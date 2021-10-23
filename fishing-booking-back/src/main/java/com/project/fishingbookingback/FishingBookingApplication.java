@@ -1,5 +1,7 @@
 package com.project.fishingbookingback;
 
+import com.project.fishingbookingback.model.ProviderRegistration;
+import com.project.fishingbookingback.service.ProviderRegistrationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @SpringBootApplication
 public class FishingBookingApplication {
 
@@ -15,14 +19,20 @@ public class FishingBookingApplication {
         SpringApplication.run(FishingBookingApplication.class, args);
     }
 
-
+    
     @RestController
     @RequestMapping(value = "/api")
     public class TestController {
-        @PreAuthorize("hasRole('CLIENT')")
+        private ProviderRegistrationService providerRegistrationService;
+
+        public TestController(ProviderRegistrationService providerRegistrationService) {
+            this.providerRegistrationService = providerRegistrationService;
+        }
+
+        @PreAuthorize("permitAll()")
         @GetMapping(value = "/")
-        public ResponseEntity<String> test() {
-            return ResponseEntity.ok("Hello World");
+        public ResponseEntity<List<ProviderRegistration>> test() {
+            return ResponseEntity.ok(providerRegistrationService.findAll());
         }
     }
 
