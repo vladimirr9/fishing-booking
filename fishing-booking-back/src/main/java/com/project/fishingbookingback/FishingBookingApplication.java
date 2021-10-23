@@ -1,6 +1,7 @@
 package com.project.fishingbookingback;
 
 import com.project.fishingbookingback.model.ProviderRegistration;
+import com.project.fishingbookingback.service.EmailService;
 import com.project.fishingbookingback.service.ProviderRegistrationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,13 +20,15 @@ public class FishingBookingApplication {
         SpringApplication.run(FishingBookingApplication.class, args);
     }
 
-    
+
     @RestController
     @RequestMapping(value = "/api")
     public class TestController {
+        private EmailService emailService;
         private ProviderRegistrationService providerRegistrationService;
 
-        public TestController(ProviderRegistrationService providerRegistrationService) {
+        public TestController(EmailService emailService, ProviderRegistrationService providerRegistrationService) {
+            this.emailService = emailService;
             this.providerRegistrationService = providerRegistrationService;
         }
 

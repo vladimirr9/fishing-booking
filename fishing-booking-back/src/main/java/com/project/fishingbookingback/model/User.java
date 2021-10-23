@@ -6,10 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity
 public class User {
     public User() {
+    }
+
+    public User(ProviderRegistration providerRegistration) {
+        this.email = Objects.requireNonNull(providerRegistration.getEmail());
+        this.password = Objects.requireNonNull(providerRegistration.getPassword());
+        this.firstName = Objects.requireNonNull(providerRegistration.getFirstName());
+        this.lastName = Objects.requireNonNull(providerRegistration.getLastName());
+        this.phoneNumber = Objects.requireNonNull(providerRegistration.getPhoneNumber());
+        this.role = Objects.requireNonNull(providerRegistration.getRole());
+        this.address = new Address(Objects.requireNonNull(providerRegistration));
     }
 
     @Id

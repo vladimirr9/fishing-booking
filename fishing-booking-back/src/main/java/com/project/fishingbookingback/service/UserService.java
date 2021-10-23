@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,9 @@ public class UserService {
     }
 
 
+    public User createUser(ProviderRegistration providerRegistration) {
+        User user = new User(providerRegistration);
+        user.setAddress(addressService.insert(user.getAddress()));
+        return userRepository.save(user);
+    }
 }

@@ -28,6 +28,8 @@ public class ProviderRegistration {
     private String lastName;
     @RoleSubset(anyOf = {Role.ROLE_BOAT_OWNER, Role.ROLE_HOME_OWNER, Role.ROLE_FISHING_INSTRUCTOR})
     private Role role;
+    @NotBlank(message = "Phone number cannot be blank")
+    private String phoneNumber;
     @NotBlank(message = "Street cannot be blank")
     private String streetAndNumber;
     @NotBlank(message = "City cannot be blank")
@@ -43,6 +45,10 @@ public class ProviderRegistration {
 
     public Role getRole() {
         return role;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getEmail() {

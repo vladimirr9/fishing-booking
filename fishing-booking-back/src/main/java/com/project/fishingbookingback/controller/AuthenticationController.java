@@ -26,6 +26,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(request);
     }
 
+
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         String token = authenticationService.login(user.getEmail(), user.getPassword());

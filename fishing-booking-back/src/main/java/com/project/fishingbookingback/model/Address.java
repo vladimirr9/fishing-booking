@@ -4,10 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Address {
     public Address() {
+    }
+
+    public Address(ProviderRegistration providerRegistration) {
+        this.streetAndNumber = Objects.requireNonNull(providerRegistration.getStreetAndNumber());
+        this.city = Objects.requireNonNull(providerRegistration.getCity());
+        this.country = Objects.requireNonNull(providerRegistration.getCountry());
     }
 
     @Id
