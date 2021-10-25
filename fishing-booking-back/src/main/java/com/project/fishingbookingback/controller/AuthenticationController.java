@@ -1,8 +1,10 @@
 package com.project.fishingbookingback.controller;
 
+import com.project.fishingbookingback.dto.response.TokenDTO;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/api/auth")
+@RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
@@ -28,9 +30,10 @@ public class AuthenticationController {
 
 
     @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<TokenDTO> login(@RequestBody User user) {
         String token = authenticationService.login(user.getEmail(), user.getPassword());
-        return ResponseEntity.ok(token);
+        TokenDTO tokenDTO = new TokenDTO(token);
+        return ResponseEntity.ok(tokenDTO);
     }
 
 }

@@ -32,7 +32,7 @@ public class FishingBookingApplication {
             this.providerRegistrationService = providerRegistrationService;
         }
 
-        @PreAuthorize("permitAll()")
+        @PreAuthorize("hasRole('HOME_OWNER')")
         @GetMapping(value = "/")
         public ResponseEntity<List<ProviderRegistration>> test() {
             return ResponseEntity.ok(providerRegistrationService.findAll());

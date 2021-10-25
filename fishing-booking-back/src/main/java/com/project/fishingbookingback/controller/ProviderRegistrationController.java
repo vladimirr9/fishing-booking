@@ -28,7 +28,7 @@ public class ProviderRegistrationController {
         ProviderRegistration found = providerRegistrationService.findById(id);
         return ResponseEntity.ok(found);
     }
-
+    
     @PutMapping(value = "/{id}/approve")
     public ResponseEntity<HttpStatus> approve(@PathVariable Long id) {
         providerRegistrationService.approve(id);
