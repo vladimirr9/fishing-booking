@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
 
 
+
   ngOnInit(): void {
   }
 
@@ -31,12 +32,12 @@ export class LoginComponent implements OnInit {
       return;
     }
     let credentials: credentialsDTO = {email: this.loginForm.get('username')?.value, password: this.loginForm.get('password')?.value}
-    this.authService.login(credentials).subscribe((data) => {
-      this.storageService
-      console.log(data),
-      (err : Error) => {
-        console.log(err)
-      }
+    this.authService.login(credentials).subscribe((data: any) => {
+      this.storageService.storeToken(data.token)
+
+
+    }, (err : Error) => {
+      this.loginFailed = true
     })
 
   }
