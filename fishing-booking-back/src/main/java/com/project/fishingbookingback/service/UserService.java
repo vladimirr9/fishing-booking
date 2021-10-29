@@ -21,6 +21,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class.getName()));
     }
 
+    public boolean userExists(String email) {
+        return userRepository.findByEmail(email) != null;
+    }
+
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {

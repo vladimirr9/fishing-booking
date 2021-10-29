@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.exception.EntityAlreadyExistsException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
@@ -29,7 +30,15 @@ public class ProviderRegistrationService {
     }
 
     public ProviderRegistration createRequest(ProviderRegistration providerRegistration) {
+        String email = providerRegistration.getEmail();
+        if (userService.userExists(email) || registrationExists(email)) {
+            throw new EntityAlreadyExistsException(providerRegistration.getEmail());
+        }
         return repository.save(providerRegistration);
+    }
+
+    public boolean registrationExists(String email) {
+        return repository.findByEmail(email) != null;
     }
 
     public void approve(Long id) {
@@ -43,6 +52,5 @@ public class ProviderRegistrationService {
         ProviderRegistration providerRegistration = findById(id);
         emailService.sendSimpleMessage(providerRegistration.getEmail(), "Fishing Account Denied", "The reason why your account has been denied:\n" + reason);
         repository.deleteById(id);
-
     }
 }
