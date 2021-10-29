@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     }
     let credentials: credentialsDTO = {email: this.loginForm.get('username')?.value, password: this.loginForm.get('password')?.value}
     this.authService.login(credentials).subscribe((data: any) => {
-      this.storageService.storeToken(data.token)
+      this.storageService.storeTokenData(data.token)
 
 
     }, (err : Error) => {
