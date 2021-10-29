@@ -34,6 +34,7 @@ public class AuthenticationService {
         if (existingUser.getPassword().equals(password)) {
             return JWT.create()
                     .withSubject(email)
+                    .withClaim("role", existingUser.getRole().toString())
                     .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .sign(Algorithm.HMAC512(SECRET));
         } else throw new InvalidCredentialsException();
