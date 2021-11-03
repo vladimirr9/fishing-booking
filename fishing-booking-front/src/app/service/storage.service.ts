@@ -8,6 +8,7 @@ export class StorageService {
 
 
   constructor() { }
+
   storeTokenData(token: string) : void {
     localStorage.setItem("token", token)
     let decoded: any = jwt_decode(token)

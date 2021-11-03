@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CredentialsDTO } from 'src/app/dto/CredentialsDTO';
 import { Observable } from 'rxjs';
-import {config} from "shared"
-import { RegistrationDTO } from '../dto/RegistrationDTO';
+import { config } from "src/shared"
+import { RegistrationDTO } from 'src/app/dto/RegistrationDTO';
 
 @Injectable({
   providedIn: 'root'

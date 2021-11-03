@@ -33,8 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.headers().frameOptions().disable();
         http.cors().and().authorizeRequests()
                 .antMatchers(AUTH_URL + "**").permitAll()
+                .antMatchers("/h2-console/" + "**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/provider-registration/**").permitAll()
                 //.antMatchers("**").permitAll()
                 .anyRequest().authenticated()
