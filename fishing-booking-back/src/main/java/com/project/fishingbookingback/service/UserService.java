@@ -1,6 +1,10 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.model.BoatOwner;
+import com.project.fishingbookingback.model.FishingInstructor;
+import com.project.fishingbookingback.model.HomeOwner;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.UserRepository;
@@ -35,7 +39,12 @@ public class UserService {
 
 
     public User createUser(ProviderRegistration providerRegistration) {
-        User user = new User(providerRegistration);
+        User user = switch (providerRegistration.getRole()) {
+            case ROLE_HOME_OWNER -> new HomeOwner(providerRegistration);
+            case ROLE_BOAT_OWNER -> new BoatOwner(providerRegistration);
+            case ROLE_FISHING_INSTRUCTOR -> new FishingInstructor(providerRegistration);
+            default -> throw new BadRoleException("Can only register boat owner, fishing instructor, and home owner");
+        };
         user.setAddress(addressService.insert(user.getAddress()));
         return userRepository.save(user);
     }

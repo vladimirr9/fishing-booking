@@ -8,4 +8,8 @@ import javax.persistence.Entity;
 public class FishingInstructor extends User {
     public FishingInstructor() {
     }
+
+    public FishingInstructor(ProviderRegistration providerRegistration) {
+        super(providerRegistration);
+    }
 }
