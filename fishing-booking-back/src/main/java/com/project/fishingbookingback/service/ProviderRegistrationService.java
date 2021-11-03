@@ -22,7 +22,7 @@ public class ProviderRegistrationService {
     }
 
     public ProviderRegistration findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(ProviderRegistration.class.getName()));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(ProviderRegistration.class.getSimpleName()));
     }
 
     public List<ProviderRegistration> findAll() {

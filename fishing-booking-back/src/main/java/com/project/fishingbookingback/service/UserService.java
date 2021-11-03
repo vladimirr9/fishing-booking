@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User findByID(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class.getName()));
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class.getSimpleName()));
     }
 
     public boolean userExists(String email) {
@@ -32,7 +32,7 @@ public class UserService {
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new EntityNotFoundException(User.class.getName());
+            throw new EntityNotFoundException(User.class.getSimpleName());
         }
         return user;
     }

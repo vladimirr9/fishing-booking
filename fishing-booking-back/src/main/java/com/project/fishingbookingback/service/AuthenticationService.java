@@ -28,9 +28,6 @@ public class AuthenticationService {
 
     public String login(String email, String password) {
         User existingUser = userService.findByEmail(email);
-        if (existingUser == null) {
-            throw new InvalidCredentialsException();
-        }
         if (existingUser.getPassword().equals(password)) {
             return JWT.create()
                     .withSubject(email)
