@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(AUTH_URL + "**").permitAll()
                 .antMatchers("/h2-console/" + "**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/provider-registration/**").permitAll()
-                //.antMatchers("**").permitAll()
+                .antMatchers("**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService))
