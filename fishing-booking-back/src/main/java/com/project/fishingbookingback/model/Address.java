@@ -17,14 +17,22 @@ public class Address {
         this.country = Objects.requireNonNull(providerRegistration.getCountry());
     }
 
+    public Address(String streetAndNumber, String city, String country, Double latitude, Double longitude) {
+        this.streetAndNumber = streetAndNumber;
+        this.city = city;
+        this.country = country;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String streetAndNumber;
     private String city;
     private String country;
-    private Long latitude;
-    private Long longitude;
+    private Double latitude;
+    private Double longitude;
 
     public Long getId() {
         return id;
@@ -42,11 +50,11 @@ public class Address {
         return country;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 }

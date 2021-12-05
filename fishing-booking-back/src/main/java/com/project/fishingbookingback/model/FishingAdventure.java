@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,16 +35,16 @@ public class FishingAdventure {
     private String availableEquipment;
     private double cancellationFee;
     private String priceList;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
-    public Address address;
+    private Address address;
     @OneToMany()
     @JoinTable(
             name = "adventure_available_time",
             joinColumns = {@JoinColumn(name = "adventure_id")},
             inverseJoinColumns = {@JoinColumn(name = "time_id")}
     )
-    public List<AvailableTime> availableTime;
+    private List<AvailableTime> availableTime;
 
     @OneToMany()
     @JoinTable(
@@ -51,10 +52,84 @@ public class FishingAdventure {
             joinColumns = {@JoinColumn(name = "adventure_id")},
             inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
-    public List<AdditionalService> additionalService;
+    private List<AdditionalService> additionalService;
 
     @OneToOne()
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
-    public FishingInstructor fishingInstructor;
+    private FishingInstructor fishingInstructor;
 
+    public void setFishingInstructor(FishingInstructor fishingInstructor) {
+        this.fishingInstructor = fishingInstructor;
+    }
+
+    public FishingAdventure() {
+    }
+
+    public FishingAdventure(String name, String description, String biography, int maxPeople, String rulesOfConduct, String availableEquipment, double cancellationFee, String priceList, Address address) {
+        this.name = name;
+        this.description = description;
+        this.biography = biography;
+        this.maxPeople = maxPeople;
+        this.rulesOfConduct = rulesOfConduct;
+        this.availableEquipment = availableEquipment;
+        this.cancellationFee = cancellationFee;
+        this.priceList = priceList;
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public int getMaxPeople() {
+        return maxPeople;
+    }
+
+    public String getRulesOfConduct() {
+        return rulesOfConduct;
+    }
+
+    public String getAvailableEquipment() {
+        return availableEquipment;
+    }
+
+    public double getCancellationFee() {
+        return cancellationFee;
+    }
+
+    public String getPriceList() {
+        return priceList;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public List<AvailableTime> getAvailableTime() {
+        return availableTime;
+    }
+
+    public List<AdditionalService> getAdditionalService() {
+        return additionalService;
+    }
+
+    public FishingInstructor getFishingInstructor() {
+        return fishingInstructor;
+    }
 }

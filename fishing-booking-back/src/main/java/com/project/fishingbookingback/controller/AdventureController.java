@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.controller;
 
+import com.project.fishingbookingback.dto.mapper.AdventureMapper;
+import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.service.AdventureService;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +16,16 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/fishing-adventure")
 public class AdventureController {
     private AdventureService adventureService;
+    private AdventureMapper adventureMapper;
 
-    public AdventureController(AdventureService adventureService) {
+    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper) {
         this.adventureService = adventureService;
+        this.adventureMapper = adventureMapper;
     }
 
     @PostMapping()
-    public ResponseEntity<FishingAdventure> create(@Valid @RequestBody FishingAdventure fishingAdventure) {
+    public ResponseEntity<FishingAdventure> create(@Valid @RequestBody NewAdventureDTO newAdventureDTO) {
+        FishingAdventure fishingAdventure = adventureMapper.toModel(newAdventureDTO);
         FishingAdventure newFishingAdventure = adventureService.create(fishingAdventure);
         return ResponseEntity.ok(newFishingAdventure);
     }

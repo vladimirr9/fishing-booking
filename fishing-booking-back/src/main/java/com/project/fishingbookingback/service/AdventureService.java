@@ -1,7 +1,10 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.model.FishingAdventure;
+import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.repository.AdventureRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +20,9 @@ public class AdventureService {
     }
 
     public FishingAdventure create(FishingAdventure fishingAdventure) {
-        return null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(auth.getName());
+        fishingAdventure.setFishingInstructor(fishingInstructor);
+        return adventureRepository.save(fishingAdventure);
     }
 }
