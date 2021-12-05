@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -46,13 +47,17 @@ public class FishingAdventure {
     )
     private List<AvailableTime> availableTime;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "adventure_additional_service",
             joinColumns = {@JoinColumn(name = "adventure_id")},
             inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
     private List<AdditionalService> additionalService;
+
+    public void addService(AdditionalService additionalService) {
+        this.additionalService.add(additionalService);
+    }
 
     @OneToOne()
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
@@ -75,6 +80,9 @@ public class FishingAdventure {
         this.cancellationFee = cancellationFee;
         this.priceList = priceList;
         this.address = address;
+        this.additionalService = new ArrayList<>();
+        this.pictures = new ArrayList<>();
+        this.availableTime = new ArrayList<>();
     }
 
     public Long getId() {

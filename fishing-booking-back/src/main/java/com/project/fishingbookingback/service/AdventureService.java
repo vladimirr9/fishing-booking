@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.repository.AdventureRepository;
@@ -23,6 +25,16 @@ public class AdventureService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(auth.getName());
         fishingAdventure.setFishingInstructor(fishingInstructor);
+        return adventureRepository.save(fishingAdventure);
+    }
+
+    public FishingAdventure findByID(Long id) {
+        return adventureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(FishingAdventure.class.getSimpleName()));
+    }
+
+    public FishingAdventure addService(Long id, AdditionalService additionalService) {
+        FishingAdventure fishingAdventure = findByID(id);
+        fishingAdventure.addService(additionalService);
         return adventureRepository.save(fishingAdventure);
     }
 }
