@@ -4,6 +4,7 @@ import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
+import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,6 +36,12 @@ public class AdventureService {
     public FishingAdventure addService(Long id, AdditionalService additionalService) {
         FishingAdventure fishingAdventure = findByID(id);
         fishingAdventure.addService(additionalService);
+        return adventureRepository.save(fishingAdventure);
+    }
+
+    public FishingAdventure addPicture(Long id, Picture picture) {
+        FishingAdventure fishingAdventure = findByID(id);
+        fishingAdventure.addPicture(picture);
         return adventureRepository.save(fishingAdventure);
     }
 }

@@ -24,13 +24,18 @@ public class FishingAdventure {
     private String description;
     private String biography;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "adventure_pictures",
             joinColumns = {@JoinColumn(name = "adventure_id")},
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
     private List<Picture> pictures;
+
+    public void addPicture(Picture picture) {
+        this.pictures.add(picture);
+    }
+
     private int maxPeople;
     private String rulesOfConduct;
     private String availableEquipment;

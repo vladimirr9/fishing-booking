@@ -15,4 +15,15 @@ public class Picture {
     private Long id;
     @NotBlank
     private String link;
+
+    public Picture() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getLink() {
+        return link;
+    }
 }

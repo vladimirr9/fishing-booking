@@ -4,6 +4,7 @@ import com.project.fishingbookingback.dto.mapper.AdventureMapper;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
+import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.service.AdventureService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,12 @@ public class AdventureController {
     }
 
     @PostMapping(value = "/{id}/additional-service")
-    public ResponseEntity<FishingAdventure> add(@Valid @RequestBody AdditionalService additionalService, @PathVariable Long id) {
+    public ResponseEntity<FishingAdventure> addService(@Valid @RequestBody AdditionalService additionalService, @PathVariable Long id) {
         return ResponseEntity.ok(adventureService.addService(id, additionalService));
+    }
+
+    @PostMapping(value = "/{id}/pictures")
+    public ResponseEntity<FishingAdventure> addPicture(@Valid @RequestBody Picture picture, @PathVariable Long id) {
+        return ResponseEntity.ok(adventureService.addPicture(id, picture));
     }
 }
