@@ -6,9 +6,9 @@ import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.repository.AdventureRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdventureService {
@@ -23,8 +23,8 @@ public class AdventureService {
     }
 
     public FishingAdventure create(FishingAdventure fishingAdventure) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(auth.getName());
+
+        FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(loggedUserService.getUsername());
         fishingAdventure.setFishingInstructor(fishingInstructor);
         return adventureRepository.save(fishingAdventure);
     }
@@ -43,5 +43,10 @@ public class AdventureService {
         FishingAdventure fishingAdventure = findByID(id);
         fishingAdventure.addPicture(picture);
         return adventureRepository.save(fishingAdventure);
+    }
+
+
+    public List<FishingAdventure> getAdventures(String instructorUsername) {
+        return adventureRepository.findByFishingInstructorId(instructorUsername);
     }
 }

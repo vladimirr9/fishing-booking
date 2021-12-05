@@ -34,7 +34,14 @@ export class LoginComponent implements OnInit {
     let credentials: CredentialsDTO = {email: this.loginForm.get('username')?.value, password: this.loginForm.get('password')?.value}
     this.authService.login(credentials).subscribe((data: any) => {
       this.storageService.storeTokenData(data.token)
-      this.router.navigateByUrl('/')
+      switch (this.storageService.getRole()) {
+        case 'ROLE_FISHING_INSTRUCTOR':
+          this.router.navigateByUrl('/instructor-home')
+          break
+        default:
+          this.router.navigateByUrl('/')
+      }
+
 
     }, (err : Error) => {
       this.loginFailed = true
