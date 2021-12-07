@@ -5,6 +5,7 @@ import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityAlreadyExistsException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.InvalidCredentialsException;
+import com.project.fishingbookingback.exception.NotAllowedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,6 +46,14 @@ public class ControllerExceptionHandler {
                 ex.getMessage(),
                 new Date());
         return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NotAllowedException.class)
+    public ResponseEntity<ErrorMessage> NotAllowedException(NotAllowedException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                ex.getMessage(),
+                new Date());
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
 }

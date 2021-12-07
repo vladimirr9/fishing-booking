@@ -4,6 +4,12 @@
   <mat-card-content>
     <p>{{adventure.description}}</p>
   </mat-card-content>
-  <mat-card-actions>
-  </mat-card-actions>
+  <mat-card-actions align='end'>
+    <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="editAdventure()"
+        src="assets/img/edit.png">
+    <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="deleteAdventure()"
+        src="assets/img/delete.png">
+
+</mat-card-actions>
+
 </mat-card>

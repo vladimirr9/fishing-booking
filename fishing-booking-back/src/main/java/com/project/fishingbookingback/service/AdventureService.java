@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
@@ -23,7 +24,7 @@ public class AdventureService {
     }
 
     public FishingAdventure create(FishingAdventure fishingAdventure) {
-        
+
         FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(loggedUserService.getUsername());
         fishingAdventure.setFishingInstructor(fishingInstructor);
         return adventureRepository.save(fishingAdventure);
@@ -48,5 +49,14 @@ public class AdventureService {
 
     public List<FishingAdventure> getAdventures(String instructorUsername) {
         return adventureRepository.findByFishingInstructorId(instructorUsername);
+    }
+
+    public void deleteAdventure(Long id) {
+        FishingAdventure fishingAdventure = findByID(id);
+        String fishingInstructorEmail = loggedUserService.getUsername();
+        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
+            throw new NotAllowedException();
+        }
+        adventureRepository.deleteById(id);
     }
 }

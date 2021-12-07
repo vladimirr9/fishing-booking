@@ -14,4 +14,12 @@ export class AdventureListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeAdventure(adventure : any) {
+    let index = this.adventures.indexOf(adventure);
+      if (index !== -1) {
+        this.adventures.splice(index, 1);
+      }
+
+  }
+
 }
