@@ -2,6 +2,7 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.AdventureMapper;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
+import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.Picture;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,9 +50,20 @@ public class AdventureController {
         return ResponseEntity.ok(adventureService.addPicture(id, picture));
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<FishingAdventure> updateAdventure(@Valid @RequestBody UpdateAdventureDTO updateAdventureDTO, @PathVariable Long id) {
+        FishingAdventure fishingAdventure = adventureMapper.toModel(updateAdventureDTO);
+        return ResponseEntity.ok(adventureService.updateAdventure(id, fishingAdventure));
+    }
+
     @GetMapping()
     public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername) {
         return ResponseEntity.ok(adventureService.getAdventures(instructorUsername));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<FishingAdventure> getAdventure(@PathVariable Long id) {
+        return ResponseEntity.ok(adventureService.findByID(id));
     }
 
     @DeleteMapping(value = "/{id}")

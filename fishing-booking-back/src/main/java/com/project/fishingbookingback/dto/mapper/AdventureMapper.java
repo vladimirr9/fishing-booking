@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.dto.mapper;
 
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
+import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.FishingAdventure;
 import org.springframework.stereotype.Component;
@@ -24,5 +25,21 @@ public class AdventureMapper {
                         newAdventureDTO.getCountry(),
                         newAdventureDTO.getLatitude(),
                         newAdventureDTO.getLongitude()));
+    }
+
+    public FishingAdventure toModel(UpdateAdventureDTO updateAdventureDTO) {
+        return new FishingAdventure(updateAdventureDTO.getName(),
+                updateAdventureDTO.getDescription(),
+                updateAdventureDTO.getBiography(),
+                updateAdventureDTO.getMaxPeople(),
+                updateAdventureDTO.getRulesOfConduct(),
+                updateAdventureDTO.getAvailableEquipment(),
+                updateAdventureDTO.getCancellationFee(),
+                updateAdventureDTO.getHourlyPrice(),
+                new Address(updateAdventureDTO.getStreetAndNumber(),
+                        updateAdventureDTO.getCity(),
+                        updateAdventureDTO.getCountry(),
+                        updateAdventureDTO.getLatitude(),
+                        updateAdventureDTO.getLongitude()));
     }
 }

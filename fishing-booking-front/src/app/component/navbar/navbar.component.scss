@@ -10,16 +10,22 @@
   position: sticky;
   top: 0px;
   z-index: 2;
-  height: 70px;
+  height: fit-content;
 }
 
-a {
+a, a:hover {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: white;
   font-size: 24px;
-  padding: 1em 1.2em;
+  padding: 0.8em 1.2em;
   text-decoration: none;
+
 }
+a:hover {
+  background-color: #182380;
+  cursor: pointer;
+}
+
 
 
 .logging {

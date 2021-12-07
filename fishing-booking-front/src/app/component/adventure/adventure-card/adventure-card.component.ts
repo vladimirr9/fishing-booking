@@ -3,6 +3,7 @@ import { AdventureService } from 'src/app/service/adventure.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adventure-card',
@@ -15,7 +16,7 @@ export class AdventureCardComponent implements OnInit {
 
 
   @Output() adventureDeleted = new EventEmitter()
-  constructor(private storageService: StorageService, private adventureService: AdventureService) { }
+  constructor(private storageService: StorageService, private adventureService: AdventureService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +28,7 @@ export class AdventureCardComponent implements OnInit {
   }
 
   editAdventure() {
-
+    this.router.navigateByUrl(`adventures/${this.adventure.id}/edit`)
   }
 
   deleteAdventure() {

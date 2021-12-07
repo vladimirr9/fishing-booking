@@ -28,5 +28,14 @@ export class AdventureService {
     return this.http.delete(`${config.baseUrl}${this.adventureURL}/${id}`)
   }
 
+  getAdventure(id : number) : Observable<any> {
+    return this.http.get(`${config.baseUrl}${this.adventureURL}/${id}`)
+  }
+
+  updateAdventure(id : number, adventure : any): Observable<any> {
+    return this.http.put(`${config.baseUrl}${this.adventureURL}/${id}`, adventure)
+
+  }
+
 
 }

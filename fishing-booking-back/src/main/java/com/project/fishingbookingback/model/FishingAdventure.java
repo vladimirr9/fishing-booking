@@ -151,4 +151,60 @@ public class FishingAdventure {
     public FishingInstructor getFishingInstructor() {
         return fishingInstructor;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
+    }
+
+    public void setRulesOfConduct(String rulesOfConduct) {
+        this.rulesOfConduct = rulesOfConduct;
+    }
+
+    public void setAvailableEquipment(String availableEquipment) {
+        this.availableEquipment = availableEquipment;
+    }
+
+    public void setCancellationFee(double cancellationFee) {
+        this.cancellationFee = cancellationFee;
+    }
+
+    public void setPriceList(String priceList) {
+        this.priceList = priceList;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setAvailableTime(List<AvailableTime> availableTime) {
+        this.availableTime = availableTime;
+    }
+
+    public void setAdditionalService(List<AdditionalService> additionalService) {
+        this.additionalService = additionalService;
+    }
+
+    public void setHourlyPrice(Double hourlyPrice) {
+        this.hourlyPrice = hourlyPrice;
+    }
 }

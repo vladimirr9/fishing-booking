@@ -59,4 +59,22 @@ public class AdventureService {
         }
         adventureRepository.deleteById(id);
     }
+
+    public FishingAdventure updateAdventure(Long id, FishingAdventure updatedFishingAdventure) {
+        FishingAdventure fishingAdventure = findByID(id);
+        String fishingInstructorEmail = loggedUserService.getUsername();
+        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
+            throw new NotAllowedException();
+        }
+        fishingAdventure.setName(updatedFishingAdventure.getName());
+        fishingAdventure.setDescription(updatedFishingAdventure.getDescription());
+        fishingAdventure.setBiography(updatedFishingAdventure.getBiography());
+        fishingAdventure.setMaxPeople(updatedFishingAdventure.getMaxPeople());
+        fishingAdventure.setRulesOfConduct(updatedFishingAdventure.getRulesOfConduct());
+        fishingAdventure.setAvailableEquipment(updatedFishingAdventure.getAvailableEquipment());
+        fishingAdventure.setCancellationFee(updatedFishingAdventure.getCancellationFee());
+        fishingAdventure.setHourlyPrice(updatedFishingAdventure.getHourlyPrice());
+        fishingAdventure.setAddress(updatedFishingAdventure.getAddress());
+        return adventureRepository.save(fishingAdventure);
+    }
 }

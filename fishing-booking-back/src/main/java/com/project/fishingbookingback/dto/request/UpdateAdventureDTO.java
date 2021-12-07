@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class NewAdventureDTO {
+public class UpdateAdventureDTO {
     @NotBlank
     private String name;
     @NotBlank
@@ -31,7 +31,7 @@ public class NewAdventureDTO {
     @NotNull
     private Double hourlyPrice;
 
-    public NewAdventureDTO() {
+    public UpdateAdventureDTO() {
     }
 
     public String getName() {

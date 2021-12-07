@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>New Adventure</h1>
+  <h1>{{getTitle()}}</h1>
   <form class="form-container" [formGroup]="addAdventureForm">
   <div class="left-container">
     <mat-form-field appearance="standard">
@@ -16,7 +16,7 @@
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Maximum Number of People</mat-label>
-      <input type="number" matInput placeholder="Maximum Number of People" formControlName="maxNumberOfPeople"/>
+      <input type="number" matInput placeholder="Maximum Number of People" formControlName="maxPeople"/>
     </mat-form-field>
   </div>
   <div class="middle-container">
@@ -60,9 +60,12 @@
         <mat-label>Longitude</mat-label>
         <input type="number" matInput placeholder="Longitude"  formControlName="longitude"/>
       </mat-form-field>
+      <div class="button-container">
+      <button mat-flat-button color="primary" (click)="editMode ? editAdventure() : createAdventure()" class="button">{{getButtonText()}}</button>
+      <button mat-flat-button color="warn" (click)="Cancel()" class="button">Cancel</button>
+    </div>
     </div>
       <div class="map" (click)="getCoord($event)" id="map"></div>
   </div>
 </form>
-<button mat-flat-button color="primary" (click)="createBook()" class="create-button">Create</button>
 </div>
