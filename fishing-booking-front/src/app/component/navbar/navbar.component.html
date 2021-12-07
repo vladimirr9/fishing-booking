@@ -1,3 +1,4 @@
 <div class="container">
-  <a routerLink="/login">Login</a>
+  <a class="logging" *ngIf="!authService.isLoggedIn()" routerLink="/login">Login</a>
+  <a class="logging" *ngIf="authService.isLoggedIn()" (click)="logOut()">Logout</a>
 </div>

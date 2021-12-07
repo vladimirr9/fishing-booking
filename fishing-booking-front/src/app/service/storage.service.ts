@@ -16,6 +16,10 @@ export class StorageService {
     localStorage.setItem("role", decoded.role)
   }
 
+  clear() : void {
+    localStorage.clear()
+  }
+
   getToken() : string {
     return localStorage.getItem('token') || ""
   }
