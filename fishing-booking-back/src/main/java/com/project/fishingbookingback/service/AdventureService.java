@@ -23,7 +23,7 @@ public class AdventureService {
     }
 
     public FishingAdventure create(FishingAdventure fishingAdventure) {
-
+        
         FishingInstructor fishingInstructor = (FishingInstructor) userService.findByEmail(loggedUserService.getUsername());
         fishingAdventure.setFishingInstructor(fishingInstructor);
         return adventureRepository.save(fishingAdventure);

@@ -18,7 +18,6 @@ public class NewAdventureDTO {
     private String availableEquipment;
     @NotNull
     private Double cancellationFee;
-    private String priceList;
     @NotBlank
     private String streetAndNumber;
     @NotBlank
@@ -62,10 +61,7 @@ public class NewAdventureDTO {
     public double getCancellationFee() {
         return cancellationFee;
     }
-
-    public String getPriceList() {
-        return priceList;
-    }
+    
 
     public String getStreetAndNumber() {
         return streetAndNumber;

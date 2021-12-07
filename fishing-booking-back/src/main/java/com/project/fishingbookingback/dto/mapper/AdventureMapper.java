@@ -18,7 +18,7 @@ public class AdventureMapper {
                 newAdventureDTO.getRulesOfConduct(),
                 newAdventureDTO.getAvailableEquipment(),
                 newAdventureDTO.getCancellationFee(),
-                newAdventureDTO.getPriceList(),
+                newAdventureDTO.getHourlyPrice(),
                 new Address(newAdventureDTO.getStreetAndNumber(),
                         newAdventureDTO.getCity(),
                         newAdventureDTO.getCountry(),

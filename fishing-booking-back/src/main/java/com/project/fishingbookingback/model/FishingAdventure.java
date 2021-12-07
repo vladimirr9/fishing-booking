@@ -72,10 +72,12 @@ public class FishingAdventure {
         this.fishingInstructor = fishingInstructor;
     }
 
+    private Double hourlyPrice;
+
     public FishingAdventure() {
     }
 
-    public FishingAdventure(String name, String description, String biography, int maxPeople, String rulesOfConduct, String availableEquipment, double cancellationFee, String priceList, Address address) {
+    public FishingAdventure(String name, String description, String biography, int maxPeople, String rulesOfConduct, String availableEquipment, double cancellationFee, Double hourlyPrice, Address address) {
         this.name = name;
         this.description = description;
         this.biography = biography;
@@ -83,7 +85,7 @@ public class FishingAdventure {
         this.rulesOfConduct = rulesOfConduct;
         this.availableEquipment = availableEquipment;
         this.cancellationFee = cancellationFee;
-        this.priceList = priceList;
+        this.hourlyPrice = hourlyPrice;
         this.address = address;
         this.additionalService = new ArrayList<>();
         this.pictures = new ArrayList<>();
@@ -92,6 +94,10 @@ public class FishingAdventure {
 
     public Long getId() {
         return id;
+    }
+
+    public Double getHourlyPrice() {
+        return hourlyPrice;
     }
 
     public String getName() {
