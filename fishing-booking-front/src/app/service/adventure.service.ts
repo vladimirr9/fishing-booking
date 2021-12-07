@@ -19,7 +19,10 @@ export class AdventureService {
         instructorUsername: instructorUsername
       }
     })
-
   }
+  createNewAdventure(adventure : any) : Observable<any> {
+    return this.http.post(`${config.baseUrl}${this.adventureURL}`, adventure)
+  }
+
 
 }

@@ -16,6 +16,9 @@ export class StorageService {
     localStorage.setItem("role", decoded.role)
   }
 
+  getToken() : string {
+    return localStorage.getItem('token') || ""
+  }
   getRole() : string {
     return localStorage.getItem('role') || "UNAUTHENTICATED"
   }
