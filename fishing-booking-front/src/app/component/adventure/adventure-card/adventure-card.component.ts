@@ -22,8 +22,12 @@ export class AdventureCardComponent implements OnInit {
   }
 
 
-  isAdventureOwner() : boolean {
 
+  view() {
+    this.router.navigateByUrl(`adventures/${this.adventure.id}`)
+  }
+
+  isAdventureOwner() : boolean {
     return this.storageService.getUsername() === this.adventure.fishingInstructor.email
   }
 

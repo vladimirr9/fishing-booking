@@ -1,0 +1,9 @@
+<mat-card class="container-card">
+  <img mat-card-image [src]="picture.link" alt="Broken image">
+  <div class="buttons-container">
+    <div class="delete-button">
+    <input *ngIf="isFishingInstructor()" type="image" class="image" (click)="deletePicture()"
+        src="assets/img/delete.png">
+    </div>
+  </div>
+</mat-card>

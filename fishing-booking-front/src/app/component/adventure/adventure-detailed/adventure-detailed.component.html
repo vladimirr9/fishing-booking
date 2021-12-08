@@ -1,0 +1,74 @@
+<div class="container" >
+  <h1 class="title">{{adventure.name}}</h1>
+  <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
+  <h2>Hourly Price: {{adventure.hourlyPrice}}RSD</h2>
+  <div>Maximum number of people: {{adventure.maxPeople}}
+  </div>
+  <div class="about">
+    <div class="text">
+      <h3>
+        What it's all about?
+      </h3>
+      <p>
+        {{adventure.description}}
+      </p>
+    </div>
+    <div class="text">
+      <h3>
+        About the instructor
+      </h3>
+      <p>
+        {{adventure.biography}}
+      </p>
+    </div>
+    <div class="text">
+      <h3>
+        Rules of conduct
+      </h3>
+      <p>
+        {{adventure.rulesOfConduct}}
+      </p>
+    </div>
+    <div class="text">
+      <h3>
+        Available Equipment
+      </h3>
+      <p>
+        {{adventure.availableEquipment}}
+      </p>
+    </div>
+  </div>
+  <span class="additional-services">
+  <h3>Additional Services</h3>
+  <input *ngIf="authService.isFishingInstructor()" type="image" class="image" (click)="addAdditionalService()"
+        src="assets/img/plus.svg">
+</span>
+  <div class="service-container">
+    <div *ngFor="let service of services" class="service-item">
+      <app-additional-service-card  [additionalService]="service" (serviceDeleted)="removeService($event)"></app-additional-service-card>
+    </div>
+  </div>
+  <span class="pictures">
+  <h3>Pictures From This Adventure</h3>
+  <input *ngIf="authService.isFishingInstructor()" type="image" class="image" (click)="addPicture()"
+        src="assets/img/plus.svg">
+  </span>
+  <div class="picture-container">
+    <div *ngFor="let picture of pictures" class="picture-item">
+      <app-picture-card [picture]="picture" (pictureDeleted)="deletePicture($event)"></app-picture-card>
+    </div>
+  </div>
+  <div class="location">
+    <h3>
+      Where it is
+    </h3>
+    <p>
+      {{adventure.address.streetAndNumber}},
+      {{adventure.address.city}},
+      {{adventure.address.country}}
+    </p>
+      <div class="map" id="map"></div>
+  </div>
+</div>
+
+

@@ -11,6 +11,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { LoginComponent } from './component/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { RegistrationComponent } from './component/registration/registration.component';
 import { InstructorHomeComponent } from './component/instructor-home/instructor-home.component';
@@ -19,6 +20,11 @@ import { AdventureCardComponent } from './component/adventure/adventure-card/adv
 import { NewAdventureComponent } from './component/adventure/new-adventure/new-adventure.component';
 import { StorageService } from './service/storage.service';
 import { AuthInterceptorService } from './service/auth-interceptor.service';
+import { AdventureDetailedComponent } from './component/adventure/adventure-detailed/adventure-detailed.component';
+import { AdditionalServiceCardComponent } from './component/additional-service/additional-service-card/additional-service-card.component';
+import { PictureCardComponent } from './component/picture/picture-card/picture-card.component';
+import { PictureDialogComponent } from './component/dialog/picture-dialog/picture-dialog.component';
+import { AdditionalServiceDialogComponent } from './component/dialog/additional-service-dialog/additional-service-dialog.component';
 
 
 
@@ -31,7 +37,12 @@ import { AuthInterceptorService } from './service/auth-interceptor.service';
     InstructorHomeComponent,
     AdventureListComponent,
     AdventureCardComponent,
-    NewAdventureComponent
+    NewAdventureComponent,
+    AdventureDetailedComponent,
+    AdditionalServiceCardComponent,
+    PictureCardComponent,
+    PictureDialogComponent,
+    AdditionalServiceDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +54,8 @@ import { AuthInterceptorService } from './service/auth-interceptor.service';
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [StorageService ,
     {

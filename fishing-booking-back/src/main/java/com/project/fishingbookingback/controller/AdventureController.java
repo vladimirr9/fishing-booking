@@ -72,4 +72,16 @@ public class AdventureController {
         adventureService.deleteAdventure(id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(value = "/{id}/additional-services/{id_service}")
+    public ResponseEntity<HttpStatus> deleteAdditionalService(@PathVariable Long id, @PathVariable Long id_service) {
+        adventureService.deleteAdditionalService(id, id_service);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}/pictures/{id_picture}")
+    public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture) {
+        adventureService.deletePicture(id, id_picture);
+        return ResponseEntity.noContent().build();
+    }
 }

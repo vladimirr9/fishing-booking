@@ -1,23 +1,18 @@
 .container-card {
-  max-width: 400px;
+  max-width: 200px;
 }
-
 
 .image {
   max-width: 25px;
   max-height: 25px;
   margin-right: 10px;
 }
+
+
 .buttons-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 
-}
 
-.edit-delete-buttons {
-  margin-left: auto;
-}
-
-.mat-view {
-  background-color: #2D9645;
-  color: #fff;
 }

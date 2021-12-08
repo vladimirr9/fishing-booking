@@ -1,0 +1,10 @@
+<mat-card class="container-card">
+  <mat-card-title>{{additionalService.name}}</mat-card-title>
+  <mat-card-subtitle>{{additionalService.price}} RSD</mat-card-subtitle>
+  <div class="buttons-container">
+    <div class="delete-button">
+    <input *ngIf="isFishingInstructor()" type="image" class="image" (click)="deleteService()"
+        src="assets/img/delete.png">
+    </div>
+  </div>
+</mat-card>

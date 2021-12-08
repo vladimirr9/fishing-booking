@@ -1,0 +1,15 @@
+<div class="container">
+  <h2 mat-dialog-title>New Picture</h2>
+
+  <form class="form" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Link</mat-label>
+      <input matInput placeholder="Link" formControlName="link" />
+    </mat-form-field>
+  </form>
+
+  <div class="button-container">
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+    <button mat-flat-button color="warn" (click)="close()">Close</button>
+  </div>
+</div>

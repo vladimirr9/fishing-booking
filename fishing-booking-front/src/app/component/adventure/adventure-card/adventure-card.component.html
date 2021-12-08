@@ -4,12 +4,14 @@
   <mat-card-content>
     <p>{{adventure.description}}</p>
   </mat-card-content>
-  <mat-card-actions align='end'>
+  <div class="buttons-container">
+    <button class="detailed-button" color="view" mat-flat-button (click)="view()">Details</button>
+    <div class="edit-delete-buttons">
     <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="editAdventure()"
         src="assets/img/edit.png">
     <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="deleteAdventure()"
         src="assets/img/delete.png">
-
-</mat-card-actions>
+    </div>
+  </div>
 
 </mat-card>

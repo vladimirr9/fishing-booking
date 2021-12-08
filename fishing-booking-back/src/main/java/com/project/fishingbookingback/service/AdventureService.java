@@ -54,19 +54,13 @@ public class AdventureService {
 
     public void deleteAdventure(Long id) {
         FishingAdventure fishingAdventure = findByID(id);
-        String fishingInstructorEmail = loggedUserService.getUsername();
-        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
-            throw new NotAllowedException();
-        }
+        checkIfAllowed(fishingAdventure);
         adventureRepository.deleteById(id);
     }
 
     public FishingAdventure updateAdventure(Long id, FishingAdventure updatedFishingAdventure) {
         FishingAdventure fishingAdventure = findByID(id);
-        String fishingInstructorEmail = loggedUserService.getUsername();
-        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
-            throw new NotAllowedException();
-        }
+        checkIfAllowed(fishingAdventure);
         fishingAdventure.setName(updatedFishingAdventure.getName());
         fishingAdventure.setDescription(updatedFishingAdventure.getDescription());
         fishingAdventure.setBiography(updatedFishingAdventure.getBiography());
@@ -78,4 +72,27 @@ public class AdventureService {
         fishingAdventure.setAddress(updatedFishingAdventure.getAddress());
         return adventureRepository.save(fishingAdventure);
     }
+
+    public void deleteAdditionalService(Long id, Long id_service) {
+        FishingAdventure fishingAdventure = findByID(id);
+        checkIfAllowed(fishingAdventure);
+        fishingAdventure.getAdditionalService().removeIf(service -> service.getId().equals(id_service));
+        adventureRepository.save(fishingAdventure);
+    }
+
+    public void deletePicture(Long id, Long id_picture) {
+        FishingAdventure fishingAdventure = findByID(id);
+        checkIfAllowed(fishingAdventure);
+        fishingAdventure.getPictures().removeIf(picture -> picture.getId().equals(id_picture));
+        adventureRepository.save(fishingAdventure);
+    }
+
+    private void checkIfAllowed(FishingAdventure fishingAdventure) {
+        String fishingInstructorEmail = loggedUserService.getUsername();
+        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
+            throw new NotAllowedException();
+        }
+    }
+
+
 }

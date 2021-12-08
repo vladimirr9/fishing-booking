@@ -147,7 +147,7 @@ export class NewAdventureComponent implements OnInit {
   }
 
 
-  initMap(lat: number, lon: number) {
+  initMap(lon: number, lat: number,) {
     this.map = new Map({
       target: 'map',
       layers: [
@@ -156,7 +156,7 @@ export class NewAdventureComponent implements OnInit {
         })
       ],
       view: new View({
-        center: olProj.fromLonLat([lat, lon]),
+        center: olProj.fromLonLat([lon, lat]),
         zoom: 12
       })
     });

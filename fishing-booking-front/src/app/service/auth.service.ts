@@ -24,6 +24,10 @@ export class AuthService {
     return this.http.post(`${config.baseUrl}${this.providerRegistrationURL}`, registrationDTO)
   }
 
+  isFishingInstructor() : boolean {
+    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR"
+  }
+
   isLoggedIn() {
     return this.storageService.getToken() !== ""
   }
