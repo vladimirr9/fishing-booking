@@ -57,8 +57,9 @@ public class AdventureController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername) {
-        return ResponseEntity.ok(adventureService.getAdventures(instructorUsername));
+    public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername,
+                                                                @RequestParam(required = false) String adventureName) {
+        return ResponseEntity.ok(adventureService.getAdventures(instructorUsername, adventureName));
     }
 
     @GetMapping(value = "/{id}")

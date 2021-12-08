@@ -13,13 +13,34 @@ export class InstructorHomeComponent implements OnInit {
 
   adventures = []
 
+  searchTerm : string = ""
+
+  loadingPath = "/assets/img/loading-circle.gif"
+  magGlassPath = "/assets/img/search.svg"
+  loading : boolean = false
+
   constructor(private adventureService: AdventureService,
               private storageService: StorageService) { }
 
   ngOnInit(): void {
-    this.adventureService.getAdventuresForInstructor(this.storageService.getUsername()).subscribe( (data) => {
+    this.search()
+  }
+
+  search() {
+    this.loading = true
+    let params = this.getParams()
+    this.adventureService.getAdventuresForInstructor(params).subscribe( (data) => {
       this.adventures = data
+    }).add(()=>{
+      this.loading = false
     })
+  }
+
+  getParams() {
+    let params = Object()
+    params.instructorName = this.storageService.getUsername()
+    params.adventureName = this.searchTerm
+    return params
   }
 
 }

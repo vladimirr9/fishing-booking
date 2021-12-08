@@ -1,4 +1,24 @@
 <div class="container">
+<div class="menu-container">
   <button class="new-adventure-button" mat-flat-button color="primary" routerLink="new-adventure">New Adventure</button>
+  <div class="search">
+    <form>
+    <input
+      type="text"
+      class="input"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      placeholder="Name of the adventure"
+    />
+    <input
+      class="mag-glass"
+      type="image"
+      [style.opacity]="searchTerm ? 1 : 0.5"
+      [src]="loading ? loadingPath : magGlassPath"
+      (click)="search()"
+    />
+  </form>
+  </div>
+</div>
   <app-adventure-list class="adventure-list" [adventures]="adventures"></app-adventure-list>
 </div>

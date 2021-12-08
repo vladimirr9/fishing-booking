@@ -13,11 +13,9 @@ export class AdventureService {
 
   constructor(private http: HttpClient) { }
 
-  getAdventuresForInstructor(instructorUsername : string) : Observable<any> {
+  getAdventuresForInstructor(params : any) : Observable<any> {
     return this.http.get(`${config.baseUrl}${this.adventureURL}`, {
-      params: {
-        instructorUsername: instructorUsername
-      }
+      params: params
     })
   }
   createNewAdventure(adventure : any) : Observable<any> {

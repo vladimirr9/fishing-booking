@@ -47,8 +47,9 @@ public class AdventureService {
     }
 
 
-    public List<FishingAdventure> getAdventures(String instructorUsername) {
-        return adventureRepository.findByFishingInstructorId(instructorUsername);
+    public List<FishingAdventure> getAdventures(String instructorUsername, String adventureName) {
+        String adventureSearch = adventureName == null ? "" : adventureName;
+        return adventureRepository.findByFishingInstructorId(instructorUsername, adventureSearch);
     }
 
     public void deleteAdventure(Long id) {
