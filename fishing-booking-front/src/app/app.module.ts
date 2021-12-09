@@ -28,6 +28,7 @@ import { AdditionalServiceDialogComponent } from './component/dialog/additional-
 import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -61,7 +62,8 @@ import { ChangePasswordComponent } from './component/dialog/change-password/chan
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbModule
   ],
   providers: [StorageService ,
     {
