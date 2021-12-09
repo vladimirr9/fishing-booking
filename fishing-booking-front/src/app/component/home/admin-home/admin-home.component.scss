@@ -1,0 +1,60 @@
+.container {
+  margin: 50px 8%;
+
+}
+.menu-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-admin-button {
+  margin-bottom: 20px;
+}
+
+.registration-container {
+  min-height: 100px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+}
+
+.container-card {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.mat-view {
+  background-color: #2D9645;
+  color: #fff;
+}
+
+
+.user-table {
+  width: 80%;
+}
+.service-table {
+  width: 60%;
+}
+
+
+
+.user-table {
+  min-height: 100px;
+}
+
+
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent
+}

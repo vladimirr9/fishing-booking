@@ -1,0 +1,41 @@
+<div class="registration-container">
+  <h1>Admin Registration</h1>
+  <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email"  formControlName="email"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" type="password"  formControlName="password"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name"  formControlName="firstName"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last Name"  formControlName="lastName"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Street And Number</mat-label>
+      <input matInput placeholder="Street And Number"  formControlName="streetAndNumber"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="Phone Number"  formControlName="phoneNumber"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>City</mat-label>
+      <input matInput placeholder="City"  formControlName="city"/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Country</mat-label>
+      <input matInput placeholder="Country"  formControlName="country"/>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-flat-button color="primary" type="submit" class="button">Register</button>
+    </div>
+  </form>
+  <div *ngIf="registrationFailed" class="failed-registration">Registration failed</div>
+</div>

@@ -1,6 +1,9 @@
 package com.project.fishingbookingback.controller;
 
+import com.project.fishingbookingback.dto.mapper.UserMapper;
+import com.project.fishingbookingback.dto.request.AdminRegistrationDTO;
 import com.project.fishingbookingback.dto.response.TokenDTO;
+import com.project.fishingbookingback.model.Admin;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
@@ -17,15 +20,24 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final UserMapper userMapper;
 
-    public AuthenticationController(AuthenticationService authenticationService) {
+    public AuthenticationController(AuthenticationService authenticationService, UserMapper userMapper) {
         this.authenticationService = authenticationService;
+        this.userMapper = userMapper;
     }
 
     @PostMapping(value = "/provider-registration")
     public ResponseEntity<ProviderRegistration> register(@Valid @RequestBody ProviderRegistration providerRegistration) {
         ProviderRegistration request = authenticationService.registerProvider(providerRegistration);
         return ResponseEntity.ok(request);
+    }
+
+    @PostMapping(value = "/admins")
+    public ResponseEntity<User> registerAdmin(@Valid @RequestBody AdminRegistrationDTO adminRegistrationDTO) {
+        Admin admin = userMapper.toModel(adminRegistrationDTO);
+        User newAdmin = authenticationService.registerAdmin(admin);
+        return ResponseEntity.ok(newAdmin);
     }
 
 

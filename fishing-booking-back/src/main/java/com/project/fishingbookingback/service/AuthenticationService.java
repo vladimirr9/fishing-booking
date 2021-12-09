@@ -2,7 +2,9 @@ package com.project.fishingbookingback.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.project.fishingbookingback.exception.EntityAlreadyExistsException;
 import com.project.fishingbookingback.exception.InvalidCredentialsException;
+import com.project.fishingbookingback.model.Admin;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import org.springframework.stereotype.Service;
@@ -35,5 +37,12 @@ public class AuthenticationService {
                     .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .sign(Algorithm.HMAC512(SECRET));
         } else throw new InvalidCredentialsException();
+    }
+
+    public User registerAdmin(Admin admin) {
+        if (providerRegistrationService.registrationExists(admin.getEmail()) || userService.userExists(admin.getEmail())) {
+            throw new EntityAlreadyExistsException(admin.getEmail());
+        }
+        return userService.saveUser(admin);
     }
 }
