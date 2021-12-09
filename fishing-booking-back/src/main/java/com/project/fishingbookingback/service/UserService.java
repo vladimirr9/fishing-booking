@@ -1,7 +1,9 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.dto.request.UserDetailsRequestDTO;
 import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.BoatOwner;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.HomeOwner;
@@ -15,10 +17,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final AddressService addressService;
     private final UserRepository userRepository;
+    private final LoggedUserService loggedUserService;
 
-    public UserService(AddressService addressService, UserRepository userRepository) {
+    public UserService(AddressService addressService, UserRepository userRepository, LoggedUserService loggedUserService) {
         this.addressService = addressService;
         this.userRepository = userRepository;
+        this.loggedUserService = loggedUserService;
     }
 
     public User findByID(Long id) {
@@ -47,5 +51,24 @@ public class UserService {
         };
         user.setAddress(addressService.insert(user.getAddress()));
         return userRepository.save(user);
+    }
+
+    public User updateUser(Long id, UserDetailsRequestDTO userDetailsRequestDTO) {
+        checkIfAllowed(userDetailsRequestDTO.getEmail());
+        User user = findByID(id);
+        user.setFirstName(userDetailsRequestDTO.getFirstName());
+        user.setLastName(userDetailsRequestDTO.getLastName());
+        user.setPhoneNumber(userDetailsRequestDTO.getPhoneNumber());
+        user.getAddress().setStreetAndNumber(userDetailsRequestDTO.getStreetAndNumber());
+        user.getAddress().setCountry(userDetailsRequestDTO.getCountry());
+        user.getAddress().setCity(userDetailsRequestDTO.getCity());
+        return userRepository.save(user);
+    }
+
+    private void checkIfAllowed(String email) {
+        String userEmail = loggedUserService.getUsername();
+        if (!userEmail.equals(email)) {
+            throw new NotAllowedException();
+        }
     }
 }

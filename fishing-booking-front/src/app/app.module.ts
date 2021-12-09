@@ -25,6 +25,8 @@ import { AdditionalServiceCardComponent } from './component/additional-service/a
 import { PictureCardComponent } from './component/picture/picture-card/picture-card.component';
 import { PictureDialogComponent } from './component/dialog/picture-dialog/picture-dialog.component';
 import { AdditionalServiceDialogComponent } from './component/dialog/additional-service-dialog/additional-service-dialog.component';
+import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
+import { UserDetailsComponent } from './component/user-details/user-details.component';
 
 
 
@@ -42,7 +44,9 @@ import { AdditionalServiceDialogComponent } from './component/dialog/additional-
     AdditionalServiceCardComponent,
     PictureCardComponent,
     PictureDialogComponent,
-    AdditionalServiceDialogComponent
+    AdditionalServiceDialogComponent,
+    InstructorProfileComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

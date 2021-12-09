@@ -43,7 +43,6 @@ export class NewAdventureComponent implements OnInit {
     streetAndNumber: ['', Validators.required],
     latitude: [0, Validators.required],
     longitude: [0, Validators.required],
-
   })
 
 

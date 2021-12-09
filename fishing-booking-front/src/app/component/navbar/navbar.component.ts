@@ -31,6 +31,15 @@ export class NavbarComponent implements OnInit {
       default:
         this.router.navigateByUrl("/")
     }
-
+  }
+  goToProfile() {
+    let role = this.storageService.getRole()
+    switch (role) {
+      case "ROLE_FISHING_INSTRUCTOR":
+        this.router.navigateByUrl("/instructor-profile")
+        break
+      default:
+        this.router.navigateByUrl("/")
+    }
   }
 }
