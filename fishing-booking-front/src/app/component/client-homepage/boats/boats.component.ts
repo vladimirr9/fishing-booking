@@ -9,6 +9,13 @@ export class BoatsComponent implements OnInit {
 
   constructor() { }
 
+  //filters
+  filterName: string = "";
+  filterAdress: string = "";
+  filterMark: number=0;
+  filterStartDate: Date = new Date();
+  filterEndDate: Date = new Date();
+  //
   ngOnInit(): void {
   }
 

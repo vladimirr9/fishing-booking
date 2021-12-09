@@ -7,7 +7,7 @@
                 <label for="">Name:</label>
             </div>
             <div class="col-9">
-                <input type="text" class="form-control" >
+                <input type="text" [(ngModel)]="filterName" class="form-control" >
             </div>
         </div>
     
@@ -16,7 +16,7 @@
                 <label for="">Adress:</label>
             </div>
             <div class="col-9">
-                <input type="text" class="form-control" >
+                <input type="text"  class="form-control" >
             </div>
         </div>
     
@@ -27,8 +27,8 @@
             </div>
             <div class="col-9 m-auto">
                 <div class="row">
-                    <input type="range" class="form-range col-8 ml-3 pt-4" min="0" max="5" step="1" id="mark">
-                    <input type="text" id="textInput" class="mt-2 ml-2 col-2" disabled value="">
+                    <input type="range" [(ngModel)]="filterMark" class="form-range col-8 ml-3 pt-4" min="0" max="5" step="1" id="mark" (change)="markChanged()">
+                    <input type="text" [(ngModel)]="filterMark" id="textInput" class="mt-2 ml-2 col-2" disabled value="">
                 </div>
             </div>
         </div>
@@ -39,11 +39,11 @@
             </div>
             <div class="row" style="padding-top: 15px;">
                 <div class="col-6">
-                    <input type="datetime-local" class="form-control" name="datepicker">
+                    <input type="datetime-local" [(ngModel)]="filterStartDate" class="form-control" name="datepicker">
                 </div>
                 
                 <div class="col-6">
-                    <input type="datetime-local" class="form-control" name="datepicker" >
+                    <input type="datetime-local" [(ngModel)]="filterEndDate" class="form-control" name="datepicker" >
                 </div>
             </div>
         </div>

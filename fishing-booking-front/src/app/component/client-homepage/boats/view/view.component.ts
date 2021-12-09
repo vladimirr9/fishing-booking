@@ -12,6 +12,14 @@ export class ViewComponent implements OnInit {
   boats: BoatsDTO[]= [];
   filteredBoats: BoatsDTO[]= [];
 
+  //filters
+  filterName: string = "";
+  filterAdress: string = "";
+  filterMark: number=0;
+  filterStartDate: Date = new Date();
+  filterEndDate: Date = new Date();
+  //
+
   constructor(private _boatService: BoatService) {
   }
 
