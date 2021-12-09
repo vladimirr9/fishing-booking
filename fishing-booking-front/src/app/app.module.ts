@@ -27,6 +27,7 @@ import { PictureDialogComponent } from './component/dialog/picture-dialog/pictur
 import { AdditionalServiceDialogComponent } from './component/dialog/additional-service-dialog/additional-service-dialog.component';
 import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
+import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
 
 
 
@@ -46,7 +47,8 @@ import { UserDetailsComponent } from './component/user-details/user-details.comp
     PictureDialogComponent,
     AdditionalServiceDialogComponent,
     InstructorProfileComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

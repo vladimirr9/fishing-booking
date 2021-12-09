@@ -111,7 +111,7 @@ export class AdventureDetailedComponent implements OnInit {
       ],
       view: new View({
         center: olProj.fromLonLat([lon, lat]),
-        zoom: 16
+        zoom: 19
       })
     });
   }

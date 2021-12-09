@@ -2,10 +2,12 @@ package com.project.fishingbookingback.controller;
 
 
 import com.project.fishingbookingback.dto.mapper.UserMapper;
+import com.project.fishingbookingback.dto.request.ChangePasswordRequstDTO;
 import com.project.fishingbookingback.dto.request.UserDetailsRequestDTO;
 import com.project.fishingbookingback.dto.response.UserDetailsResponseDTO;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,5 +42,11 @@ public class UserController {
     public ResponseEntity<UserDetailsResponseDTO> updateUserDetails(@Valid @RequestBody UserDetailsRequestDTO userDetailsRequestDTO, @PathVariable Long id) {
         UserDetailsResponseDTO responseBody = userMapper.toResponseDTO(userService.updateUser(id, userDetailsRequestDTO));
         return ResponseEntity.ok(responseBody);
+    }
+
+    @PutMapping(value = "/{email}/passwords")
+    public ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody ChangePasswordRequstDTO changePasswordRequstDTO, @PathVariable String email) {
+        userService.changePassword(email, changePasswordRequstDTO);
+        return ResponseEntity.noContent().build();
     }
 }

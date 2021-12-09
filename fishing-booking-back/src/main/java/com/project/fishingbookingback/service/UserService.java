@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.dto.request.ChangePasswordRequstDTO;
 import com.project.fishingbookingback.dto.request.UserDetailsRequestDTO;
 import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
@@ -65,10 +66,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void changePassword(String email, ChangePasswordRequstDTO changePasswordRequstDTO) {
+        checkIfAllowed(email);
+        User user = findByEmail(email);
+        if (user.getPassword().equals(changePasswordRequstDTO.getCurrentPassword())) {
+            user.setPassword(changePasswordRequstDTO.getNewPassword());
+        }
+        userRepository.save(user);
+    }
+
     private void checkIfAllowed(String email) {
         String userEmail = loggedUserService.getUsername();
         if (!userEmail.equals(email)) {
             throw new NotAllowedException();
         }
     }
+
+
 }

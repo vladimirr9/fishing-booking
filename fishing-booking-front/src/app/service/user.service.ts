@@ -8,10 +8,15 @@ import { config } from "src/shared"
 })
 export class UserService {
 
+
   private userURL = "/users"
 
   constructor(private http: HttpClient)  { }
 
+
+  changePassword(username: string, data: any) {
+    return this.http.put(`${config.baseUrl}${this.userURL}/${username}/passwords`, data)
+  }
   updateProfile(id: number, userDetails : string) : Observable<any> {
     return this.http.put(`${config.baseUrl}${this.userURL}/${id}`, userDetails)
   }
