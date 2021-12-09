@@ -42,4 +42,15 @@ export class NavbarComponent implements OnInit {
         this.router.navigateByUrl("/")
     }
   }
+  viewRouting(navigateTo: string){
+    switch(navigateTo){
+      case 'BOATS':
+        this.router.navigateByUrl("/client-homepage/boats")
+        break;
+      case 'HOLIDAY HOMES':
+        break;
+      case 'INSTRUCTORS':
+        break;
+    }
+  }
 }

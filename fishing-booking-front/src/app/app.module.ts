@@ -29,6 +29,8 @@ import { InstructorProfileComponent } from './component/instructor-profile/instr
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomepageComponent } from './component/client-homepage/homepage/homepage.component';
+import { BoatsComponent } from './component/client-homepage/boats/boats.component';
 
 
 
@@ -49,7 +51,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdditionalServiceDialogComponent,
     InstructorProfileComponent,
     UserDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HomepageComponent,
+    BoatsComponent
   ],
   imports: [
     BrowserModule,
