@@ -28,6 +28,8 @@ import { AdditionalServiceDialogComponent } from './component/dialog/additional-
 import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
+import { OwnerHomeComponent } from './component/owner-home/owner-home.component';
+import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
 
 
 
@@ -48,7 +50,9 @@ import { ChangePasswordComponent } from './component/dialog/change-password/chan
     AdditionalServiceDialogComponent,
     InstructorProfileComponent,
     UserDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    OwnerHomeComponent,
+    NewHomeComponent
   ],
   imports: [
     BrowserModule,

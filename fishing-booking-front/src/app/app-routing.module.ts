@@ -6,6 +6,8 @@ import { NewAdventureComponent } from './component/adventure/new-adventure/new-a
 import { RegistrationComponent } from './component/registration/registration.component';
 import { AdventureDetailedComponent } from './component/adventure/adventure-detailed/adventure-detailed.component';
 import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
+import { OwnerHomeComponent } from './component/owner-home/owner-home.component';
+import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'signup', component: RegistrationComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'instructor-profile', component: InstructorProfileComponent },
                          { path: 'adventures/:id/edit', component:  NewAdventureComponent},
                          { path: 'adventures/:id', component:  AdventureDetailedComponent},
+                         { path: 'owner-home', component:  OwnerHomeComponent},
+                         { path: 'owner-home/new-home', component:  NewHomeComponent},
                         ];
 
 @NgModule({

@@ -1,0 +1,64 @@
+<div class="container">
+    <h1>{{getTitle()}}</h1>
+    <form class="form-container" [formGroup]="addHomeForm">
+    <div class="left-container">
+      <mat-form-field appearance="standard">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name"  formControlName="name"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Description</mat-label>
+        <textarea class="textarea" matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Number of Rooms</mat-label>
+        <input type="number" matInput placeholder="Number of Rooms" formControlName="numOfRooms"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Number of Beds per Room</mat-label>
+        <input type="number" matInput placeholder="Number of Beds per Room" formControlName="numOfBeds"/>
+      </mat-form-field>
+    </div>
+    <div class="middle-container">
+      <mat-form-field appearance="standard">
+        <mat-label>Rules of Conduct</mat-label>
+        <textarea class="textarea" matInput placeholder="Rules of Conduct" formControlName="rulesOfConduct"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Additional information</mat-label>
+        <textarea class="textarea" matInput placeholder="Additional information" formControlName="additionalInfo"></textarea>
+      </mat-form-field>
+      
+    </div>
+    <div class="right-container">
+      <div class="address-container">
+        <mat-form-field appearance="standard">
+          <mat-label>Country</mat-label>
+          <input matInput placeholder="Country"  formControlName="country"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="City"  formControlName="city"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Street and Number</mat-label>
+          <input matInput placeholder="Street and Number"  formControlName="streetAndNumber"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Latitude</mat-label>
+          <input type="number" matInput placeholder="Latitude"  formControlName="latitude"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Longitude</mat-label>
+          <input type="number" matInput placeholder="Longitude"  formControlName="longitude"/>
+        </mat-form-field>
+        <div class="button-container">
+        <button mat-flat-button color="primary" (click)="editMode ? editHome() : createHome()" class="button">{{getButtonText()}}</button>
+        <button mat-flat-button color="warn" (click)="Cancel()" class="button">Cancel</button>
+      </div>
+      </div>
+        <div class="map" (click)="getCoord($event)" id="map"></div>
+    </div>
+  </form>
+  </div>
+  

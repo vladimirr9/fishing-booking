@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
         case 'ROLE_FISHING_INSTRUCTOR':
           this.router.navigateByUrl('/instructor-home')
           break
+        case 'ROLE_HOME_OWNER':
+          this.router.navigateByUrl('/owner-home')
+          break
         default:
           this.router.navigateByUrl('/')
       }
