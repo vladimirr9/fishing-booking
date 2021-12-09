@@ -31,6 +31,8 @@ import { ChangePasswordComponent } from './component/dialog/change-password/chan
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './component/client-homepage/homepage/homepage.component';
 import { BoatsComponent } from './component/client-homepage/boats/boats.component';
+import { ViewComponent } from './component/client-homepage/boats/view/view.component';
+import { FilterComponent } from './component/client-homepage/boats/filter/filter.component';
 
 
 
@@ -53,7 +55,9 @@ import { BoatsComponent } from './component/client-homepage/boats/boats.componen
     UserDetailsComponent,
     ChangePasswordComponent,
     HomepageComponent,
-    BoatsComponent
+    BoatsComponent,
+    ViewComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
