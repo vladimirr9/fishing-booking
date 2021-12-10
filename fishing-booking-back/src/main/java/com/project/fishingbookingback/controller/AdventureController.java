@@ -9,6 +9,7 @@ import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.service.AdventureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class AdventureController {
         this.adventureMapper = adventureMapper;
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PostMapping()
     public ResponseEntity<FishingAdventure> create(@Valid @RequestBody NewAdventureDTO newAdventureDTO) {
         FishingAdventure fishingAdventure = adventureMapper.toModel(newAdventureDTO);
@@ -40,21 +42,25 @@ public class AdventureController {
         return ResponseEntity.ok(newFishingAdventure);
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PostMapping(value = "/{id}/additional-services")
     public ResponseEntity<FishingAdventure> addService(@Valid @RequestBody AdditionalService additionalService, @PathVariable Long id) {
         return ResponseEntity.ok(adventureService.addService(id, additionalService));
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PostMapping(value = "/{id}/pictures")
     public ResponseEntity<FishingAdventure> addPicture(@Valid @RequestBody Picture picture, @PathVariable Long id) {
         return ResponseEntity.ok(adventureService.addPicture(id, picture));
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<FishingAdventure> updateAdventure(@Valid @RequestBody UpdateAdventureDTO updateAdventureDTO, @PathVariable Long id) {
         FishingAdventure fishingAdventure = adventureMapper.toModel(updateAdventureDTO);
         return ResponseEntity.ok(adventureService.updateAdventure(id, fishingAdventure));
     }
+
 
     @GetMapping()
     public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername,
@@ -67,18 +73,21 @@ public class AdventureController {
         return ResponseEntity.ok(adventureService.findByID(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteAdventure(@PathVariable Long id) {
         adventureService.deleteAdventure(id);
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}/additional-services/{id_service}")
     public ResponseEntity<HttpStatus> deleteAdditionalService(@PathVariable Long id, @PathVariable Long id_service) {
         adventureService.deleteAdditionalService(id, id_service);
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}/pictures/{id_picture}")
     public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture) {
         adventureService.deletePicture(id, id_picture);
