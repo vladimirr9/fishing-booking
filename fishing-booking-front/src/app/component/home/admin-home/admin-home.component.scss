@@ -16,6 +16,7 @@
 
 .registration-container {
   min-height: 100px;
+  display: flex;
 }
 
 .buttons-container {
@@ -33,6 +34,7 @@ mat-card-title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
 }
 
 

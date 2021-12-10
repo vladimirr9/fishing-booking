@@ -46,10 +46,10 @@ export class RegistrationComponent implements OnInit {
       city: this.registrationForm.get('city')?.value,
       country: this.registrationForm.get('country')?.value,
       role: this.registrationForm.get('role')?.value,
-      explanation: this.registrationForm.get('username')?.value ?? ""
+      explanation: this.registrationForm.get('explanation')?.value ?? ""
     }
     this.authService.registerProvider(registrationDTO).subscribe(() => {
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('/login')
     }, (err: Error) => {
       this.registrationFailed = true;
     })
