@@ -30,6 +30,8 @@ import { UserDetailsComponent } from './component/user-details/user-details.comp
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
 import { OwnerHomeComponent } from './component/owner-home/owner-home.component';
 import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
+import { HomeListComponent } from './component/holiday-home/home-list/home-list.component';
+import { HomeCardComponent } from './component/holiday-home/home-card/home-card.component';
 
 
 
@@ -52,7 +54,9 @@ import { NewHomeComponent } from './component/holiday-home/new-home/new-home.com
     UserDetailsComponent,
     ChangePasswordComponent,
     OwnerHomeComponent,
-    NewHomeComponent
+    NewHomeComponent,
+    HomeListComponent,
+    HomeCardComponent
   ],
   imports: [
     BrowserModule,

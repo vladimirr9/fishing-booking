@@ -33,15 +33,21 @@ public class HolidayHomeController {
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
 
-    @PutMapping()
-    public ResponseEntity<HolidayHome> update(@NotNull long id, @Valid NewHolidayHomeDTO updatedHolidayHomeDTO) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<HolidayHome> update(@NotNull Long id, @Valid NewHolidayHomeDTO updatedHolidayHomeDTO) {
         HolidayHome newHolidayHome = holidayHomeService.update(id, updatedHolidayHomeDTO);
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
 
     @GetMapping()
-    public ResponseEntity<List<HolidayHome>> getHolidayHomes(@RequestParam(required = false) String homeOwnerUsername) {;
-        return ResponseEntity.ok(holidayHomeService.getHolidayHomes(homeOwnerUsername));
+    public ResponseEntity<List<HolidayHome>> getHolidayHomes(@RequestParam(required = false) String homeOwnerUsername,
+                                                                @RequestParam(required = false) String holidayHomeName) {;
+        return ResponseEntity.ok(holidayHomeService.getHolidayHomes(homeOwnerUsername, holidayHomeName));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<HolidayHome> getHome(@PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.findByID(id));
     }
 
     @DeleteMapping(value = "/{id}")

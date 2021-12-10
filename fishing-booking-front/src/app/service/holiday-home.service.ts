@@ -7,8 +7,9 @@ import { config } from "src/shared"
   providedIn: 'root'
 })
 export class HolidayHomeService {
+  
 
-  private homeURL = "/holiday-homes"
+  private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
 
   createNewHome(home : any) : Observable<any> {
@@ -20,8 +21,17 @@ export class HolidayHomeService {
   }
 
   updateHome(id : number, home : any): Observable<any> {
+    alert(home.name);
     return this.http.put(`${config.baseUrl}${this.homeURL}/${id}`, home)
-
   }
 
+  deleteHome(id : number) : Observable<any> {
+    return this.http.delete(`${config.baseUrl}${this.homeURL}/${id}`)
+  }
+
+  getHomesForOwner(params : any) : Observable<any> {
+    return this.http.get(`${config.baseUrl}${this.homeURL}`, {
+      params: params
+    })
+  }
 }

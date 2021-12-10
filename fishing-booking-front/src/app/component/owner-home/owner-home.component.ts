@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HolidayHomeService } from 'src/app/service/holiday-home.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-owner-home',
@@ -14,7 +18,8 @@ export class OwnerHomeComponent implements OnInit {
   magGlassPath = "/assets/img/search.svg"
   loading : boolean = false
 
-  constructor() { }
+  constructor(private holidayHomeService: HolidayHomeService,
+    private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.search()
@@ -22,18 +27,18 @@ export class OwnerHomeComponent implements OnInit {
 
   search() {
     this.loading = true
-    /*let params = this.getParams()
-    this.adventureService.getAdventuresForInstructor(params).subscribe( (data) => {
-      this.adventures = data
+    let params = this.getParams()
+    this.holidayHomeService.getHomesForOwner(params).subscribe( (data) => {
+      this.homes = data
     }).add(()=>{
       this.loading = false
-    })*/
+    })
   }
 
   getParams() {
-    /*let params = Object()
-    params.instructorName = this.storageService.getUsername()
-    params.adventureName = this.searchTerm
-    return params*/
+    let params = Object()
+    params.ownerName = this.storageService.getUsername()
+    params.homeName = this.searchTerm
+    return params
   }
 }

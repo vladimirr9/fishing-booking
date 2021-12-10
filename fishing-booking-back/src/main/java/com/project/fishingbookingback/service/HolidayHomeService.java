@@ -4,11 +4,9 @@ import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
-import com.project.fishingbookingback.repository.AdventureRepository;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,7 +15,7 @@ public class HolidayHomeService {
     private final HolidayHomeRepository holidayHomeRepository;
     private final LoggedUserService loggedUserService;
 
-    public HolidayHomeService(UserService userService, AdventureRepository adventureRepository, HolidayHomeRepository holidayHomeRepository, LoggedUserService loggedUserService) {
+    public HolidayHomeService(UserService userService, HolidayHomeRepository holidayHomeRepository, LoggedUserService loggedUserService) {
         this.userService = userService;
         this.holidayHomeRepository = holidayHomeRepository;
         this.loggedUserService = loggedUserService;
@@ -29,9 +27,13 @@ public class HolidayHomeService {
         return holidayHomeRepository.save(holidayHome);
     }
 
+    public HolidayHome findByID(Long id) {
+        return holidayHomeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(HolidayHome.class.getSimpleName()));
+    }
 
-    public List<HolidayHome> getHolidayHomes(String homeOwnerUsername) {
-        return holidayHomeRepository.findByHomeOwnerId(homeOwnerUsername);
+    public List<HolidayHome> getHolidayHomes(String homeOwnerUsername, String holidayHomeName) {
+        String holidayHomeSearch = holidayHomeName == null ? "" : holidayHomeName;
+        return holidayHomeRepository.findByHomeOwnerId(homeOwnerUsername, holidayHomeSearch);
     }
 
     public HolidayHome update(long id, NewHolidayHomeDTO dto) {
@@ -45,7 +47,7 @@ public class HolidayHomeService {
         holidayHome.setRoomsPerHome(dto.getRoomsPerHome());
         holidayHome.setBedsPerRoom(dto.getBedsPerRoom());
         holidayHome.setRulesOfConduct(dto.getRulesOfConduct());
-        holidayHome.setAditionalInfo(dto.getAdditionalInfo());
+        holidayHome.setAdditionalInfo(dto.getAdditionalInfo());
         return holidayHomeRepository.save(holidayHome);
     }
 

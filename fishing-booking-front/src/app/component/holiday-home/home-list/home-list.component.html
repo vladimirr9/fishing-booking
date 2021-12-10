@@ -1,0 +1,6 @@
+<div class="container">
+    <div class="item" *ngFor="let home of homes">
+      <app-home-card [home] = "home" (homeDeleted)="removeHome($event)"></app-home-card>
+    </div>
+  </div>
+  

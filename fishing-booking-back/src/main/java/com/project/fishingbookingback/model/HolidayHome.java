@@ -44,7 +44,7 @@ public class HolidayHome {
     )
     private List<Appointment> freeAppointments;
     private String rulesOfConduct;
-    private String aditionalInfo;
+    private String additionalInfo;
 
     public void setHomeOwner(HomeOwner homeOwner) {
         this.homeOwner = homeOwner;
@@ -134,15 +134,15 @@ public class HolidayHome {
         this.rulesOfConduct = rulesOfConduct;
     }
 
-    public String getAditionalInfo() {
-        return aditionalInfo;
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 
-    public void setAditionalInfo(String aditionalInfo) {
-        this.aditionalInfo = aditionalInfo;
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
-    public HolidayHome(String name, Address address, String description, List<Picture> exterior, List<Picture> interior, int roomsPerHome, int bedsPerRoom, List<Appointment> freeAppointments, String rulesOfConduct, String aditionalInfo) {
+    public HolidayHome(String name, Address address, String description, List<Picture> exterior, List<Picture> interior, int roomsPerHome, int bedsPerRoom, List<Appointment> freeAppointments, String rulesOfConduct, String additionalInfo) {
         this.name = name;
         this.address = address;
         this.description = description;
@@ -152,6 +152,6 @@ public class HolidayHome {
         this.bedsPerRoom = bedsPerRoom;
         this.freeAppointments = freeAppointments;
         this.rulesOfConduct = rulesOfConduct;
-        this.aditionalInfo = aditionalInfo;
+        this.additionalInfo = additionalInfo;
     }
 }
