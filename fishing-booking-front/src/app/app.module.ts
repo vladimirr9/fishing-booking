@@ -12,9 +12,9 @@ import { LoginComponent } from './component/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatTableModule} from '@angular/material/table';
 import { RegistrationComponent } from './component/registration/registration.component';
-import { InstructorHomeComponent } from './component/instructor-home/instructor-home.component';
+import { InstructorHomeComponent } from './component/home/instructor-home/instructor-home.component';
 import { AdventureListComponent } from './component/adventure/adventure-list/adventure-list.component';
 import { AdventureCardComponent } from './component/adventure/adventure-card/adventure-card.component';
 import { NewAdventureComponent } from './component/adventure/new-adventure/new-adventure.component';
@@ -25,9 +25,10 @@ import { AdditionalServiceCardComponent } from './component/additional-service/a
 import { PictureCardComponent } from './component/picture/picture-card/picture-card.component';
 import { PictureDialogComponent } from './component/dialog/picture-dialog/picture-dialog.component';
 import { AdditionalServiceDialogComponent } from './component/dialog/additional-service-dialog/additional-service-dialog.component';
-import { InstructorProfileComponent } from './component/instructor-profile/instructor-profile.component';
+import { InstructorProfileComponent } from './component/profile/instructor-profile/instructor-profile.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './component/client-homepage/homepage/homepage.component';
 import { BoatsComponent } from './component/client-homepage/boats/boats.component';
@@ -38,6 +39,12 @@ import { AdventureViewComponent } from './component/client-homepage/instructors/
 import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
 import { HolidayHousesViewComponent } from './component/client-homepage/holiday-houses/holiday-houses-view/holiday-houses-view.component';
 import { SorterComponent } from './component/client-homepage/sorter/sorter.component';
+
+import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
+import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
+import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
+import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
+
 
 
 
@@ -67,7 +74,11 @@ import { SorterComponent } from './component/client-homepage/sorter/sorter.compo
     AdventureViewComponent,
     HolidayHousesComponent,
     HolidayHousesViewComponent,
-    SorterComponent
+    SorterComponent,
+    AdminHomeComponent,
+    AdminProfileComponent,
+    AdminRegistrationComponent,
+    ChangeFeeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +92,8 @@ import { SorterComponent } from './component/client-homepage/sorter/sorter.compo
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    MatTableModule
   ],
   providers: [StorageService ,
     {

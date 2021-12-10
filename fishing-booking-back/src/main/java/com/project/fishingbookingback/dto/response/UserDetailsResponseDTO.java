@@ -15,11 +15,13 @@ public class UserDetailsResponseDTO {
     private String streetAndNumber;
 
     private String city;
- 
+
     private String country;
 
+    private Boolean firstLogin;
 
-    public UserDetailsResponseDTO(Long id, String email, String firstName, String lastName, String phoneNumber, String streetAndNumber, String city, String country) {
+
+    public UserDetailsResponseDTO(Long id, String email, String firstName, String lastName, String phoneNumber, String streetAndNumber, String city, String country, Boolean firstLogin) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -28,6 +30,7 @@ public class UserDetailsResponseDTO {
         this.streetAndNumber = streetAndNumber;
         this.city = city;
         this.country = country;
+        this.firstLogin = firstLogin;
     }
 
     public UserDetailsResponseDTO() {
@@ -55,6 +58,10 @@ public class UserDetailsResponseDTO {
 
     public String getStreetAndNumber() {
         return streetAndNumber;
+    }
+
+    public Boolean getFirstLogin() {
+        return firstLogin;
     }
 
     public String getCity() {

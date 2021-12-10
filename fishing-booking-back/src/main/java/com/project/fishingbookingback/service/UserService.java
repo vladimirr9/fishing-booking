@@ -5,13 +5,17 @@ import com.project.fishingbookingback.dto.request.UserDetailsRequestDTO;
 import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
+import com.project.fishingbookingback.model.Admin;
 import com.project.fishingbookingback.model.BoatOwner;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.HomeOwner;
 import com.project.fishingbookingback.model.ProviderRegistration;
+import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -72,7 +76,16 @@ public class UserService {
         if (user.getPassword().equals(changePasswordRequstDTO.getCurrentPassword())) {
             user.setPassword(changePasswordRequstDTO.getNewPassword());
         }
+        if (user.getRole() == Role.ROLE_ADMIN) {
+            Admin admin = (Admin) user;
+            admin.setFirstLogin(false);
+        }
         userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        User user = findByID(id);
+        userRepository.deleteById(id);
     }
 
     private void checkIfAllowed(String email) {
@@ -83,4 +96,12 @@ public class UserService {
     }
 
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+
+    public User saveUser(Admin admin) {
+        return userRepository.save(admin);
+    }
 }

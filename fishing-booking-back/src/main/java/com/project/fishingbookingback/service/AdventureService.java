@@ -6,6 +6,8 @@ import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Role;
+import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.stereotype.Service;
 
@@ -88,8 +90,9 @@ public class AdventureService {
     }
 
     private void checkIfAllowed(FishingAdventure fishingAdventure) {
-        String fishingInstructorEmail = loggedUserService.getUsername();
-        if (!fishingInstructorEmail.equals(fishingAdventure.getFishingInstructor().getEmail())) {
+        String email = loggedUserService.getUsername();
+        User user = userService.findByEmail(email);
+        if (!email.equals(fishingAdventure.getFishingInstructor().getEmail()) && user.getRole() != Role.ROLE_ADMIN) {
             throw new NotAllowedException();
         }
     }

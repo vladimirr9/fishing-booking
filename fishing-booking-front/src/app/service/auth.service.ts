@@ -11,6 +11,7 @@ import { StorageService } from './storage.service';
 })
 export class AuthService {
 
+
   private loginUrl = "/auth/login"
   private providerRegistrationURL = "/auth/provider-registration"
 
@@ -22,6 +23,9 @@ export class AuthService {
   }
   registerProvider(registrationDTO: RegistrationDTO) {
     return this.http.post(`${config.baseUrl}${this.providerRegistrationURL}`, registrationDTO)
+  }
+  registerAdmin(adminRegistration: any) {
+    return this.http.post(`${config.baseUrl}/auth/admins`, adminRegistration)
   }
 
   isFishingInstructor() : boolean {

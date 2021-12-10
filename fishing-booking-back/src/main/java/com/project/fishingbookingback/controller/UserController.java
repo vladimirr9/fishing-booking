@@ -9,6 +9,7 @@ import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -42,6 +44,17 @@ public class UserController {
     public ResponseEntity<UserDetailsResponseDTO> updateUserDetails(@Valid @RequestBody UserDetailsRequestDTO userDetailsRequestDTO, @PathVariable Long id) {
         UserDetailsResponseDTO responseBody = userMapper.toResponseDTO(userService.updateUser(id, userDetailsRequestDTO));
         return ResponseEntity.ok(responseBody);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<User>> getAll() {
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @PutMapping(value = "/{email}/passwords")
