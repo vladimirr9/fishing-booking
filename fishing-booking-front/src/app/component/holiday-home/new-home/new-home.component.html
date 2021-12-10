@@ -28,6 +28,42 @@
         <mat-label>Additional information</mat-label>
         <textarea class="textarea" matInput placeholder="Additional information" formControlName="additionalInfo"></textarea>
       </mat-form-field>
+      <div *ngIf="editMode" appearance="standard">
+        <mat-label>Add interior picture</mat-label>
+        <input  type="image" class="image" (click)="addPicture(true)"
+        src="assets/img/plus.svg">
+        <div class="picture-container">
+          <div *ngFor="let picture of interior" class="picture-item">
+            <mat-card class="container-card">
+              <img mat-card-image [src]="picture.link" alt="Broken image">
+              <div class="buttons-container">
+                <div class="delete-button">
+                <input type="image" class="image" (click)="deletePicture(picture, true)"
+                    src="assets/img/delete.png">
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+
+        <mat-label>Add exterior picture</mat-label>
+        <input  type="image" class="image" (click)="addPicture(false)"
+        src="assets/img/plus.svg">
+        <div class="picture-container">
+          <div *ngFor="let picture of exterior" class="picture-item">
+            <mat-card class="container-card">
+              <img mat-card-image [src]="picture.link" alt="Broken image">
+              <div class="buttons-container">
+                <div class="delete-button">
+                <input type="image" class="image" (click)="deletePicture(picture, false)"
+                    src="assets/img/delete.png">
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+        
+      </div>
       
     </div>
     <div class="right-container">
@@ -52,6 +88,7 @@
           <mat-label>Longitude</mat-label>
           <input type="number" matInput placeholder="Longitude"  formControlName="longitude"/>
         </mat-form-field>
+        
         <div class="button-container">
         <button mat-flat-button color="primary" (click)="editMode ? editHome() : createHome()" class="button">{{getButtonText()}}</button>
         <button mat-flat-button color="warn" (click)="Cancel()" class="button">Cancel</button>

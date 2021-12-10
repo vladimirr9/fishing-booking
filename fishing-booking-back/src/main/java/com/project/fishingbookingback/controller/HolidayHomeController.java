@@ -33,7 +33,7 @@ public class HolidayHomeController {
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
 
-    @PostMapping(value = "/{id}/{is_interior}/pictures")
+    @PostMapping(value = "/{id}/pictures/{is_interior}")
     public ResponseEntity<HolidayHome> addPicture(@Valid @RequestBody Picture picture, @PathVariable Long id, @PathVariable Boolean is_interior) {
         return ResponseEntity.ok(holidayHomeService.addPicture(id, is_interior, picture));
     }
@@ -61,7 +61,7 @@ public class HolidayHomeController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(value = "/{id}/{is_interior}/{id_picture}")
+    @DeleteMapping(value = "/{id}/pictures/{is_interior}/{id_picture}")
     public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture, @PathVariable Boolean is_interior) {
         holidayHomeService.deletePicture(id, id_picture, is_interior);
         return ResponseEntity.noContent().build();

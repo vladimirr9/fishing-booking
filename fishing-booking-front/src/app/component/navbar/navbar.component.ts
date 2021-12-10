@@ -44,6 +44,9 @@ export class NavbarComponent implements OnInit {
       case "ROLE_FISHING_INSTRUCTOR":
         this.router.navigateByUrl("/instructor-profile")
         break
+      case "ROLE_HOME_OWNER":
+        this.router.navigateByUrl("/home-owner-profile")
+        break
       case 'ROLE_ADMIN':
         this.router.navigateByUrl('/admin-profile')
         break

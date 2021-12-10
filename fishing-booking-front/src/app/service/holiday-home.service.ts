@@ -8,6 +8,7 @@ import { config } from "src/shared"
 })
 export class HolidayHomeService {
   
+  
 
   private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
@@ -32,5 +33,13 @@ export class HolidayHomeService {
     return this.http.get(`${config.baseUrl}${this.homeURL}`, {
       params: params
     })
+  }
+
+  postPicture(id_home: number, picture: any, isInterior: boolean) {
+    return this.http.post(`${config.baseUrl}${this.homeURL}/${id_home}/pictures/${isInterior}`, picture)
+  }
+
+  deletePicture(id_home: number, id_picture : number, isInterior: boolean) {
+    return this.http.delete(`${config.baseUrl}${this.homeURL}/${id_home}/pictures/${isInterior}/${id_picture}`)
   }
 }

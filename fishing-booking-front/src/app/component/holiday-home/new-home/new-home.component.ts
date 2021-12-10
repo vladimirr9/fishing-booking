@@ -10,6 +10,8 @@ import { toLonLat } from 'ol/proj';
 import { transform } from 'ol/proj';
 import { HolidayHomeService } from 'src/app/service/holiday-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
 
 @Component({
   selector: 'app-new-home',
@@ -22,11 +24,13 @@ export class NewHomeComponent implements OnInit {
   submitFailed = false
   editMode = false
   map!: Map
+  interior : any
+  exterior : any
 
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private dialog: MatDialog) { }
 
 
     addHomeForm = this.fb.group({
@@ -63,8 +67,51 @@ export class NewHomeComponent implements OnInit {
           this.lon = data.address.longitude
           this.lat = data.address.latitude
           this.map.getView().setCenter(transform([this.lon, this.lat], 'EPSG:4326', 'EPSG:3857'));
+          this.exterior = data.exterior
+          this.interior = data.interior
         })
       }
+    }
+
+    addPicture(isInterior: boolean) {
+
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+  
+      const dialogRef = this.dialog.open(PictureDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            this.holidayHomeService.postPicture(this.route.snapshot.params['id'], data, isInterior).subscribe((result:any) => {
+              this.interior = result.interior
+              this.exterior = result.exterior
+            })
+          }
+        }
+      );
+    }
+
+    deletePicture(picture : any, isInterior: boolean) {
+      this.holidayHomeService.deletePicture(this.route.snapshot.params['id'], picture.id, isInterior).subscribe((data) => {
+        
+        if(isInterior) {
+          let index = this.interior.indexOf(picture);
+          if (index !== -1) {
+            this.interior.splice(index, 1);
+          }
+        }
+        else {
+          let index = this.exterior.indexOf(picture);
+          if (index !== -1) {
+            this.exterior.splice(index, 1);
+          }
+        }
+
+
+      })
     }
 
     createHome() {

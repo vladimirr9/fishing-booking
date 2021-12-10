@@ -36,6 +36,7 @@ import { AdminHomeComponent } from './component/home/admin-home/admin-home.compo
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
+import { HomeOwnerProfileComponent } from './component/profile/home-owner-profile/home-owner-profile.component';
 
 
 
@@ -60,11 +61,12 @@ import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/c
     OwnerHomeComponent,
     NewHomeComponent,
     HomeListComponent,
-    HomeCardComponent
+    HomeCardComponent,
     AdminHomeComponent,
     AdminProfileComponent,
     AdminRegistrationComponent,
-    ChangeFeeDialogComponent
+    ChangeFeeDialogComponent,
+    HomeOwnerProfileComponent
   ],
   imports: [
     BrowserModule,
