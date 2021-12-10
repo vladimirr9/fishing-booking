@@ -10,14 +10,6 @@ export class ViewComponent implements OnInit {
 
   @Input() boats: BoatsDTO[]= [];
 
-  //filters
-  filterName: string = "";
-  filterAdress: string = "";
-  filterMark: number=0;
-  filterStartDate: Date = new Date();
-  filterEndDate: Date = new Date();
-  //
-
   constructor() {
   }
 

@@ -33,6 +33,8 @@ import { HomepageComponent } from './component/client-homepage/homepage/homepage
 import { BoatsComponent } from './component/client-homepage/boats/boats.component';
 import { ViewComponent } from './component/client-homepage/boats/view/view.component';
 import { FilterComponent } from './component/client-homepage/boats/filter/filter.component';
+import { InstructorsComponent } from './component/client-homepage/instructors/instructors.component';
+import { AdventureViewComponent } from './component/client-homepage/instructors/adventure-view/adventure-view.component';
 
 
 
@@ -57,7 +59,9 @@ import { FilterComponent } from './component/client-homepage/boats/filter/filter
     HomepageComponent,
     BoatsComponent,
     ViewComponent,
-    FilterComponent
+    FilterComponent,
+    InstructorsComponent,
+    AdventureViewComponent
   ],
   imports: [
     BrowserModule,

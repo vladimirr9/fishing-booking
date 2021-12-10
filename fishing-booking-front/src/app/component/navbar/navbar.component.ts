@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit {
       case 'HOLIDAY HOMES':
         break;
       case 'INSTRUCTORS':
+        this.router.navigateByUrl("/client-homepage/instructors")
         break;
     }
   }
