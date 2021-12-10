@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.dto.mapper;
 
 import com.project.fishingbookingback.dto.request.AdminRegistrationDTO;
+import com.project.fishingbookingback.dto.request.UserRegistrationDTO;
 import com.project.fishingbookingback.dto.response.UserDetailsResponseDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Admin;
@@ -41,6 +42,23 @@ public class UserMapper {
         admin.setRole(Role.ROLE_ADMIN);
         admin.setFirstLogin(true);
         return admin;
+    }
+
+    public User toModel(UserRegistrationDTO userRegistrationDTO){
+        User user = new User();
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setPassword(userRegistrationDTO.getPassword());
+        user.setFirstName(userRegistrationDTO.getFirstName());
+        user.setLastName(userRegistrationDTO.getLastName());
+        user.setPhoneNumber(userRegistrationDTO.getPhoneNumber());
+        user.setAddress(new Address(userRegistrationDTO.getStreetAndNumber(),
+                userRegistrationDTO.getCity(),
+                userRegistrationDTO.getCountry(),
+                null, null));
+        user.setRole(Role.ROLE_CLIENT);
+        user.setEnabled(false);
+
+        return user;
     }
 
 }

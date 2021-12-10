@@ -52,10 +52,33 @@ export class RegistrationComponent implements OnInit {
     }
     let role = this.registrationForm.get('role')?.value;
     if(role == "ROLE_CLIENT")
+    {
+      this.registerClient();
       return;
+    }
     this.authService.registerProvider(registrationDTO).subscribe(() => {
       this.router.navigateByUrl('')
     }, (err: Error) => {
+      this.registrationFailed = true;
+    })
+  }
+
+  registerClient():void {
+    let clientRegistration : any = {
+      email: this.registrationForm.get('username')?.value,
+      password: this.registrationForm.get('password')?.value,
+      firstName: this.registrationForm.get('firstName')?.value,
+      lastName: this.registrationForm.get('lastName')?.value,
+      streetAndNumber: this.registrationForm.get('streetAndNumber')?.value,
+      phoneNumber: this.registrationForm.get('phoneNumber')?.value,
+      city: this.registrationForm.get('city')?.value,
+      country: this.registrationForm.get('country')?.value
+    }
+
+    this.authService.registerClient(clientRegistration).subscribe(()=>{
+      this.router.navigateByUrl('');
+      alert("Email sent!");
+    },(err: Error) =>{
       this.registrationFailed = true;
     })
   }

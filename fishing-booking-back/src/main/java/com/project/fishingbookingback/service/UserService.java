@@ -52,6 +52,7 @@ public class UserService {
             case ROLE_HOME_OWNER -> new HomeOwner(providerRegistration);
             case ROLE_BOAT_OWNER -> new BoatOwner(providerRegistration);
             case ROLE_FISHING_INSTRUCTOR -> new FishingInstructor(providerRegistration);
+            case ROLE_CLIENT -> new User(providerRegistration);
             default -> throw new BadRoleException("Can only register boat owner, fishing instructor, and home owner");
         };
         user.setAddress(addressService.insert(user.getAddress()));
