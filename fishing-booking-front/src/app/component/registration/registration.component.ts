@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
+    password2: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     streetAndNumber: new FormControl('', Validators.required),
@@ -26,6 +27,7 @@ export class RegistrationComponent implements OnInit {
     explanation: new FormControl(''),
   })
 
+
   registrationFailed = false
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() : void {
     this.registrationFailed = false
-    if (this.registrationForm.invalid) {
+    if (this.registrationForm.invalid || this.registrationForm.get('password2')?.value !== this.registrationForm.get('password')?.value) {
       return;
     }
     let registrationDTO : RegistrationDTO = {
