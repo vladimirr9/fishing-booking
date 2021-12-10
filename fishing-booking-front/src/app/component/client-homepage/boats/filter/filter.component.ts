@@ -19,8 +19,8 @@ export class FilterComponent implements OnInit {
   }
 
   markChanged(): void{
-    alert(this.filterStartDate);  
-    alert(this.filterEndDate);
+    //alert(this.filterStartDate);  
+    //alert(this.filterEndDate);
   }
 
 }

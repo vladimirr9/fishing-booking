@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BoatsDTO } from 'src/app/dto/BoatsDTO';
-import { BoatService } from 'src/app/service/boat.service';
 
 @Component({
   selector: 'app-view',
@@ -9,8 +8,7 @@ import { BoatService } from 'src/app/service/boat.service';
 })
 export class ViewComponent implements OnInit {
 
-  boats: BoatsDTO[]= [];
-  filteredBoats: BoatsDTO[]= [];
+  @Input() boats: BoatsDTO[]= [];
 
   //filters
   filterName: string = "";
@@ -20,13 +18,10 @@ export class ViewComponent implements OnInit {
   filterEndDate: Date = new Date();
   //
 
-  constructor(private _boatService: BoatService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.boats = this._boatService.getBoats();
-      
-    
   }
 
 }
