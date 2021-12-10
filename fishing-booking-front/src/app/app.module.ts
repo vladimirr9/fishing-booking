@@ -44,6 +44,9 @@ import { AdminHomeComponent } from './component/home/admin-home/admin-home.compo
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
+import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
+import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
+import { ReservationViewComponent } from './component/client-homepage/reservations/reservation-view/reservation-view.component';
 
 
 
@@ -78,7 +81,10 @@ import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/c
     AdminHomeComponent,
     AdminProfileComponent,
     AdminRegistrationComponent,
-    ChangeFeeDialogComponent
+    ChangeFeeDialogComponent,
+    ClientProfileComponent,
+    ReservationsComponent,
+    ReservationViewComponent
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,10 @@ export class NavbarComponent implements OnInit {
         case 'ROLE_ADMIN':
           this.router.navigateByUrl('/admin-home')
           break
+          case 'ROLE_CLIENT':
+            this.router.navigateByUrl('/client-homepage/reservations')
+            break
+        
       default:
         this.router.navigateByUrl("/")
     }
@@ -44,6 +48,9 @@ export class NavbarComponent implements OnInit {
       case 'ROLE_ADMIN':
         this.router.navigateByUrl('/admin-profile')
         break
+      case 'ROLE_CLIENT':
+          this.router.navigateByUrl('/client-profile')
+          break
       default:
         this.router.navigateByUrl("/")
     }

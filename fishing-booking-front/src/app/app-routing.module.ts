@@ -14,6 +14,8 @@ import { InstructorProfileComponent } from './component/profile/instructor-profi
 import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
+import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
+import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
 
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
@@ -23,12 +25,14 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'admin-home/new-admin', component: AdminRegistrationComponent },
                          { path: 'instructor-home/new-adventure', component:  NewAdventureComponent},
                          { path: 'instructor-profile', component: InstructorProfileComponent },
+                         { path: 'client-profile', component: ClientProfileComponent },
                          { path: 'admin-profile', component: AdminProfileComponent },
                          { path: 'adventures/:id/edit', component:  NewAdventureComponent},
                          { path: 'adventures/:id', component:  AdventureDetailedComponent},
                          { path: 'client-homepage/boats', component: BoatsComponent},
                          { path: 'client-homepage/instructors', component: InstructorsComponent},
-                         { path: 'client-homepage/holiday-houses', component: HolidayHousesComponent}
+                         { path: 'client-homepage/holiday-houses', component: HolidayHousesComponent},
+                         { path: 'client-homepage/reservations', component: ReservationsComponent}
                         ];
 
 @NgModule({
