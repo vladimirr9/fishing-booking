@@ -16,10 +16,10 @@ import { ChangePasswordComponent } from '../../dialog/change-password/change-pas
 export class AdminHomeComponent implements OnInit {
 
   constructor(private providerRegistrationService: ProviderRegistrationService,
-     private userService: UserService,
-      private adventureService: AdventureService,
-       private storageService : StorageService,
-       private dialog: MatDialog, private feeService: FeeService) { }
+    private userService: UserService,
+    private adventureService: AdventureService,
+    private storageService: StorageService,
+    private dialog: MatDialog, private feeService: FeeService) { }
 
   adventures: any
   registrations: any
@@ -28,7 +28,7 @@ export class AdminHomeComponent implements OnInit {
   displayedColumnsServices: string[] = ['name', 'owner', 'deletion']
   displayedColumns: string[] = ['email', 'firstName', 'lastName', 'role', 'deletion'];
   ngOnInit(): void {
-    this.userService.getProfile(this.storageService.getUsername()).subscribe((data : any) => {
+    this.userService.getProfile(this.storageService.getUsername()).subscribe((data: any) => {
       if (data.firstLogin) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true
@@ -37,24 +37,26 @@ export class AdminHomeComponent implements OnInit {
           firstLogin: data.firstLogin
         };
 
-      const dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
+        const dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
 
-      dialogRef.afterClosed().subscribe(
-        res => {
-          this.userService.changePassword(data.email, res).subscribe((result:any) => {
-            void(0) //observables are lazy if nothing is done it won't be executed
-          })
-      }
-      );
+        dialogRef.afterClosed().subscribe(
+          res => {
+            if (res) {
+              this.userService.changePassword(data.email, res).subscribe((result: any) => {
+                void (0) //observables are lazy if nothing is done it won't be executed
+              })
+            }
+          }
+        );
       }
     })
     this.providerRegistrationService.getAllRegistrations().subscribe((data: any) => {
       this.registrations = data
     })
-    this.userService.getAll().subscribe((data : any)=> {
+    this.userService.getAll().subscribe((data: any) => {
       this.users = data
     })
-    this.adventureService.getAdventuresForInstructor(null).subscribe((data:any) => {
+    this.adventureService.getAdventuresForInstructor(null).subscribe((data: any) => {
       this.adventures = data
     })
   }
@@ -66,21 +68,24 @@ export class AdminHomeComponent implements OnInit {
   changeFee() {
 
     const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true
-        dialogConfig.autoFocus = true
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
 
-      const dialogRef = this.dialog.open(ChangeFeeDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ChangeFeeDialogComponent, dialogConfig);
 
-      dialogRef.afterClosed().subscribe(
-        res => {
+    dialogRef.afterClosed().subscribe(
+      res => {
+        if (res) {
           this.feeService.updateFee(res).subscribe((result) => {
-            void(0)
+            void (0)
           })
+        }
       }
-      );
+
+    );
   }
 
-  deleteUser(user:any){
+  deleteUser(user: any) {
     this.userService.deleteUser(user.id).subscribe((data) => {
       let index = this.users.indexOf(user);
       if (index !== -1) {
