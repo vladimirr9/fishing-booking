@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
     public UserDetailsResponseDTO toResponseDTO(User user) {
+        boolean firstLogin = false;
+        if (user.getRole() == Role.ROLE_ADMIN) {
+            firstLogin = ((Admin) user).isFirstLogin();
+        }
         return new UserDetailsResponseDTO(user.getId(),
                 user.getEmail(),
                 user.getFirstName(),
@@ -18,7 +22,9 @@ public class UserMapper {
                 user.getPhoneNumber(),
                 user.getAddress().getStreetAndNumber(),
                 user.getAddress().getCity(),
-                user.getAddress().getCountry());
+                user.getAddress().getCountry(),
+                firstLogin);
+
     }
 
     public Admin toModel(AdminRegistrationDTO adminRegistrationDTO) {
@@ -33,6 +39,7 @@ public class UserMapper {
                 adminRegistrationDTO.getCountry(),
                 null, null));
         admin.setRole(Role.ROLE_ADMIN);
+        admin.setFirstLogin(true);
         return admin;
     }
 

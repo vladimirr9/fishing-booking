@@ -10,6 +10,7 @@ import com.project.fishingbookingback.model.BoatOwner;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.HomeOwner;
 import com.project.fishingbookingback.model.ProviderRegistration;
+import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,10 @@ public class UserService {
         User user = findByEmail(email);
         if (user.getPassword().equals(changePasswordRequstDTO.getCurrentPassword())) {
             user.setPassword(changePasswordRequstDTO.getNewPassword());
+        }
+        if (user.getRole() == Role.ROLE_ADMIN) {
+            Admin admin = (Admin) user;
+            admin.setFirstLogin(false);
         }
         userRepository.save(user);
     }

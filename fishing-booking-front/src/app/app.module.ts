@@ -31,6 +31,7 @@ import { ChangePasswordComponent } from './component/dialog/change-password/chan
 import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
+import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
 
 
 
@@ -54,7 +55,8 @@ import { AdminRegistrationComponent } from './component/admin-registration/admin
     ChangePasswordComponent,
     AdminHomeComponent,
     AdminProfileComponent,
-    AdminRegistrationComponent
+    AdminRegistrationComponent,
+    ChangeFeeDialogComponent
   ],
   imports: [
     BrowserModule,

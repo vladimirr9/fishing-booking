@@ -5,9 +5,12 @@
 .menu-container {
   display: flex;
   flex-direction: row;
+  > button {
+    margin: 20px;
+  }
 }
 
-.new-admin-button {
+.new-admin-button, .change-fee-button {
   margin-bottom: 20px;
 }
 
