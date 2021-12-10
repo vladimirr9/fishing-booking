@@ -47,6 +47,7 @@ import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/c
 import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
 import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
 import { ReservationViewComponent } from './component/client-homepage/reservations/reservation-view/reservation-view.component';
+import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
 
 
 
@@ -84,7 +85,8 @@ import { ReservationViewComponent } from './component/client-homepage/reservatio
     ChangeFeeDialogComponent,
     ClientProfileComponent,
     ReservationsComponent,
-    ReservationViewComponent
+    ReservationViewComponent,
+    ReservationSorterComponent
   ],
   imports: [
     BrowserModule,

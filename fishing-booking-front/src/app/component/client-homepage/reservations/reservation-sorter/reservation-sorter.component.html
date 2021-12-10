@@ -1,0 +1,17 @@
+<div class="container fontContainer mt-3">
+    <div class="col p-3" style="border: 1px solid gray;">
+        <h6 class="text-center">Sort by:</h6>
+        <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('date')" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Date</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('price')" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label"  for="exampleRadios2">Price</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('duration')" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+            <label class="form-check-label" for="exampleRadios3">Duration</label>
+          </div>
+    </div>
+</div>

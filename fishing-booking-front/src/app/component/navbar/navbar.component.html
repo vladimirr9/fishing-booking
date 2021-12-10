@@ -27,7 +27,7 @@
       </ul>
       <form class="d-flex" style="margin-left: 1100px;">
           <a class="nav-link active" *ngIf="!authService.isLoggedIn()" routerLink="/login">Log in</a>
-          <a class="nav-link active" *ngIf="authService.isLoggedIn()" (click)="logOut()">Log out</a>
+          <a class="nav-link active" [routerLink]="" *ngIf="authService.isLoggedIn()" (click)="logOut()">Log out</a>
       </form>
     </div>
   </div>

@@ -31,14 +31,14 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
 
   sortHouses(): void{
     switch(this.sorterType){
-      case 'name':
-        this.filteredReservations.sort((a, b) => a.name.localeCompare(b.name));
+      case 'date':
+        this.filteredReservations.sort((a, b) => b.startDate.getTime()-a.startDate.getTime());
         break;
-      case 'mark':
+      case 'price':
         this.filteredReservations.sort((a, b) => b.mark - a.mark);
         break;
-      case 'location':
-        this.filteredReservations.sort((a, b) => a.adress.localeCompare(b.adress));
+      case 'duration':
+        this.filteredReservations.sort((a, b) => b.durationInHours - a.durationInHours);
         break;
       default:
 

@@ -9,7 +9,7 @@
     <input id="password" type="password" formControlName="password" placeholder="Password">
     <br />
     <div class="button-holder">
-      <button class="submit-button" type="submit" [disabled]="!loginForm.valid">Log in</button>
+      <button class="submit-button" type="submit"  [disabled]="!loginForm.valid">Log in</button>
     </div>
   </form>
   <div *ngIf="loginFailed" class="failed-login">Invalid combination of username and password</div>
