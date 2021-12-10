@@ -1,12 +1,16 @@
 <div class="registration-container">
   <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <label for="username">Username: </label>
+    <label for="username">Email: </label>
     <br />
     <input id="username" type="text" formControlName="username" placeholder="Email address">
     <br />
     <label for="password">Password: </label>
     <br />
     <input id="password" type="password" formControlName="password" placeholder="Password">
+    <br />
+    <label for="password2">Repeat password: </label>
+    <br />
+    <input id="password2" type="password" formControlName="password2" placeholder="Password">
     <br />
     <label for="firstName">First Name: </label>
     <br />

@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
+    password2: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     streetAndNumber: new FormControl('', Validators.required),
@@ -33,9 +34,10 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() : void {
     this.registrationFailed = false
-    if (this.registrationForm.invalid) {
+
+    if(!this.validateForm())
       return;
-    }
+
     let registrationDTO : RegistrationDTO = {
       email: this.registrationForm.get('username')?.value,
       password: this.registrationForm.get('password')?.value,
@@ -48,6 +50,9 @@ export class RegistrationComponent implements OnInit {
       role: this.registrationForm.get('role')?.value,
       explanation: this.registrationForm.get('username')?.value ?? ""
     }
+    let role = this.registrationForm.get('role')?.value;
+    if(role == "ROLE_CLIENT")
+      return;
     this.authService.registerProvider(registrationDTO).subscribe(() => {
       this.router.navigateByUrl('')
     }, (err: Error) => {
@@ -55,9 +60,27 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  validateForm(): boolean{
+    if(!this.doesPasswordMatch()){
+      alert("Password doesnt match!");
+      return false;
+    }
+    if (this.registrationForm.invalid) 
+    {
+      alert("Form not valid!");
+      return false;
+    }
+
+    return true;
+  }
+
   isProvider() : boolean {
     let role = this.registrationForm.get('role')?.value
     return role === "ROLE_HOME_OWNER" || role === "ROLE_BOAT_OWNER" || role === "ROLE_FISHING_INSTRUCTOR"
+  }
+
+  doesPasswordMatch(): boolean{
+    return this.registrationForm.get('password')?.value === this.registrationForm.get('password2')?.value;
   }
 
 }
