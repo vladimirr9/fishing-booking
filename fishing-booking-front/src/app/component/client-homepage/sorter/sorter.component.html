@@ -1,1 +1,17 @@
-<p>sorter works!</p>
+<div class="container fontContainer mt-3">
+    <div class="col p-3" style="border: 1px solid gray;">
+        <h6 class="text-center">Sort by:</h6>
+        <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('name')" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Name</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('mark')" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label"  for="exampleRadios2">Mark</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('location')" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+            <label class="form-check-label" for="exampleRadios3">Location</label>
+          </div>
+    </div>
+</div>

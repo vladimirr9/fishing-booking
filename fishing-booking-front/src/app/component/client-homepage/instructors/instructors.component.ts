@@ -39,7 +39,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
         this.filteredAdventures.sort((a, b) => b.mark - a.mark);
         break;
       case 'location':
-          break;
+        this.filteredAdventures.sort((a, b) => a.adress.localeCompare(b.adress));
+        break;
       default:
 
     }

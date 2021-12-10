@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-sorter',
@@ -9,7 +10,13 @@ export class SorterComponent implements OnInit {
 
   constructor() { }
 
+  @Output() sortingEvent: EventEmitter<string> = new EventEmitter<string>();
+
   ngOnInit(): void {
+  }
+
+  setSorter(sorterType: string):void{
+    this.sortingEvent.next(sorterType);
   }
 
 }

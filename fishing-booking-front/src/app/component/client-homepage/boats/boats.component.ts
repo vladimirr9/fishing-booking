@@ -38,7 +38,8 @@ export class BoatsComponent implements OnInit,AfterViewInit {
         this.filteredBoats.sort((a, b) => b.mark - a.mark);
         break;
       case 'location':
-          break;
+        this.filteredBoats.sort((a, b) => a.adress.localeCompare(b.adress));
+        break;
       default:
 
     }

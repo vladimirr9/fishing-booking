@@ -39,7 +39,8 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
         this.filteredHouses.sort((a, b) => b.mark - a.mark);
         break;
       case 'location':
-          break;
+        this.filteredHouses.sort((a, b) => a.adress.localeCompare(b.adress));
+        break;
       default:
 
     }
