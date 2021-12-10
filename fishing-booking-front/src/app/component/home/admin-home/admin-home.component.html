@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="menu-container">
+    <button class="new-admin-button" mat-flat-button color="primary" routerLink="new-admin">New Admin</button>
+    <button class="change-fee-button" mat-flat-button color="primary" (click)="changeFee()">Change Fee</button>
+  </div>
+  <h1>Registration Requests</h1>
+  <div class="registration-container">
+    <div *ngFor="let registration of registrations">
+      <mat-card class="container-card">
+        <mat-card-title>{{registration.firstName}} {{registration.lastName}}</mat-card-title>
+        <div class="buttons-container">
+          <button class="detailed-button" color="view" mat-flat-button (click)="view()">Details</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <h1>Registered Users</h1>
+  <table mat-table [dataSource]="users" class="mat-elevation-z8 user-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{element.email}}</td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let element">{{element.role}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deletion">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"><button mat-flat-button color="warn" (click)="deleteUser(element)">Delete</button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+    ></tr>
+  </table>
+
+
+  <h1>Registered Services</h1>
+  <table mat-table [dataSource]="adventures" class="mat-elevation-z8 service-table">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="owner">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{element.fishingInstructor.firstName}} {{element.fishingInstructor.lastName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deletion">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"><button mat-flat-button color="warn" (click)="deleteService(element)">Delete</button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsServices"></tr>
+    <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsServices;"
+    ></tr>
+  </table>
+
+
+
+
+
+</div>

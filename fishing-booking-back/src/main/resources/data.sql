@@ -1,1 +1,2 @@
-INSERT INTO USERS(id,email,password,firstName,lastName,role,phoneNumber,streetAndNumber,city,country,explanation) VALUES (1,'peraperic4200@gmail.com','pass','pera','peric','ROLE_HOME_OWNER',0633244324,'Kralja Petra 1','Novi Sad','Serbia','i WANT TO WORK');
+insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (1, 'Novi Sad', 'Serbia', 0, 0, 'Kralja Petra 1');
+INSERT INTO users (D_TYPE,ID,EMAIL,FIRST_NAME,LAST_NAME,PASSWORD,PHONE_NUMBER,ROLE,FIRST_LOGIN,ADDRESS_ID) VALUES ('ADMIN',1,'admin','admin','admin','pass','21323',1,0,1);

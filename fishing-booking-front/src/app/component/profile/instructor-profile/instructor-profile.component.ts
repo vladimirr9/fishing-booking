@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { StorageService } from 'src/app/service/storage.service';
 import { UserService } from 'src/app/service/user.service';
-import { ChangePasswordComponent } from '../dialog/change-password/change-password.component';
+import { ChangePasswordComponent } from '../../dialog/change-password/change-password.component';
 
 @Component({
   selector: 'app-instructor-profile',

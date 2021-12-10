@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/provider-registration")
@@ -28,7 +29,14 @@ public class ProviderRegistrationController {
         ProviderRegistration found = providerRegistrationService.findById(id);
         return ResponseEntity.ok(found);
     }
-    
+
+
+    @GetMapping()
+    public ResponseEntity<List<ProviderRegistration>> getAll() {
+        List<ProviderRegistration> found = providerRegistrationService.findAll();
+        return ResponseEntity.ok(found);
+    }
+
     @PutMapping(value = "/{id}/approve")
     public ResponseEntity<HttpStatus> approve(@PathVariable Long id) {
         providerRegistrationService.approve(id);

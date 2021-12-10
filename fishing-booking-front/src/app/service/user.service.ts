@@ -9,10 +9,19 @@ import { config } from "src/shared"
 export class UserService {
 
 
+
+
   private userURL = "/users"
 
   constructor(private http: HttpClient)  { }
 
+  getAll() {
+    return this.http.get(`${config.baseUrl}${this.userURL}`)
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${config.baseUrl}${this.userURL}/${id}`)
+  }
 
   changePassword(username: string, data: any) {
     return this.http.put(`${config.baseUrl}${this.userURL}/${username}/passwords`, data)
