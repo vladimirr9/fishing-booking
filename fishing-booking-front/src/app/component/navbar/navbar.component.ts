@@ -47,7 +47,8 @@ export class NavbarComponent implements OnInit {
       case 'BOATS':
         this.router.navigateByUrl("/client-homepage/boats")
         break;
-      case 'HOLIDAY HOMES':
+      case 'HOLIDAY_HOUSES':
+        this.router.navigateByUrl("/client-homepage/holiday-houses")
         break;
       case 'INSTRUCTORS':
         this.router.navigateByUrl("/client-homepage/instructors")

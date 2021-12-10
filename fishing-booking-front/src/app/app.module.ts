@@ -35,6 +35,8 @@ import { ViewComponent } from './component/client-homepage/boats/view/view.compo
 import { FilterComponent } from './component/client-homepage/boats/filter/filter.component';
 import { InstructorsComponent } from './component/client-homepage/instructors/instructors.component';
 import { AdventureViewComponent } from './component/client-homepage/instructors/adventure-view/adventure-view.component';
+import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
+import { HolidayHousesViewComponent } from './component/client-homepage/holiday-houses/holiday-houses-view/holiday-houses-view.component';
 
 
 
@@ -61,7 +63,9 @@ import { AdventureViewComponent } from './component/client-homepage/instructors/
     ViewComponent,
     FilterComponent,
     InstructorsComponent,
-    AdventureViewComponent
+    AdventureViewComponent,
+    HolidayHousesComponent,
+    HolidayHousesViewComponent
   ],
   imports: [
     BrowserModule,
