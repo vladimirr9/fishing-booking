@@ -14,7 +14,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   registrationForm = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     let registrationDTO : RegistrationDTO = {
-      email: this.registrationForm.get('username')?.value,
+      email: this.registrationForm.get('email')?.value,
       password: this.registrationForm.get('password')?.value,
       firstName: this.registrationForm.get('firstName')?.value,
       lastName: this.registrationForm.get('lastName')?.value,

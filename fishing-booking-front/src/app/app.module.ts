@@ -32,6 +32,7 @@ import { AdminHomeComponent } from './component/home/admin-home/admin-home.compo
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -70,7 +71,8 @@ import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/c
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [StorageService ,
     {
