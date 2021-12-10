@@ -1,6 +1,45 @@
 .login-container {
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin-top: 100px;
 }
+
+mat-form-field {
+  width: 250px;
+  font-size: 18px;
+}
+
+.form {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+
+}
+
+.login-button {
+  margin-top: 10px;
+  width: 100px;
+  height: 45px;
+  font-size: 18px;
+}
+
+.failed-login {
+  margin-top: 15px;
+  color: red;
+  min-height: 20px;
+}
+
+.registration-text {
+  margin: 10px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+

@@ -37,6 +37,7 @@ import { AdminProfileComponent } from './component/profile/admin-profile/admin-p
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
 import { HomeOwnerProfileComponent } from './component/profile/home-owner-profile/home-owner-profile.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -80,7 +81,8 @@ import { HomeOwnerProfileComponent } from './component/profile/home-owner-profil
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [StorageService ,
     {

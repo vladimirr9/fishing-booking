@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router) { }
 
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
   loginFailed : boolean = false
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    let credentials: CredentialsDTO = {email: this.loginForm.get('username')?.value, password: this.loginForm.get('password')?.value}
+    let credentials: CredentialsDTO = {email: this.loginForm.get('email')?.value, password: this.loginForm.get('password')?.value}
     this.authService.login(credentials).subscribe((data: any) => {
       this.storageService.storeTokenData(data.token)
       switch (this.storageService.getRole()) {
