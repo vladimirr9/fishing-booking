@@ -12,6 +12,7 @@ export class InstructorAdventureService {
   getAdventures(): InstructorAdventureDTO[]{
     return [
       {
+        "imageUrl": "",
         "name": "Avantura luda",
         "adress": "Leaf Rake",
         "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
@@ -21,6 +22,7 @@ export class InstructorAdventureService {
         "freeDates": []
       },
       {
+          "imageUrl": "",
           "name": "Avantura ludja",
           "adress": "Rake",
           "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",

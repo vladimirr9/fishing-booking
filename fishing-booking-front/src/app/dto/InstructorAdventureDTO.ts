@@ -1,4 +1,5 @@
 export interface InstructorAdventureDTO{
+    imageUrl: string,
     name : string,
     adress: string,
     description: string,

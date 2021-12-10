@@ -1,5 +1,6 @@
 
 export interface BoatsDTO{
+    imageUrl: string,
     name : string,
     adress: string,
     description: string,

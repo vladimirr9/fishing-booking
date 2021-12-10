@@ -37,6 +37,7 @@ import { InstructorsComponent } from './component/client-homepage/instructors/in
 import { AdventureViewComponent } from './component/client-homepage/instructors/adventure-view/adventure-view.component';
 import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
 import { HolidayHousesViewComponent } from './component/client-homepage/holiday-houses/holiday-houses-view/holiday-houses-view.component';
+import { SorterComponent } from './component/client-homepage/sorter/sorter.component';
 
 
 
@@ -65,7 +66,8 @@ import { HolidayHousesViewComponent } from './component/client-homepage/holiday-
     InstructorsComponent,
     AdventureViewComponent,
     HolidayHousesComponent,
-    HolidayHousesViewComponent
+    HolidayHousesViewComponent,
+    SorterComponent
   ],
   imports: [
     BrowserModule,

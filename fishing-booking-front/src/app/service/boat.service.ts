@@ -16,6 +16,7 @@ export class BoatService {
     //return this._http.get<BoatsDTO[]>(this._boatUrl);
     return [
       {
+        "imageUrl": "",
         "name": "AABrod1",
         "adress": "Leaf Rake",
         "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
@@ -24,6 +25,7 @@ export class BoatService {
         "freeDates": []
       },
       {
+        "imageUrl": "",
           "name": "ABrod2",
           "adress": "Rake",
           "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
@@ -34,17 +36,4 @@ export class BoatService {
     ]
   }
 
-  getBoats2(): BoatsDTO[]{
-    //return this._http.get<BoatsDTO[]>(this._boatUrl);
-    return [
-      {
-        "name": "Brod1",
-        "adress": "Leaf Rake",
-        "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
-        "mark": 5.2,
-        "price": 19.95,
-        "freeDates": []
-      }
-    ]
-  }
 }
