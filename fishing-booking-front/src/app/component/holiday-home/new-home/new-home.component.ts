@@ -32,8 +32,8 @@ export class NewHomeComponent implements OnInit {
     addHomeForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      numOfRooms: [0, Validators.required],
-      numOfBeds: [0, Validators.required],
+      roomsPerHome: [0, Validators.required],
+      bedsPerRoom: [0, Validators.required],
       additionalInfo: [''],
       rulesOfConduct: [''],
       country: ['', Validators.required],
@@ -51,8 +51,8 @@ export class NewHomeComponent implements OnInit {
         this.holidayHomeService.getHome(id).subscribe((data) => {
           this.addHomeForm.controls['name'].setValue(data.name)
           this.addHomeForm.controls['description'].setValue(data.description)
-          this.addHomeForm.controls['numOfRooms'].setValue(data.numOfRooms)
-          this.addHomeForm.controls['numOfBeds'].setValue(data.numOfBeds)
+          this.addHomeForm.controls['roomsPerHome'].setValue(data.roomsPerHome)
+          this.addHomeForm.controls['bedsPerRoom'].setValue(data.bedsPerRoom)
           this.addHomeForm.controls['rulesOfConduct'].setValue(data.rulesOfConduct)
           this.addHomeForm.controls['additionalInfo'].setValue(data.additionalInfo)
           this.addHomeForm.controls['country'].setValue(data.address.country)
@@ -77,8 +77,8 @@ export class NewHomeComponent implements OnInit {
       let home = {
         name: this.addHomeForm.controls['name'].value,
         description: this.addHomeForm.controls['description'].value,
-        numOfRooms: this.addHomeForm.controls['numOfRooms'].value,
-        numOfBeds: this.addHomeForm.controls['numOfBeds'].value,
+        roomsPerHome: this.addHomeForm.controls['roomsPerHome'].value,
+        bedsPerRoom: this.addHomeForm.controls['bedsPerRoom'].value,
         additionalInfo: this.addHomeForm.controls['additionalInfo'].value,
         rulesOfConduct: this.addHomeForm.controls['rulesOfConduct'].value,
         streetAndNumber: this.addHomeForm.controls['streetAndNumber'].value,
@@ -110,8 +110,8 @@ export class NewHomeComponent implements OnInit {
       let home = {
         name: this.addHomeForm.controls['name'].value,
         description: this.addHomeForm.controls['description'].value,
-        numOfRooms: this.addHomeForm.controls['numOfRooms'].value,
-        numOfBeds: this.addHomeForm.controls['numOfBeds'].value,
+        roomsPerHome: this.addHomeForm.controls['roomsPerHome'].value,
+        bedsPerRoom: this.addHomeForm.controls['bedsPerRoom'].value,
         additionalInfo: this.addHomeForm.controls['additionalInfo'].value,
         rulesOfConduct: this.addHomeForm.controls['rulesOfConduct'].value,
         streetAndNumber: this.addHomeForm.controls['streetAndNumber'].value,

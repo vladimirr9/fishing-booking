@@ -33,8 +33,13 @@ public class HolidayHomeController {
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
 
+    @PostMapping(value = "/{id}/{is_interior}/pictures")
+    public ResponseEntity<HolidayHome> addPicture(@Valid @RequestBody Picture picture, @PathVariable Long id, @PathVariable Boolean is_interior) {
+        return ResponseEntity.ok(holidayHomeService.addPicture(id, is_interior, picture));
+    }
+
     @PutMapping(value = "/{id}")
-    public ResponseEntity<HolidayHome> update(@NotNull Long id, @Valid NewHolidayHomeDTO updatedHolidayHomeDTO) {
+    public ResponseEntity<HolidayHome> update(@Valid @RequestBody NewHolidayHomeDTO updatedHolidayHomeDTO, @PathVariable Long id) {
         HolidayHome newHolidayHome = holidayHomeService.update(id, updatedHolidayHomeDTO);
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
@@ -53,6 +58,12 @@ public class HolidayHomeController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteHolidayHome(@PathVariable Long id) {
         holidayHomeService.deleteHolidayHome(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}/{is_interior}/{id_picture}")
+    public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture, @PathVariable Boolean is_interior) {
+        holidayHomeService.deletePicture(id, id_picture, is_interior);
         return ResponseEntity.noContent().build();
     }
 

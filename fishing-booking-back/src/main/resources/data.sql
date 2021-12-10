@@ -1,3 +1,1 @@
-/*
- something
- */
+INSERT INTO USERS(id,email,password,firstName,lastName,role,phoneNumber,streetAndNumber,city,country,explanation) VALUES (1,'peraperic4200@gmail.com','pass','pera','peric','ROLE_HOME_OWNER',0633244324,'Kralja Petra 1','Novi Sad','Serbia','i WANT TO WORK');

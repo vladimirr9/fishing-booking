@@ -38,6 +38,7 @@ public class HolidayHomeService {
 
     public HolidayHome update(long id, NewHolidayHomeDTO dto) {
         var holidayHome = holidayHomeRepository.getById(id);
+        holidayHome.setName(dto.getName());
         holidayHome.setAddress(new Address(dto.getStreetAndNumber(),
                 dto.getCity(),
                 dto.getCountry(),
@@ -53,11 +54,29 @@ public class HolidayHomeService {
 
     public void deleteHolidayHome(Long id) {
         HolidayHome holidayHome = holidayHomeRepository.getById(id);
-        String userEmail = loggedUserService.getUsername();
-        if (!userEmail.equals(holidayHome.getHomeOwner().getEmail())) {
+        checkIfAllowed(holidayHome);
+        holidayHomeRepository.deleteById(id);
+    }
+
+    public void deletePicture(Long id, Long id_picture, Boolean is_interior) {
+        HolidayHome holidayHome = findByID(id);
+        checkIfAllowed(holidayHome);
+        (is_interior ? holidayHome.getInterior() : holidayHome.getExterior()).removeIf(picture -> picture.getId().equals(id_picture));
+        holidayHomeRepository.save(holidayHome);
+    }
+
+    private void checkIfAllowed(HolidayHome holidayHome) {
+        String username = loggedUserService.getUsername();
+        if (!username.equals(holidayHome.getHomeOwner().getEmail())) {
             throw new NotAllowedException();
         }
-        holidayHomeRepository.deleteById(id);
+    }
+
+    public HolidayHome addPicture(Long id, Boolean is_interior, Picture picture) {
+        HolidayHome holidayHome = findByID(id);
+        checkIfAllowed(holidayHome);
+        holidayHome.addPicture(is_interior, picture);
+        return holidayHomeRepository.save(holidayHome);
     }
 }
 

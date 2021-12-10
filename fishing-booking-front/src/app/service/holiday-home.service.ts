@@ -21,7 +21,6 @@ export class HolidayHomeService {
   }
 
   updateHome(id : number, home : any): Observable<any> {
-    alert(home.name);
     return this.http.put(`${config.baseUrl}${this.homeURL}/${id}`, home)
   }
 

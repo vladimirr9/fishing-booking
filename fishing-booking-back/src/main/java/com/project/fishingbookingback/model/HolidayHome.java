@@ -154,4 +154,12 @@ public class HolidayHome {
         this.rulesOfConduct = rulesOfConduct;
         this.additionalInfo = additionalInfo;
     }
+
+    public void addPicture(Boolean is_interior, Picture picture) {
+        if (is_interior) {
+            interior.add(picture);
+        } else {
+            exterior.add(picture);
+        }
+    }
 }
