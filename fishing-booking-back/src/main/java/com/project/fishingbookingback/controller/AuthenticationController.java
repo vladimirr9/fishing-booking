@@ -9,6 +9,7 @@ import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(request);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/admins")
     public ResponseEntity<User> registerAdmin(@Valid @RequestBody AdminRegistrationDTO adminRegistrationDTO) {
         Admin admin = userMapper.toModel(adminRegistrationDTO);
