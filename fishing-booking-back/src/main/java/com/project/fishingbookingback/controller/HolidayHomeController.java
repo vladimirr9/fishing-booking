@@ -9,6 +9,7 @@ import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.service.HolidayHomeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,19 +26,19 @@ public class HolidayHomeController {
         this.holidayHomeService = holidayHomeService;
         this.holidayHomeMapper = holidayHomeMapper;
     }
-
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @PostMapping()
     public ResponseEntity<HolidayHome> create(@Valid @RequestBody NewHolidayHomeDTO newHolidayHomeDTO) {
         HolidayHome holidayHome = holidayHomeMapper.toModel(newHolidayHomeDTO);
         HolidayHome newHolidayHome = holidayHomeService.create(holidayHome);
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
-
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @PostMapping(value = "/{id}/pictures/{is_interior}")
     public ResponseEntity<HolidayHome> addPicture(@Valid @RequestBody Picture picture, @PathVariable Long id, @PathVariable Boolean is_interior) {
         return ResponseEntity.ok(holidayHomeService.addPicture(id, is_interior, picture));
     }
-
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<HolidayHome> update(@Valid @RequestBody NewHolidayHomeDTO updatedHolidayHomeDTO, @PathVariable Long id) {
         HolidayHome newHolidayHome = holidayHomeService.update(id, updatedHolidayHomeDTO);
@@ -54,13 +55,13 @@ public class HolidayHomeController {
     public ResponseEntity<HolidayHome> getHome(@PathVariable Long id) {
         return ResponseEntity.ok(holidayHomeService.findByID(id));
     }
-
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteHolidayHome(@PathVariable Long id) {
         holidayHomeService.deleteHolidayHome(id);
         return ResponseEntity.noContent().build();
     }
-
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @DeleteMapping(value = "/{id}/pictures/{is_interior}/{id_picture}")
     public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture, @PathVariable Boolean is_interior) {
         holidayHomeService.deletePicture(id, id_picture, is_interior);

@@ -37,8 +37,8 @@ export class OwnerHomeComponent implements OnInit {
 
   getParams() {
     let params = Object()
-    params.ownerName = this.storageService.getUsername()
-    params.homeName = this.searchTerm
+    params.homeOwnerUsername = this.storageService.getUsername()
+    params.holidayHomeName = this.searchTerm
     return params
   }
 }
