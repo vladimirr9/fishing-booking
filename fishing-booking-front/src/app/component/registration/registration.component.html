@@ -1,58 +1,70 @@
 <div class="registration-container">
+  <h1>Registration</h1>
   <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <label for="username">Email: </label>
-    <br />
-    <input id="username" type="text" formControlName="username" placeholder="Email address">
-    <br />
-    <label for="password">Password: </label>
-    <br />
-    <input id="password" type="password" formControlName="password" placeholder="Password">
-    <br />
-    <label for="password2">Repeat password: </label>
-    <br />
-    <input id="password2" type="password" formControlName="password2" placeholder="Password">
-    <br />
-    <label for="firstName">First Name: </label>
-    <br />
-    <input id="firstName" type="text" formControlName="firstName" placeholder="First Name">
-    <br />
-    <label for="lastName">Last Name: </label>
-    <br />
-    <input id="lastName" type="text" formControlName="lastName" placeholder="Last Name">
-    <br />
-    <label for="streetAndNumber">Street and Number: </label>
-    <br />
-    <input id="streetAndNumber" type="text" formControlName="streetAndNumber" placeholder="Street and Number">
-    <br />
-    <label for="phoneNumber">Phone Number: </label>
-    <br />
-    <input id="phoneNumber" type="text" formControlName="phoneNumber" placeholder="Phone Number">
-    <br />
-    <label for="city">City: </label>
-    <br />
-    <input id="city" type="text" formControlName="city" placeholder="City">
-    <br />
-    <label for="country">Country: </label>
-    <br />
-    <input id="country" type="text" formControlName="country" placeholder="Country">
-    <br />
-    <label for="role">Type of User: </label>
-    <br />
-    <select id="roles" formControlName="role" name="Roles">
-      <option value="ROLE_CLIENT">Client</option>
-      <option value="ROLE_HOME_OWNER">Home Owner</option>
-      <option value="ROLE_FISHING_INSTRUCTOR">Fishing Intructor</option>
-      <option value="ROLE_BOAT_OWNER">Boat Owner</option>
-    </select>
-    <br />
-    <span *ngIf="isProvider()">
-      <label for="explanation">Reason for Registration: </label>
-      <br />
-      <textarea class="explanation" type="text" formControlName="explanation" style="resize: none;"></textarea>
-      <br />
-    </span>
+    <div class="split-forms">
+      <div class="left-form">
+    <mat-form-field appearance="standard">
+      <mat-label>Email Address</mat-label>
+      <input matInput  placeholder="Email Address" formControlName="email" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Password</mat-label>
+      <input matInput  placeholder="Password" type="password" formControlName="password" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Repeat Password</mat-label>
+      <input matInput  placeholder="Repeat Password" type="password" formControlName="password2" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>First Name</mat-label>
+      <input matInput  placeholder="First Name" formControlName="firstName" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Last Name</mat-label>
+      <input matInput  placeholder="Last Name" formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Phone Number</mat-label>
+      <input matInput  placeholder="Phone Number" formControlName="phoneNumber" />
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type Of User</mat-label>
+      <select matNativeControl required formControlName="role">
+        <option value="ROLE_CLIENT">Client</option>
+        <option value="ROLE_BOAT_OWNER">Boat Owner</option>
+        <option value="ROLE_FISHING_INSTRUCTOR">Fishing Instructor</option>
+        <option value="ROLE_HOME_OWNER">Home Owner</option>
+      </select>
+    </mat-form-field>
+
+  </div>
+    <div class="address">
+      <mat-form-field appearance="standard">
+        <mat-label>Country</mat-label>
+        <input matInput  placeholder="Country" formControlName="country" />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>City</mat-label>
+        <input matInput  placeholder="City" formControlName="city" />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Street And Number</mat-label>
+        <input matInput  placeholder="Street And Number" formControlName="streetAndNumber" />
+      </mat-form-field>
+      <span class="explanation">
+        <mat-form-field appearance="standard" *ngIf="isProvider()">
+          <mat-label>Reason For Registration</mat-label>
+          <textarea class="textarea" matInput placeholder="Reason For Registration" formControlName="explanation"></textarea>
+        </mat-form-field>
+      </span>
+
+    </div>
+  </div>
     <div class="button-holder">
-      <button class="submit-button" type="submit" [disabled]="!registrationForm.valid">Log in</button>
+      <button class="register-button" mat-flat-button color="primary" type="submit" [disabled]="!registrationForm.valid">Register</button>
     </div>
   </form>
   <div *ngIf="registrationFailed" class="failed-registration">Registration failed</div>

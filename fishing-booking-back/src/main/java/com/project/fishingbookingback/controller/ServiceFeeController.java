@@ -3,6 +3,7 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.model.ServiceFee;
 import com.project.fishingbookingback.service.FeeService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,8 @@ public class ServiceFeeController {
         ServiceFee found = feeService.get();
         return ResponseEntity.ok(found);
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping()
     public ResponseEntity<ServiceFee> update(@RequestBody @Valid ServiceFee serviceFee) {
         ServiceFee updated = feeService.update(serviceFee);

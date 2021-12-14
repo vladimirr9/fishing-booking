@@ -14,7 +14,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   registrationForm = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     password2: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -27,6 +27,7 @@ export class RegistrationComponent implements OnInit {
     explanation: new FormControl(''),
   })
 
+
   registrationFailed = false
 
   ngOnInit(): void {
@@ -34,12 +35,11 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() : void {
     this.registrationFailed = false
-
-    if(!this.validateForm())
+    if (this.registrationForm.invalid || this.registrationForm.get('password2')?.value !== this.registrationForm.get('password')?.value) 
       return;
 
     let registrationDTO : RegistrationDTO = {
-      email: this.registrationForm.get('username')?.value,
+      email: this.registrationForm.get('email')?.value,
       password: this.registrationForm.get('password')?.value,
       firstName: this.registrationForm.get('firstName')?.value,
       lastName: this.registrationForm.get('lastName')?.value,
@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       city: this.registrationForm.get('city')?.value,
       country: this.registrationForm.get('country')?.value,
       role: this.registrationForm.get('role')?.value,
-      explanation: this.registrationForm.get('username')?.value ?? ""
+      explanation: this.registrationForm.get('explanation')?.value ?? ""
     }
     let role = this.registrationForm.get('role')?.value;
     if(role == "ROLE_CLIENT")
@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.authService.registerProvider(registrationDTO).subscribe(() => {
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('/login')
     }, (err: Error) => {
       this.registrationFailed = true;
     })

@@ -49,6 +49,7 @@ import { ReservationsComponent } from './component/client-homepage/reservations/
 import { ReservationViewComponent } from './component/client-homepage/reservations/reservation-view/reservation-view.component';
 import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
 
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -101,7 +102,8 @@ import { ReservationSorterComponent } from './component/client-homepage/reservat
     MatInputModule,
     MatDialogModule,
     NgbModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [StorageService ,
     {

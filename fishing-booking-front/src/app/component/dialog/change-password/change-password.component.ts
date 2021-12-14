@@ -12,10 +12,12 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<ChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  error : any
 
   form = new FormGroup({
     currentPassword: new FormControl('', Validators.required),
-    newPassword: new FormControl('', Validators.required)
+    newPassword: new FormControl('', Validators.required),
+    newPassword2: new FormControl('', Validators.required)
   })
 
   canClose() {
@@ -29,6 +31,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   submit() {
+    if (this.form.get('newPassword')?.value !== this.form.get('newPassword2')?.value) {
+      this.error = true
+      return
+    }
     this.dialogRef.close(this.form.value);
   }
   close() {
