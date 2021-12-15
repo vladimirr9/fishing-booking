@@ -37,8 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.cors().and().authorizeRequests()
-                .antMatchers(AUTH_URL + "provider-registration").permitAll()
                 .antMatchers(AUTH_URL + "login").permitAll()
+                .antMatchers(AUTH_URL + "provider-registration").permitAll()
+                .antMatchers(AUTH_URL + "clients").permitAll()
+                .antMatchers(AUTH_URL + "confirm-client/*").permitAll()
                 .antMatchers("/h2-console/" + "**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/provider-registration/**").permitAll()

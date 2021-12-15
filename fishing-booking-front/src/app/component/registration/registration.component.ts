@@ -65,7 +65,7 @@ export class RegistrationComponent implements OnInit {
 
   registerClient():void {
     let clientRegistration : any = {
-      email: this.registrationForm.get('username')?.value,
+      email: this.registrationForm.get('email')?.value,
       password: this.registrationForm.get('password')?.value,
       firstName: this.registrationForm.get('firstName')?.value,
       lastName: this.registrationForm.get('lastName')?.value,
