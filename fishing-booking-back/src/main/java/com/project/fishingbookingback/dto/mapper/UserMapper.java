@@ -3,10 +3,7 @@ package com.project.fishingbookingback.dto.mapper;
 import com.project.fishingbookingback.dto.request.AdminRegistrationDTO;
 import com.project.fishingbookingback.dto.request.UserRegistrationDTO;
 import com.project.fishingbookingback.dto.response.UserDetailsResponseDTO;
-import com.project.fishingbookingback.model.Address;
-import com.project.fishingbookingback.model.Admin;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,21 +41,21 @@ public class UserMapper {
         return admin;
     }
 
-    public User toModel(UserRegistrationDTO userRegistrationDTO){
-        User user = new User();
-        user.setEmail(userRegistrationDTO.getEmail());
-        user.setPassword(userRegistrationDTO.getPassword());
-        user.setFirstName(userRegistrationDTO.getFirstName());
-        user.setLastName(userRegistrationDTO.getLastName());
-        user.setPhoneNumber(userRegistrationDTO.getPhoneNumber());
-        user.setAddress(new Address(userRegistrationDTO.getStreetAndNumber(),
+    public Client toModel(UserRegistrationDTO userRegistrationDTO){
+        Client client = new Client();
+        client.setEmail(userRegistrationDTO.getEmail());
+        client.setPassword(userRegistrationDTO.getPassword());
+        client.setFirstName(userRegistrationDTO.getFirstName());
+        client.setLastName(userRegistrationDTO.getLastName());
+        client.setPhoneNumber(userRegistrationDTO.getPhoneNumber());
+        client.setAddress(new Address(userRegistrationDTO.getStreetAndNumber(),
                 userRegistrationDTO.getCity(),
                 userRegistrationDTO.getCountry(),
                 null, null));
-        user.setRole(Role.ROLE_CLIENT);
-        user.setEnabled(false);
+        client.setRole(Role.ROLE_CLIENT);
+        client.setEnabled(false);
 
-        return user;
+        return client;
     }
 
 }

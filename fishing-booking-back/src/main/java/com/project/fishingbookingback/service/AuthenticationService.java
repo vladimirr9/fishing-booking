@@ -5,9 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.project.fishingbookingback.exception.EntityAlreadyExistsException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.InvalidCredentialsException;
-import com.project.fishingbookingback.model.Admin;
-import com.project.fishingbookingback.model.ProviderRegistration;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.exception.UserNotConfirmedException;
+import com.project.fishingbookingback.model.*;
 import org.springframework.stereotype.Service;
 
 import java.net.UnknownHostException;
@@ -34,6 +33,8 @@ public class AuthenticationService {
 
     public String login(String email, String password) {
         User existingUser = userService.findByEmail(email);
+        checkEnability(existingUser);
+
         if (existingUser.getPassword().equals(password)) {
             return JWT.create()
                     .withSubject(email)
@@ -43,22 +44,22 @@ public class AuthenticationService {
         } else throw new InvalidCredentialsException();
     }
 
-    public User ConfirmUser(Long userID){
-            User user = userService.findByID(userID);
-            if(user==null)
-                throw new EntityNotFoundException(user.getClass().getName());
+    public Client ConfirmClient(Long userID){
+            Client client = (Client) userService.findByID(userID);
+            if(client==null)
+                throw new EntityNotFoundException(client.getClass().getName());
 
-            if(user.isEnabled())
-                throw new EntityAlreadyExistsException(user.getEmail());
+            if(client.isEnabled())
+                throw new EntityAlreadyExistsException(client.getEmail());
 
-            return userRegistrationService.confirmUser(user);
+            return userRegistrationService.confirmClient(client);
     }
 
-    public User registerUser(User user) throws UnknownHostException {
-        if(providerRegistrationService.registrationExists(user.getEmail()) || userService.userExists(user.getEmail()))
-            throw new EntityAlreadyExistsException(user.getEmail());
+    public Client registerClient(Client client) throws UnknownHostException {
+        if(providerRegistrationService.registrationExists(client.getEmail()) || userService.userExists(client.getEmail()))
+            throw new EntityAlreadyExistsException(client.getEmail());
 
-        return userRegistrationService.registerUser(user);
+        return userRegistrationService.registerClient(client);
     }
 
     public User registerAdmin(Admin admin) {
@@ -66,5 +67,12 @@ public class AuthenticationService {
             throw new EntityAlreadyExistsException(admin.getEmail());
         }
         return userService.saveUser(admin);
+    }
+    
+    private void checkEnability(User existingUser){
+        if(existingUser.getRole() == Role.ROLE_CLIENT){
+            Client client = (Client) existingUser;
+            if(!client.isEnabled()) throw new UserNotConfirmedException("User account not yet confirmed!");
+        }
     }
 }

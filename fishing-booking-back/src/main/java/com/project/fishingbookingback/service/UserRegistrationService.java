@@ -1,6 +1,6 @@
 package com.project.fishingbookingback.service;
 
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.Client;
 import com.project.fishingbookingback.repository.UserRepository;
 
 import org.springframework.core.env.Environment;
@@ -25,17 +25,17 @@ public class UserRegistrationService {
         this.environment = environment;
     }
 
-    public User registerUser(User user) throws UnknownHostException {
+    public Client registerClient(Client client) throws UnknownHostException {
         int port = Integer.parseInt(environment.getProperty("server.port"));
-        userRepository.save(user);
-        emailService.sendSimpleMessage(user.getEmail(),"Confirm registration",emailText+"http://localhost:"+port+confirmationControllerPath+user.getId());
-        System.out.println(emailText+"http://localhost:"+port+confirmationControllerPath+user.getId());
-        return user;
+        userRepository.save(client);
+        emailService.sendSimpleMessage(client.getEmail(),"Confirm registration",emailText+"http://localhost:"+port+confirmationControllerPath+client.getId());
+        System.out.println(emailText+"http://localhost:"+port+confirmationControllerPath+client.getId());
+        return client;
     }
 
-    public User confirmUser(User user){
-        user.setEnabled(true);
-        userRepository.save(user);
-        return user;
+    public Client confirmClient(Client client){
+        client.setEnabled(true);
+        userRepository.save(client);
+        return client;
     }
 }
