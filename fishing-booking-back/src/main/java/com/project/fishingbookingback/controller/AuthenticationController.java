@@ -56,8 +56,7 @@ public class AuthenticationController {
         User user = authenticationService.ConfirmUser(clientID);
         return ResponseEntity.ok("Account with email:" + user.getEmail() + " successfully registered!");
     }
-
-    //test
+    
     @PostMapping(value = "/login")
     public ResponseEntity<TokenDTO> login(@RequestBody User user) {
         String token = authenticationService.login(user.getEmail(), user.getPassword());

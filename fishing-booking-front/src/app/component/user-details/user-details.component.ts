@@ -28,7 +28,6 @@ export class UserDetailsComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    alert('a')
     this.userService.getProfile(this.username).subscribe((data : any) => {
       this.userDetails = data
       this.initialDetails = JSON.parse(JSON.stringify(data)); //clones, read docs for info
