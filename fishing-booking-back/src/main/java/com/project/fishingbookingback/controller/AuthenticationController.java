@@ -10,7 +10,12 @@ import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.net.UnknownHostException;
@@ -46,13 +51,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value="/confirm-client/{clientID}")
-    public ResponseEntity<String> confirmUser(@PathVariable Long clientID){
+    @GetMapping(value = "/confirm-client/{clientID}")
+    public ResponseEntity<String> confirmUser(@PathVariable Long clientID) {
         User user = authenticationService.ConfirmUser(clientID);
-        return ResponseEntity.ok("Account with email:" +user.getEmail()+" successfully registered!");
+        return ResponseEntity.ok("Account with email:" + user.getEmail() + " successfully registered!");
     }
 
-
+    //test
     @PostMapping(value = "/login")
     public ResponseEntity<TokenDTO> login(@RequestBody User user) {
         String token = authenticationService.login(user.getEmail(), user.getPassword());
