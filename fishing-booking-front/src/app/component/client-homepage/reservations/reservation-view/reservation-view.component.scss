@@ -1,12 +1,12 @@
-.row{
-    font-size: 10px;
-}
+.example-card {
+    max-width: 400px;
+    margin: 8px;
+  }
 
-.myCard{
-    max-height: 420px;
-}
+  .reservationCard{
+      padding: 0;
+  }
 
-.myImage{
-    width: 100%;
-    height: 150px;
-}
+  .card-item{
+      margin:3px;
+  }

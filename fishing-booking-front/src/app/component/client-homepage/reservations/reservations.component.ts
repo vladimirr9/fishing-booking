@@ -3,6 +3,7 @@ import { View } from 'ol';
 import { ReservationDTO } from 'src/app/dto/ReservationDTO';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { FilterComponent } from '../boats/filter/filter.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-reservations',

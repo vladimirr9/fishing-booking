@@ -8,9 +8,17 @@
             <div class="col-md-12 text-center">
                 <a class="btn btn-primary mt-3 " (click)="filterReservations()" role="button">Filter</a>
             </div>
-            <!--sorter-->
+            sorter
             <app-reservation-sorter (sortingEvent)="setSorter($event)"></app-reservation-sorter>
 
         </div>
     </div>
 </div>
+
+
+<!-- <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>1</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list> -->
