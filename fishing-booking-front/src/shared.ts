@@ -1,3 +1,5 @@
+import { environment } from "./environments/environment";
+
 export const config = {
-  "baseUrl": "http://localhost:8081/api"
+  "baseUrl": environment.baseUrl
 }

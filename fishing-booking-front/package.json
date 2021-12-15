@@ -3,14 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port $PORT --host 0.0.0.0 --disable-host-check --prod",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+	"heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
+	"@angular/cli": "~12.2.11",
+    "@angular/compiler-cli": "~12.2.0",
+	"@angular-devkit/build-angular": "~12.2.11",
     "@angular/cdk": "^12.2.13",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
@@ -34,9 +38,6 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.11",
-    "@angular/cli": "~12.2.11",
-    "@angular/compiler-cli": "~12.2.0",
     "@types/arcgis-rest-api": "^10.4.5",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
