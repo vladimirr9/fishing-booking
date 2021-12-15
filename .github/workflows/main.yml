@@ -5,6 +5,8 @@ on:
       - 'main'
 jobs:
   test:
+    env:
+      working-directory: ./fishing-booking-back
     name: Tests
     runs-on: ubuntu-latest
     steps:
@@ -14,6 +16,8 @@ jobs:
         with:
           java-version: 17
       - name: Maven Package
+        working-directory: ${{env.working-directory}}
         run: mvn clean package
       - name: Maven Verify
+        working-directory: ${{env.working-directory}}
         run: mvn clean verify 
