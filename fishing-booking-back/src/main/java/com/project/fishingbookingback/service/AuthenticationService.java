@@ -19,12 +19,12 @@ import static com.project.fishingbookingback.Constants.SECRET;
 public class AuthenticationService {
     private final UserService userService;
     private final ProviderRegistrationService providerRegistrationService;
-    private final UserRegistrationService userRegistrationService;
+    private final ClientRegistrationService clientRegistrationService;
 
-    public AuthenticationService(UserService userService, ProviderRegistrationService providerRegistrationService, UserRegistrationService userRegistrationService) {
+    public AuthenticationService(UserService userService, ProviderRegistrationService providerRegistrationService, ClientRegistrationService clientRegistrationService) {
         this.userService = userService;
         this.providerRegistrationService = providerRegistrationService;
-        this.userRegistrationService = userRegistrationService;
+        this.clientRegistrationService = clientRegistrationService;
     }
 
     public ProviderRegistration registerProvider(ProviderRegistration providerRegistration) {
@@ -52,14 +52,14 @@ public class AuthenticationService {
             if(client.isEnabled())
                 throw new EntityAlreadyExistsException(client.getEmail());
 
-            return userRegistrationService.confirmClient(client);
+            return clientRegistrationService.confirmClient(client);
     }
 
     public Client registerClient(Client client) throws UnknownHostException {
         if(providerRegistrationService.registrationExists(client.getEmail()) || userService.userExists(client.getEmail()))
             throw new EntityAlreadyExistsException(client.getEmail());
 
-        return userRegistrationService.registerClient(client);
+        return clientRegistrationService.registerClient(client);
     }
 
     public User registerAdmin(Admin admin) {

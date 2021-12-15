@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.net.UnknownHostException;
 
 @Service
-public class UserRegistrationService {
+public class ClientRegistrationService {
     private final UserService userService;
     private final UserRepository userRepository;
     private final EmailService emailService;
@@ -18,7 +18,7 @@ public class UserRegistrationService {
     private final String confirmationControllerPath="/api/auth/confirm-client/";
     private final String emailText = "To confirm your profile creating press following link. This registration is one time only. DO NOT PRESS it multiple times!\n";
 
-    public UserRegistrationService(UserService userService, UserRepository userRepository, EmailService emailService, Environment environment) {
+    public ClientRegistrationService(UserService userService, UserRepository userRepository, EmailService emailService, Environment environment) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.emailService = emailService;
