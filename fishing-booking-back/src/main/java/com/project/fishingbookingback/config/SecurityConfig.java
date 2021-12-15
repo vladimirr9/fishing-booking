@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(AUTH_URL + "provider-registration").permitAll()
                 .antMatchers(AUTH_URL + "login").permitAll()
                 .antMatchers("/h2-console/" + "**").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/provider-registration/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/fishing-adventures/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/service-fees/**").permitAll()
