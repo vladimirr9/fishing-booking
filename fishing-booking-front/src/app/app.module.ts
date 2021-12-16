@@ -50,6 +50,7 @@ import { ReservationViewComponent } from './component/client-homepage/reservatio
 import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
 
 import {MatSelectModule} from '@angular/material/select';
+import { DeleteAccountComponent } from './component/dialog/delete-account/delete-account.component';
 
 
 
@@ -87,7 +88,8 @@ import {MatSelectModule} from '@angular/material/select';
     ClientProfileComponent,
     ReservationsComponent,
     ReservationViewComponent,
-    ReservationSorterComponent
+    ReservationSorterComponent,
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,
