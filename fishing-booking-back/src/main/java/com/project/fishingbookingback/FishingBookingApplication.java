@@ -19,7 +19,7 @@ public class FishingBookingApplication {
         SpringApplication.run(FishingBookingApplication.class, args);
     }
 
-    
+
     @RestController
     @RequestMapping(value = "/api")
     public class TestController {
@@ -33,7 +33,7 @@ public class FishingBookingApplication {
 
         @GetMapping(value = "/")
         public ResponseEntity<List<ProviderRegistration>> test() {
-            return ResponseEntity.ok(providerRegistrationService.findAll());
+            return ResponseEntity.ok(providerRegistrationService.findAll(null));
         }
     }
 

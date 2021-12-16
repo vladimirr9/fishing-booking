@@ -3,6 +3,7 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.exception.EntityAlreadyExistsException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.model.ProviderRegistration;
+import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.ProviderRegistrationRepository;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class ProviderRegistrationService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(ProviderRegistration.class.getSimpleName()));
     }
 
-    public List<ProviderRegistration> findAll() {
-        return repository.findAll();
+    public List<ProviderRegistration> findAll(Role excluded) {
+        return repository.findAllExcept(excluded);
     }
 
     public ProviderRegistration createRequest(ProviderRegistration providerRegistration) {

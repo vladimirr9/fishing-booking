@@ -50,7 +50,10 @@ export class AdminHomeComponent implements OnInit {
         );
       }
     })
-    this.providerRegistrationService.getAllRegistrations().subscribe((data: any) => {
+    let registrationParams = {
+      exclude: "ROLE_CLIENT"
+    }
+    this.providerRegistrationService.getAllRegistrations(registrationParams).subscribe((data: any) => {
       this.registrations = data
     })
     this.userService.getAll().subscribe((data: any) => {

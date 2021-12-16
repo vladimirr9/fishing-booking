@@ -11,7 +11,9 @@ export class ProviderRegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  getAllRegistrations() {
-    return this.http.get(`${config.baseUrl}${this.providerRegistrationURL}`)
+  getAllRegistrations(params?: any) {
+    return this.http.get(`${config.baseUrl}${this.providerRegistrationURL}`, {
+      params: params
+    })
   }
 }
