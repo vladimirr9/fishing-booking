@@ -30,8 +30,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @Column(nullable = true)
-    private boolean isEnabled;
     public Role role;
 
 
@@ -100,11 +98,4 @@ public class User {
         this.role = role;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
 }

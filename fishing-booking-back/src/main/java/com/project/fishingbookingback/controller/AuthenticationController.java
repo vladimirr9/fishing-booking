@@ -5,6 +5,7 @@ import com.project.fishingbookingback.dto.request.AdminRegistrationDTO;
 import com.project.fishingbookingback.dto.request.UserRegistrationDTO;
 import com.project.fishingbookingback.dto.response.TokenDTO;
 import com.project.fishingbookingback.model.Admin;
+import com.project.fishingbookingback.model.Client;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
@@ -45,16 +46,16 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/clients")
-    public ResponseEntity<User> registerUser(@Valid @RequestBody UserRegistrationDTO userDTO) throws UnknownHostException {
-        User user = userMapper.toModel(userDTO);
-        authenticationService.registerUser(user);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<Client> registerClient(@Valid @RequestBody UserRegistrationDTO userDTO) throws UnknownHostException {
+        Client client = userMapper.toModel(userDTO);
+        authenticationService.registerClient(client);
+        return ResponseEntity.ok(client);
     }
 
-    @GetMapping(value = "/confirm-client/{clientID}")
-    public ResponseEntity<String> confirmUser(@PathVariable Long clientID) {
-        User user = authenticationService.ConfirmUser(clientID);
-        return ResponseEntity.ok("Account with email:" + user.getEmail() + " successfully registered!");
+    @GetMapping(value="/confirm-client/{clientID}")
+    public ResponseEntity<String> confirmClient(@PathVariable Long clientID){
+        Client client = authenticationService.ConfirmClient(clientID);
+        return ResponseEntity.ok("Account with email:" +client.getEmail()+" successfully registered!");
     }
     
     @PostMapping(value = "/login")

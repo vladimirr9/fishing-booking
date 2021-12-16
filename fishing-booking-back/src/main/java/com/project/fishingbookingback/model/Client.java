@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.model;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -7,6 +8,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CLIENT")
 public class Client extends User {
 
-    public Client() {
+    public Client() {}
+
+    private boolean isEnabled;
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }
