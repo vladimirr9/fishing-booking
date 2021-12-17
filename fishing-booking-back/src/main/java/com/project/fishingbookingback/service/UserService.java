@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public boolean userExists(String email) {
-        return findByEmail(email) != null;
+        return userRepository.findByEmail(email) != null;
     }
 
     public User findByEmail(String email) {
@@ -87,6 +87,11 @@ public class UserService {
     public void deleteUser(Long id) {
         User user = findByID(id);
         userRepository.deleteById(id);
+    }
+
+    public void deleteUser(String email) {
+        User user = findByEmail(email);
+        userRepository.deleteById(user.getId());
     }
 
     private void checkIfAllowed(String email) {

@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.controller;
 
+import com.project.fishingbookingback.dto.request.DeletionAnswerDTO;
 import com.project.fishingbookingback.model.AccountDeletion;
 import com.project.fishingbookingback.service.AccountDeletionService;
 import org.springframework.http.HttpStatus;
@@ -50,8 +51,14 @@ public class AccountDeletionController {
     }
 
     @PutMapping(value = "/{id}/approve")
-    public ResponseEntity<HttpStatus> approve(@PathVariable Long id) {
-        //TODO: implement
+    public ResponseEntity<HttpStatus> approve(@PathVariable Long id, @Valid @RequestBody DeletionAnswerDTO deletionAnswerDTO) {
+        accountDeletionService.approve(id, deletionAnswerDTO.getReason());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}/deny")
+    public ResponseEntity<HttpStatus> deny(@PathVariable Long id, @Valid @RequestBody DeletionAnswerDTO deletionAnswerDTO) {
+        accountDeletionService.deny(id, deletionAnswerDTO.getReason());
         return ResponseEntity.noContent().build();
     }
 }

@@ -14,11 +14,13 @@ public class AccountDeletionService {
     private final AccountDeletionRepository repository;
     private final LoggedUserService loggedUserService;
     private final UserService userService;
+    private final EmailService emailService;
 
-    public AccountDeletionService(AccountDeletionRepository repository, LoggedUserService loggedUserService, UserService userService) {
+    public AccountDeletionService(AccountDeletionRepository repository, LoggedUserService loggedUserService, UserService userService, EmailService emailService) {
         this.repository = repository;
         this.loggedUserService = loggedUserService;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     public AccountDeletion create(AccountDeletion accountDeletion) {
@@ -58,5 +60,17 @@ public class AccountDeletionService {
         if (!userEmail.equals(email)) {
             throw new NotAllowedException();
         }
+    }
+
+    public void approve(Long id, String reason) {
+        AccountDeletion accountDeletion = findOne(id);
+        emailService.sendSimpleMessage(accountDeletion.getEmail(), "Account deletion approved", reason);
+        userService.deleteUser(accountDeletion.getEmail());
+        repository.deleteById(id);
+    }
+
+    public void deny(Long id, String reason) {
+        AccountDeletion accountDeletion = findOne(id);
+        emailService.sendSimpleMessage(accountDeletion.getEmail(), "Account deletion denied", reason);
     }
 }
