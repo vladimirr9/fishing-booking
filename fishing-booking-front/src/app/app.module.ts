@@ -55,6 +55,8 @@ import { AccountDeletionCardComponent } from './component/account-deletion/accou
 
 import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
 import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
+import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
+import { DenyRegistrationDialogComponent } from './component/dialog/deny-registration-dialog/deny-registration-dialog.component';
 
 
 
@@ -96,7 +98,9 @@ import { AccountDeletionDialogComponent } from './component/dialog/account-delet
     DeleteAccountComponent,
     AccountDeletionCardComponent,
     AccountDeletionPageComponent,
-    AccountDeletionDialogComponent
+    AccountDeletionDialogComponent,
+    RegistrationRequestPageComponent,
+    DenyRegistrationDialogComponent
   ],
   imports: [
     BrowserModule,

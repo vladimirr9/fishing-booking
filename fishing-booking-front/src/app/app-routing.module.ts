@@ -17,6 +17,7 @@ import { AdminRegistrationComponent } from './component/admin-registration/admin
 import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
 import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
 import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
+import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
 
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'instructor-home', component: InstructorHomeComponent },
                          { path: 'admin-home', component: AdminHomeComponent },
                          { path: 'admin-home/new-admin', component: AdminRegistrationComponent },
+                         { path: 'admin-home/registration-requests/:id', component: RegistrationRequestPageComponent },
                          { path: 'instructor-home/new-adventure', component:  NewAdventureComponent},
                          { path: 'instructor-profile', component: InstructorProfileComponent },
                          { path: 'client-profile', component: ClientProfileComponent },
