@@ -51,6 +51,10 @@ import { ReservationSorterComponent } from './component/client-homepage/reservat
 
 import {MatSelectModule} from '@angular/material/select';
 import { DeleteAccountComponent } from './component/dialog/delete-account/delete-account.component';
+import { AccountDeletionCardComponent } from './component/account-deletion/account-deletion-card/account-deletion-card.component';
+
+import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
+import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
 
 
 
@@ -89,7 +93,10 @@ import { DeleteAccountComponent } from './component/dialog/delete-account/delete
     ReservationsComponent,
     ReservationViewComponent,
     ReservationSorterComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    AccountDeletionCardComponent,
+    AccountDeletionPageComponent,
+    AccountDeletionDialogComponent
   ],
   imports: [
     BrowserModule,

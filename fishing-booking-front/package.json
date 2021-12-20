@@ -7,7 +7,7 @@
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-	"heroku-postbuild": "ls && ng build --prod"
+    "heroku-postbuild": "ls && ng build --prod"
   },
   "engines": {
     "node": "14.15.3",
@@ -16,9 +16,9 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
-	"@angular/cli": "~12.2.11",
+    "@angular/cli": "~12.2.11",
     "@angular/compiler-cli": "~12.2.0",
-	"@angular-devkit/build-angular": "~12.2.11",
+    "@angular-devkit/build-angular": "~12.2.11",
     "@angular/cdk": "^12.2.13",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",

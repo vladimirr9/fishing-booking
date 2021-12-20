@@ -2,6 +2,7 @@
 <div class="container">
   <a class="home" *ngIf="authService.isLoggedIn()" (click)="goToHome()">Home</a>
   <a class="profile" *ngIf="authService.isLoggedIn()" (click)="goToProfile()">Profile</a>
+  <a class="account-deletions" *ngIf="authService.isAdmin()" routerLink="/account-deletions">Deletions</a>
   <a class="logging" *ngIf="!authService.isLoggedIn()" routerLink="/login">Login</a>
   <a class="logging" *ngIf="authService.isLoggedIn()" (click)="logOut()">Logout</a>
 </div>
