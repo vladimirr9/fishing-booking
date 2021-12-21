@@ -11,10 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,7 +32,6 @@ public class User {
         this.phoneNumber = Objects.requireNonNull(providerRegistration.getPhoneNumber());
         this.role = Objects.requireNonNull(providerRegistration.getRole());
         this.address = new Address(Objects.requireNonNull(providerRegistration));
-        this.availablePeriods = new ArrayList<>();
     }
 
     @Id
@@ -53,8 +49,6 @@ public class User {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<AvailablePeriod> availablePeriods;
 
     public Long getId() {
         return id;
@@ -88,9 +82,6 @@ public class User {
         return role;
     }
 
-    public List<AvailablePeriod> getAvailablePeriods() {
-        return availablePeriods;
-    }
 
     public void setAddress(Address address) {
         this.address = address;
