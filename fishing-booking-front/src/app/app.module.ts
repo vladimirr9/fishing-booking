@@ -57,6 +57,10 @@ import { AccountDeletionPageComponent } from './component/account-deletion/accou
 import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
 import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
 import { DenyRegistrationDialogComponent } from './component/dialog/deny-registration-dialog/deny-registration-dialog.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
+
 
 
 
@@ -100,7 +104,8 @@ import { DenyRegistrationDialogComponent } from './component/dialog/deny-registr
     AccountDeletionPageComponent,
     AccountDeletionDialogComponent,
     RegistrationRequestPageComponent,
-    DenyRegistrationDialogComponent
+    DenyRegistrationDialogComponent,
+    InstructorCalendarPageComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +121,8 @@ import { DenyRegistrationDialogComponent } from './component/dialog/deny-registr
     MatDialogModule,
     NgbModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [StorageService ,
     {
