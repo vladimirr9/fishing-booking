@@ -30,6 +30,11 @@ export class InstructorCalendarPageComponent {
 
   view: CalendarView = CalendarView.Month;
 
+  test: any
+
+  log() {
+    console.log(this.test)
+  }
 
 
   CalendarView = CalendarView;

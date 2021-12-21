@@ -1,6 +1,20 @@
 package com.project.fishingbookingback.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +26,7 @@ public class User {
     public User() {
     }
 
+
     public User(ProviderRegistration providerRegistration) {
         this.email = Objects.requireNonNull(providerRegistration.getEmail());
         this.password = Objects.requireNonNull(providerRegistration.getPassword());
@@ -20,6 +35,7 @@ public class User {
         this.phoneNumber = Objects.requireNonNull(providerRegistration.getPhoneNumber());
         this.role = Objects.requireNonNull(providerRegistration.getRole());
         this.address = new Address(Objects.requireNonNull(providerRegistration));
+        this.availablePeriods = new ArrayList<>();
     }
 
     @Id
@@ -33,10 +49,12 @@ public class User {
     public Role role;
 
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<AvailablePeriod> availablePeriods;
 
     public Long getId() {
         return id;
@@ -68,6 +86,10 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public List<AvailablePeriod> getAvailablePeriods() {
+        return availablePeriods;
     }
 
     public void setAddress(Address address) {
