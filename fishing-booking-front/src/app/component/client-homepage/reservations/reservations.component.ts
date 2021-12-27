@@ -52,7 +52,8 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
   }
 
   async filterReservations(): Promise<void>{
-      this.filteredReservations = this.reservations.filter(boat => boat.name.includes(this.filterComponent.filterName));
+      this.filteredReservations = this.reservations.filter(boat =>boat.startDate.getTime() >= this.filterComponent.filterStartDate.getTime() && boat.startDate.getTime() <= this.filterComponent.filterEndDate.getTime());
+      this.filteredReservations = this.filteredReservations.filter(boat => boat.name.includes(this.filterComponent.filterName));
       this.filteredReservations = this.filteredReservations.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
       this.filteredReservations = this.filteredReservations.filter(boat => boat.mark >= this.filterComponent.filterMark);
       this.sortHouses();

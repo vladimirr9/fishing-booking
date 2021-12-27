@@ -31,8 +31,12 @@
                 <li class="card-item">Mark: {{reservation.mark}}</li>
                 <li type="date" class="card-item">
                     <label class="mr-2">Start date:</label>
-                    <input type="date" [value]="reservation.startDate | date:'yyyy-MM-dd'" disabled>
+                    <input type="date" style="width: 150px;" [value]="reservation.startDate | date:'yyyy-MM-dd'" disabled>
                 </li>
+                <li type="date" class="card-item">
+                  <label class="mr-2">Start time:</label>
+                  <input type="" style="width: 150px;" [value]="reservation.startDate.toLocaleTimeString()" disabled>
+              </li>
                 <li class="card-item">Duration: {{reservation.durationInHours}}h</li>
               </ul>
             </mat-card-subtitle>
