@@ -12,19 +12,23 @@ import java.util.List;
 public class AvailablePeriodService {
     private final AvailablePeriodRepository repository;
     private final LoggedUserService loggedUserService;
+    private final UserService userService;
 
-    public AvailablePeriodService(AvailablePeriodRepository repository, LoggedUserService loggedUserService) {
+    public AvailablePeriodService(AvailablePeriodRepository repository, LoggedUserService loggedUserService, UserService userService) {
         this.repository = repository;
         this.loggedUserService = loggedUserService;
+        this.userService = userService;
     }
 
-    public AvailablePeriod create(AvailablePeriod availablePeriod) {
-        checkIfAllowed(availablePeriod.getEmail());
-        return repository.save(availablePeriod);
+    public AvailablePeriod create(AvailablePeriod availablePeriod, String email) {
+        checkIfAllowed(email);
+        AvailablePeriod savedAvailablePeriod = repository.save(availablePeriod);
+        userService.addAvailablePeriod(email, savedAvailablePeriod);
+        return savedAvailablePeriod;
     }
 
-    public List<AvailablePeriod> getPeriods(String providerEmail) {
-        return repository.findAll(providerEmail);
+    public List<AvailablePeriod> getPeriods(String email) {
+        return repository.findAll(email);
     }
 
     public AvailablePeriod findByID(Long id) {
@@ -33,8 +37,7 @@ public class AvailablePeriodService {
 
     public void delete(Long id) {
         AvailablePeriod availablePeriod = findByID(id);
-        checkIfAllowed(availablePeriod.getEmail());
-        repository.deleteById(id);
+        userService.removeAvailablePeriod(availablePeriod);
     }
 
 

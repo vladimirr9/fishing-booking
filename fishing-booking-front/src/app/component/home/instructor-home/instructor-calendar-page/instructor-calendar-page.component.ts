@@ -3,6 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
 import { Subject } from 'rxjs';
+import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
+import { AuthService } from 'src/app/service/auth.service';
+import { AvailablePeriodService } from 'src/app/service/available-period.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 const colors: any = {
   red: {
@@ -24,16 +28,46 @@ const colors: any = {
   templateUrl: './instructor-calendar-page.component.html',
   styleUrls: ['./instructor-calendar-page.component.scss']
 })
-export class InstructorCalendarPageComponent {
+export class InstructorCalendarPageComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
+  constructor(private modal: NgbModal, private storageService: StorageService, private availablePeriodService: AvailablePeriodService) {}
+  ngOnInit(): void {
+    this.availablePeriodService.getPeriods(this.storageService.getUsername()).subscribe((data : AvailablePeriod[]) => {
+      data.forEach((element) => {
+        let id = element.id || 0
+        this.addAvailablePeriodToCalendar(id,element.fromTime,element.toTime)
+      })
+    })
+  }
+
   view: CalendarView = CalendarView.Month;
 
-  test: any
+  fromTime: any
+  toTime: any
 
-  log() {
-    console.log(this.test)
+  test() {
+    console.log(this.fromTime)
+    console.log(this.toTime)
+    let date = new Date(Date.parse(this.toTime))
+    console.log(date.toLocaleString())
+    console.log('---------')
+
+  }
+
+  addAvailablePeriod() {
+    let availablePeriod = {
+      fromTime: this.fromTime,
+      toTime: this.toTime,
+      email: this.storageService.getUsername()
+    }
+    this.availablePeriodService.postPeriod(availablePeriod).subscribe((data : AvailablePeriod) => {
+      let id = data.id || 0
+      this.addAvailablePeriodToCalendar(id, data.fromTime, data.toTime)
+    })
+
+
   }
 
 
@@ -66,50 +100,11 @@ export class InstructorCalendarPageComponent {
 
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -164,6 +159,35 @@ export class InstructorCalendarPageComponent {
       },
     ];
   }
+
+  addAvailablePeriodToCalendar(id : number ,fromTime: any, toTime: any): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Available Period',
+        start: new Date(Date.parse(fromTime)),
+        end: new Date(Date.parse(toTime)),
+        color: colors.blue,
+        draggable: false,
+        resizable: {
+          beforeStart: false,
+          afterEnd: false,
+        },
+        actions: [
+          {
+            label: '<i class="fas fa-fw fa-trash-alt"></i>',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+              this.availablePeriodService.deletePeriod(id).subscribe((data) => {
+                this.events = this.events.filter((iEvent) => iEvent !== event);
+              })
+            },
+          },
+        ]
+      },
+    ];
+  }
+
+
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);

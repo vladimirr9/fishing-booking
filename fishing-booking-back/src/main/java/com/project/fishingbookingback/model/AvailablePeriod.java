@@ -1,10 +1,14 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,16 +18,30 @@ public class AvailablePeriod {
     Long id;
     LocalDateTime fromTime;
     LocalDateTime toTime;
-    @Email
-    String email;
 
-    public AvailablePeriod(LocalDateTime fromTime, LocalDateTime toTime, String email) {
+
+    @ManyToOne()
+    @JoinTable(
+            name = "instructor_available_periods",
+            joinColumns = {@JoinColumn(name = "available_periods_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "instructor_id", referencedColumnName = "id")}
+
+    )
+    @JsonBackReference
+    private FishingInstructor fishingInstructor;
+
+
+    public AvailablePeriod(LocalDateTime fromTime, LocalDateTime toTime) {
         this.fromTime = fromTime;
         this.toTime = toTime;
-        this.email = email;
+
     }
 
     public AvailablePeriod() {
+    }
+
+    public FishingInstructor getFishingInstructor() {
+        return fishingInstructor;
     }
 
     public Long getId() {
@@ -38,7 +56,4 @@ public class AvailablePeriod {
         return toTime;
     }
 
-    public String getEmail() {
-        return email;
-    }
 }

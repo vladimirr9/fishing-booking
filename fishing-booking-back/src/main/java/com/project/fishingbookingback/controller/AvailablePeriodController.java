@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.controller;
 
+import com.project.fishingbookingback.dto.request.AvailablePeriodDTO;
 import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.service.AvailablePeriodService;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,9 @@ public class AvailablePeriodController {
     }
 
     @PostMapping
-    public ResponseEntity<AvailablePeriod> getPeriods(@RequestBody @Valid AvailablePeriod availablePeriod) {
-        AvailablePeriod newAvailablePeriod = availablePeriodService.create(availablePeriod);
+    public ResponseEntity<AvailablePeriod> addPeriod(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO) {
+        AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
+        AvailablePeriod newAvailablePeriod = availablePeriodService.create(availablePeriod, availablePeriodDTO.getEmail());
         return ResponseEntity.ok(newAvailablePeriod);
     }
 

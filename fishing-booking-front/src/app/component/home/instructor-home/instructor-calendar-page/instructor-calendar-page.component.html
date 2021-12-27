@@ -1,7 +1,16 @@
 <div class="container">
+  <div class="date-selects">
 <mat-form-field>
-  <input matInput type="datetime-local" placeholder="start date" [(ngModel)]="test" (click)="log()">
+  <input matInput type="datetime-local" placeholder="Start Date" [(ngModel)]="fromTime">
 </mat-form-field>
+<div>
+<mat-form-field>
+  <input matInput type="datetime-local" placeholder="End Date" [(ngModel)]="toTime">
+</mat-form-field>
+<button mat-flat-button color="primary" class="button" (click)="addAvailablePeriod()">Add</button>
+</div>
+</div>
+
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">

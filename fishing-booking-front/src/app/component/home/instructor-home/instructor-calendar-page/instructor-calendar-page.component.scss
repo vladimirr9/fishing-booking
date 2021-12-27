@@ -1,4 +1,11 @@
+
+.date-selects {
+  display: flex;
+  flex-direction: column;
+}
+
 mat-form-field {
   margin: 20px;
   min-width: 300px;
+  max-width: 300px;
 }

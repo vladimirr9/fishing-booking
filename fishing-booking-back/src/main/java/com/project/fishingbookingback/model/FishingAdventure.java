@@ -135,7 +135,7 @@ public class FishingAdventure {
     public Address getAddress() {
         return address;
     }
-    
+
 
     public List<AdditionalService> getAdditionalService() {
         return additionalService;
