@@ -29,6 +29,7 @@ export class RegistrationComponent implements OnInit {
 
 
   registrationFailed = false
+  loadingData = false
 
   ngOnInit(): void {
   }
@@ -75,10 +76,14 @@ export class RegistrationComponent implements OnInit {
       country: this.registrationForm.get('country')?.value
     }
 
+    this.loadingData = true;
+
     this.authService.registerClient(clientRegistration).subscribe(()=>{
+      this.loadingData = false;
       this.router.navigateByUrl('');
       alert("Email sent!");
     },(err: Error) =>{
+      this.loadingData = false;
       this.registrationFailed = true;
     })
   }

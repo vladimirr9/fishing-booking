@@ -60,6 +60,7 @@ import { DenyRegistrationDialogComponent } from './component/dialog/deny-registr
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
+import { MaterialModule } from './material/material.module';
 
 
 
@@ -122,7 +123,8 @@ import { InstructorCalendarPageComponent } from './component/home/instructor-hom
     NgbModule,
     MatTableModule,
     MatSelectModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    MaterialModule
   ],
   providers: [StorageService ,
     {

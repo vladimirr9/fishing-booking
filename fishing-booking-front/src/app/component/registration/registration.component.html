@@ -65,6 +65,7 @@
   </div>
     <div class="button-holder">
       <button class="register-button" mat-flat-button color="primary" type="submit" [disabled]="!registrationForm.valid">Register</button>
+      <mat-spinner *ngIf="loadingData" [diameter]="40"></mat-spinner>
     </div>
   </form>
   <div *ngIf="registrationFailed" class="failed-registration">Registration failed</div>
