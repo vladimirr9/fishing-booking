@@ -1,6 +1,17 @@
 package com.project.fishingbookingback.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +22,7 @@ import java.util.Objects;
 public class User {
     public User() {
     }
+
 
     public User(ProviderRegistration providerRegistration) {
         this.email = Objects.requireNonNull(providerRegistration.getEmail());
@@ -33,10 +45,10 @@ public class User {
     public Role role;
 
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
 
     public Long getId() {
         return id;
@@ -69,6 +81,7 @@ public class User {
     public Role getRole() {
         return role;
     }
+
 
     public void setAddress(Address address) {
         this.address = address;

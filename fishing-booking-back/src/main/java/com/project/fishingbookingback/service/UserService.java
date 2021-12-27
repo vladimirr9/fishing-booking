@@ -89,6 +89,11 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void deleteUser(String email) {
+        User user = findByEmail(email);
+        userRepository.deleteById(user.getId());
+    }
+
     private void checkIfAllowed(String email) {
         String userEmail = loggedUserService.getUsername();
         if (!userEmail.equals(email)) {

@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="account-deletion-container">
+    <div *ngFor="let accountDeletion of accountDeletions">
+      <app-account-deletion-card [accountDeletion]="accountDeletion" (accountDeleted)="removeAccount($event)"></app-account-deletion-card>
+    </div>
+  </div>
+</div>

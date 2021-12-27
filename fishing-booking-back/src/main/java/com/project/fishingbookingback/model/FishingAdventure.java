@@ -1,5 +1,8 @@
 package com.project.fishingbookingback.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +46,6 @@ public class FishingAdventure {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
-    @OneToMany()
-    @JoinTable(
-            name = "adventure_available_time",
-            joinColumns = {@JoinColumn(name = "adventure_id")},
-            inverseJoinColumns = {@JoinColumn(name = "time_id")}
-    )
-    private List<AvailableTime> availableTime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -64,8 +59,9 @@ public class FishingAdventure {
         this.additionalService.add(additionalService);
     }
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private FishingInstructor fishingInstructor;
 
     public void setFishingInstructor(FishingInstructor fishingInstructor) {
@@ -89,7 +85,7 @@ public class FishingAdventure {
         this.address = address;
         this.additionalService = new ArrayList<>();
         this.pictures = new ArrayList<>();
-        this.availableTime = new ArrayList<>();
+
     }
 
     public Long getId() {
@@ -139,10 +135,7 @@ public class FishingAdventure {
     public Address getAddress() {
         return address;
     }
-
-    public List<AvailableTime> getAvailableTime() {
-        return availableTime;
-    }
+    
 
     public List<AdditionalService> getAdditionalService() {
         return additionalService;
@@ -196,9 +189,6 @@ public class FishingAdventure {
         this.address = address;
     }
 
-    public void setAvailableTime(List<AvailableTime> availableTime) {
-        this.availableTime = availableTime;
-    }
 
     public void setAdditionalService(List<AdditionalService> additionalService) {
         this.additionalService = additionalService;

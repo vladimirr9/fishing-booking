@@ -1,0 +1,14 @@
+<div class="container">
+  <h2 mat-dialog-title>Registration Denial</h2>
+
+  <form class="form" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Reason</mat-label>
+      <textarea matInput type="text" placeholder="Reason or denial" formControlName="reason"></textarea>
+    </mat-form-field>
+  </form>
+  <div class="button-container">
+    <button mat-flat-button color="primary" (click)="deny()">Deny</button>
+    <button mat-flat-button color="warn" (click)="close()">Close</button>
+  </div>
+</div>

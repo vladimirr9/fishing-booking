@@ -9,7 +9,7 @@
       <mat-card class="container-card">
         <mat-card-title>{{registration.firstName}} {{registration.lastName}}</mat-card-title>
         <div class="buttons-container">
-          <button class="detailed-button" color="view" mat-flat-button (click)="view()">Details</button>
+          <button class="detailed-button" color="view" mat-flat-button [routerLink]="['./registration-requests', registration.id]">Details</button>
         </div>
       </mat-card>
     </div>

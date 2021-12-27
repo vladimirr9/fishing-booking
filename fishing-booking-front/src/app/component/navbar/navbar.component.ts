@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
       case 'ROLE_CLIENT':
             this.router.navigateByUrl('/client-homepage/reservations')
             break
-        
+
       default:
         this.router.navigateByUrl("/")
     }

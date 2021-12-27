@@ -37,6 +37,10 @@ export class AuthService {
     return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR"
   }
 
+  isAdmin() : boolean {
+    return this.storageService.getRole() === "ROLE_ADMIN"
+  }
+
   isLoggedIn() {
     return this.storageService.getToken() !== ""
   }

@@ -50,6 +50,17 @@ import { ReservationViewComponent } from './component/client-homepage/reservatio
 import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
 
 import {MatSelectModule} from '@angular/material/select';
+import { DeleteAccountComponent } from './component/dialog/delete-account/delete-account.component';
+import { AccountDeletionCardComponent } from './component/account-deletion/account-deletion-card/account-deletion-card.component';
+
+import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
+import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
+import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
+import { DenyRegistrationDialogComponent } from './component/dialog/deny-registration-dialog/deny-registration-dialog.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
+
 
 
 
@@ -87,7 +98,14 @@ import {MatSelectModule} from '@angular/material/select';
     ClientProfileComponent,
     ReservationsComponent,
     ReservationViewComponent,
-    ReservationSorterComponent
+    ReservationSorterComponent,
+    DeleteAccountComponent,
+    AccountDeletionCardComponent,
+    AccountDeletionPageComponent,
+    AccountDeletionDialogComponent,
+    RegistrationRequestPageComponent,
+    DenyRegistrationDialogComponent,
+    InstructorCalendarPageComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +121,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     NgbModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [StorageService ,
     {
