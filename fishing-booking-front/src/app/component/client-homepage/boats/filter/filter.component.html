@@ -1,51 +1,30 @@
-<div class="container fontContainer mt-3">
-    <div class="col p-3" style="border: 1px solid gray;">
-        <h6 class="text-center">Filters:</h6>
-        
-        <div class="row pt-2" >
-            <div class="col-3 my-auto">
-                <label for="">Name:</label>
-            </div>
-            <div class="col-9">
-                <input type="text" [(ngModel)]="filterName" class="form-control" >
-            </div>
-        </div>
+
+        <mat-form-field style="margin-left: 50px;" class="field" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="filterName">
+        </mat-form-field>
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Adress</mat-label>
+          <input matInput [(ngModel)]="filterAdress">
+        </mat-form-field>
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Mark</mat-label>
+            <mat-select [(ngModel)]="filterMark"  name="food">
+              <mat-option *ngFor="let mark of [0,1,2,3,4,5]" [value]="mark" >
+                {{mark}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="filterStartDate"  placeholder="Start date">
+              <input matEndDate [(ngModel)]="filterEndDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+
     
-        <div class="row pt-2" >
-            <div class="col-3 my-auto">
-                <label for="">Adress:</label>
-            </div>
-            <div class="col-9">
-                <input type="text" [(ngModel)]="filterAdress" class="form-control" >
-            </div>
-        </div>
-    
-    
-        <div class="row pt-2">
-            <div class="col-3 my-auto">
-                <label for="">Mark range:</label>
-            </div>
-            <div class="col-9 m-auto">
-                <div class="row">
-                    <input type="range" [(ngModel)]="filterMark" class="form-range col-8 ml-3 pt-4" min="0" max="5" step="1" id="mark" (change)="markChanged()">
-                    <input type="text" [(ngModel)]="filterMark" id="textInput" class="mt-2 ml-2 col-2" disabled value="">
-                </div>
-            </div>
-        </div>
-    
-        <div class="row pt-2 ml-0">
-            <div class="my-auto text-center">
-                <label for="">Free dates:</label>
-            </div>
-            <div class="row" style="padding-top: 15px;">
-                <div class="col-6">
-                    <input type="datetime-local" [(ngModel)]="filterStartDate" class="form-control" name="datepicker">
-                </div>
-                
-                <div class="col-6">
-                    <input type="datetime-local" [(ngModel)]="filterEndDate" class="form-control" name="datepicker" >
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+

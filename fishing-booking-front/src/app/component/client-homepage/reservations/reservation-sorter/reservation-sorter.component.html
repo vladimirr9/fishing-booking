@@ -1,4 +1,4 @@
-<div class="container fontContainer mt-3">
+<!-- <div class="container fontContainer mt-3">
     <div class="col p-3" style="border: 1px solid gray;">
         <h6 class="text-center">Sort by:</h6>
         <div class="form-check">
@@ -14,4 +14,10 @@
             <label class="form-check-label" for="exampleRadios3">Duration</label>
           </div>
     </div>
-</div>
+</div> -->
+<mat-radio-group aria-label="Select an option">
+  <label style="margin-left: 200px;"><b>Sort by:</b></label>
+  <mat-radio-button class="radioBtn" (click)="setSorter('date')" value="1">Date</mat-radio-button>
+  <mat-radio-button class="radioBtn" (click)="setSorter('price')" value="2">Price</mat-radio-button>
+  <mat-radio-button class="radioBtn" (click)="setSorter('duration')" value="3">Duration</mat-radio-button>
+</mat-radio-group>

@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-3" *ngFor="let adventure of adventures">
       <div class="card m-3 myCard">
         <div class="card-body">
@@ -13,4 +13,25 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <mat-grid-list cols="6" rowHeight="340px">
+    <mat-grid-tile colspan="2" *ngFor="let adventure of adventures">
+      <mat-card class="example-card" >
+        <mat-card-title-group>
+          <mat-card-title>{{adventure.name}}</mat-card-title>
+          <mat-card-subtitle> 
+            <ul class="reservationCard">
+              <li class="card-item">Adress: {{adventure.adress}}</li>
+              <li class="card-item">Price: {{adventure.price}}$</li>
+              <li class="card-item">Mark: {{adventure.mark}}</li>
+            </ul>
+          </mat-card-subtitle>
+          <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+        </mat-card-title-group>
+        <mat-card-content>
+          {{adventure.description}}
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
