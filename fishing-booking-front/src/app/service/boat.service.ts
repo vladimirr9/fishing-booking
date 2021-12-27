@@ -28,7 +28,7 @@ export class BoatService {
         "imageUrl": "",
           "name": "ABrod2",
           "adress": "Rake",
-          "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+          "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
           "mark": 4.6,
           "price": 20.95,
           "freeDates": []

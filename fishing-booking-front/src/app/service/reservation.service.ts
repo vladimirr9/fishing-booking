@@ -16,7 +16,7 @@ export class ReservationService {
       price: 23,
       durationInHours: 4,
       mark: 2.2,
-      adress: "Cloverfiel 22"
+      adress: "Cloverfield lane 22"
     },
       {
       imgUrl: "",
