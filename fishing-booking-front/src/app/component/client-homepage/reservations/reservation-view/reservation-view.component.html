@@ -19,8 +19,8 @@
     </div> -->
 
   
-    <mat-grid-list cols="6">
-      <mat-grid-tile colspan="2" *ngFor="let reservation of reservations">
+    <mat-grid-list cols="6" rowHeight="340px">
+      <mat-grid-tile colspan="2"  *ngFor="let reservation of reservations">
         <mat-card class="example-card" >
           <mat-card-title-group>
             <mat-card-title>{{reservation.name}}</mat-card-title>
