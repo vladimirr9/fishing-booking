@@ -1,4 +1,4 @@
-<div class="container-fluid ">
+<!-- <div class="container-fluid ">
     <div class="row">
         <div class="col-9">
             <app-adventure-view [adventures]="filteredAdventures"></app-adventure-view>
@@ -8,9 +8,18 @@
             <div class="col-md-12 text-center">
                 <a class="btn btn-primary mt-3 " (click)="filterAdventures()" role="button">Filter</a>
             </div>
-            <!--sorter-->
+           
             <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
 
         </div>
     </div>
+</div> -->
+
+<div class="filterArea">
+    <app-filter></app-filter>
+    <button mat-raised-button class="filterBtn" color="primary" (click)="filterAdventures()" >Filter</button>
+    <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
+</div>
+<div class="viewArea">
+    <app-adventure-view [adventures]="filteredAdventures"></app-adventure-view>
 </div>
