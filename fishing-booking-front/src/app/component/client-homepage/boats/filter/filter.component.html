@@ -1,4 +1,4 @@
-<div class="container fontContainer mt-3">
+<!-- <div class="container fontContainer mt-3">
     <div class="col p-3" style="border: 1px solid gray;">
         <h6 class="text-center">Filters:</h6>
         
@@ -48,4 +48,19 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+   
+        <mat-form-field style="margin-left: 50px;" class="field" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput [(ngModel)]="filterName">
+        </mat-form-field>
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Adress</mat-label>
+          <input matInput [(ngModel)]="filterAdress">
+        </mat-form-field>
+
+
+    
+

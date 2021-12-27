@@ -16,8 +16,9 @@
 </div> -->
 
 <div class="filterArea">
-    Filter AREA
-    
+        <app-filter></app-filter>
+        <button mat-raised-button class="filterBtn" color="primary" (click)="filterReservations()" >Filter</button>
+        <app-reservation-sorter (sortingEvent)="setSorter($event)"></app-reservation-sorter>
 </div>
 <div class="viewArea">
     <app-reservation-view [reservations]="filteredReservations"></app-reservation-view>
