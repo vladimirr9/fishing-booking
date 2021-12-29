@@ -1,25 +1,7 @@
-<!-- <div class="row">
-    <div class="col-3" *ngFor="let reservation of reservations">
-      <div class="card m-3 myCard">
-        <div class="card-body">
-          <img src="https://source.unsplash.com/random/800x800/?img=1" class="card-img-top myImage" alt="...">
-          <h6 class="card-title">{{reservation.name}}</h6>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Adress: {{reservation.adress}}</li>
-            <li class="list-group-item">Price: {{reservation.price}}$</li>
-            <li class="list-group-item">Mark: {{reservation.mark}}</li>
-            <li type="date" class="list-group-item">
-                <label class="mr-2">Start date:</label>
-                <input type="date" [value]="reservation.startDate | date:'yyyy-MM-dd'" disabled>
-            </li>
-            <li class="list-group-item">Duration: {{reservation.durationInHours}}h</li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
+
 
   
-    <mat-grid-list cols="6" rowHeight="340px">
+    <mat-grid-list cols="8" rowHeight="340px">
       <mat-grid-tile colspan="2"  *ngFor="let reservation of reservations">
         <mat-card class="example-card" >
           <mat-card-title-group>
