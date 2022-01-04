@@ -48,6 +48,15 @@ public class HolidayHome {
     private List<AvailablePeriod> availablePeriods;
     private String rulesOfConduct;
     private String additionalInfo;
+    private float pricePerDay;
+
+    public float getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public void setPricePerDay(float pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
 
     public void setHomeOwner(HomeOwner homeOwner) {
         this.homeOwner = homeOwner;

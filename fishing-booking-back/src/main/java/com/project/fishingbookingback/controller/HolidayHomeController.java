@@ -2,6 +2,7 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.HolidayHomeMapper;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
+import com.project.fishingbookingback.dto.response.ClientsHolidayHomeDTO;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.HolidayHome;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,6 +51,15 @@ public class HolidayHomeController {
     public ResponseEntity<List<HolidayHome>> getHolidayHomes(@RequestParam(required = false) String homeOwnerUsername,
                                                                 @RequestParam(required = false) String holidayHomeName) {;
         return ResponseEntity.ok(holidayHomeService.getHolidayHomes(homeOwnerUsername, holidayHomeName));
+    }
+
+    @GetMapping(value = "/client")
+    public ResponseEntity<List<ClientsHolidayHomeDTO>> getAllHolidayHomes() {
+        List<ClientsHolidayHomeDTO> clientsHolidayHomeDTOs = new ArrayList<>();
+        for(HolidayHome home: holidayHomeService.getAll())
+            clientsHolidayHomeDTOs.add(holidayHomeMapper.toHolidayViewDTO(home));
+
+        return ResponseEntity.ok(clientsHolidayHomeDTOs);
     }
 
     @GetMapping(value = "/{id}")

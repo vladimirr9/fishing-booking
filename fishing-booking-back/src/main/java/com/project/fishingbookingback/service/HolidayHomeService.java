@@ -27,6 +27,10 @@ public class HolidayHomeService {
         return holidayHomeRepository.save(holidayHome);
     }
 
+    public List<HolidayHome> getAll(){
+        return holidayHomeRepository.findAll();
+    }
+
     public HolidayHome findByID(Long id) {
         return holidayHomeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(HolidayHome.class.getSimpleName()));
     }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { config } from "src/shared"
+import { HolidayHouseDTO } from '../dto/HolidayHouseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class HolidayHomeService {
 
   private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
+
+  getAllHomes() : Observable<HolidayHouseDTO[]>{
+      return this.http.get<HolidayHouseDTO[]>(`${config.baseUrl}${this.homeURL}/client`);
+  }
 
   createNewHome(home : any) : Observable<any> {
     return this.http.post(`${config.baseUrl}${this.homeURL}`, home)
