@@ -40,6 +40,16 @@ public class AvailablePeriod {
     @JsonBackReference
     private HolidayHome holidayHome;
 
+    @ManyToOne()
+    @JoinTable(
+            name = "boat_available_periods",
+            joinColumns = {@JoinColumn(name = "available_periods_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "boat_id", referencedColumnName = "id")}
+
+    )
+    @JsonBackReference
+    private Boat boat;
+
     public AvailablePeriod(LocalDateTime fromTime, LocalDateTime toTime) {
         this.fromTime = fromTime;
         this.toTime = toTime;
