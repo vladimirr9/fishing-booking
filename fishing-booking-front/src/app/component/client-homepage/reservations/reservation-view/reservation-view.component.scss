@@ -1,0 +1,17 @@
+.example-card {
+    width: 400px;
+    margin: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .reservationCard{
+      padding: 0;
+  }
+
+  .card-item{
+      margin:3px;
+  }

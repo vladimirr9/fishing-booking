@@ -1,0 +1,23 @@
+<!-- <div class="container fontContainer mt-3">
+    <div class="col p-3" style="border: 1px solid gray;">
+        <h6 class="text-center">Sort by:</h6>
+        <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('name')" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+            <label class="form-check-label" for="exampleRadios1">Name</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('mark')" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label"  for="exampleRadios2">Mark</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" (click)="setSorter('location')" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+            <label class="form-check-label" for="exampleRadios3">Location</label>
+          </div>
+    </div>
+</div> -->
+<mat-radio-group aria-label="Select an option">
+  <label style="margin-left: 400px;"><b>Sort by:</b></label>
+  <mat-radio-button class="radioBtn" (click)="setSorter('name')" value="1">Name</mat-radio-button>
+  <mat-radio-button class="radioBtn" (click)="setSorter('mark')" value="2">Mark</mat-radio-button>
+  <mat-radio-button class="radioBtn" (click)="setSorter('location')" value="3">Location</mat-radio-button>
+</mat-radio-group>

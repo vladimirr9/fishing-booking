@@ -29,15 +29,16 @@ export class RegistrationComponent implements OnInit {
 
 
   registrationFailed = false
+  loadingData = false
 
   ngOnInit(): void {
   }
 
   onSubmit() : void {
     this.registrationFailed = false
-    if (this.registrationForm.invalid || this.registrationForm.get('password2')?.value !== this.registrationForm.get('password')?.value) {
+    if (this.registrationForm.invalid || this.registrationForm.get('password2')?.value !== this.registrationForm.get('password')?.value) 
       return;
-    }
+
     let registrationDTO : RegistrationDTO = {
       email: this.registrationForm.get('email')?.value,
       password: this.registrationForm.get('password')?.value,
@@ -50,6 +51,12 @@ export class RegistrationComponent implements OnInit {
       role: this.registrationForm.get('role')?.value,
       explanation: this.registrationForm.get('explanation')?.value ?? ""
     }
+    let role = this.registrationForm.get('role')?.value;
+    if(role == "ROLE_CLIENT")
+    {
+      this.registerClient();
+      return;
+    }
     this.authService.registerProvider(registrationDTO).subscribe(() => {
       this.router.navigateByUrl('/login')
     }, (err: Error) => {
@@ -57,9 +64,51 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  registerClient():void {
+    let clientRegistration : any = {
+      email: this.registrationForm.get('email')?.value,
+      password: this.registrationForm.get('password')?.value,
+      firstName: this.registrationForm.get('firstName')?.value,
+      lastName: this.registrationForm.get('lastName')?.value,
+      streetAndNumber: this.registrationForm.get('streetAndNumber')?.value,
+      phoneNumber: this.registrationForm.get('phoneNumber')?.value,
+      city: this.registrationForm.get('city')?.value,
+      country: this.registrationForm.get('country')?.value
+    }
+
+    this.loadingData = true;
+
+    this.authService.registerClient(clientRegistration).subscribe(()=>{
+      this.loadingData = false;
+      this.router.navigateByUrl('');
+      alert("Email sent!");
+    },(err: Error) =>{
+      this.loadingData = false;
+      this.registrationFailed = true;
+    })
+  }
+
+  validateForm(): boolean{
+    if(!this.doesPasswordMatch()){
+      alert("Password doesnt match!");
+      return false;
+    }
+    if (this.registrationForm.invalid) 
+    {
+      alert("Form not valid!");
+      return false;
+    }
+
+    return true;
+  }
+
   isProvider() : boolean {
     let role = this.registrationForm.get('role')?.value
     return role === "ROLE_HOME_OWNER" || role === "ROLE_BOAT_OWNER" || role === "ROLE_FISHING_INSTRUCTOR"
+  }
+
+  doesPasswordMatch(): boolean{
+    return this.registrationForm.get('password')?.value === this.registrationForm.get('password2')?.value;
   }
 
 }

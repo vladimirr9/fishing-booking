@@ -1,0 +1,9 @@
+
+<div class="filterArea">
+    <app-filter></app-filter>
+    <button mat-raised-button class="filterBtn" color="primary" (click)="filterAdventures()" >Filter</button>
+    <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
+</div>
+<div class="viewArea">
+    <app-adventure-view [adventures]="filteredAdventures"></app-adventure-view>
+</div>

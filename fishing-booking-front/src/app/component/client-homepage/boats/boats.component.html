@@ -1,0 +1,26 @@
+<!-- <div class="container-fluid ">
+    <div class="row">
+        <div class="col-9">
+            <app-view [boats]="filteredBoats"></app-view>
+        </div>
+        <div class="col-3">
+            <app-filter></app-filter>
+            <div class="col-md-12 text-center">
+                <a class="btn btn-primary mt-3 " (click)="filterBoats()" role="button">Filter</a>
+            </div>
+           
+           <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
+
+        </div>
+    </div>
+</div> -->
+
+
+<div class="filterArea">
+    <app-filter></app-filter>
+    <button mat-raised-button class="filterBtn" color="primary" (click)="filterBoats()" >Filter</button>
+    <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
+</div>
+<div class="viewArea">
+    <app-view [boats]="filteredBoats"></app-view>
+</div>

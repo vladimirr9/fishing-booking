@@ -1,0 +1,37 @@
+<!-- <div class="row">
+    <div class="col-3" *ngFor="let adventure of adventures">
+      <div class="card m-3 myCard">
+        <div class="card-body">
+          <img src="https://source.unsplash.com/random/800x800/?img=1" class="card-img-top myImage" alt="...">
+          <h6 class="card-title">{{adventure.name}}</h6>
+          <p class="card-text">{{adventure.description}}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Adress:{{adventure.adress}}</li>
+            <li class="list-group-item">Price:{{adventure.price}}</li>
+            <li class="list-group-item">Mark:{{adventure.mark}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <mat-grid-list cols="8" rowHeight="340px">
+    <mat-grid-tile colspan="2" *ngFor="let adventure of adventures">
+      <mat-card class="example-card" >
+        <mat-card-title-group>
+          <mat-card-title>{{adventure.name}}</mat-card-title>
+          <mat-card-subtitle> 
+            <ul class="reservationCard">
+              <li class="card-item">Adress: {{adventure.adress}}</li>
+              <li class="card-item">Price: {{adventure.price}}$</li>
+              <li class="card-item">Mark: {{adventure.mark}}</li>
+            </ul>
+          </mat-card-subtitle>
+          <img mat-card-xl-image src="{{adventure.imageUrl}}" >
+        </mat-card-title-group>
+        <mat-card-content>
+          {{adventure.description}}
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>

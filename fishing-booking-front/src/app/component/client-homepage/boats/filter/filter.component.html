@@ -1,0 +1,30 @@
+
+        <mat-form-field style="margin-left: 50px;" class="field" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="filterName">
+        </mat-form-field>
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Adress</mat-label>
+          <input matInput [(ngModel)]="filterAdress">
+        </mat-form-field>
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Mark</mat-label>
+            <mat-select [(ngModel)]="filterMark"  name="food">
+              <mat-option *ngFor="let mark of [0,1,2,3,4,5]" [value]="mark" >
+                {{mark}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="filterStartDate"  placeholder="Start date">
+              <input matEndDate [(ngModel)]="filterEndDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+
+    
+

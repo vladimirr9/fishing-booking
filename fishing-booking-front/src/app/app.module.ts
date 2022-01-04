@@ -32,12 +32,37 @@ import { OwnerHomeComponent } from './component/owner-home/owner-home.component'
 import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
 import { HomeListComponent } from './component/holiday-home/home-list/home-list.component';
 import { HomeCardComponent } from './component/holiday-home/home-card/home-card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomepageComponent } from './component/client-homepage/homepage/homepage.component';
+import { BoatsComponent } from './component/client-homepage/boats/boats.component';
+import { ViewComponent } from './component/client-homepage/boats/view/view.component';
+import { FilterComponent } from './component/client-homepage/boats/filter/filter.component';
+import { InstructorsComponent } from './component/client-homepage/instructors/instructors.component';
+import { AdventureViewComponent } from './component/client-homepage/instructors/adventure-view/adventure-view.component';
+import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
+import { HolidayHousesViewComponent } from './component/client-homepage/holiday-houses/holiday-houses-view/holiday-houses-view.component';
+import { SorterComponent } from './component/client-homepage/sorter/sorter.component';
 import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
 import { HomeOwnerProfileComponent } from './component/profile/home-owner-profile/home-owner-profile.component';
+import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
+import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
+import { ReservationViewComponent } from './component/client-homepage/reservations/reservation-view/reservation-view.component';
+import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DeleteAccountComponent } from './component/dialog/delete-account/delete-account.component';
+import { AccountDeletionCardComponent } from './component/account-deletion/account-deletion-card/account-deletion-card.component';
+import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
+import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
+import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
+import { DenyRegistrationDialogComponent } from './component/dialog/deny-registration-dialog/deny-registration-dialog.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
+import { MaterialModule } from './material/material.module';
+
 
 
 
@@ -63,11 +88,31 @@ import {MatSelectModule} from '@angular/material/select';
     NewHomeComponent,
     HomeListComponent,
     HomeCardComponent,
+    HomepageComponent,
+    BoatsComponent,
+    ViewComponent,
+    FilterComponent,
+    InstructorsComponent,
+    AdventureViewComponent,
+    HolidayHousesComponent,
+    HolidayHousesViewComponent,
+    SorterComponent,
     AdminHomeComponent,
     AdminProfileComponent,
     AdminRegistrationComponent,
     ChangeFeeDialogComponent,
-    HomeOwnerProfileComponent
+    HomeOwnerProfileComponent,
+    ClientProfileComponent,
+    ReservationsComponent,
+    ReservationViewComponent,
+    ReservationSorterComponent,
+    DeleteAccountComponent,
+    AccountDeletionCardComponent,
+    AccountDeletionPageComponent,
+    AccountDeletionDialogComponent,
+    RegistrationRequestPageComponent,
+    DenyRegistrationDialogComponent,
+    InstructorCalendarPageComponent
   ],
   imports: [
     BrowserModule,
@@ -81,8 +126,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    NgbModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    MaterialModule
   ],
   providers: [StorageService ,
     {

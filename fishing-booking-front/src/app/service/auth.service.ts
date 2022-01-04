@@ -14,6 +14,7 @@ export class AuthService {
 
   private loginUrl = "/auth/login"
   private providerRegistrationURL = "/auth/provider-registration"
+  private clientRegistrationURL = "/auth/clients"
 
   constructor(private http: HttpClient,
               private storageService: StorageService) { }
@@ -28,8 +29,16 @@ export class AuthService {
     return this.http.post(`${config.baseUrl}/auth/admins`, adminRegistration)
   }
 
+  registerClient(clientRegistration: any){
+    return this.http.post(`${config.baseUrl}${this.clientRegistrationURL}`,clientRegistration);
+  }
+
   isFishingInstructor() : boolean {
     return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR"
+  }
+
+  isAdmin() : boolean {
+    return this.storageService.getRole() === "ROLE_ADMIN"
   }
 
   isLoggedIn() {

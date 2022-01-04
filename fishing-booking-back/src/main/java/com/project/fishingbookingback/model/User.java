@@ -23,6 +23,7 @@ public class User {
     public User() {
     }
 
+
     public User(ProviderRegistration providerRegistration) {
         this.email = Objects.requireNonNull(providerRegistration.getEmail());
         this.password = Objects.requireNonNull(providerRegistration.getPassword());
@@ -42,9 +43,12 @@ public class User {
     private String lastName;
     private String phoneNumber;
     public Role role;
+
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
 
     public Long getId() {
         return id;
@@ -78,6 +82,7 @@ public class User {
         return role;
     }
 
+
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -105,4 +110,5 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }

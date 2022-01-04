@@ -1,0 +1,32 @@
+<!-- <div class="container-fluid ">
+    <div class="row">
+        <div class="col-9">
+            <app-reservation-view [reservations]="filteredReservations"></app-reservation-view>
+        </div>
+        <div class="col-3">
+            <app-filter></app-filter>
+            <div class="col-md-12 text-center">
+                <a class="btn btn-primary mt-3 " (click)="filterReservations()" role="button">Filter</a>
+            </div>
+            sorter
+            <app-reservation-sorter (sortingEvent)="setSorter($event)"></app-reservation-sorter>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="filterArea">
+        <app-filter></app-filter>
+        <button mat-raised-button class="filterBtn" color="primary" (click)="filterReservations()" >Filter</button>
+        <app-reservation-sorter (sortingEvent)="setSorter($event)"></app-reservation-sorter>
+</div>
+<div class="viewArea">
+    <app-reservation-view [reservations]="filteredReservations"></app-reservation-view>
+</div>
+
+<!-- <mat-grid-list class="reservationsView"  cols="5" rowHeight="750px" gutterSize="5px">
+    <mat-grid-tile class="view" colspan="4">
+         <app-reservation-view [reservations]="filteredReservations"></app-reservation-view>
+    </mat-grid-tile>
+    <mat-grid-tile class="filters"  >4</mat-grid-tile>
+</mat-grid-list>  -->

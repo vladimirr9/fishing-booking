@@ -2,19 +2,24 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.UserMapper;
 import com.project.fishingbookingback.dto.request.AdminRegistrationDTO;
+import com.project.fishingbookingback.dto.request.UserRegistrationDTO;
 import com.project.fishingbookingback.dto.response.TokenDTO;
 import com.project.fishingbookingback.model.Admin;
+import com.project.fishingbookingback.model.Client;
 import com.project.fishingbookingback.model.ProviderRegistration;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.service.AuthenticationService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.UnknownHostException;
 
 @RestController
 @RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +45,19 @@ public class AuthenticationController {
         return ResponseEntity.ok(newAdmin);
     }
 
+    @PostMapping(value = "/clients")
+    public ResponseEntity<Client> registerClient(@Valid @RequestBody UserRegistrationDTO userDTO) throws UnknownHostException {
+        Client client = userMapper.toModel(userDTO);
+        authenticationService.registerClient(client);
+        return ResponseEntity.ok(client);
+    }
 
+    @GetMapping(value="/confirm-client/{clientID}")
+    public ResponseEntity<String> confirmClient(@PathVariable Long clientID){
+        Client client = authenticationService.ConfirmClient(clientID);
+        return ResponseEntity.ok("Account with email:" +client.getEmail()+" successfully registered!");
+    }
+    
     @PostMapping(value = "/login")
     public ResponseEntity<TokenDTO> login(@RequestBody User user) {
         String token = authenticationService.login(user.getEmail(), user.getPassword());

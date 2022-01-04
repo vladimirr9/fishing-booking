@@ -6,6 +6,7 @@ import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.Admin;
+import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.model.BoatOwner;
 import com.project.fishingbookingback.model.FishingInstructor;
 import com.project.fishingbookingback.model.HomeOwner;
@@ -52,6 +53,7 @@ public class UserService {
             case ROLE_HOME_OWNER -> new HomeOwner(providerRegistration);
             case ROLE_BOAT_OWNER -> new BoatOwner(providerRegistration);
             case ROLE_FISHING_INSTRUCTOR -> new FishingInstructor(providerRegistration);
+            case ROLE_CLIENT -> new User(providerRegistration);
             default -> throw new BadRoleException("Can only register boat owner, fishing instructor, and home owner");
         };
         user.setAddress(addressService.insert(user.getAddress()));
@@ -88,6 +90,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void deleteUser(String email) {
+        User user = findByEmail(email);
+        userRepository.deleteById(user.getId());
+    }
+
+    public AvailablePeriod addAvailablePeriod(String email, AvailablePeriod availablePeriod) {
+        FishingInstructor fishingInstructor = (FishingInstructor) findByEmail(email);
+        fishingInstructor.getAvailablePeriods().add(availablePeriod);
+        userRepository.save(fishingInstructor);
+        return availablePeriod;
+    }
+
     private void checkIfAllowed(String email) {
         String userEmail = loggedUserService.getUsername();
         if (!userEmail.equals(email)) {
@@ -103,5 +117,13 @@ public class UserService {
 
     public User saveUser(Admin admin) {
         return userRepository.save(admin);
+    }
+
+
+    public void removeAvailablePeriod(AvailablePeriod availablePeriod) {
+        String username = loggedUserService.getUsername();
+        FishingInstructor fishingInstructor = (FishingInstructor) findByEmail(username);
+        fishingInstructor.getAvailablePeriods().remove(availablePeriod);
+        userRepository.save(fishingInstructor);
     }
 }
