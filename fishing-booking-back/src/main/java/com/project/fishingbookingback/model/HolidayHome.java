@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -42,7 +44,8 @@ public class HolidayHome {
             joinColumns = {@JoinColumn(name = "holiday_home_id")},
             inverseJoinColumns = {@JoinColumn(name = "appointment_id")}
     )
-    private List<Appointment> freeAppointments;
+    @JsonManagedReference
+    private List<AvailablePeriod> availablePeriods;
     private String rulesOfConduct;
     private String additionalInfo;
 
@@ -60,6 +63,15 @@ public class HolidayHome {
 
     public String getName() {
         return name;
+    }
+
+
+    public List<AvailablePeriod> getAvailablePeriods() {
+        return availablePeriods;
+    }
+
+    public void setAvailablePeriods(List<AvailablePeriod> availablePeriods) {
+        this.availablePeriods = availablePeriods;
     }
 
     public void setName(String name) {
@@ -118,14 +130,6 @@ public class HolidayHome {
         this.bedsPerRoom = bedsPerRoom;
     }
 
-    public List<Appointment> getFreeAppointments() {
-        return freeAppointments;
-    }
-
-    public void setFreeAppointments(List<Appointment> freeAppointments) {
-        this.freeAppointments = freeAppointments;
-    }
-
     public String getRulesOfConduct() {
         return rulesOfConduct;
     }
@@ -142,7 +146,7 @@ public class HolidayHome {
         this.additionalInfo = additionalInfo;
     }
 
-    public HolidayHome(String name, Address address, String description, List<Picture> exterior, List<Picture> interior, int roomsPerHome, int bedsPerRoom, List<Appointment> freeAppointments, String rulesOfConduct, String additionalInfo) {
+    public HolidayHome(String name, Address address, String description, List<Picture> exterior, List<Picture> interior, int roomsPerHome, int bedsPerRoom, List<AvailablePeriod> availablePeriods, String rulesOfConduct, String additionalInfo) {
         this.name = name;
         this.address = address;
         this.description = description;
@@ -150,7 +154,7 @@ public class HolidayHome {
         this.interior = interior;
         this.roomsPerHome = roomsPerHome;
         this.bedsPerRoom = bedsPerRoom;
-        this.freeAppointments = freeAppointments;
+        this.availablePeriods = availablePeriods;
         this.rulesOfConduct = rulesOfConduct;
         this.additionalInfo = additionalInfo;
     }

@@ -3,6 +3,7 @@ package com.project.fishingbookingback.dto.mapper;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Appointment;
+import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.model.HolidayHome;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class HolidayHomeMapper {
                 dto.getInterior(),
                 dto.getRoomsPerHome(),
                 dto.getBedsPerRoom(),
-                new ArrayList<Appointment>(),
+                new ArrayList<AvailablePeriod>(),
                 dto.getRulesOfConduct(),
                 dto.getAdditionalInfo());
     }

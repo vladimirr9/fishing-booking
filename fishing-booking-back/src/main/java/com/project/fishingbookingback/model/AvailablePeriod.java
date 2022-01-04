@@ -30,6 +30,15 @@ public class AvailablePeriod {
     @JsonBackReference
     private FishingInstructor fishingInstructor;
 
+    @ManyToOne()
+    @JoinTable(
+            name = "home_available_periods",
+            joinColumns = {@JoinColumn(name = "available_periods_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "home_id", referencedColumnName = "id")}
+
+    )
+    @JsonBackReference
+    private HolidayHome holidayHome;
 
     public AvailablePeriod(LocalDateTime fromTime, LocalDateTime toTime) {
         this.fromTime = fromTime;
@@ -40,6 +49,7 @@ public class AvailablePeriod {
     public AvailablePeriod() {
     }
 
+    public HolidayHome getHolidayHome() {return holidayHome;}
     public FishingInstructor getFishingInstructor() {
         return fishingInstructor;
     }
