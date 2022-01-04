@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 public class AvailablePeriod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    LocalDateTime fromTime;
-    LocalDateTime toTime;
+    private Long id;
+    private LocalDateTime fromTime;
+    private LocalDateTime toTime;
 
 
     @ManyToOne()

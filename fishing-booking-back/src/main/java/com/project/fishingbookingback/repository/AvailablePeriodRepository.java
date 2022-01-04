@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface AvailablePeriodRepository extends JpaRepository<AvailablePeriod, Long> {
 
-    @Query("select ap from AvailablePeriod ap where (:email is null or ap.fishingInstructor.email = :email)")
+    @Query("select ap from AvailablePeriod ap where (:email is null or (ap.fishingInstructor is not null and ap.fishingInstructor.email = :email))")
     List<AvailablePeriod> findAll(@Param("email") String email);
 }
