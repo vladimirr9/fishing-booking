@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Boat {
@@ -21,6 +22,9 @@ public class Boat {
     private Boolean vhf;
     private Boolean fishfinder;
     private Boolean cabin;
+    @OneToMany(mappedBy = "boat",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<BoatReservation> reservations;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
@@ -63,6 +67,14 @@ public class Boat {
 
     public void setPricePerDay(Float pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+
+    public Set<BoatReservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<BoatReservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Long getId() {

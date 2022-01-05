@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class HolidayHome {
@@ -49,6 +50,16 @@ public class HolidayHome {
     private String rulesOfConduct;
     private String additionalInfo;
     private float pricePerDay;
+    @OneToMany(mappedBy = "holidayHome",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<HolidayHomeReservation> reservations;
+
+    public Set<HolidayHomeReservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<HolidayHomeReservation> reservations) {
+        this.reservations = reservations;
+    }
 
     public float getPricePerDay() {
         return pricePerDay;

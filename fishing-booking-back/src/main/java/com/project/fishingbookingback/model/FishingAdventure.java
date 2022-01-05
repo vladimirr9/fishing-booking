@@ -3,18 +3,10 @@ package com.project.fishingbookingback.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "fishing_adventure")
@@ -46,6 +38,8 @@ public class FishingAdventure {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+    @OneToMany(mappedBy = "adventure",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<AdventureReservation> reservations;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -86,6 +80,14 @@ public class FishingAdventure {
         this.additionalService = new ArrayList<>();
         this.pictures = new ArrayList<>();
 
+    }
+
+    public Set<AdventureReservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<AdventureReservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Long getId() {
