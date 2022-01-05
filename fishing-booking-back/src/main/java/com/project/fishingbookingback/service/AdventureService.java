@@ -5,7 +5,9 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingInstructor;
+import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
 import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.AdventureRepository;
@@ -18,11 +20,13 @@ public class AdventureService {
     private final UserService userService;
     private final AdventureRepository adventureRepository;
     private final LoggedUserService loggedUserService;
+    private final FishingPromotionService fishingPromotionService;
 
-    public AdventureService(UserService userService, AdventureRepository adventureRepository, LoggedUserService loggedUserService) {
+    public AdventureService(UserService userService, AdventureRepository adventureRepository, LoggedUserService loggedUserService, FishingPromotionService fishingPromotionService) {
         this.userService = userService;
         this.adventureRepository = adventureRepository;
         this.loggedUserService = loggedUserService;
+        this.fishingPromotionService = fishingPromotionService;
     }
 
     public FishingAdventure create(FishingAdventure fishingAdventure) {
@@ -87,6 +91,24 @@ public class AdventureService {
         checkIfAllowed(fishingAdventure);
         fishingAdventure.getPictures().removeIf(picture -> picture.getId().equals(id_picture));
         adventureRepository.save(fishingAdventure);
+    }
+
+
+    public FishingPromotion addPromotion(Long id, Promotion promotion) {
+        FishingAdventure fishingAdventure = findByID(id);
+        checkIfAllowed(fishingAdventure);
+        FishingPromotion fishingPromotion = new FishingPromotion(promotion.getFromTime(), promotion.getToTime(), promotion.getPrice(), promotion.getValidUntil(), fishingAdventure);
+        return fishingPromotionService.addPromotion(fishingPromotion);
+    }
+
+    public void deletePromotion(Long id, Long id_promotion) {
+        FishingAdventure fishingAdventure = findByID(id);
+        checkIfAllowed(fishingAdventure);
+        fishingPromotionService.deletePromotion(id_promotion);
+    }
+
+    public List<FishingPromotion> getPromotions(Long id) {
+        return fishingPromotionService.getPromotions(id);
     }
 
     private void checkIfAllowed(FishingAdventure fishingAdventure) {

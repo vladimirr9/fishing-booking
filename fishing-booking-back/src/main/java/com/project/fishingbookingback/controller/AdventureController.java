@@ -5,7 +5,9 @@ import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
+import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
 import com.project.fishingbookingback.service.AdventureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,4 +95,22 @@ public class AdventureController {
         adventureService.deletePicture(id, id_picture);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping(value = "/{id}/promotions")
+    public ResponseEntity<FishingPromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
+        return ResponseEntity.ok(adventureService.addPromotion(id, promotion));
+    }
+
+    @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
+    public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
+        adventureService.deletePromotion(id, id_promotion);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/promotions")
+    public ResponseEntity<List<FishingPromotion>> getPromotions(@PathVariable Long id) {
+        return ResponseEntity.ok(adventureService.getPromotions(id));
+    }
+
+
 }
