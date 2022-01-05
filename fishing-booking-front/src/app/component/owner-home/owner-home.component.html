@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="menu-container">
+      <button class="new-home-button" mat-flat-button color="primary" routerLink="new-home">New Holiday Home</button>
+      <button class="new-home-button" mat-flat-button color="primary" routerLink="/">Calendar</button>
+      <button class="new-home-button" mat-flat-button color="primary" routerLink="/">Reservations</button>
+      <button class="new-home-button" mat-flat-button color="primary" routerLink="/">Free Time</button>
+      <div class="search">
+        <form>
+        <input
+          type="text"
+          class="input"
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          placeholder="Name of the holiday home"
+        />
+        <input
+          class="mag-glass"
+          type="image"
+          [style.opacity]="searchTerm ? 1 : 0.5"
+          [src]="loading ? loadingPath : magGlassPath"
+          (click)="search()"
+        />
+      </form>
+      </div>
+    </div>
+      <app-home-list class="home-list" [homes]="homes"></app-home-list>
+    </div>
+    

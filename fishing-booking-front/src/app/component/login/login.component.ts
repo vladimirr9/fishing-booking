@@ -36,14 +36,17 @@ export class LoginComponent implements OnInit {
       this.storageService.storeTokenData(data.token)
       switch (this.storageService.getRole()) {
         case 'ROLE_FISHING_INSTRUCTOR':
-          this.router.navigateByUrl('/instructor-home')
-          break
+			this.router.navigateByUrl('/instructor-home')
+			break
+        case 'ROLE_HOME_OWNER':
+			this.router.navigateByUrl('/owner-home')
+			break
         case 'ROLE_ADMIN':
-        this.router.navigateByUrl('/admin-home');
-        break;
+			this.router.navigateByUrl('/admin-home')
+			break
         case 'ROLE_CLIENT':
           this.router.navigateByUrl('client-homepage/reservations')
-        break;
+			break;
         default:
           this.router.navigateByUrl('/')
       }

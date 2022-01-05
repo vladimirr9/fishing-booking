@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { InstructorAdventureDTO } from 'src/app/dto/InstructorAdventureDTO';
-import { InstructorAdventureService } from 'src/app/service/instructor-adventure.service';
+import { AdventureService } from 'src/app/service/adventure.service';
 import { FilterComponent } from '../boats/filter/filter.component';
 
 
@@ -15,15 +15,19 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   filteredAdventures: InstructorAdventureDTO[]= [];
   sorterType: string = "";
 
-  constructor(private _instructorAdventureService: InstructorAdventureService) { }
+  constructor(private _adventureService: AdventureService) { }
   
 
   @ViewChild(FilterComponent)
   private filterComponent!: FilterComponent;
 
   ngOnInit(): void {
-    this.adventures = this._instructorAdventureService.getAdventures();
-    this.filteredAdventures = this.adventures;
+    //this.adventures = this._adventureService.getAllAdventures();
+    this._adventureService.getAllAdventures().subscribe((data: InstructorAdventureDTO[])=>{
+      this.adventures = data;
+      this.filteredAdventures = this.adventures;
+    });
+    
   }
 
   ngAfterViewInit(): void {

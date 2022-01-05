@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HolidayHouseDTO } from 'src/app/dto/HolidayHouseDTO';
-import { HolidayHouseService } from 'src/app/service/holiday-house.service';
+import { HolidayHomeService } from 'src/app/service/holiday-home.service';
 import { FilterComponent } from '../boats/filter/filter.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { FilterComponent } from '../boats/filter/filter.component';
 })
 export class HolidayHousesComponent implements OnInit,AfterViewInit {
 
-  constructor(private _holidayHouseService: HolidayHouseService) { }
+  constructor(private _holidayHouseService: HolidayHomeService) { }
  
 
   houses: HolidayHouseDTO[]=[];
@@ -22,8 +22,10 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
 
 
   ngOnInit(): void {
-    this.houses = this._holidayHouseService.getHouses();
-    this.filteredHouses = this.houses;
+    this._holidayHouseService.getAllHomes().subscribe((data: HolidayHouseDTO[])=>{
+      this.houses = data;
+      this.filteredHouses = data;
+    });
   }
 
   ngAfterViewInit(): void {

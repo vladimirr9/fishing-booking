@@ -21,8 +21,12 @@ export class BoatsComponent implements OnInit,AfterViewInit {
   private filterComponent!: FilterComponent;
 
   ngOnInit(): void {
-    this.boats = this._boatService.getBoats();
-    this.filteredBoats = this.boats;
+    //this.boats = this._boatService.getBoats();
+    //this.filteredBoats = this.boats;
+    this._boatService.getBoats().subscribe((data: BoatsDTO[])=>{
+      this.boats = data;
+      this.filteredBoats = this.boats;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -38,7 +42,7 @@ export class BoatsComponent implements OnInit,AfterViewInit {
         this.filteredBoats.sort((a, b) => b.mark - a.mark);
         break;
       case 'location':
-        this.filteredBoats.sort((a, b) => a.adress.localeCompare(b.adress));
+        this.filteredBoats.sort((a, b) => a.address.localeCompare(b.address));
         break;
       default:
 
@@ -52,7 +56,7 @@ export class BoatsComponent implements OnInit,AfterViewInit {
 
   async filterBoats(): Promise<void>{
       this.filteredBoats = this.boats.filter(boat => boat.name.includes(this.filterComponent.filterName));
-      this.filteredBoats = this.filteredBoats.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
+      this.filteredBoats = this.filteredBoats.filter(boat => boat.address.includes(this.filterComponent.filterAdress));
       this.filteredBoats = this.filteredBoats.filter(boat => boat.mark >= this.filterComponent.filterMark);
       this.sortBoats();
   }

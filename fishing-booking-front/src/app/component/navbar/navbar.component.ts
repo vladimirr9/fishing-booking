@@ -27,8 +27,11 @@ export class NavbarComponent implements OnInit {
     switch (role) {
       case "ROLE_FISHING_INSTRUCTOR":
         this.router.navigateByUrl("/instructor-home")
-        break
-      case 'ROLE_ADMIN':
+	      break
+        case "ROLE_HOME_OWNER":
+          this.router.navigateByUrl("/owner-home")
+		  break
+        case 'ROLE_ADMIN':
           this.router.navigateByUrl('/admin-home')
           break
       case 'ROLE_CLIENT':
@@ -44,6 +47,9 @@ export class NavbarComponent implements OnInit {
     switch (role) {
       case "ROLE_FISHING_INSTRUCTOR":
         this.router.navigateByUrl("/instructor-profile")
+        break
+      case "ROLE_HOME_OWNER":
+        this.router.navigateByUrl("/home-owner-profile")
         break
       case 'ROLE_ADMIN':
         this.router.navigateByUrl('/admin-profile')

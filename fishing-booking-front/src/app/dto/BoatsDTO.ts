@@ -1,10 +1,10 @@
 
 export interface BoatsDTO{
+    id: number,
     imageUrl: string,
     name : string,
-    adress: string,
+    address: string,
     description: string,
     mark: number,
-    price: number,
-    freeDates: any
+    price: number
 }

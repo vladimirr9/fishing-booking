@@ -28,7 +28,10 @@ import { AdditionalServiceDialogComponent } from './component/dialog/additional-
 import { InstructorProfileComponent } from './component/profile/instructor-profile/instructor-profile.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { ChangePasswordComponent } from './component/dialog/change-password/change-password.component';
-
+import { OwnerHomeComponent } from './component/owner-home/owner-home.component';
+import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
+import { HomeListComponent } from './component/holiday-home/home-list/home-list.component';
+import { HomeCardComponent } from './component/holiday-home/home-card/home-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './component/client-homepage/homepage/homepage.component';
 import { BoatsComponent } from './component/client-homepage/boats/boats.component';
@@ -39,20 +42,18 @@ import { AdventureViewComponent } from './component/client-homepage/instructors/
 import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
 import { HolidayHousesViewComponent } from './component/client-homepage/holiday-houses/holiday-houses-view/holiday-houses-view.component';
 import { SorterComponent } from './component/client-homepage/sorter/sorter.component';
-
 import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
 import { ChangeFeeDialogComponent } from './component/dialog/change-fee-dialog/change-fee-dialog.component';
+import { HomeOwnerProfileComponent } from './component/profile/home-owner-profile/home-owner-profile.component';
 import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
 import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
 import { ReservationViewComponent } from './component/client-homepage/reservations/reservation-view/reservation-view.component';
 import { ReservationSorterComponent } from './component/client-homepage/reservations/reservation-sorter/reservation-sorter.component';
-
 import {MatSelectModule} from '@angular/material/select';
 import { DeleteAccountComponent } from './component/dialog/delete-account/delete-account.component';
 import { AccountDeletionCardComponent } from './component/account-deletion/account-deletion-card/account-deletion-card.component';
-
 import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
 import { AccountDeletionDialogComponent } from './component/dialog/account-deletion-dialog/account-deletion-dialog.component';
 import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
@@ -83,6 +84,10 @@ import { MaterialModule } from './material/material.module';
     InstructorProfileComponent,
     UserDetailsComponent,
     ChangePasswordComponent,
+    OwnerHomeComponent,
+    NewHomeComponent,
+    HomeListComponent,
+    HomeCardComponent,
     HomepageComponent,
     BoatsComponent,
     ViewComponent,
@@ -96,6 +101,7 @@ import { MaterialModule } from './material/material.module';
     AdminProfileComponent,
     AdminRegistrationComponent,
     ChangeFeeDialogComponent,
+    HomeOwnerProfileComponent,
     ClientProfileComponent,
     ReservationsComponent,
     ReservationViewComponent,

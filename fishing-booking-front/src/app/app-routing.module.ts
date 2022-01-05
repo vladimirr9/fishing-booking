@@ -5,15 +5,16 @@ import { LoginComponent } from './component/login/login.component';
 import { NewAdventureComponent } from './component/adventure/new-adventure/new-adventure.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { AdventureDetailedComponent } from './component/adventure/adventure-detailed/adventure-detailed.component';
-
+import { OwnerHomeComponent } from './component/owner-home/owner-home.component';
+import { NewHomeComponent } from './component/holiday-home/new-home/new-home.component';
 import { BoatsComponent } from './component/client-homepage/boats/boats.component';
 import { InstructorsComponent } from './component/client-homepage/instructors/instructors.component';
 import { HolidayHousesComponent } from './component/client-homepage/holiday-houses/holiday-houses.component';
-
 import { InstructorProfileComponent } from './component/profile/instructor-profile/instructor-profile.component';
 import { AdminHomeComponent } from './component/home/admin-home/admin-home.component';
 import { AdminProfileComponent } from './component/profile/admin-profile/admin-profile.component';
 import { AdminRegistrationComponent } from './component/admin-registration/admin-registration.component';
+import { HomeOwnerProfileComponent } from './component/profile/home-owner-profile/home-owner-profile.component';
 import { ClientProfileComponent } from './component/profile/client-profile/client-profile.component';
 import { ReservationsComponent } from './component/client-homepage/reservations/reservations.component';
 import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
@@ -35,6 +36,10 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'account-deletions', component: AccountDeletionPageComponent },
                          { path: 'adventures/:id/edit', component:  NewAdventureComponent},
                          { path: 'adventures/:id', component:  AdventureDetailedComponent},
+                         { path: 'owner-home', component:  OwnerHomeComponent},
+                         { path: 'owner-home/new-home', component:  NewHomeComponent},
+                         { path: 'holiday-homes/:id/edit', component:  NewHomeComponent},
+                         { path: 'home-owner-profile', component: HomeOwnerProfileComponent },
                          { path: 'client-homepage/boats', component: BoatsComponent},
                          { path: 'client-homepage/instructors', component: InstructorsComponent},
                          { path: 'client-homepage/holiday-houses', component: HolidayHousesComponent},

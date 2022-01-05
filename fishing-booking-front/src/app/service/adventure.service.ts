@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { config } from "src/shared"
+import { InstructorAdventureDTO } from '../dto/InstructorAdventureDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class AdventureService {
 
   constructor(private http: HttpClient) { }
 
+  getAllAdventures(): Observable<InstructorAdventureDTO[]>{
+    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client`);
+  }
 
   deleteAdditionalService(id_adventure: number, id_service : number) {
     return this.http.delete(`${config.baseUrl}${this.adventureURL}/${id_adventure}/additional-services/${id_service}`)

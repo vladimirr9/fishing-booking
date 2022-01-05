@@ -1,0 +1,17 @@
+<mat-card class="container-card">
+    <mat-card-title>{{home.name}}</mat-card-title>
+    <mat-card-subtitle>{{home.homeOwner.firstName}} {{home.homeOwner.lastName}}</mat-card-subtitle>
+    <mat-card-content>
+      <p>{{home.description}}</p>
+    </mat-card-content>
+    <div class="buttons-container">
+      <div class="edit-delete-buttons">
+      <input *ngIf="isHomeOwner()" type="image" class="image" (click)="editHome()"
+          src="assets/img/edit.png">
+      <input *ngIf="isHomeOwner()" type="image" class="image" (click)="deleteHome()"
+          src="assets/img/delete.png">
+      </div>
+    </div>
+  
+  </mat-card>
+  

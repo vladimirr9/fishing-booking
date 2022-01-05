@@ -2,6 +2,7 @@ package com.project.fishingbookingback.dto.mapper;
 
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
+import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.FishingAdventure;
 import org.springframework.stereotype.Component;
@@ -41,5 +42,21 @@ public class AdventureMapper {
                         updateAdventureDTO.getCountry(),
                         updateAdventureDTO.getLatitude(),
                         updateAdventureDTO.getLongitude()));
+    }
+
+    public ClientsAdventureViewDTO toClientAdventureDTO(FishingAdventure adventure) {
+        ClientsAdventureViewDTO returnDto = new ClientsAdventureViewDTO();
+        returnDto.setId(adventure.getId());
+        if(adventure.getPictures().isEmpty())
+            returnDto.setImageUrl("No image");
+        else
+            returnDto.setImageUrl(adventure.getPictures().get(0).getLink());
+        returnDto.setName(adventure.getName());
+        returnDto.setAdress(adventure.getAddress().toString());
+        returnDto.setDescription(adventure.getDescription());
+        returnDto.setInstructorsDescription(adventure.getBiography());
+        returnDto.setMark(0);
+        returnDto.setPrice(adventure.getHourlyPrice());
+        return returnDto;
     }
 }

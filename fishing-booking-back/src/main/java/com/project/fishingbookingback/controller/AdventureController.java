@@ -1,8 +1,10 @@
 package com.project.fishingbookingback.controller;
 
+import ch.qos.logback.core.util.COWArrayList;
 import com.project.fishingbookingback.dto.mapper.AdventureMapper;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
+import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingPromotion;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -68,6 +71,15 @@ public class AdventureController {
     public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername,
                                                                 @RequestParam(required = false) String adventureName) {
         return ResponseEntity.ok(adventureService.getAdventures(instructorUsername, adventureName));
+    }
+
+    @GetMapping(value="/client")
+    public ResponseEntity<List<ClientsAdventureViewDTO>> getClientAdventures(){
+        List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
+        for(FishingAdventure adventure: adventureService.getAllAdventures())
+            clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
+
+        return ResponseEntity.ok(clientsAdventureViewDTOS);
     }
 
     @GetMapping(value = "/{id}")

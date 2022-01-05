@@ -58,6 +58,10 @@ public class AdventureService {
         return adventureRepository.findByFishingInstructorId(instructorUsername, adventureSearch);
     }
 
+    public List<FishingAdventure> getAllAdventures(){
+        return adventureRepository.findAll();
+    }
+
     public void deleteAdventure(Long id) {
         FishingAdventure fishingAdventure = findByID(id);
         checkIfAllowed(fishingAdventure);
