@@ -27,7 +27,11 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-.additional-services, .pictures {
+.additional-services, .pictures, .promotions {
+  display: flex;
+}
+
+.promotion-list {
   display: flex;
 }
 

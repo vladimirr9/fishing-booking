@@ -62,6 +62,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
 import { MaterialModule } from './material/material.module';
+import { PromotionDialogComponent } from './component/dialog/promotion-dialog/promotion-dialog.component';
+import { FishingPromotionCardComponent } from './component/promotion/fishing-promotion-card/fishing-promotion-card.component';
 
 
 
@@ -112,7 +114,9 @@ import { MaterialModule } from './material/material.module';
     AccountDeletionDialogComponent,
     RegistrationRequestPageComponent,
     DenyRegistrationDialogComponent,
-    InstructorCalendarPageComponent
+    InstructorCalendarPageComponent,
+    PromotionDialogComponent,
+    FishingPromotionCardComponent
   ],
   imports: [
     BrowserModule,

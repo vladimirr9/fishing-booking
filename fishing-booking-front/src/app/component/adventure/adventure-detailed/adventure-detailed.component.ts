@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/service/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
 import { AdditionalServiceDialogComponent } from '../../dialog/additional-service-dialog/additional-service-dialog.component';
+import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
+import { FishingPromotion } from 'src/app/model/FishingPromotion';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class AdventureDetailedComponent implements OnInit {
   map!: Map
   services: any
   pictures: any
+  promotions!: FishingPromotion[]
   finishedLoading = false
   constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog) { }
 
@@ -39,6 +42,9 @@ export class AdventureDetailedComponent implements OnInit {
 
 
       this.finishedLoading = true
+    })
+    this.adventureService.getPromotions(this.id).subscribe((data) => {
+      this.promotions = data
     })
   }
 
@@ -82,6 +88,28 @@ export class AdventureDetailedComponent implements OnInit {
     );
   }
 
+  addPromotion() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(PromotionDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.adventureService.postPromotion(this.id,data).subscribe((result:any) => {
+            this.adventureService.getPromotions(this.id).subscribe((data) => {
+              this.promotions = data;
+            })
+          })
+        }
+      }
+    );
+  }
+
 
   removeService(additionalService : any) {
     this.adventureService.deleteAdditionalService(this.id, additionalService.id).subscribe((data) => {
@@ -98,6 +126,12 @@ export class AdventureDetailedComponent implements OnInit {
         this.pictures.splice(index, 1);
       }
     })
+  }
+  deletePromotion(fishingPromotion : FishingPromotion) {
+    let index = this.promotions.indexOf(fishingPromotion)
+    if (index !== -1) {
+      this.promotions.splice(index, 1);
+    }
   }
 
 
