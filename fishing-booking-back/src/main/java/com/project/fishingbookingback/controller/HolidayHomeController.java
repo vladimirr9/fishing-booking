@@ -11,6 +11,7 @@ import com.project.fishingbookingback.service.HolidayHomeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -53,6 +54,7 @@ public class HolidayHomeController {
         return ResponseEntity.ok(holidayHomeService.getHolidayHomes(homeOwnerUsername, holidayHomeName));
     }
 
+    @Transactional
     @GetMapping(value = "/client")
     public ResponseEntity<List<ClientsHolidayHomeDTO>> getAllHolidayHomes() {
         List<ClientsHolidayHomeDTO> clientsHolidayHomeDTOs = new ArrayList<>();

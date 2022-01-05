@@ -22,7 +22,7 @@
                 <li class="card-item">Duration: {{reservation.durationInHours}}h</li>
               </ul>
             </mat-card-subtitle>
-            <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+            <img mat-card-xl-image src="{{reservation.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
           </mat-card-title-group>
         </mat-card>
       </mat-grid-tile>

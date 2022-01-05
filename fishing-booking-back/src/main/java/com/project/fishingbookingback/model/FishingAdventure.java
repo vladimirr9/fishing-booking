@@ -18,7 +18,7 @@ public class FishingAdventure {
     private String description;
     private String biography;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "adventure_pictures",
             joinColumns = {@JoinColumn(name = "adventure_id")},

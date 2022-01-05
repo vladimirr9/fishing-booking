@@ -4,6 +4,7 @@ import com.project.fishingbookingback.dto.mapper.ReservationMapper;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.service.ReservationService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class ReservationController {
     }
 
     @GetMapping
+    @Transactional
     public List<ReservationDTO> getAll(){
         List<ReservationDTO> reservationDTOS = new ArrayList<>();
         for(Reservation reservation: reservationService.getAll())

@@ -5,6 +5,7 @@ import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
 import com.project.fishingbookingback.model.Boat;
 import com.project.fishingbookingback.service.BoatService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class BoatController {
         this.boatMapper = boatMapper;
     }
 
+    @Transactional
     @GetMapping(value="/client")
     public ResponseEntity<List<ClientsBoatViewDTO>> getBoats(){
         List<ClientsBoatViewDTO> boatViewDTOs = new ArrayList<>();

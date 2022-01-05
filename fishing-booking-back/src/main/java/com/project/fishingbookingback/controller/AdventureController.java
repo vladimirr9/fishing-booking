@@ -13,6 +13,7 @@ import com.project.fishingbookingback.service.AdventureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,6 +73,7 @@ public class AdventureController {
         return ResponseEntity.ok(adventureService.getAdventures(instructorUsername, adventureName));
     }
 
+    @Transactional
     @GetMapping(value = "/client")
     public ResponseEntity<List<ClientsAdventureViewDTO>> getClientAdventures() {
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
