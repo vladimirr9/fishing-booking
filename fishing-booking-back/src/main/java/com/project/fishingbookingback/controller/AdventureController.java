@@ -1,6 +1,5 @@
 package com.project.fishingbookingback.controller;
 
-import ch.qos.logback.core.util.COWArrayList;
 import com.project.fishingbookingback.dto.mapper.AdventureMapper;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
@@ -73,10 +72,10 @@ public class AdventureController {
         return ResponseEntity.ok(adventureService.getAdventures(instructorUsername, adventureName));
     }
 
-    @GetMapping(value="/client")
-    public ResponseEntity<List<ClientsAdventureViewDTO>> getClientAdventures(){
+    @GetMapping(value = "/client")
+    public ResponseEntity<List<ClientsAdventureViewDTO>> getClientAdventures() {
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
-        for(FishingAdventure adventure: adventureService.getAllAdventures())
+        for (FishingAdventure adventure : adventureService.getAllAdventures())
             clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
 
         return ResponseEntity.ok(clientsAdventureViewDTOS);
