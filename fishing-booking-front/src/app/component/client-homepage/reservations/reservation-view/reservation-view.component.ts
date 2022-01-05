@@ -14,4 +14,7 @@ export class ReservationViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showTime(startDate: Date): string{
+    return (new Date(startDate).toLocaleTimeString());
+  }
 }

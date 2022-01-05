@@ -2,6 +2,7 @@ package com.project.fishingbookingback.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class AdventureReservation extends Reservation {
@@ -12,8 +13,8 @@ public class AdventureReservation extends Reservation {
     public AdventureReservation() {
     }
 
-    public AdventureReservation(LocalDate startDate, int durationInHours, double mark, FishingAdventure adventure) {
-        super(startDate, durationInHours, mark);
+    public AdventureReservation(Long id, LocalDateTime startDate, int durationInHours, double mark, double price, FishingAdventure adventure) {
+        super(id, startDate, durationInHours, mark, price);
         this.adventure = adventure;
     }
 

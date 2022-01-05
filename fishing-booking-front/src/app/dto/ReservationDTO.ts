@@ -5,5 +5,5 @@ export interface ReservationDTO {
     price: number,
     durationInHours: number,
     mark: number,
-    adress: string
+    address: string
   }
