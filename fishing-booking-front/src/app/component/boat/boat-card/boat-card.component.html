@@ -1,0 +1,17 @@
+<mat-card class="container-card">
+    <mat-card-title>{{boat.name}}</mat-card-title>
+    <mat-card-subtitle>{{boat.boatOwner.firstName}} {{boat.boatOwner.lastName}}</mat-card-subtitle>
+    <mat-card-content>
+      <p>{{boat.description}}</p>
+    </mat-card-content>
+    <div class="buttons-container">
+      <div class="edit-delete-buttons">
+      <input *ngIf="isBoatOwner()" type="image" class="image" (click)="editBoat()"
+          src="assets/img/edit.png">
+      <input *ngIf="isBoatOwner()" type="image" class="image" (click)="deleteBoat()"
+          src="assets/img/delete.png">
+      </div>
+    </div>
+  
+  </mat-card>
+  

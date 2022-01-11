@@ -1,7 +1,9 @@
 package com.project.fishingbookingback.dto.mapper;
 
 
+import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
+import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Boat;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +22,35 @@ public class BoatMapper {
         boatViewDTO.setMark(0);
         boatViewDTO.setPrice(boat.getPricePerDay());
         return boatViewDTO;
+    }
+
+    public Boat toModel(NewBoatDTO dto) {
+        return new Boat(
+                dto.getName(),
+                dto.getType(),
+                dto.getLength(),
+                dto.getEngineNumber(),
+                dto.getEnginePower(),
+                dto.getMaxSpeed(),
+                dto.getGps(),
+                dto.getRadar(),
+                dto.getVhf(),
+                dto.getFishfinder(),
+                dto.getCabin(),
+                new Address(
+                        dto.getStreetAndNumber(),
+                        dto.getCity(),
+                        dto.getCountry(),
+                        dto.getLatitude(),
+                        dto.getLongitude()
+                ),
+                dto.getDescription(),
+                dto.getCapacity(),
+                dto.getRulesOfConduct(),
+                dto.getAdditionalInfo(),
+                dto.getFishingEquipment(),
+                dto.getCancellationFeePercentage(),
+                dto.getPricePerDay()
+        );
     }
 }

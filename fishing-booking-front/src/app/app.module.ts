@@ -64,6 +64,11 @@ import { InstructorCalendarPageComponent } from './component/home/instructor-hom
 import { MaterialModule } from './material/material.module';
 import { PromotionDialogComponent } from './component/dialog/promotion-dialog/promotion-dialog.component';
 import { FishingPromotionCardComponent } from './component/promotion/fishing-promotion-card/fishing-promotion-card.component';
+import { BoatOwnerHomeComponent } from './component/home/boat-owner-home/boat-owner-home.component';
+import { BoatListComponent } from './component/boat/boat-list/boat-list.component';
+import { BoatCardComponent } from './component/boat/boat-card/boat-card.component';
+import { NewBoatComponent } from './component/boat/new-boat/new-boat.component';
+import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profile/boat-owner-profile.component';
 
 
 
@@ -116,7 +121,12 @@ import { FishingPromotionCardComponent } from './component/promotion/fishing-pro
     DenyRegistrationDialogComponent,
     InstructorCalendarPageComponent,
     PromotionDialogComponent,
-    FishingPromotionCardComponent
+    FishingPromotionCardComponent,
+    BoatOwnerHomeComponent,
+    BoatListComponent,
+    BoatCardComponent,
+    NewBoatComponent,
+    BoatOwnerProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -27,9 +27,7 @@ public class NewHolidayHomeDTO {
     private int roomsPerHome;
     @NotNull
     private int bedsPerRoom;
-    @NotBlank
     private String rulesOfConduct;
-    @NotBlank
     private String additionalInfo;
 
     public String getName() {
