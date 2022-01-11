@@ -8,6 +8,9 @@ import java.util.Set;
 
 @Entity
 public class Boat {
+    public Boat() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,14 +37,14 @@ public class Boat {
     private BoatOwner boatOwner;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "exterior_pictures",
+            name = "boat_exterior_pictures",
             joinColumns = {@JoinColumn(name = "boat_id")},
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
     private List<Picture> exterior;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "interior_pictures",
+            name = "boat_interior_pictures",
             joinColumns = {@JoinColumn(name = "boat_id")},
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
@@ -60,6 +63,28 @@ public class Boat {
     private String fishingEquipment;
     private Float cancellationFeePercentage;
     private Float pricePerDay;
+
+    public Boat(String name, String type, Float length, int engineNumber, Float enginePower, Float maxSpeed, Boolean gps, Boolean radar, Boolean vhf, Boolean fishfinder, Boolean cabin, Address address, String description, int capacity, String rulesOfConduct, String additionalInfo, String fishingEquipment, Float cancellationFeePercentage, Float pricePerDay) {
+        this.name = name;
+        this.type = type;
+        this.length = length;
+        this.engineNumber = engineNumber;
+        this.enginePower = enginePower;
+        this.maxSpeed = maxSpeed;
+        this.gps = gps;
+        this.radar = radar;
+        this.vhf = vhf;
+        this.fishfinder = fishfinder;
+        this.cabin = cabin;
+        this.address = address;
+        this.description = description;
+        this.capacity = capacity;
+        this.rulesOfConduct = rulesOfConduct;
+        this.additionalInfo = additionalInfo;
+        this.fishingEquipment = fishingEquipment;
+        this.cancellationFeePercentage = cancellationFeePercentage;
+        this.pricePerDay = pricePerDay;
+    }
 
     public Float getPricePerDay() {
         return pricePerDay;
@@ -259,5 +284,13 @@ public class Boat {
 
     public void setCancellationFeePercentage(Float cancellationFeePercentage) {
         this.cancellationFeePercentage = cancellationFeePercentage;
+    }
+
+    public void addPicture(Boolean is_interior, Picture picture) {
+        if (is_interior) {
+            interior.add(picture);
+        } else {
+            exterior.add(picture);
+        }
     }
 }

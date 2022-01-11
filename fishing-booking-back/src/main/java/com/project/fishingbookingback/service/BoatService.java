@@ -1,6 +1,9 @@
 package com.project.fishingbookingback.service;
 
-import com.project.fishingbookingback.model.Boat;
+import com.project.fishingbookingback.dto.request.NewBoatDTO;
+import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.exception.NotAllowedException;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +13,88 @@ import java.util.List;
 public class BoatService {
 
     private final BoatRepository boatRepository;
+    private final UserService userService;
+    private final LoggedUserService loggedUserService;
 
-    public BoatService(BoatRepository boatRepository) {
+    public BoatService(BoatRepository boatRepository, UserService userService, LoggedUserService loggedUserService) {
         this.boatRepository = boatRepository;
+        this.userService = userService;
+        this.loggedUserService = loggedUserService;
     }
 
     public List<Boat> getAll(){
         return boatRepository.findAll();
     }
+
+    public List<Boat> getBoatsForOwner(String ownerUsername, String search) {
+        String boatSearch = search == null ? "" : search;
+        return boatRepository.findByOwnerId(ownerUsername, boatSearch);
+    }
+
+    public Boat create(Boat boat) {
+        BoatOwner boatOwner = (BoatOwner) userService.findByEmail(loggedUserService.getUsername());
+        boat.setBoatOwner(boatOwner);
+        return boatRepository.save(boat);
+    }
+
+
+    public Boat findByID(Long id) {
+        return boatRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Boat.class.getSimpleName()));
+    }
+
+    public Boat update(long id, NewBoatDTO dto) {
+        Boat boat = boatRepository.getById(id);
+        boat.setName(dto.getName());
+        boat.setAddress(new Address(dto.getStreetAndNumber(),
+                dto.getCity(),
+                dto.getCountry(),
+                dto.getLatitude(),
+                dto.getLongitude()));
+        boat.setDescription(dto.getDescription());
+        boat.setRulesOfConduct(dto.getRulesOfConduct());
+        boat.setAdditionalInfo(dto.getAdditionalInfo());
+        boat.setCabin(dto.getCabin());
+        boat.setCancellationFeePercentage(dto.getCancellationFeePercentage());
+        boat.setCapacity(dto.getCapacity());
+        boat.setEngineNumber(dto.getEngineNumber());
+        boat.setEnginePower(dto.getEnginePower());
+        boat.setFishfinder(dto.getFishfinder());
+        boat.setFishingEquipment(dto.getFishingEquipment());
+        boat.setVhf(dto.getVhf());
+        boat.setGps(dto.getGps());
+        boat.setRadar(dto.getRadar());
+        boat.setPricePerDay(dto.getPricePerDay());
+        boat.setType(dto.getType());
+        boat.setLength(dto.getLength());
+        boat.setMaxSpeed(dto.getMaxSpeed());
+        return boatRepository.save(boat);
+    }
+
+    public void deleteBoat(Long id) {
+        Boat boat = boatRepository.getById(id);
+        checkIfAllowed(boat);
+        boatRepository.deleteById(id);
+    }
+
+    public void deletePicture(Long id, Long id_picture, Boolean is_interior) {
+        Boat boat = findByID(id);
+        checkIfAllowed(boat);
+        (is_interior ? boat.getInterior() : boat.getExterior()).removeIf(picture -> picture.getId().equals(id_picture));
+        boatRepository.save(boat);
+    }
+
+    private void checkIfAllowed(Boat boat) {
+        String username = loggedUserService.getUsername();
+        if (!username.equals(boat.getBoatOwner().getEmail())) {
+            throw new NotAllowedException();
+        }
+    }
+
+    public Boat addPicture(Long id, Boolean is_interior, Picture picture) {
+        Boat boat = findByID(id);
+        checkIfAllowed(boat);
+        boat.addPicture(is_interior, picture);
+        return boatRepository.save(boat);
+    }
+
 }
