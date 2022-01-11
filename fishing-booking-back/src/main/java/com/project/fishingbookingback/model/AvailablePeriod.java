@@ -76,4 +76,8 @@ public class AvailablePeriod {
         return toTime;
     }
 
+    public boolean overlaps(LocalDateTime time){
+        return time.isAfter(fromTime) && time.isBefore(toTime);
+    }
+
 }

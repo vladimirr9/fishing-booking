@@ -10,6 +10,7 @@ import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.model.Promotion;
 import com.project.fishingbookingback.service.AdventureService;
+import com.project.fishingbookingback.service.AvailableAdventureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +35,12 @@ import java.util.List;
 public class AdventureController {
     private AdventureService adventureService;
     private AdventureMapper adventureMapper;
+    private final AvailableAdventureService availableAdventureService;
 
-    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper) {
+    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper, AvailableAdventureService availableAdventureService) {
         this.adventureService = adventureService;
         this.adventureMapper = adventureMapper;
+        this.availableAdventureService = availableAdventureService;
     }
 
     @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
@@ -80,6 +84,14 @@ public class AdventureController {
         for (FishingAdventure adventure : adventureService.getAllAdventures())
             clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
 
+        return ResponseEntity.ok(clientsAdventureViewDTOS);
+    }
+
+    @GetMapping(value="/client/freePeriods")
+    public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(LocalDateTime from,LocalDateTime to){
+        List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
+        for (FishingAdventure adventure : availableAdventureService.getAvailableAdventures(from,to))
+            clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
         return ResponseEntity.ok(clientsAdventureViewDTOS);
     }
 

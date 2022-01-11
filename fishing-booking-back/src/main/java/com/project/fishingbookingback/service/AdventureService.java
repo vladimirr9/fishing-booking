@@ -2,14 +2,7 @@ package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.AdditionalService;
-import com.project.fishingbookingback.model.FishingAdventure;
-import com.project.fishingbookingback.model.FishingInstructor;
-import com.project.fishingbookingback.model.FishingPromotion;
-import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +54,8 @@ public class AdventureService {
     public List<FishingAdventure> getAllAdventures(){
         return adventureRepository.findAll();
     }
+
+
 
     public void deleteAdventure(Long id) {
         FishingAdventure fishingAdventure = findByID(id);

@@ -56,6 +56,7 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   }
 
   async filterAdventures(): Promise<void>{
+    //this._adventureService.getAvailableAdventures()
     this.filteredAdventures = this.adventures.filter(boat => boat.name.includes(this.filterComponent.filterName));
     this.filteredAdventures = this.filteredAdventures.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
     this.filteredAdventures = this.filteredAdventures.filter(boat => boat.mark >= this.filterComponent.filterMark);

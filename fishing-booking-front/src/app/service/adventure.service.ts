@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { config } from "src/shared"
@@ -22,6 +22,11 @@ export class AdventureService {
 
   getAllAdventures(): Observable<InstructorAdventureDTO[]>{
     return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client`);
+  }
+
+  getAvailableAdventures(from: Date,to: Date): Observable<InstructorAdventureDTO[]>{
+    //add
+    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client/freePeriods`); 
   }
 
   deleteAdditionalService(id_adventure: number, id_service : number) {
