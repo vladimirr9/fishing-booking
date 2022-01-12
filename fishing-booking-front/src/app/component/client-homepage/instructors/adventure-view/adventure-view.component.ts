@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InstructorAdventureDTO } from 'src/app/dto/InstructorAdventureDTO';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adventure-view',
@@ -8,10 +9,14 @@ import { InstructorAdventureDTO } from 'src/app/dto/InstructorAdventureDTO';
 })
 export class AdventureViewComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   @Input() adventures: InstructorAdventureDTO[]=[];
   ngOnInit(): void {
   }
+  
+  viewDetails(id: number): void{
+    this.router.navigateByUrl(`adventures/${id}`)
+  } 
 
 }
