@@ -64,7 +64,7 @@ public abstract class Reservation {
     public void setDurationInHours(int durationInHours) {
         this.durationInHours = durationInHours;
     }
-    
+
 
     public void setApproved(boolean approved) {
         this.approved = approved;

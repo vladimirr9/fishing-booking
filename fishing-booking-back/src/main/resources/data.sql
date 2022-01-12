@@ -26,5 +26,5 @@ INSERT INTO fishing_adventure(id,available_equipment,biography,cancellation_fee,
 VALUES (2,'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15, 'Tons of fun for the whole family', 450, 5, 'Canyon Rock', 'You must stay with me, the instructor, the entire duration of the trip', 3,3);
 
 --RESERVATIONS
-INSERT INTO ADVENTURE_RESERVATION (id,duration_in_hours,mark,start_date,price,approved,adventure_id)
-VALUES(1,2,3.4,'2012-09-17 18:47:52.69',200,1,1)
+INSERT INTO ADVENTURE_RESERVATION (id,duration_in_hours,start_date,price,approved,adventure_id)
+VALUES(1,2,'2012-09-17 18:47:52.69',200,1,1)
