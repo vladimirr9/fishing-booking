@@ -13,18 +13,16 @@ public abstract class Reservation {
     private Long id;
     private LocalDateTime startDate;
     private int durationInHours;
-    private double mark;
     private double price;
 
 
     public Reservation() {
     }
 
-    public Reservation(Long id, LocalDateTime startDate, int durationInHours, double mark, double price) {
+    public Reservation(Long id, LocalDateTime startDate, int durationInHours, double price) {
         this.id = id;
         this.startDate = startDate;
         this.durationInHours = durationInHours;
-        this.mark = mark;
         this.price = price;
     }
 
@@ -60,11 +58,4 @@ public abstract class Reservation {
         this.durationInHours = durationInHours;
     }
 
-    public double getMark() {
-        return mark;
-    }
-
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
 }

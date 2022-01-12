@@ -13,8 +13,8 @@ public class AdventureReservation extends Reservation {
     public AdventureReservation() {
     }
 
-    public AdventureReservation(Long id, LocalDateTime startDate, int durationInHours, double mark, double price, FishingAdventure adventure) {
-        super(id, startDate, durationInHours, mark, price);
+    public AdventureReservation(Long id, LocalDateTime startDate, int durationInHours,  double price, FishingAdventure adventure) {
+        super(id, startDate, durationInHours, price);
         this.adventure = adventure;
     }
 

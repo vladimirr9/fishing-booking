@@ -13,7 +13,7 @@ public class HolidayHomeReservation extends Reservation{
     private HolidayHome holidayHome;
 
     public HolidayHomeReservation(Long id, LocalDateTime startDate, int durationInHours, double mark, double price, HolidayHome holidayHome) {
-        super(id, startDate, durationInHours, mark, price);
+        super(id, startDate, durationInHours,  price);
         this.holidayHome = holidayHome;
     }
 
