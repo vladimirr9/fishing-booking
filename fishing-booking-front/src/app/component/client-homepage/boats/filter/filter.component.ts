@@ -10,8 +10,8 @@ export class FilterComponent implements OnInit {
   filterName: string = "";
   filterAdress: string = "";
   filterMark: number=0;
-  filterStartDate: Date = new Date();
-  filterEndDate: Date = new Date();
+  // filterStartDate: Date = new Date();
+  // filterEndDate: Date = new Date();
 
   constructor() { }
 

@@ -17,6 +17,15 @@
 
 <div class="filterArea">
         <app-filter></app-filter>
+        <mat-form-field style="margin-left: 10px;" appearance="fill" class="field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="filterStartDate"  placeholder="Start date">
+              <input matEndDate [(ngModel)]="filterEndDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
         <button mat-raised-button class="filterBtn" color="primary" (click)="filterReservations()" >Filter</button>
         <app-reservation-sorter (sortingEvent)="setSorter($event)"></app-reservation-sorter>
 </div>

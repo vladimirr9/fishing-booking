@@ -2,6 +2,16 @@
 <div class="filterArea">
     <app-filter></app-filter>
     <button mat-raised-button class="filterBtn" color="primary" (click)="filterAdventures()" >Filter</button>
+    <mat-form-field appearance="fill" class="field">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate [(ngModel)]="searchStartDate"  placeholder="Start date">
+          <input matEndDate [(ngModel)]="searchEndDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button mat-raised-button class="filterBtn" color="primary" (click)="searchAdventures()" >Search</button>
     <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
 </div>
 <div class="viewArea">

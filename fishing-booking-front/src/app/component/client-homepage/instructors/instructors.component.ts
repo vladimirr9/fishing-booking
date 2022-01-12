@@ -14,6 +14,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   adventures: InstructorAdventureDTO[]= [];
   filteredAdventures: InstructorAdventureDTO[]= [];
   sorterType: string = "";
+  searchStartDate: Date = new Date();
+  searchEndDate: Date = new Date();
 
   constructor(private _adventureService: AdventureService) { }
   
@@ -56,10 +58,15 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   }
 
   async filterAdventures(): Promise<void>{
-    //this._adventureService.getAvailableAdventures()
-    this.filteredAdventures = this.adventures.filter(boat => boat.name.includes(this.filterComponent.filterName));
-    this.filteredAdventures = this.filteredAdventures.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
-    this.filteredAdventures = this.filteredAdventures.filter(boat => boat.mark >= this.filterComponent.filterMark);
+    this.filteredAdventures = this.adventures.filter(adventure => adventure.name.includes(this.filterComponent.filterName));
+    this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.adress.includes(this.filterComponent.filterAdress));
+    this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.mark >= this.filterComponent.filterMark);
     this.sortAdventures();
-}
+  }
+
+  searchAdventures(): void{
+
+  }
+
+
 }

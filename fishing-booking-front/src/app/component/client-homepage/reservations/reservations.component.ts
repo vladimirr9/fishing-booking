@@ -17,6 +17,8 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
   reservations: ReservationDTO[] = [];
   filteredReservations: ReservationDTO[] = [];
   sorterType: string = "";
+  filterStartDate: Date = new Date();
+  filterEndDate: Date = new Date();
 
   @ViewChild(FilterComponent)
   private filterComponent!: FilterComponent;
@@ -54,7 +56,7 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
   }
 
   async filterReservations(): Promise<void>{
-      this.filteredReservations = this.reservations.filter(boat =>boat.startDate.getTime() >= this.filterComponent.filterStartDate.getTime() && boat.startDate.getTime() <= this.filterComponent.filterEndDate.getTime());
+      this.filteredReservations = this.reservations.filter(boat => new Date(boat.startDate).getTime() >= this.filterStartDate.getTime() && new Date(boat.startDate).getTime() <= this.filterEndDate.getTime());
       this.filteredReservations = this.filteredReservations.filter(boat => boat.name.includes(this.filterComponent.filterName));
       this.filteredReservations = this.filteredReservations.filter(boat => boat.address.includes(this.filterComponent.filterAdress));
       this.filteredReservations = this.filteredReservations.filter(boat => boat.mark >= this.filterComponent.filterMark);

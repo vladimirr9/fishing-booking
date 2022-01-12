@@ -16,6 +16,8 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
   houses: HolidayHouseDTO[]=[];
   filteredHouses: HolidayHouseDTO[] = [];
   sorterType: string = "";
+  searchStartDate: Date = new Date();
+  searchEndDate: Date = new Date();
 
   @ViewChild(FilterComponent)
   private filterComponent!: FilterComponent;
@@ -58,6 +60,10 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
       this.filteredHouses = this.filteredHouses.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
       this.filteredHouses = this.filteredHouses.filter(boat => boat.mark >= this.filterComponent.filterMark);
       this.sortHouses();
+  }
+
+  searchHouses(): void{
+    
   }
   
 

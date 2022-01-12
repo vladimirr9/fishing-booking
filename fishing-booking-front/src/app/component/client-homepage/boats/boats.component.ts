@@ -15,6 +15,9 @@ export class BoatsComponent implements OnInit,AfterViewInit {
   boats: BoatsDTO[]= [];
   filteredBoats: BoatsDTO[]= [];
   sorterType: string = "";
+  searchStartDate: Date = new Date();
+  searchEndDate: Date = new Date();
+
 
 
   @ViewChild(FilterComponent)
@@ -60,6 +63,11 @@ export class BoatsComponent implements OnInit,AfterViewInit {
       this.filteredBoats = this.filteredBoats.filter(boat => boat.mark >= this.filterComponent.filterMark);
       this.sortBoats();
   }
+
+  searchBoats(): void{
+    
+  }
+
 
   
 }
