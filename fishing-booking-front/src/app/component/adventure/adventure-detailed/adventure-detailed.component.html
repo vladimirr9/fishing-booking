@@ -1,5 +1,5 @@
 <div class="container" >
-  <h1 class="title">{{adventure.name}}</h1>
+  <h1 class="title">{{adventure.name}} <button mat-raised-button class="reservationButton" color="primary" (click)="reserve()" *ngIf="isClient()" >Filter</button> </h1>
   <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
   <h2>Hourly Price: {{adventure.hourlyPrice}}RSD</h2>
   <div>Cancellation Fee:{{adventure.cancellationFee}}%</div>

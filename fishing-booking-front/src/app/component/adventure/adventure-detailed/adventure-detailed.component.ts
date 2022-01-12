@@ -13,6 +13,7 @@ import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dial
 import { AdditionalServiceDialogComponent } from '../../dialog/additional-service-dialog/additional-service-dialog.component';
 import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
 import { FishingPromotion } from 'src/app/model/FishingPromotion';
+import { StorageService } from 'src/app/service/storage.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AdventureDetailedComponent implements OnInit {
   pictures: any
   promotions!: FishingPromotion[]
   finishedLoading = false
-  constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.initMap(19.7245, 45.2889)
@@ -46,6 +47,14 @@ export class AdventureDetailedComponent implements OnInit {
     this.adventureService.getPromotions(this.id).subscribe((data) => {
       this.promotions = data
     })
+  }
+
+  isClient(): boolean{
+    return this.storageService.getRole() == 'ROLE_CLIENT';
+  }
+
+  reserve(): void{
+    
   }
 
   addPicture() {
