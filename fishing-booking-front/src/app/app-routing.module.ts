@@ -20,6 +20,9 @@ import { ReservationsComponent } from './component/client-homepage/reservations/
 import { AccountDeletionPageComponent } from './component/account-deletion/account-deletion-page/account-deletion-page.component';
 import { RegistrationRequestPageComponent } from './component/registration-request-page/registration-request-page.component';
 import { InstructorCalendarPageComponent } from './component/home/instructor-home/instructor-calendar-page/instructor-calendar-page.component';
+import { BoatOwnerHomeComponent } from './component/home/boat-owner-home/boat-owner-home.component';
+import { NewBoatComponent } from './component/boat/new-boat/new-boat.component';
+import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profile/boat-owner-profile.component';
 
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
@@ -43,7 +46,11 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'client-homepage/boats', component: BoatsComponent},
                          { path: 'client-homepage/instructors', component: InstructorsComponent},
                          { path: 'client-homepage/holiday-houses', component: HolidayHousesComponent},
-                         { path: 'client-homepage/reservations', component: ReservationsComponent}
+                         { path: 'client-homepage/reservations', component: ReservationsComponent},
+                         { path: 'boat-owner-home', component:  BoatOwnerHomeComponent},
+                         { path: 'boat-owner-home/new-boat', component:  NewBoatComponent},
+                         { path: 'boats/:id/edit', component:  NewBoatComponent},
+                         { path: 'boat-owner-profile', component: BoatOwnerProfileComponent }
                         ];
 
 @NgModule({

@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="menu-container">
+      <button class="menu-button" mat-flat-button color="primary" routerLink="new-boat">New Boat</button>
+      <button class="menu-button" mat-flat-button color="primary" routerLink="calendar">Calendar</button>
+      <button class="menu-button" mat-flat-button color="primary">Reservations</button>
+      <button class="menu-button" mat-flat-button color="primary">Free Time</button>
+    
+      <div class="search">
+        <form>
+        <input
+          type="text"
+          class="input"
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          placeholder="Name of the boat"
+        />
+        <input
+          class="mag-glass"
+          type="image"
+          [style.opacity]="searchTerm ? 1 : 0.5"
+          [src]="loading ? loadingPath : magGlassPath"
+          (click)="search()"
+        />
+      </form>
+      </div>
+    </div>
+      <app-boat-list class="boat-list" [boats]="boats"></app-boat-list>
+    </div>
+    

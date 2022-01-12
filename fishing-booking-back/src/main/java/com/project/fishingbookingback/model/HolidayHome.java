@@ -25,14 +25,14 @@ public class HolidayHome {
     private String description;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "exterior_pictures",
+            name = "holiday_home_exterior_pictures",
             joinColumns = {@JoinColumn(name = "holiday_home_id")},
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
     private List<Picture> exterior;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "interior_pictures",
+            name = "holiday_home_interior_pictures",
             joinColumns = {@JoinColumn(name = "holiday_home_id")},
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
