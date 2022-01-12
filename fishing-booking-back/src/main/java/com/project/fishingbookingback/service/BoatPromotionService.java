@@ -21,8 +21,8 @@ public class BoatPromotionService {
     }
 
 
-    public BoatPromotion addPromotion(BoatPromotion fishingPromotion) {
-        return repository.save(fishingPromotion);
+    public BoatPromotion addPromotion(BoatPromotion boatPromotion) {
+        return repository.save(boatPromotion);
     }
 
     public void deletePromotion(Long id_promotion) {
