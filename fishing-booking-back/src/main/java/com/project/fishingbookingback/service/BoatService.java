@@ -15,11 +15,13 @@ public class BoatService {
     private final BoatRepository boatRepository;
     private final UserService userService;
     private final LoggedUserService loggedUserService;
+    private final BoatPromotionService boatPromotionService;
 
-    public BoatService(BoatRepository boatRepository, UserService userService, LoggedUserService loggedUserService) {
+    public BoatService(BoatRepository boatRepository, UserService userService, LoggedUserService loggedUserService, BoatPromotionService boatPromotionService) {
         this.boatRepository = boatRepository;
         this.userService = userService;
         this.loggedUserService = loggedUserService;
+        this.boatPromotionService = boatPromotionService;
     }
 
     public List<Boat> getAll(){
@@ -95,6 +97,23 @@ public class BoatService {
         checkIfAllowed(boat);
         boat.addPicture(is_interior, picture);
         return boatRepository.save(boat);
+    }
+
+    public BoatPromotion addPromotion(Long id, Promotion promotion) {
+        Boat boat = findByID(id);
+        checkIfAllowed(boat);
+        BoatPromotion boatPromotion = new BoatPromotion(promotion.getFromTime(), promotion.getToTime(), promotion.getPrice(), promotion.getValidUntil(), boat);
+        return boatPromotionService.addPromotion(boatPromotion);
+    }
+
+    public void deletePromotion(Long id, Long id_promotion) {
+        Boat boat = findByID(id);
+        checkIfAllowed(boat);
+        boatPromotionService.deletePromotion(id_promotion);
+    }
+
+    public List<BoatPromotion> getPromotions(Long id) {
+        return boatPromotionService.getPromotions(id);
     }
 
 }

@@ -3,10 +3,7 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.HolidayHomeMapper;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.dto.response.ClientsHolidayHomeDTO;
-import com.project.fishingbookingback.model.AdditionalService;
-import com.project.fishingbookingback.model.FishingAdventure;
-import com.project.fishingbookingback.model.HolidayHome;
-import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.HolidayHomeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +76,22 @@ public class HolidayHomeController {
     public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture, @PathVariable Boolean is_interior) {
         holidayHomeService.deletePicture(id, id_picture, is_interior);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/{id}/promotions")
+    public ResponseEntity<HolidayHomePromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.addPromotion(id, promotion));
+    }
+
+    @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
+    public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
+        holidayHomeService.deletePromotion(id, id_promotion);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/promotions")
+    public ResponseEntity<List<HolidayHomePromotion>> getPromotions(@PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.getPromotions(id));
     }
 
 
