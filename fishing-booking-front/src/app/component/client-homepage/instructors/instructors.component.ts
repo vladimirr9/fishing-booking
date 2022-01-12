@@ -65,7 +65,9 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   }
 
   searchAdventures(): void{
-
+    this._adventureService.getAvailableAdventures(this.searchStartDate,this.searchEndDate).subscribe((data: InstructorAdventureDTO[])=>{
+      this.filteredAdventures = data;
+    });
   }
 
 

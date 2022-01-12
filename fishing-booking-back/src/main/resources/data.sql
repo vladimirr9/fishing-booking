@@ -27,4 +27,12 @@ VALUES (2,'Everything you will need will be provided to you', 'I''m a seasoned v
 
 --RESERVATIONS
 INSERT INTO ADVENTURE_RESERVATION (id,duration_in_hours,start_date,price,approved,adventure_id)
-VALUES(1,2,'2012-09-17 18:47:52.69',200,1,1)
+VALUES(1,2,'2012-09-17 18:47:52.69',200,1,1);
+
+--PERIODS
+INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
+VALUES(1,'2016-09-17 18:47:52.69','2022-09-17 18:47:52.69');
+
+--INSTRUCTOR AVAILABLE PERIOD
+INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
+VALUES(3,1);

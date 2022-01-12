@@ -25,8 +25,10 @@ export class AdventureService {
   }
 
   getAvailableAdventures(from: Date,to: Date): Observable<InstructorAdventureDTO[]>{
-    //add
-    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client/freePeriods`); 
+    let params = Object();
+    params.from = from.toISOString();
+    params.to = to.toISOString();
+    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client/freePeriods`,{params: params}); 
   }
 
   deleteAdditionalService(id_adventure: number, id_service : number) {
