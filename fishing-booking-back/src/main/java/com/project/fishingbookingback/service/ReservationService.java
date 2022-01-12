@@ -5,6 +5,7 @@ import com.project.fishingbookingback.repository.AdventureReservationRepository;
 import com.project.fishingbookingback.repository.BoatReservationRepository;
 import com.project.fishingbookingback.repository.HolidayHomeReservationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +28,9 @@ public class ReservationService {
         reservations.addAll(holidayHomeReservationRepository.findAll());
         reservations.addAll(boatReservationRepository.findAll());
         return  reservations;
+    }
+
+    public Reservation findById(long id) {
+        throw new UnsupportedOperationException();
     }
 }
