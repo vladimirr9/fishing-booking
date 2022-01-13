@@ -24,13 +24,13 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Choose a start time</mat-label>
-        <input matInput  [(ngModel)]="startingDate" [ngxTimepicker]="toggleTimepicker">
+        <input matInput  [(ngModel)]="startingTime" [ngxTimepicker]="toggleTimepicker">
         <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>Choose a end time</mat-label>
-        <input matInput [(ngModel)]="endingDate" [ngxTimepicker]="toggleTimepicker1">
+        <input matInput [(ngModel)]="endingTime" [ngxTimepicker]="toggleTimepicker1">
         <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
     </mat-form-field>
 

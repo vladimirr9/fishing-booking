@@ -16,8 +16,9 @@ export class ReserveAdventureComponent implements OnInit {
   @Input() adventure: any
   totalPrice: number = 0;
   @Input() chosenDate: Date= new Date();
-  startingDate: string = "";
-  endingDate: string = ""; 
+  @Input() endingDate: Date = new Date();
+  startingTime: string = "";
+  endingTime: string = ""; 
   personNum: number = 1;
   available: boolean = true;
   statusMessage: string = "";
@@ -25,7 +26,10 @@ export class ReserveAdventureComponent implements OnInit {
   
 
   ngOnInit(): void {
-    
+    let formatedStart = this.chosenDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.chosenDate.toLocaleTimeString().split(" ")[1]
+    let formatedEnd = this.endingDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.endingDate.toLocaleTimeString().split(" ")[1]
+    this.startingTime = formatedStart;
+    this.endingTime = formatedEnd;
   }
 
   convertTimeToNum(time: string): number{
@@ -45,8 +49,8 @@ export class ReserveAdventureComponent implements OnInit {
   reserve(): void{
     if(this.totalPrice<=0){alert("Please calculate price first!"); return;}
     let date = new Date(this.chosenDate.setHours(0,0,0,0))
-    let from = this.addMinutes(date, this.convertTimeToNum(this.startingDate));
-    let to = this.addMinutes(date, this.convertTimeToNum(this.endingDate));
+    let from = this.addMinutes(date, this.convertTimeToNum(this.startingTime));
+    let to = this.addMinutes(date, this.convertTimeToNum(this.endingTime));
     this.adventureService.getPeriodAvailability(this.adventure.fishingInstructor.email,from,to).subscribe((data)=>{
       this.available = data;
       if(this.available)
@@ -75,7 +79,7 @@ export class ReserveAdventureComponent implements OnInit {
 
 
   periodDurationInMinutes(): number{
-    return this.convertTimeToNum(this.endingDate)- this.convertTimeToNum(this.startingDate);
+    return this.convertTimeToNum(this.endingTime)- this.convertTimeToNum(this.startingTime);
   }
 
   calculatePrice(): void{

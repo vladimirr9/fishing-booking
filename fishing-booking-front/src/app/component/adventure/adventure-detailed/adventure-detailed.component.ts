@@ -30,14 +30,19 @@ export class AdventureDetailedComponent implements OnInit {
   pictures: any
   promotions!: FishingPromotion[]
   finishedLoading = false
+  //Client related fields
   chosenDate: Date = new Date()
+  endingDate: Date = new Date();
   constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.initMap(19.7245, 45.2889)
     this.id = this.route.snapshot.params['id']
-    if(this.isClient())
+    if(this.isClient()){
       this.chosenDate = new Date(this.route.snapshot.params['date'])
+      this.endingDate = new Date(this.route.snapshot.params['date2'])
+    }
+      
       
     this.adventureService.getAdventure(this.id).subscribe((data) => {
       this.adventure = data
