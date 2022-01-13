@@ -43,7 +43,7 @@ export class ReserveAdventureComponent implements OnInit {
 
   calculatePrice(): void{
     let price = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
-    if(price < 0){
+    if(price < 0 || isNaN(price)){
       alert("Please choose valid times!"); return;
     }
     this.totalPrice = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
