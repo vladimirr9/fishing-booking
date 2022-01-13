@@ -65,7 +65,9 @@ export class BoatsComponent implements OnInit,AfterViewInit {
   }
 
   searchBoats(): void{
-    
+    this._boatService.getAvailableBoats(this.searchStartDate,this.searchEndDate).subscribe((data: BoatsDTO[])=>{
+      this.filteredBoats = data;
+    });
   }
 
 

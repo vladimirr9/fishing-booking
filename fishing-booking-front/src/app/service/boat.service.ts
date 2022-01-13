@@ -23,6 +23,13 @@ export class BoatService {
     })
   }
 
+  getAvailableBoats(from: Date,to: Date):Observable<BoatsDTO[]>{
+    let params = Object();
+    params.from = from.toISOString();
+    params.to = to.toISOString();
+    return this.http.get<BoatsDTO[]>(`${config.baseUrl}${this.boatUrl}/client/freeBoats`,{params: params})
+  }
+
   createNewBoat(boat : any) : Observable<any> {
     return this.http.post(`${config.baseUrl}${this.boatUrl}`, boat)
   }

@@ -29,7 +29,7 @@ public class BoatService {
         for (Boat boat : boatRepository.findAll())
             if(isBoatAvailable(boat,from,to))
                 availableBoats.add(boat);
-        
+
         return availableBoats;
     }
 
