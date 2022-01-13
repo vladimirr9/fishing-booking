@@ -15,7 +15,7 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "reservation_id", referencedColumnName = "id")
+    @JoinColumn(name = "reservation_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference
     private Reservation reservation;
     private String comment;

@@ -1,0 +1,36 @@
+<div class="container">
+  <h2 mat-dialog-title>Report</h2>
+  <form class="form" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Comment</mat-label>
+      <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+    </mat-form-field>
+    <h4>Sanction Client</h4>
+    <div class="radio-container">
+    <div>
+      <label for="yes">Yes</label>
+      <input type="radio" [value]="true" id="yes" name="sanction" formControlName="sanction">
+    </div>
+    <div>
+      <label for="no">No</label>
+      <input type="radio" [value]="false" id="no" name="sanction" formControlName="sanction" [checked]="true">
+    </div>
+  </div>
+  <h4>Client Appeared</h4>
+  <div class="radio-container">
+    <div>
+      <label for="yes-appear">Yes</label>
+      <input type="radio" [value]="true" id="yes-appear" name="appeared" formControlName="appeared" [checked]="true">
+    </div>
+    <div>
+      <label for="no-appear">No</label>
+      <input type="radio" [value]="false" id="no-appear" name="appeared" formControlName="appeared">
+    </div>
+  </div>
+  </form>
+
+  <div class="button-container">
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+    <button mat-flat-button color="warn" (click)="close()">Close</button>
+  </div>
+</div>

@@ -1,6 +1,9 @@
 package com.project.fishingbookingback.dto.request;
 
+import javax.validation.constraints.NotBlank;
+
 public class ReportRequestDTO {
+    @NotBlank
     private String comment;
     private boolean sanction;
     private boolean appeared;

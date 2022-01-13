@@ -1,0 +1,46 @@
+
+.container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+/*
+input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  width: 100%;
+}*/
+
+.radio-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  * {
+    padding: 5px;
+  }
+}
+.button-holder {
+  padding-top: 15px;
+  text-align: center;
+}
+.button-container {
+  display: flex;
+  * {
+    margin: 10px;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+

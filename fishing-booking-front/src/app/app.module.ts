@@ -74,6 +74,8 @@ import { BoatDetailsComponent } from './component/boat/boat-details/boat-details
 import { ReserveBoatComponent } from './component/boat/reserve-boat/reserve-boat.component';
 import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
 import { ReserveHolidayHomeComponent } from './component/holiday-home/reserve-holiday-home/reserve-holiday-home.component';
+import { InstructorReservationsPageComponent } from './component/instructor-reservations-page/instructor-reservations-page.component';
+import { ReportDialogComponent } from './component/dialog/report-dialog/report-dialog.component';
 
 
 
@@ -133,10 +135,12 @@ import { ReserveHolidayHomeComponent } from './component/holiday-home/reserve-ho
     NewBoatComponent,
     BoatOwnerProfileComponent,
     ReserveAdventureComponent,
+    InstructorReservationsPageComponent,
     BoatDetailsComponent,
-    ReserveBoatComponent,
     HolidayHomeDetailsComponent,
-    ReserveHolidayHomeComponent
+    ReserveBoatComponent,
+    ReserveHolidayHomeComponent,
+    ReportDialogComponent
   ],
   imports: [
     BrowserModule,

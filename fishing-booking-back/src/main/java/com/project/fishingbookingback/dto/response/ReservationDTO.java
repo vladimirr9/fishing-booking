@@ -3,13 +3,16 @@ package com.project.fishingbookingback.dto.response;
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
+    private Long id;
     private String imgUrl;
     private String name;
     private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private double price;
     private double durationInHours;
     private double mark;
     private String address;
+    private Boolean reportPresent;
 
     public ReservationDTO() {
     }
@@ -68,5 +71,29 @@ public class ReservationDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public Boolean getReportPresent() {
+        return reportPresent;
+    }
+
+    public void setReportPresent(Boolean reportPresent) {
+        this.reportPresent = reportPresent;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
