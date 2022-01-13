@@ -12,6 +12,10 @@ public class Client extends User {
 
     private boolean isEnabled;
 
+    public Client(ProviderRegistration providerRegistration) {
+        super(providerRegistration);
+    }
+
     public boolean isEnabled() {
         return isEnabled;
     }

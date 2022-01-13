@@ -60,4 +60,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UnrecognizedTypeException.class)
+    public ResponseEntity<ErrorMessage> UnrecognizedTypeException(NotAllowedException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                ex.getMessage(),
+                new Date());
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
 }

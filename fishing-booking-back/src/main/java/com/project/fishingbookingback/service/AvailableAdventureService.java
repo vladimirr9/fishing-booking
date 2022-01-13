@@ -29,6 +29,14 @@ public class AvailableAdventureService {
         return fishingAdventures;
     }
 
+    public boolean IsInstructorAvailable(String email,LocalDateTime from,LocalDateTime to){
+        List<AvailablePeriod> availablePeriods = availablePeriodService.getPeriods(email);
+        for(AvailablePeriod availablePeriod : availablePeriods)
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+                return true;
+        return false;
+    }
+
     private List<FishingAdventure> getAvailableAdventuresForFishingInstructor(String email,LocalDateTime from, LocalDateTime to) {
         List<AvailablePeriod> availablePeriods = availablePeriodService.getPeriods(email);
         for (AvailablePeriod availablePeriod : availablePeriods)

@@ -2,6 +2,7 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.ReportMapper;
 import com.project.fishingbookingback.dto.mapper.ReservationMapper;
+import com.project.fishingbookingback.dto.request.CreateReservationDTO;
 import com.project.fishingbookingback.dto.request.ReportAnswerRequestDTO;
 import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
@@ -11,12 +12,7 @@ import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -61,6 +57,12 @@ public class ReservationController {
     @PutMapping("/{id}/reports/{report_id}/deny")
     public ResponseEntity<HttpStatus> denyReport(@PathVariable Long id, @PathVariable Long report_id, @RequestBody ReportAnswerRequestDTO reportAnswerRequestDTO) {
         reservationService.denyReport(id, report_id, reportAnswerRequestDTO.getMessage());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CreateReservationDTO createReservationDTO){
+        reservationService.createReservation(createReservationDTO.getPrice(),createReservationDTO.getFrom(),createReservationDTO.getTo(),createReservationDTO.getClientUsername(),createReservationDTO.getEntityId(),createReservationDTO.getType());
         return ResponseEntity.noContent().build();
     }
 

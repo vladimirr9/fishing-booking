@@ -89,14 +89,20 @@ public class AdventureController {
     }
 
     @GetMapping(value="/client/freePeriods")
-    public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(@RequestParam("from")
-                                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                                                @RequestParam("to")
-                                                                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
+    public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                                                @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
         for (FishingAdventure adventure : availableAdventureService.getAvailableAdventures(from,to))
             clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
         return ResponseEntity.ok(clientsAdventureViewDTOS);
+    }
+
+    @GetMapping(value="/client/freePeriods/{email}")
+    public ResponseEntity<Boolean> isInstructorAvailable(@PathVariable String email,
+                                                              @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                              @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
+        Boolean availability = availableAdventureService.IsInstructorAvailable(email,from,to);
+        return ResponseEntity.ok(availability);
     }
 
     @GetMapping(value = "/{id}")

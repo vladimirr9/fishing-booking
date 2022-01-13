@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.dto.mapper;
 
+
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.AdventureReservation;
 import com.project.fishingbookingback.model.BoatReservation;
@@ -11,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 
 @Component
 public class ReservationMapper {
+
     public ReservationDTO toDTO(Reservation reservation){
         if(reservation.getClass()== HolidayHomeReservation.class)
             return holidayHomeReservationDTO((HolidayHomeReservation) reservation);
@@ -19,6 +21,7 @@ public class ReservationMapper {
         else
             return adventureReservationDTO((AdventureReservation) reservation);
     }
+
 
     private ReservationDTO holidayHomeReservationDTO(HolidayHomeReservation reservation){
         ReservationDTO reservationDTO = new ReservationDTO();

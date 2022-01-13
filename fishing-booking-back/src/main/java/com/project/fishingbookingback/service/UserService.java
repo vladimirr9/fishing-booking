@@ -5,14 +5,7 @@ import com.project.fishingbookingback.dto.request.UserDetailsRequestDTO;
 import com.project.fishingbookingback.exception.BadRoleException;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.Admin;
-import com.project.fishingbookingback.model.AvailablePeriod;
-import com.project.fishingbookingback.model.BoatOwner;
-import com.project.fishingbookingback.model.FishingInstructor;
-import com.project.fishingbookingback.model.HomeOwner;
-import com.project.fishingbookingback.model.ProviderRegistration;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +46,7 @@ public class UserService {
             case ROLE_HOME_OWNER -> new HomeOwner(providerRegistration);
             case ROLE_BOAT_OWNER -> new BoatOwner(providerRegistration);
             case ROLE_FISHING_INSTRUCTOR -> new FishingInstructor(providerRegistration);
-            case ROLE_CLIENT -> new User(providerRegistration);
+            case ROLE_CLIENT -> new Client(providerRegistration);
             default -> throw new BadRoleException("Can only register boat owner, fishing instructor, and home owner");
         };
         user.setAddress(addressService.insert(user.getAddress()));

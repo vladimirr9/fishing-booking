@@ -55,6 +55,10 @@ public abstract class Reservation {
         return client;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,42 +1,87 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
-import com.project.fishingbookingback.model.Report;
-import com.project.fishingbookingback.model.Reservation;
-import com.project.fishingbookingback.repository.AdventureReservationRepository;
-import com.project.fishingbookingback.repository.BoatReservationRepository;
-import com.project.fishingbookingback.repository.HolidayHomeReservationRepository;
+import com.project.fishingbookingback.exception.NotAllowedException;
+import com.project.fishingbookingback.exception.UnrecognizedTypeException;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class ReservationService {
-    private final AdventureReservationRepository adventureReservationRepository;
-    private final HolidayHomeReservationRepository holidayHomeReservationRepository;
-    private final BoatReservationRepository boatReservationRepository;
+
     private final ReservationRepository reservationRepository;
     private final ReportService reportService;
     private final EmailService emailService;
+    private final HolidayHomeService holidayHomeService;
+    private final UserService userService;
+    private final BoatService boatService;
+    private final AdventureService adventureService;
 
-    public ReservationService(AdventureReservationRepository adventureReservationRepository, HolidayHomeReservationRepository holidayHomeReservationRepository, BoatReservationRepository boatReservationRepository, ReservationRepository reservationRepository, ReportService reportService, EmailService emailService) {
-        this.adventureReservationRepository = adventureReservationRepository;
-        this.holidayHomeReservationRepository = holidayHomeReservationRepository;
-        this.boatReservationRepository = boatReservationRepository;
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
+        this.holidayHomeService = holidayHomeService;
+        this.userService = userService;
+        this.boatService = boatService;
+        this.adventureService = adventureService;
     }
 
     public List<Reservation> getAll() {
-        /*List<Reservation> reservations = new ArrayList<>();
-        reservations.addAll(adventureReservationRepository.findAll());
-        reservations.addAll(holidayHomeReservationRepository.findAll());
-        reservations.addAll(boatReservationRepository.findAll());
-        return reservations;*/
         return reservationRepository.findAll();
+    }
+
+    public void createReservation(double price,LocalDateTime from,LocalDateTime to,String clientUsername, Long entityId,String type){
+        if(to.isBefore(from)) throw new NotAllowedException();
+        Reservation reservation = getReservationdownClass(type,entityId);
+        Client client = (Client) userService.findByEmail(clientUsername);
+        reservation.setClient(client);
+        reservation.setPrice(price);
+        reservation.setStartDate(from);
+        reservation.setEndDate(to);
+        reservation.setApproved(false);
+        reservationRepository.save(reservation);
+    }
+
+    private Reservation getReservationdownClass(String type,Long entityId){
+        switch (type){
+            case "ADVENTURE" ->{
+                var adventureReservation = new AdventureReservation();
+                FishingAdventure adventure = adventureService.findByID(entityId);
+                adventureReservation.setAdventure(adventure);
+                Set<AdventureReservation> adventureReservations = adventure.getReservations();
+                adventureReservations.add(adventureReservation);
+                adventure.setReservations(adventureReservations);
+                return adventureReservation;
+            }
+            case "HOLIDAY_HOME" -> {
+                var holidayReservation = new HolidayHomeReservation();
+                HolidayHome home = holidayHomeService.findByID(entityId);
+                holidayReservation.setHolidayHome(home);
+                Set<HolidayHomeReservation> holidayHomeReservations = home.getReservations();
+                holidayHomeReservations.add(holidayReservation);
+                home.setReservations(holidayHomeReservations);
+                return holidayReservation;
+            }
+            case "BOAT" ->{
+                var boatReservation = new BoatReservation();
+                Boat boat = boatService.findByID(entityId);
+                boatReservation.setBoat(boat);
+                Set<BoatReservation> boatReservations = boat.getReservations();
+                boatReservations.add(boatReservation);
+                boat.setReservations(boatReservations);
+                return boatReservation;
+            }
+            default -> { throw new UnrecognizedTypeException("Requested reservation type doesn't exist!");}
+        }
+
+
     }
 
     public Reservation findByID(Long id) {
