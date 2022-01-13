@@ -1,5 +1,9 @@
 <div class="container">
     <h1>Boat-details</h1>
+    <div>
+        <app-reserve-boat  [boat]="boat" [startingDate]="startingDate" [endingDate]="endingDate"></app-reserve-boat>
+    </div>
+   
     <form class="form-container" [formGroup]="addBoatForm">
     <div class="left-container">
       <mat-form-field appearance="standard">
@@ -120,10 +124,6 @@
           <input type="number" readonly matInput placeholder="Longitude"  formControlName="longitude"/>
         </mat-form-field>
         
-        <div class="button-container">
-        <button mat-flat-button color="primary" (click)="reserve()" class="button">{{getButtonText()}}</button>
-        
-      </div>
       </div>
         <div class="map" (click)="getCoord($event)" id="map"></div>
     </div>

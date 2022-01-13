@@ -10,8 +10,8 @@ import { toLonLat } from 'ol/proj';
 import { transform } from 'ol/proj';
 import { BoatService } from 'src/app/service/boat.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-boat-details',
@@ -28,6 +28,11 @@ export class BoatDetailsComponent implements OnInit {
   map!: Map
   interior : any
   exterior : any
+  boat: any
+
+  //client
+  startingDate: Date= new Date();
+  endingDate: Date = new Date();
 
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
@@ -63,9 +68,13 @@ export class BoatDetailsComponent implements OnInit {
 
     ngOnInit(): void {
       this.initMap(this.lon, this.lat);
-        this.editMode = true
-        let id = this.route.snapshot.params['id'];
+      this.initializeForm()
+    }
+
+    initializeForm(): void{
+      let id = this.route.snapshot.params['id'];
         this.boatService.getBoat(id).subscribe((data) => {
+          this.boat = data;
           this.addBoatForm.controls['name'].setValue(data.name)
           this.addBoatForm.controls['type'].setValue(data.type)
           this.addBoatForm.controls['length'].setValue(data.length)
@@ -96,7 +105,6 @@ export class BoatDetailsComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
         })
-      
     }
 
     getCoord(event: any) {
@@ -106,44 +114,6 @@ export class BoatDetailsComponent implements OnInit {
       this.addBoatForm.controls['latitude'].setValue(xy[1])
     }
 
-    editBoat() {
-      if (this.addBoatForm.invalid) {
-        this.submitFailed = true
-        return;
-      }
-      this.submitFailed = false
-      let id = this.route.snapshot.params['id'];
-      let boat = {
-        name: this.addBoatForm.controls['name'].value,
-        type:this.addBoatForm.controls['type'].value,
-        length:this.addBoatForm.controls['length'].value,
-        engineNumber:this.addBoatForm.controls['engineNumber'].value,
-        enginePower:this.addBoatForm.controls['enginePower'].value,
-        maxSpeed :this.addBoatForm.controls['maxSpeed'].value,
-        gps:this.addBoatForm.controls['gps'].value,
-        radar :this.addBoatForm.controls['radar'].value,
-        vhf :this.addBoatForm.controls['vhf'].value,
-        fishfinder :this.addBoatForm.controls['fishfinder'].value,
-        cabin  :this.addBoatForm.controls['cabin'].value,
-        description :this.addBoatForm.controls['description'].value,
-        capacity  :this.addBoatForm.controls['capacity'].value,
-        fishingEquipment :this.addBoatForm.controls['fishingEquipment'].value,
-        pricePerDay :this.addBoatForm.controls['pricePerDay'].value,
-        cancellationFeePercentage :this.addBoatForm.controls['cancellationFeePercentage'].value,
-        rulesOfConduct  :this.addBoatForm.controls['rulesOfConduct'].value,
-        additionalInfo :this.addBoatForm.controls['additionalInfo'].value,
-        country :this.addBoatForm.controls['country'].value,
-        city  :this.addBoatForm.controls['city'].value,
-        streetAndNumber :this.addBoatForm.controls['streetAndNumber'].value,
-        latitude :this.addBoatForm.controls['latitude'].value,
-        longitude :this.addBoatForm.controls['longitude'].value,
-      }
-      this.boatService.updateBoat(id, boat).subscribe((data) => {
-        this.router.navigateByUrl('boat-owner-home')
-      })
-    }
-
-  
   
   
     initMap(lon: number, lat: number,) {
