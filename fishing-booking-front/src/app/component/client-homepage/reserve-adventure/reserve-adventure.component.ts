@@ -26,6 +26,7 @@ export class ReserveAdventureComponent implements OnInit {
   
 
   ngOnInit(): void {
+    if(isNaN(this.endingDate.getHours())) return;
     let formatedStart = this.chosenDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.chosenDate.toLocaleTimeString().split(" ")[1]
     let formatedEnd = this.endingDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.endingDate.toLocaleTimeString().split(" ")[1]
     this.startingTime = formatedStart;
