@@ -1,5 +1,6 @@
 <div class="container" >
-  <h1 class="title">{{adventure.name}}</h1>
+  <h1 class="title">{{adventure.name}}  </h1>
+  <app-reserve-adventure *ngIf="isClient()" [adventure]="adventure" [chosenDate]="chosenDate"></app-reserve-adventure>
   <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
   <h2>Hourly Price: {{adventure.hourlyPrice}}RSD</h2>
   <div>Cancellation Fee:{{adventure.cancellationFee}}%</div>

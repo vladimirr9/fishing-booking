@@ -12,8 +12,8 @@ public class HolidayHomeReservation extends Reservation{
     @JoinColumn(name = "holidayhome_id")
     private HolidayHome holidayHome;
 
-    public HolidayHomeReservation(Long id, LocalDateTime startDate, int durationInHours, double mark, double price, HolidayHome holidayHome) {
-        super(id, startDate, durationInHours,  price);
+    public HolidayHomeReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, HolidayHome holidayHome) {
+        super(id, startDate, endDate, price, approved);
         this.holidayHome = holidayHome;
     }
 

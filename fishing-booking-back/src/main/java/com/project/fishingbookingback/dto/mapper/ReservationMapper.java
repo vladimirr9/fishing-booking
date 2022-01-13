@@ -7,6 +7,8 @@ import com.project.fishingbookingback.model.HolidayHomeReservation;
 import com.project.fishingbookingback.model.Reservation;
 import org.springframework.stereotype.Component;
 
+import java.time.temporal.ChronoUnit;
+
 @Component
 public class ReservationMapper {
     public ReservationDTO toDTO(Reservation reservation){
@@ -29,7 +31,7 @@ public class ReservationMapper {
             reservationDTO.setImgUrl("");
         else
             reservationDTO.setImgUrl(reservation.getHolidayHome().getExterior().get(0).getLink());
-        reservationDTO.setDurationInHours(reservation.getDurationInHours());
+        reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(),reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
         
 
@@ -47,7 +49,7 @@ public class ReservationMapper {
             reservationDTO.setImgUrl("");
         else
             reservationDTO.setImgUrl(reservation.getBoat().getExterior().get(0).getLink());
-        reservationDTO.setDurationInHours(reservation.getDurationInHours());
+        reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(),reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
 
         return reservationDTO;
@@ -64,7 +66,7 @@ public class ReservationMapper {
             reservationDTO.setImgUrl("");
         else
             reservationDTO.setImgUrl(reservation.getAdventure().getPictures().get(0).getLink());
-        reservationDTO.setDurationInHours(reservation.getDurationInHours());
+        reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(),reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
 
         return reservationDTO;

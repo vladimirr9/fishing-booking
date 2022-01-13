@@ -21,7 +21,7 @@ public abstract class Reservation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGen")
     private Long id;
     private LocalDateTime startDate;
-    private int durationInHours;
+    private LocalDateTime endDate;
     private double price;
     private boolean approved;
     @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,13 +32,14 @@ public abstract class Reservation {
     }
 
 
-    public Reservation(Long id, LocalDateTime startDate, int durationInHours, double price) {
+    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved) {
+
         this.id = id;
         this.startDate = startDate;
-        this.durationInHours = durationInHours;
+        this.endDate = endDate;
         this.price = price;
-        this.approved = false;
         this.report = null;
+        this.approved = approved;
     }
 
     public Long getId() {
@@ -57,8 +58,12 @@ public abstract class Reservation {
         this.startDate = startDate;
     }
 
-    public int getDurationInHours() {
-        return durationInHours;
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public double getPrice() {
@@ -69,18 +74,14 @@ public abstract class Reservation {
         this.price = price;
     }
 
-    public void setDurationInHours(int durationInHours) {
-        this.durationInHours = durationInHours;
+    public boolean isApproved() {
+        return approved;
     }
-
 
     public void setApproved(boolean approved) {
         this.approved = approved;
     }
 
-    public boolean isApproved() {
-        return approved;
-    }
 
     public Report getReport() {
         return report;

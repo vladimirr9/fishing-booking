@@ -10,8 +10,8 @@ public class BoatReservation extends Reservation {
     @JoinColumn(name="boat_id")
     private Boat boat;
 
-    public BoatReservation(Long id, LocalDateTime startDate, int durationInHours, double price, Boat boat) {
-        super(id, startDate, durationInHours, price);
+    public BoatReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Boat boat) {
+        super(id, startDate, endDate, price, approved);
         this.boat = boat;
     }
 

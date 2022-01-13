@@ -1,0 +1,55 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Reserve</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          fill out reservation form
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <mat-form-field appearance="fill" class="example-form-field">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [(ngModel)]="chosenDate" [matDatepicker]="datepicker" disabled>
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a start time</mat-label>
+        <input matInput  [(ngModel)]="startingDate" [ngxTimepicker]="toggleTimepicker">
+        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a end time</mat-label>
+        <input matInput [(ngModel)]="endingDate" [ngxTimepicker]="toggleTimepicker1">
+        <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+    </mat-form-field>
+
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Person num(max:{{adventure.maxPeople}})</mat-label>
+        <input matInput [(ngModel)]="personNum" type="number" min="1" max="{{adventure.maxPeople}}">
+      </mat-form-field>
+
+     <div>
+        <label><b>Calculated price: </b></label>
+        <label for="totalPrice" >{{totalPrice.toFixed(2)}}$</label>
+        <button mat-raised-button style="margin-left: 10px;" (click)="calculatePrice()">Calculate</button>
+     </div> 
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="reserve()">RESERVE</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+
+</mat-accordion>

@@ -43,7 +43,7 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
         this.filteredHouses.sort((a, b) => b.mark - a.mark);
         break;
       case 'location':
-        this.filteredHouses.sort((a, b) => a.adress.localeCompare(b.adress));
+        this.filteredHouses.sort((a, b) => a.address.localeCompare(b.address));
         break;
       default:
 
@@ -57,7 +57,7 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
 
   async filterHouses(): Promise<void>{
       this.filteredHouses = this.houses.filter(boat => boat.name.includes(this.filterComponent.filterName));
-      this.filteredHouses = this.filteredHouses.filter(boat => boat.adress.includes(this.filterComponent.filterAdress));
+      this.filteredHouses = this.filteredHouses.filter(boat => boat.address.includes(this.filterComponent.filterAdress));
       this.filteredHouses = this.filteredHouses.filter(boat => boat.mark >= this.filterComponent.filterMark);
       this.sortHouses();
   }

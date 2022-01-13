@@ -11,6 +11,7 @@ import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.model.Promotion;
 import com.project.fishingbookingback.service.AdventureService;
 import com.project.fishingbookingback.service.AvailableAdventureService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -88,7 +89,10 @@ public class AdventureController {
     }
 
     @GetMapping(value="/client/freePeriods")
-    public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(LocalDateTime from,LocalDateTime to){
+    public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(@RequestParam("from")
+                                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                                                @RequestParam("to")
+                                                                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
         for (FishingAdventure adventure : availableAdventureService.getAvailableAdventures(from,to))
             clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
