@@ -1,1 +1,132 @@
-<p>boat-details works!</p>
+<div class="container">
+    <h1>Boat-details</h1>
+    <form class="form-container" [formGroup]="addBoatForm">
+    <div class="left-container">
+      <mat-form-field appearance="standard">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" readonly formControlName="name"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Type</mat-label>
+        <input matInput placeholder="Type" readonly formControlName="type"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Length</mat-label>
+        <input type="number" matInput readonly placeholder="Length"  formControlName="length"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Engine number</mat-label>
+        <input type="number" readonly matInput placeholder="Engine number" formControlName="engineNumber"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Engine power</mat-label>
+        <input type="number" readonly matInput placeholder="Engine power" formControlName="enginePower"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Maximum speed</mat-label>
+        <input type="number" readonly matInput placeholder="Maximum speed" formControlName="maxSpeed"/>
+      </mat-form-field>
+
+      <mat-label>GPS</mat-label>
+      <input type="checkbox" style="pointer-events: none;"  formControlName="gps"/>
+
+      <mat-label>Radar</mat-label>
+      <input type="checkbox" style="pointer-events: none;" formControlName="radar"/>
+      
+      <mat-label>VHF Radio</mat-label>
+      <input type="checkbox"style="pointer-events: none;" formControlName="vhf"/>
+      
+      <mat-label>Fishfinder</mat-label>
+      <input type="checkbox"style="pointer-events: none;" formControlName="fishfinder"/>
+
+      <mat-label>Cabin</mat-label>
+      <input type="checkbox" style="pointer-events: none;" formControlName="cabin"/>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Name" readonly formControlName="description"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Capacity</mat-label>
+        <input type="number" readonly matInput placeholder="Capacity" formControlName="capacity"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Fishing equipment</mat-label>
+        <textarea class="textarea" matInput readonly placeholder="Fishing equipment" formControlName="fishingEquipment"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Price per day</mat-label>
+        <input type="number"  matInput placeholder="Price per day" formControlName="pricePerDay"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Cancellation fee percantage</mat-label>
+        <input type="number"  matInput placeholder="Cancellation fee percantage" formControlName="cancellationFeePercentage"/>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Rules of Conduct</mat-label>
+        <textarea class="textarea" readonly matInput placeholder="Rules of Conduct" formControlName="rulesOfConduct"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Additional information</mat-label>
+        <textarea class="textarea" readonly matInput placeholder="Additional information" formControlName="additionalInfo"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="middle-container">
+      
+      <div *ngIf="editMode" appearance="standard">
+        <div *ngIf="addBoatForm.controls['cabin'].value" appearance="standard">
+        
+        <div class="picture-container">
+          <div *ngFor="let picture of interior" class="picture-item">
+            <mat-card class="container-card">
+              <img mat-card-image [src]="picture.link" alt="Broken image">
+             
+            </mat-card>
+          </div>
+        </div>
+      </div>
+            
+            <div class="picture-container">
+              <div *ngFor="let picture of exterior" class="picture-item">
+                <mat-card class="container-card">
+                  <img mat-card-image [src]="picture.link" alt="Broken image">
+                </mat-card>
+              </div>
+            </div>
+        
+      </div>
+      
+    </div>
+    <div class="right-container">
+      <div class="address-container">
+        <mat-form-field appearance="standard">
+          <mat-label>Country</mat-label>
+          <input matInput readonly placeholder="Country"  formControlName="country"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>City</mat-label>
+          <input matInput readonly placeholder="City"  formControlName="city"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Street and Number</mat-label>
+          <input matInput readonly placeholder="Street and Number"  formControlName="streetAndNumber"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Latitude</mat-label>
+          <input type="number" readonly matInput placeholder="Latitude"  formControlName="latitude"/>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Longitude</mat-label>
+          <input type="number" readonly matInput placeholder="Longitude"  formControlName="longitude"/>
+        </mat-form-field>
+        
+        <div class="button-container">
+        <button mat-flat-button color="primary" (click)="reserve()" class="button">{{getButtonText()}}</button>
+        
+      </div>
+      </div>
+        <div class="map" (click)="getCoord($event)" id="map"></div>
+    </div>
+  </form>
+  </div>
+  
