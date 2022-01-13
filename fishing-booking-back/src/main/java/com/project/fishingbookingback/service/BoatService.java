@@ -7,6 +7,8 @@ import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +23,23 @@ public class BoatService {
         this.userService = userService;
         this.loggedUserService = loggedUserService;
     }
+
+    public List<Boat> getAvailableBoats(LocalDateTime from, LocalDateTime to) {
+        List<Boat> availableBoats = new ArrayList<>();
+        for (Boat boat : boatRepository.findAll())
+            if(isBoatAvailable(boat,from,to))
+                availableBoats.add(boat);
+        
+        return availableBoats;
+    }
+
+    private boolean isBoatAvailable(Boat boat,LocalDateTime from, LocalDateTime to){
+        for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+                return true;
+        return false;
+    }
+
 
     public List<Boat> getAll(){
         return boatRepository.findAll();
