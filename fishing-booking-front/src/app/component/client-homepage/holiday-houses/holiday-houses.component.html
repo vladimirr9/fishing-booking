@@ -12,7 +12,7 @@
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
       <button mat-raised-button class="filterBtn" color="primary" (click)="searchHouses()" >Search</button>
-    <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
+    <app-sorter style="margin-left: 200px;" (sortingEvent)="setSorter($event)"></app-sorter>
 </div>
 <div class="viewArea">
     <app-holiday-houses-view [houses]="filteredHouses"></app-holiday-houses-view>

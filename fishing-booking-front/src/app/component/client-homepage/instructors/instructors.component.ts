@@ -15,7 +15,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   filteredAdventures: InstructorAdventureDTO[]= [];
   sorterType: string = "";
   searchStartDate: Date = new Date();
-  searchEndDate: Date = new Date();
+  startingTime: string = "";
+  endingTime: string= "";
 
   constructor(private _adventureService: AdventureService) { }
   
@@ -65,9 +66,31 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   }
 
   searchAdventures(): void{
-    this._adventureService.getAvailableAdventures(this.searchStartDate,this.searchEndDate).subscribe((data: InstructorAdventureDTO[])=>{
+    let date = new Date(this.searchStartDate.setHours(0,0,0,0))
+    let from = this.addMinutes(date,this.convertTimeToNum(this.startingTime));
+    let to = this.addMinutes(date,this.convertTimeToNum(this.endingTime));
+    alert(from)
+    alert(to)
+    this._adventureService.getAvailableAdventures(from,to).subscribe((data: InstructorAdventureDTO[])=>{
       this.filteredAdventures = data;
     });
+  }
+
+  convertTimeToNum(time: string): number{
+    let timeNum = 0;
+    let minutes = parseInt(time.split(" ")[0].split(":")[1]);
+    let hours = parseInt(time.split(" ")[0].split(":")[0]);
+    if(time.split(" ")[1]=="PM")
+      timeNum +=12 * 60;
+    else if(hours==12)
+      hours = 0
+    timeNum+=+ hours*60 + minutes;
+  
+    return timeNum;
+  }
+
+  addMinutes(date: Date, minutes: number): Date {
+    return new Date(date.getTime() + minutes*60000);
   }
 
 
