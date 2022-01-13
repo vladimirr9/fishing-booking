@@ -70,6 +70,7 @@ import { BoatCardComponent } from './component/boat/boat-card/boat-card.componen
 import { NewBoatComponent } from './component/boat/new-boat/new-boat.component';
 import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profile/boat-owner-profile.component';
 import { ReserveAdventureComponent } from './component/client-homepage/reserve-adventure/reserve-adventure.component';
+import { BoatDetailsComponent } from './component/boat/boat-details/boat-details.component';
 
 
 
@@ -128,7 +129,8 @@ import { ReserveAdventureComponent } from './component/client-homepage/reserve-a
     BoatCardComponent,
     NewBoatComponent,
     BoatOwnerProfileComponent,
-    ReserveAdventureComponent
+    ReserveAdventureComponent,
+    BoatDetailsComponent
   ],
   imports: [
     BrowserModule,
