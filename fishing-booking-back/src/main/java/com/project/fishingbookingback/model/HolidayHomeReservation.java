@@ -7,17 +7,22 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
-public class HolidayHomeReservation extends Reservation{
+public class HolidayHomeReservation extends Reservation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "holidayhome_id")
     private HolidayHome holidayHome;
 
-    public HolidayHomeReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, HolidayHome holidayHome) {
-        super(id, startDate, endDate, price, approved);
+    public HolidayHomeReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, HolidayHome holidayHome, Client client) {
+        super(id, startDate, endDate, price, approved, client);
         this.holidayHome = holidayHome;
     }
 
     public HolidayHomeReservation() {
+    }
+
+    @Override
+    public String getOwnerEmail() {
+        return holidayHome.getHomeOwner().getEmail();
     }
 
     public HolidayHome getHolidayHome() {

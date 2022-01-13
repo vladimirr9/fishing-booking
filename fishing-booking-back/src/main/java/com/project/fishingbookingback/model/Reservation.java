@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
@@ -28,18 +30,29 @@ public abstract class Reservation {
     @JsonManagedReference
     private Report report;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
     public Reservation() {
     }
 
 
-    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved) {
-
+    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Client client) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
         this.report = null;
         this.approved = approved;
+        this.client = client;
+    }
+
+    abstract public String getOwnerEmail();
+
+
+    public Client getClient() {
+        return client;
     }
 
     public Long getId() {

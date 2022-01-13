@@ -2,11 +2,13 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.ReportMapper;
 import com.project.fishingbookingback.dto.mapper.ReservationMapper;
+import com.project.fishingbookingback.dto.request.ReportAnswerRequestDTO;
 import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.service.ReservationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +39,9 @@ public class ReservationController {
     @Transactional
     public List<ReservationDTO> getAll() {
         List<ReservationDTO> reservationDTOS = new ArrayList<>();
-        for (Reservation reservation : reservationService.getAll())
+        for (Reservation reservation : reservationService.getAll()) {
             reservationDTOS.add(reservationMapper.toDTO(reservation));
-
+        }
         return reservationDTOS;
     }
 
@@ -48,6 +50,18 @@ public class ReservationController {
         Report report = reportMapper.toModel(reportRequestDTO);
         Report newReport = reservationService.addReport(id, report);
         return ResponseEntity.ok(newReport);
+    }
+
+    @PutMapping("/{id}/reports/{report_id}/approve")
+    public ResponseEntity<HttpStatus> approveReport(@PathVariable Long id, @PathVariable Long report_id, @RequestBody ReportAnswerRequestDTO reportAnswerRequestDTO) {
+        reservationService.approveReport(id, report_id, reportAnswerRequestDTO.getMessage());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/reports/{report_id}/deny")
+    public ResponseEntity<HttpStatus> denyReport(@PathVariable Long id, @PathVariable Long report_id, @RequestBody ReportAnswerRequestDTO reportAnswerRequestDTO) {
+        reservationService.denyReport(id, report_id, reportAnswerRequestDTO.getMessage());
+        return ResponseEntity.noContent().build();
     }
 
 }

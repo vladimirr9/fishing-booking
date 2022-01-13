@@ -18,8 +18,13 @@ public class AdventureReservation extends Reservation {
     public AdventureReservation() {
     }
 
-    public AdventureReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, FishingAdventure adventure) {
-        super(id, startDate, endDate, price, approved);
+    @Override
+    public String getOwnerEmail() {
+        return adventure.getFishingInstructor().getEmail();
+    }
+
+    public AdventureReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, FishingAdventure adventure, Client client) {
+        super(id, startDate, endDate, price, approved, client);
         this.adventure = adventure;
     }
 
