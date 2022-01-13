@@ -30,11 +30,15 @@ export class AdventureDetailedComponent implements OnInit {
   pictures: any
   promotions!: FishingPromotion[]
   finishedLoading = false
+  chosenDate: Date = new Date()
   constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.initMap(19.7245, 45.2889)
     this.id = this.route.snapshot.params['id']
+    if(this.isClient())
+      this.chosenDate = new Date(this.route.snapshot.params['date'])
+      
     this.adventureService.getAdventure(this.id).subscribe((data) => {
       this.adventure = data
       this.services = data.additionalService
@@ -53,9 +57,6 @@ export class AdventureDetailedComponent implements OnInit {
     return this.storageService.getRole() == 'ROLE_CLIENT';
   }
 
-  reserve(): void{
-    
-  }
 
   addPicture() {
 

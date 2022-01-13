@@ -12,11 +12,12 @@ export class AdventureViewComponent implements OnInit {
   constructor( private router: Router) { }
 
   @Input() adventures: InstructorAdventureDTO[]=[];
+  @Input() chosenDate: Date = new Date();
   ngOnInit(): void {
   }
   
   viewDetails(id: number): void{
-    this.router.navigateByUrl(`adventures/${id}`)
+    this.router.navigate(['/adventures',id,this.chosenDate.toISOString()])
   } 
 
 }

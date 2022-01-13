@@ -15,5 +15,5 @@
     <app-sorter (sortingEvent)="setSorter($event)"></app-sorter>
 </div>
 <div class="viewArea">
-    <app-adventure-view [adventures]="filteredAdventures"></app-adventure-view>
+    <app-adventure-view [chosenDate]="searchStartDate" [adventures]="filteredAdventures"></app-adventure-view>
 </div>

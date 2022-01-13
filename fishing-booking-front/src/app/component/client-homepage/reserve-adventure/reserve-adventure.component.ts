@@ -11,12 +11,14 @@ export class ReserveAdventureComponent implements OnInit {
 
   @Input() adventure: any
   totalPrice: number = 0;
-  chosenDate: Date= new Date();
+  @Input() chosenDate: Date= new Date();
   startingDate: string = "";
   endingDate: string = ""; 
   personNum: number = 1;
+  
 
   ngOnInit(): void {
+    
   }
 
   convertTimeToNum(time: string): number{
