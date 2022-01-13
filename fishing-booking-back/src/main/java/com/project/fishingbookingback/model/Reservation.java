@@ -1,11 +1,15 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
 
@@ -20,10 +24,13 @@ public abstract class Reservation {
     private int durationInHours;
     private double price;
     private boolean approved;
-
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Report report;
 
     public Reservation() {
     }
+
 
     public Reservation(Long id, LocalDateTime startDate, int durationInHours, double price) {
         this.id = id;
@@ -31,6 +38,7 @@ public abstract class Reservation {
         this.durationInHours = durationInHours;
         this.price = price;
         this.approved = false;
+        this.report = null;
     }
 
     public Long getId() {
@@ -72,5 +80,13 @@ public abstract class Reservation {
 
     public boolean isApproved() {
         return approved;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
     }
 }
