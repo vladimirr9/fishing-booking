@@ -23,6 +23,13 @@ export class BoatService {
     })
   }
 
+  IsBoatAvailabile(id: number,from: Date,to: Date): Observable<boolean>{
+    let params = Object();
+    params.from = from.toISOString();
+    params.to = to.toISOString();
+    return this.http.get<boolean>(`${config.baseUrl}${this.boatUrl}/client/freeBoats/${id}`,{params: params});
+  }
+
   getAvailableBoats(from: Date,to: Date):Observable<BoatsDTO[]>{
     let params = Object();
     params.from = from.toISOString();
