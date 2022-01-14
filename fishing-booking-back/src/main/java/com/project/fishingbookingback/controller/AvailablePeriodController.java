@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.request.AvailablePeriodDTO;
+import com.project.fishingbookingback.exception.NewAvailablePeriodOverlapsException;
 import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.service.AvailablePeriodService;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,11 +33,38 @@ public class AvailablePeriodController {
         return ResponseEntity.ok(availablePeriodService.getPeriods(providerEmail));
     }
 
-    @PostMapping
-    public ResponseEntity<AvailablePeriod> addPeriod(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO) {
+    @PostMapping("/instructor")
+    public ResponseEntity<AvailablePeriod> addPeriodForInstructor(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO) {
         AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
-        AvailablePeriod newAvailablePeriod = availablePeriodService.create(availablePeriod, availablePeriodDTO.getEmail());
-        return ResponseEntity.ok(newAvailablePeriod);
+        try {
+            AvailablePeriod newAvailablePeriod = availablePeriodService.createForInstructor(availablePeriod, availablePeriodDTO.getEmail());
+            return ResponseEntity.ok(newAvailablePeriod);
+        } catch (NewAvailablePeriodOverlapsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+
+    }
+
+    @PostMapping("/holidayHome/{homeId}")
+    public ResponseEntity<AvailablePeriod> addPeriodForHolidayHome(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO, @PathVariable Long homeId) {
+        AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
+        try {
+            AvailablePeriod newAvailablePeriod = availablePeriodService.createForHolidayHome(availablePeriod, homeId, availablePeriodDTO.getEmail());
+            return ResponseEntity.ok(newAvailablePeriod);
+        } catch (NewAvailablePeriodOverlapsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+    }
+
+    @PostMapping("/boat/{boatId}")
+    public ResponseEntity<AvailablePeriod> addPeriodForBoat(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO, @PathVariable Long boatId) {
+        AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
+        try {
+            AvailablePeriod newAvailablePeriod = availablePeriodService.createForBoat(availablePeriod, boatId, availablePeriodDTO.getEmail());
+            return ResponseEntity.ok(newAvailablePeriod);
+        } catch (NewAvailablePeriodOverlapsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
     }
 
     @DeleteMapping(value = "{id}")

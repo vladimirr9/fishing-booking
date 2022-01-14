@@ -2,9 +2,11 @@ package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.model.BoatPromotion;
+import com.project.fishingbookingback.model.HolidayHomePromotion;
 import com.project.fishingbookingback.repository.BoatPromotionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -33,4 +35,5 @@ public class BoatPromotionService {
     public List<BoatPromotion> getPromotions(Long id) {
         return repository.findByBoat_Id(id);
     }
+    public Collection<BoatPromotion> getAllForBoatOwner(String email) { return  repository.getAllForBoatOwner(email);}
 }
