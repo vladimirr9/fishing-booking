@@ -24,6 +24,7 @@ import { BoatOwnerHomeComponent } from './component/home/boat-owner-home/boat-ow
 import { NewBoatComponent } from './component/boat/new-boat/new-boat.component';
 import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profile/boat-owner-profile.component';
 import { BoatDetailsComponent } from './component/boat/boat-details/boat-details.component';
+import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
 
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
@@ -54,7 +55,8 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'boat-owner-home/new-boat', component:  NewBoatComponent},
                          { path: 'boats/:id/edit', component:  NewBoatComponent},
                          { path: 'boat-owner-profile', component: BoatOwnerProfileComponent },
-                         { path: 'boats/:id', component:  BoatDetailsComponent}
+                         { path: 'boats/:id', component:  BoatDetailsComponent},
+                         { path: 'holiday-home/:id',component: HolidayHomeDetailsComponent}
                         ];
 
 @NgModule({

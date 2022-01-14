@@ -72,6 +72,7 @@ import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profil
 import { ReserveAdventureComponent } from './component/client-homepage/reserve-adventure/reserve-adventure.component';
 import { BoatDetailsComponent } from './component/boat/boat-details/boat-details.component';
 import { ReserveBoatComponent } from './component/boat/reserve-boat/reserve-boat.component';
+import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
 
 
 
@@ -132,7 +133,8 @@ import { ReserveBoatComponent } from './component/boat/reserve-boat/reserve-boat
     BoatOwnerProfileComponent,
     ReserveAdventureComponent,
     BoatDetailsComponent,
-    ReserveBoatComponent
+    ReserveBoatComponent,
+    HolidayHomeDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
 
     <mat-grid-list cols="8" rowHeight="340px" >
       <mat-grid-tile colspan="2" *ngFor="let house of houses">
-        <mat-card class="example-card" >
+        <mat-card class="example-card" (click)="getHolidayHomeDetails(house.id)" >
           <mat-card-title-group>
             <mat-card-title>{{house.name}}</mat-card-title>
             <mat-card-subtitle> 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HolidayHouseDTO } from 'src/app/dto/HolidayHouseDTO';
 
 @Component({
@@ -8,11 +9,15 @@ import { HolidayHouseDTO } from 'src/app/dto/HolidayHouseDTO';
 })
 export class HolidayHousesViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   @Input() houses: HolidayHouseDTO[]=[];
   
   ngOnInit(): void {
+  }
+
+  getHolidayHomeDetails(id: number): void{
+    this.router.navigate(['/holiday-home',id])
   }
 
 }
