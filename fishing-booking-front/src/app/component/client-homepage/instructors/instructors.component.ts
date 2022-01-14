@@ -66,6 +66,7 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
   }
 
   searchAdventures(): void{
+    if(this.startingTime==="" || this.endingTime ===""){alert("Please select time!"); return;}
     let date = new Date(this.searchStartDate.setHours(0,0,0,0))
     let from = this.addMinutes(date,this.convertTimeToNum(this.startingTime));
     let to = this.addMinutes(date,this.convertTimeToNum(this.endingTime));
