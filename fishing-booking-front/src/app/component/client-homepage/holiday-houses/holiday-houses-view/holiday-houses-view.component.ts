@@ -19,7 +19,7 @@ export class HolidayHousesViewComponent implements OnInit {
   }
 
   getHolidayHomeDetails(id: number): void{
-    this.router.navigate(['/holiday-home',id,this.startingDate,this.endingDate])
+    this.router.navigate(['/holiday-home',id,this.startingDate.toISOString(),this.endingDate.toISOString()])
   }
 
 }

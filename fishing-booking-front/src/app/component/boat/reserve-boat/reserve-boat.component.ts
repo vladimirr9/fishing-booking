@@ -32,8 +32,7 @@ export class ReserveBoatComponent implements OnInit {
     const utc1 = Date.UTC(this.startingDate.getFullYear(), this.startingDate.getMonth(), this.startingDate.getDate());
     const utc2 = Date.UTC(this.endingDate.getFullYear(), this.endingDate.getMonth(), this.endingDate.getDate());
     let result = Math.floor((utc2 - utc1) / this._MS_PER_DAY);
-    if(result == 0) return 1;
-    return 0;
+    return Math.floor((utc2 - utc1) / this._MS_PER_DAY)+1;
   }
  
 

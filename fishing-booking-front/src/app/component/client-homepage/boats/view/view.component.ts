@@ -20,7 +20,7 @@ export class ViewComponent implements OnInit {
   }
 
   getBoatDetails(id: number):void{
-    this.router.navigate(['/boats',id,this.startingDate,this.endingDate])
+    this.router.navigate(['/boats',id,this.startingDate.toISOString(),this.endingDate.toISOString()])
   }
 
 }

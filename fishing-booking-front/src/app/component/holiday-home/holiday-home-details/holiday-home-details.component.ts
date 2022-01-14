@@ -55,8 +55,8 @@ export class HolidayHomeDetailsComponent implements OnInit {
     ngOnInit(): void {
       this.initMap(this.lon, this.lat);
        this.initializeForm();
-       this.startingDate = this.route.snapshot.params['startDate'];
-       this.endingDate = this.route.snapshot.params['endDate'];
+       this.startingDate = new Date(this.route.snapshot.params['startDate']);
+       this.endingDate = new Date(this.route.snapshot.params['endDate']);
     }
 
     initializeForm(): void{
