@@ -1,6 +1,6 @@
 package com.project.fishingbookingback.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ public class Report {
     private Long id;
     @OneToOne
     @JoinColumn(name = "reservation_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     private Reservation reservation;
     private String comment;
     private boolean sanction;

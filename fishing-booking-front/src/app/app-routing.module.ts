@@ -26,6 +26,8 @@ import { BoatOwnerProfileComponent } from './component/profile/boat-owner-profil
 import { BoatDetailsComponent } from './component/boat/boat-details/boat-details.component';
 import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
 import { InstructorReservationsPageComponent } from './component/instructor-reservations-page/instructor-reservations-page.component';
+import { AdminReportsPageComponent } from './component/admin-reports-page/admin-reports-page.component';
+
 
 
 const routes: Routes = [ { path: 'login', component: LoginComponent },
@@ -33,6 +35,7 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'instructor-home', component: InstructorHomeComponent },
                          { path: 'admin-home', component: AdminHomeComponent },
                          { path: 'admin-home/new-admin', component: AdminRegistrationComponent },
+                         { path: 'admin-home/reports', component: AdminReportsPageComponent },
                          { path: 'admin-home/registration-requests/:id', component: RegistrationRequestPageComponent },
                          { path: 'instructor-home/new-adventure', component:  NewAdventureComponent},
                          { path: 'instructor-home/calendar', component:  InstructorCalendarPageComponent},

@@ -12,7 +12,7 @@ import { ReportDialogComponent } from '../dialog/report-dialog/report-dialog.com
 })
 export class InstructorReservationsPageComponent implements OnInit {
 
-  displayedColumns: string[] = ['startDate', 'endDate', 'price', 'report'];
+  displayedColumns: string[] = ['name', 'client','startDate', 'endDate', 'price', 'report'];
   reservations: any
   constructor(private reservationService: ReservationService,
     private dialog: MatDialog,
@@ -27,7 +27,6 @@ export class InstructorReservationsPageComponent implements OnInit {
 
 
   sendReport(element: any) {
-    console.log(element)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true

@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
@@ -23,11 +24,20 @@ public class FishingInstructor extends User {
     @JsonManagedReference
     private List<AvailablePeriod> availablePeriods;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fishingInstructor")
+    @JsonBackReference
+
+    private List<FishingAdventure> fishingAdventures;
+
     public List<AvailablePeriod> getAvailablePeriods() {
         return availablePeriods;
     }
 
     public FishingInstructor() {
+    }
+
+    public List<FishingAdventure> getFishingAdventures() {
+        return fishingAdventures;
     }
 
     public FishingInstructor(ProviderRegistration providerRegistration) {

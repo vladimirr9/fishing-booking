@@ -77,6 +77,7 @@ public class ReservationMapper {
             reservationDTO.setReportPresent(false);
         else reservationDTO.setReportPresent(true);
         reservationDTO.setId(reservation.getId());
+        reservationDTO.setClient(reservation.getClient());
         return reservationDTO;
     }
 

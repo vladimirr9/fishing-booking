@@ -1,8 +1,6 @@
 package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -67,7 +65,7 @@ public class FishingAdventure {
 
     @ManyToOne()
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
     private FishingInstructor fishingInstructor;
 
     public void setFishingInstructor(FishingInstructor fishingInstructor) {

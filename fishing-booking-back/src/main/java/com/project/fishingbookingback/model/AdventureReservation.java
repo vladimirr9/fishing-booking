@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 public class AdventureReservation extends Reservation {
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "adventure_id")
+    @JoinColumn(name = "adventure_id", nullable = false)
     @JsonBackReference
     private FishingAdventure adventure;
 

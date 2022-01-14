@@ -1,6 +1,6 @@
 package com.project.fishingbookingback.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public abstract class Reservation {
     private double price;
     private boolean approved;
     @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonBackReference
     private Report report;
 
     @ManyToOne

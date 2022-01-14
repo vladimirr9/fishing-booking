@@ -76,6 +76,8 @@ import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-ho
 import { ReserveHolidayHomeComponent } from './component/holiday-home/reserve-holiday-home/reserve-holiday-home.component';
 import { InstructorReservationsPageComponent } from './component/instructor-reservations-page/instructor-reservations-page.component';
 import { ReportDialogComponent } from './component/dialog/report-dialog/report-dialog.component';
+import { AdminReportsPageComponent } from './component/admin-reports-page/admin-reports-page.component';
+
 
 
 
@@ -140,7 +142,8 @@ import { ReportDialogComponent } from './component/dialog/report-dialog/report-d
     HolidayHomeDetailsComponent,
     ReserveBoatComponent,
     ReserveHolidayHomeComponent,
-    ReportDialogComponent
+    ReportDialogComponent,
+    AdminReportsPageComponent
   ],
   imports: [
     BrowserModule,

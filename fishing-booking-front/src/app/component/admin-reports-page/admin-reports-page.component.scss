@@ -1,0 +1,28 @@
+.reports-container {
+  min-height: 100px;
+  display: flex;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+}
+
+.mat-view {
+  background-color: #2D9645;
+  color: #fff;
+}
+.container-card {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}

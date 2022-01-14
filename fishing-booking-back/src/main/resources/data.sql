@@ -9,6 +9,8 @@ insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) 
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (8, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (9, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (10, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (11, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER) values (12, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
 
 --USERS--
 INSERT INTO users (D_TYPE,ID,EMAIL,FIRST_NAME,LAST_NAME,PASSWORD,PHONE_NUMBER,ROLE,FIRST_LOGIN,ADDRESS_ID) VALUES ('ADMIN',1,'admin','admin','admin','pass','21323',1,0,1);
@@ -24,10 +26,10 @@ INSERT INTO users (D_TYPE,ID,EMAIL,FIRST_NAME,LAST_NAME,PASSWORD,PHONE_NUMBER,RO
 
 --FISHING ADVENTURES
 INSERT INTO fishing_adventure(id,available_equipment,biography,cancellation_fee,description,hourly_price,max_people,name,rules_of_conduct,address_id,instructor_id)
-VALUES (1,'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15, 'Tons of fun for the whole family', 450, 5, 'Amazon Fishing', 'You must stay with me, the instructor, the entire duration of the trip', 1,3);
+VALUES (1,'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15, 'Tons of fun for the whole family', 450, 5, 'Amazon Fishing', 'You must stay with me, the instructor, the entire duration of the trip', 11,3);
 
 INSERT INTO fishing_adventure(id,available_equipment,biography,cancellation_fee,description,hourly_price,max_people,name,rules_of_conduct,address_id,instructor_id)
-VALUES (2,'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15, 'Tons of fun for the whole family', 450, 5, 'Canyon Rock', 'You must stay with me, the instructor, the entire duration of the trip', 3,3);
+VALUES (2,'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15, 'Tons of fun for the whole family', 450, 5, 'Canyon Rock', 'You must stay with me, the instructor, the entire duration of the trip', 12,3);
 
 --HOLIDAY HOMES
 
@@ -40,8 +42,9 @@ INSERT INTO boat(ID,ADDITIONAL_INFO,CABIN,CANCELLATION_FEE_PERCENTAGE,CAPACITY,D
 INSERT INTO boat(ID,ADDITIONAL_INFO,CABIN,CANCELLATION_FEE_PERCENTAGE,CAPACITY,DESCRIPTION,ENGINE_NUMBER,ENGINE_POWER,FISHFINDER,FISHING_EQUIPMENT,GPS,LENGTH,MAX_SPEED,NAME,PRICE_PER_DAY,RADAR,RULES_OF_CONDUCT,TYPE,VHF,ADDRESS_ID,OWNER_ID) VALUES (2, 'addInfo4', false, 10, 5, 'Dobar veoma.', 10, 20, false, 'Nema ni volan.', true, 120, 1000, 'Puchina', 100, true, 'Nema spavanja u brodu.', 'Kruzer', true, 10, 2);
 
 --RESERVATIONS
--- INSERT INTO ADVENTURE_RESERVATION (id,start_date,end_date,price,approved,client_id,adventure_id)
--- VALUES(1,'2012-09-17 18:47:52.69','2012-09-17 20:52:52.69',200,1,4,1);
+INSERT INTO ADVENTURE_RESERVATION (id,start_date,end_date,price,approved,client_id,adventure_id)
+VALUES(1,'2022-01-17 18:47:52.69','2022-01-18 20:52:52.69',200,1,4,1);
+ALTER SEQUENCE MY_SEQ RESTART WITH 2;
 
 --PERIODS
 INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
