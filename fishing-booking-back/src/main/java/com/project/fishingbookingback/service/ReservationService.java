@@ -47,6 +47,7 @@ public class ReservationService {
         reservation.setEndDate(to);
         reservation.setApproved(false);
         reservationRepository.save(reservation);
+        emailService.sendSimpleMessage(clientUsername,"Reservation","Reservation request successfully sent!");
     }
 
     private Reservation getReservationdownClass(String type,Long entityId){
