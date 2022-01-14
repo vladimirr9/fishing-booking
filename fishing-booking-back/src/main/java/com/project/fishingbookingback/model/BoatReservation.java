@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 public class BoatReservation extends Reservation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boat_id")
+    @JsonBackReference
     private Boat boat;
 
     public BoatReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Boat boat, Client client) {
