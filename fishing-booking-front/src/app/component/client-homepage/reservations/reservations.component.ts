@@ -40,7 +40,7 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
         this.filteredReservations.sort((a, b) => b.startDate.getTime()-a.startDate.getTime());
         break;
       case 'price':
-        this.filteredReservations.sort((a, b) => b.mark - a.mark);
+        this.filteredReservations.sort((a, b) => b.price - a.price);
         break;
       case 'duration':
         this.filteredReservations.sort((a, b) => b.durationInHours - a.durationInHours);
