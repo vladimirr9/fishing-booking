@@ -73,6 +73,7 @@ import { ReserveAdventureComponent } from './component/client-homepage/reserve-a
 import { BoatDetailsComponent } from './component/boat/boat-details/boat-details.component';
 import { ReserveBoatComponent } from './component/boat/reserve-boat/reserve-boat.component';
 import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
+import { ReserveHolidayHomeComponent } from './component/holiday-home/reserve-holiday-home/reserve-holiday-home.component';
 
 
 
@@ -134,7 +135,8 @@ import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-ho
     ReserveAdventureComponent,
     BoatDetailsComponent,
     ReserveBoatComponent,
-    HolidayHomeDetailsComponent
+    HolidayHomeDetailsComponent,
+    ReserveHolidayHomeComponent
   ],
   imports: [
     BrowserModule,

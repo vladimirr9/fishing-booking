@@ -7,6 +7,8 @@ import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -81,6 +83,30 @@ public class HolidayHomeService {
         checkIfAllowed(holidayHome);
         holidayHome.addPicture(is_interior, picture);
         return holidayHomeRepository.save(holidayHome);
+    }
+
+    public List<HolidayHome> getAvailableHomes(LocalDateTime from, LocalDateTime to) {
+        List<HolidayHome> availableHomes = new ArrayList<>();
+        for(HolidayHome holidayHome: holidayHomeRepository.findAll())
+            if(isHomeAvailable(holidayHome,from,to))
+                availableHomes.add(holidayHome);
+
+        return availableHomes;
+    }
+
+    private boolean isHomeAvailable(HolidayHome holidayHome, LocalDateTime from, LocalDateTime to) {
+        for (AvailablePeriod availablePeriod : holidayHome.getAvailablePeriods())
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+                return true;
+        return false;
+    }
+
+    public boolean IsHomeAvailable(Long id, LocalDateTime from, LocalDateTime to) {
+        HolidayHome home = holidayHomeRepository.getById(id);
+        for (AvailablePeriod availablePeriod : home.getAvailablePeriods())
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+                return true;
+        return false;
     }
 }
 

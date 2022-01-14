@@ -3,11 +3,9 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.HolidayHomeMapper;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.dto.response.ClientsHolidayHomeDTO;
-import com.project.fishingbookingback.model.AdditionalService;
-import com.project.fishingbookingback.model.FishingAdventure;
-import com.project.fishingbookingback.model.HolidayHome;
-import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.HolidayHomeService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +61,22 @@ public class HolidayHomeController {
             clientsHolidayHomeDTOs.add(holidayHomeMapper.toHolidayViewDTO(home));
 
         return ResponseEntity.ok(clientsHolidayHomeDTOs);
+    }
+
+    @GetMapping(value="/client/freeHomes")
+    public ResponseEntity<List<ClientsHolidayHomeDTO>> getAvailableBoats(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                                      @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
+        List<ClientsHolidayHomeDTO> clientsHolidayHomeDTOs = new ArrayList<>();
+        for(HolidayHome home: holidayHomeService.getAvailableHomes(from,to))
+            clientsHolidayHomeDTOs.add(holidayHomeMapper.toHolidayViewDTO(home));
+
+        return ResponseEntity.ok(clientsHolidayHomeDTOs);
+    }
+    @GetMapping(value = "/client/freeBoats/{id}")
+    public ResponseEntity<Boolean> IsHomeAvailable(@PathVariable Long id,
+                                                   @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                   @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
+        return ResponseEntity.ok(holidayHomeService.IsHomeAvailable(id,from,to));
     }
 
     @GetMapping(value = "/{id}")

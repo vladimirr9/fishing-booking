@@ -18,6 +18,20 @@ export class HolidayHomeService {
       return this.http.get<HolidayHouseDTO[]>(`${config.baseUrl}${this.homeURL}/client`);
   }
 
+  getAvailableHomes(from: Date,to: Date):Observable<HolidayHouseDTO[]>{
+    let params = Object();
+    params.from = from.toISOString();
+    params.to = to.toISOString();
+    return this.http.get<HolidayHouseDTO[]>(`${config.baseUrl}${this.homeURL}/client/freeHomes`,{params: params})
+  }
+
+  IsHomeAvailabile(id: number,from: Date,to: Date): Observable<boolean>{
+    let params = Object();
+    params.from = from.toISOString();
+    params.to = to.toISOString();
+    return this.http.get<boolean>(`${config.baseUrl}${this.homeURL}/client/freeHomes/${id}`,{params: params});
+  } 
+
   createNewHome(home : any) : Observable<any> {
     return this.http.post(`${config.baseUrl}${this.homeURL}`, home)
   }
