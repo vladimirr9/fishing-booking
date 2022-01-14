@@ -56,7 +56,9 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'boats/:id/edit', component:  NewBoatComponent},
                          { path: 'boat-owner-profile', component: BoatOwnerProfileComponent },
                          { path: 'boats/:id', component:  BoatDetailsComponent},
-                         { path: 'holiday-home/:id',component: HolidayHomeDetailsComponent}
+                         { path: 'boats/:id/:startDate/:endDate', component:  BoatDetailsComponent},
+                         { path: 'holiday-home/:id',component: HolidayHomeDetailsComponent},
+                         { path: 'holiday-home/:id/:startDate/:endDate',component: HolidayHomeDetailsComponent}
                         ];
 
 @NgModule({

@@ -26,6 +26,9 @@ export class HolidayHomeDetailsComponent implements OnInit {
   interior : any
   holidayhome : any
   exterior : any
+   //client
+   startingDate: Date= new Date();
+   endingDate: Date = new Date();
   
 
   constructor(private fb: FormBuilder,
@@ -52,6 +55,8 @@ export class HolidayHomeDetailsComponent implements OnInit {
     ngOnInit(): void {
       this.initMap(this.lon, this.lat);
        this.initializeForm();
+       this.startingDate = this.route.snapshot.params['startDate'];
+       this.endingDate = this.route.snapshot.params['endDate'];
     }
 
     initializeForm(): void{

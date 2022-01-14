@@ -15,5 +15,5 @@
     <app-sorter style="margin-left: 200px;" (sortingEvent)="setSorter($event)"></app-sorter>
 </div>
 <div class="viewArea">
-    <app-holiday-houses-view [houses]="filteredHouses"></app-holiday-houses-view>
+    <app-holiday-houses-view [startingDate]="searchStartDate" [endingDate]="searchEndDate" [houses]="filteredHouses"></app-holiday-houses-view>
 </div>

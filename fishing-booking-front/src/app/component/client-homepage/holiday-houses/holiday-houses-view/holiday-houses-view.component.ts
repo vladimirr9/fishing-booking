@@ -12,12 +12,14 @@ export class HolidayHousesViewComponent implements OnInit {
   constructor(private router: Router) { }
 
   @Input() houses: HolidayHouseDTO[]=[];
+  @Input() startingDate: Date = new Date();
+  @Input() endingDate: Date = new Date();
   
   ngOnInit(): void {
   }
 
   getHolidayHomeDetails(id: number): void{
-    this.router.navigate(['/holiday-home',id])
+    this.router.navigate(['/holiday-home',id,this.startingDate,this.endingDate])
   }
 
 }

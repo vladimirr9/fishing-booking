@@ -10,6 +10,8 @@ import { BoatsDTO } from 'src/app/dto/BoatsDTO';
 export class ViewComponent implements OnInit {
 
   @Input() boats: BoatsDTO[]= [];
+  @Input() startingDate: Date = new Date();
+  @Input() endingDate: Date = new Date();
 
   constructor(private router: Router) {
   }
@@ -18,7 +20,7 @@ export class ViewComponent implements OnInit {
   }
 
   getBoatDetails(id: number):void{
-    this.router.navigate(['/boats',id])
+    this.router.navigate(['/boats',id,this.startingDate,this.endingDate])
   }
 
 }
