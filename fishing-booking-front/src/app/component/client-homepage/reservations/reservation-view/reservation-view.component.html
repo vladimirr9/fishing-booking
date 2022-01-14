@@ -19,7 +19,7 @@
                   <label class="mr-2">Start time:</label>
                   <input type="" style="width: 150px;" [value]="showTime(reservation.startDate)" disabled>
               </li>
-                <li class="card-item">Duration: {{reservation.durationInHours}}h</li>
+                <li class="card-item">Duration: {{(reservation.durationInHours < 24)? reservation.durationInHours + "h" : reservation.durationInHours/24 + "d" }}</li>
                 <li class="card-item">Status: {{(reservation.approved)? "Approved" : "Pending"}}</li>
               </ul>
             </mat-card-subtitle>

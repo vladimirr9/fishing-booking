@@ -61,11 +61,12 @@ export class ReserveAdventureComponent implements OnInit {
     });
   }
 
+  
   sendRequest(from: Date,to: Date): void{
     let reservationDto={
       price: this.totalPrice,
-      from: from,
-      to: to,
+      from: new Date(from.setHours(from.getHours()+1)),
+      to: new Date(to.setHours(to.getHours()+1)),
       clientUsername: this.localStorage.getUsername(),
       entityId: this.adventure.id,
       type: 'ADVENTURE'
@@ -85,7 +86,7 @@ export class ReserveAdventureComponent implements OnInit {
 
   calculatePrice(): void{
     let price = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
-    if(price < 0 || isNaN(price)){
+    if(price <= 0 || isNaN(price)){
       alert("Please choose valid times!"); return;
     }
     this.totalPrice = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
