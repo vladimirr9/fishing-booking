@@ -3,6 +3,8 @@ package com.project.fishingbookingback.dto.response;
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
+    private Long id;
+    private boolean approved;
     private String imgUrl;
     private String name;
     private LocalDateTime startDate;
@@ -12,6 +14,22 @@ public class ReservationDTO {
     private String address;
 
     public ReservationDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     public String getImgUrl() {

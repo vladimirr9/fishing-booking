@@ -10,7 +10,7 @@
               <ul class="reservationCard">
                 <li class="card-item">Adress: {{reservation.address}}</li>
                 <li class="card-item">Price: {{reservation.price}}$</li>
-                <li class="card-item">Mark: {{reservation.mark}}</li>
+                <li class="card-item">Mark: {{(reservation.mark==0)? "Not assigned" : reservation.mark}}</li>
                 <li type="date" class="card-item">
                     <label class="mr-2">Start date:</label>
                     <input type="date" style="width: 150px;" [value]="reservation.startDate | date:'yyyy-MM-dd'" disabled>
@@ -20,6 +20,7 @@
                   <input type="" style="width: 150px;" [value]="showTime(reservation.startDate)" disabled>
               </li>
                 <li class="card-item">Duration: {{reservation.durationInHours}}h</li>
+                <li class="card-item">Status: {{(reservation.approved)? "Approved" : "Pending"}}</li>
               </ul>
             </mat-card-subtitle>
             <img mat-card-xl-image src="{{reservation.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
