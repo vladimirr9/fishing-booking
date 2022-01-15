@@ -16,11 +16,13 @@ public class HolidayHomeService {
     private final UserService userService;
     private final HolidayHomeRepository holidayHomeRepository;
     private final LoggedUserService loggedUserService;
+    private final HolidayHomePromotionService holidayHomePromotionService;
 
-    public HolidayHomeService(UserService userService, HolidayHomeRepository holidayHomeRepository, LoggedUserService loggedUserService) {
+    public HolidayHomeService(UserService userService, HolidayHomeRepository holidayHomeRepository, LoggedUserService loggedUserService, HolidayHomePromotionService holidayHomePromotionService) {
         this.userService = userService;
         this.holidayHomeRepository = holidayHomeRepository;
         this.loggedUserService = loggedUserService;
+        this.holidayHomePromotionService = holidayHomePromotionService;
     }
 
     public HolidayHome create(HolidayHome holidayHome) {
@@ -107,6 +109,24 @@ public class HolidayHomeService {
             if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
+	}
+    
+    public HolidayHomePromotion addPromotion(Long id, Promotion promotion) {
+        HolidayHome holidayHome = findByID(id);
+        checkIfAllowed(holidayHome);
+        HolidayHomePromotion holidayHomePromotion = new HolidayHomePromotion(promotion.getFromTime(), promotion.getToTime(), promotion.getPrice(), promotion.getValidUntil(), holidayHome);
+
+        return holidayHomePromotionService.addPromotion(holidayHomePromotion);
+    }
+
+    public void deletePromotion(Long id, Long id_promotion) {
+        HolidayHome holidayHome = findByID(id);
+        checkIfAllowed(holidayHome);
+        holidayHomePromotionService.deletePromotion(id_promotion);
+    }
+
+    public List<HolidayHomePromotion> getPromotions(Long id) {
+        return holidayHomePromotionService.getPromotions(id);
     }
 }
 

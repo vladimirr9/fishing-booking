@@ -8,6 +8,7 @@ import com.project.fishingbookingback.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +32,10 @@ public class ReservationService {
         this.userService = userService;
         this.boatService = boatService;
         this.adventureService = adventureService;
+    }
+
+    public Collection<Reservation> getAllForOwner(String email) {
+        return reservationRepository.getAllForOwner(email);
     }
 
     public List<Reservation> getAll() {

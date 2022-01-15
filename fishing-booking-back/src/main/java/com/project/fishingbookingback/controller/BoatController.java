@@ -3,9 +3,7 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.BoatMapper;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
-import com.project.fishingbookingback.model.Boat;
-import com.project.fishingbookingback.model.HolidayHome;
-import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.BoatService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -95,5 +93,21 @@ public class BoatController {
     public ResponseEntity<HttpStatus> deletePicture(@PathVariable Long id, @PathVariable Long id_picture, @PathVariable Boolean is_interior) {
         boatService.deletePicture(id, id_picture, is_interior);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/{id}/promotions")
+    public ResponseEntity<BoatPromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
+        return ResponseEntity.ok(boatService.addPromotion(id, promotion));
+    }
+
+    @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
+    public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
+        boatService.deletePromotion(id, id_promotion);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/promotions")
+    public ResponseEntity<List<BoatPromotion>> getPromotions(@PathVariable Long id) {
+        return ResponseEntity.ok(boatService.getPromotions(id));
     }
 }

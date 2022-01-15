@@ -6,6 +6,7 @@ import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.repository.FishingPromotionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -34,4 +35,6 @@ public class FishingPromotionService {
     public List<FishingPromotion> getPromotions(Long id) {
         return repository.findByFishingAdventure_Id(id);
     }
+
+    public Collection<FishingPromotion> getAllForInstructor(String email) { return  repository.getAllForInstructor(email);}
 }
