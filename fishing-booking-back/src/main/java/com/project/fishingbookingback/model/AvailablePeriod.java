@@ -63,6 +63,7 @@ public class AvailablePeriod {
     public FishingInstructor getFishingInstructor() {
         return fishingInstructor;
     }
+    public Boat getBoat() {return boat;}
 
     public Long getId() {
         return id;
@@ -79,5 +80,13 @@ public class AvailablePeriod {
     public boolean overlaps(LocalDateTime time){
         return !time.isBefore(fromTime) && !time.isAfter(toTime);
     }
-
+    public boolean overlaps(AvailablePeriod availablePeriod) {
+        return overlaps(availablePeriod.getFromTime()) || overlaps(availablePeriod.getToTime());
+    }
+    public boolean overlaps(Reservation reservation) {
+        return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
+    }
+    public boolean overlaps(Promotion promotion) {
+        return overlaps(promotion.getFromTime()) || overlaps(promotion.getToTime());
+    }
 }

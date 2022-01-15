@@ -96,6 +96,22 @@ public class HolidayHomeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping(value = "/{id}/promotions")
+    public ResponseEntity<HolidayHomePromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.addPromotion(id, promotion));
+    }
+
+    @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
+    public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
+        holidayHomeService.deletePromotion(id, id_promotion);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/promotions")
+    public ResponseEntity<List<HolidayHomePromotion>> getPromotions(@PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.getPromotions(id));
+    }
+
 
 }
 
