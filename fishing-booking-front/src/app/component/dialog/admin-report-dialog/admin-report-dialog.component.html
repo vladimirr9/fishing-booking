@@ -1,0 +1,29 @@
+<div class="container">
+  <h2 mat-dialog-title>Unapproved Report</h2>
+
+  <form class="form" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Report Comment</mat-label>
+      <textarea matInput type="text" placeholder="Comment" formControlName="comment" readonly></textarea>
+    </mat-form-field>
+    <p>Appeared: {{data.appeared ? 'Yes' : 'No'}}</p>
+    <div class="radio-container">
+      <div>
+        <label for="approve">Approve</label>
+        <input type="radio" value="approve" id="approve" name="status" formControlName="status" [checked]="true">
+      </div>
+      <div>
+        <label for="deny">Deny</label>
+        <input type="radio" value="deny" id="deny" name="status" formControlName="status">
+      </div>
+    </div>
+    <mat-form-field appearance="standard">
+      <mat-label>Reason</mat-label>
+      <textarea matInput type="text" placeholder="Reason for Approval or Denial" formControlName="reason"></textarea>
+    </mat-form-field>
+  </form>
+  <div class="button-container">
+    <button mat-flat-button color="primary" (click)="send()">Send</button>
+    <button mat-flat-button color="warn" (click)="close()">Close</button>
+  </div>
+</div>

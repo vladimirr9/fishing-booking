@@ -138,7 +138,7 @@ public class ReservationService {
         reservationRepository.save(reservation);
         String clientEmail = report.getReservation().getClient().getEmail();
         String serviceProviderEmail = report.getReservation().getOwnerEmail();
-        emailService.sendSimpleMessage(clientEmail, "Fishing Booking Account Sanctioned", message);
-        emailService.sendSimpleMessage(serviceProviderEmail, "Fishing Booking Client Sanctioned", message);
+        emailService.sendSimpleMessage(clientEmail, "Fishing Booking Account Not Sanctioned", message);
+        emailService.sendSimpleMessage(serviceProviderEmail, "Fishing Booking Client Not Sanctioned", message);
     }
 }
