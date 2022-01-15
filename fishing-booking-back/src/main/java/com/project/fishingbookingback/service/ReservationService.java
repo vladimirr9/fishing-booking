@@ -39,7 +39,7 @@ public class ReservationService {
 
     public void createReservation(double price,LocalDateTime from,LocalDateTime to,String clientUsername, Long entityId,String type){
         if(to.isBefore(from)) throw new NotAllowedException();
-        Reservation reservation = getReservationdownClass(type,entityId);
+        Reservation reservation = createReservationdownClass(type,entityId);
         Client client = (Client) userService.findByEmail(clientUsername);
         reservation.setClient(client);
         reservation.setPrice(price);
@@ -49,8 +49,10 @@ public class ReservationService {
         reservationRepository.save(reservation);
         emailService.sendSimpleMessage(clientUsername,"Reservation","Reservation request successfully sent!");
     }
+    
 
-    private Reservation getReservationdownClass(String type,Long entityId){
+
+    private Reservation createReservationdownClass(String type,Long entityId){
         switch (type){
             case "ADVENTURE" ->{
                 var adventureReservation = new AdventureReservation();
