@@ -8,6 +8,7 @@ import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
+import com.project.fishingbookingback.service.ReservationCancelationService;
 import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,13 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final ReservationMapper reservationMapper;
     private final ReportMapper reportMapper;
+    private final ReservationCancelationService reservationCancelationService;
 
-    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper) {
+    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService) {
         this.reservationService = reservationService;
         this.reservationMapper = reservationMapper;
         this.reportMapper = reportMapper;
+        this.reservationCancelationService = reservationCancelationService;
     }
 
     @GetMapping
@@ -46,6 +49,12 @@ public class ReservationController {
         Report report = reportMapper.toModel(reportRequestDTO);
         Report newReport = reservationService.addReport(id, report);
         return ResponseEntity.ok(newReport);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable Long id){
+        reservationCancelationService.cancelReservation(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/reports/{report_id}/approve")

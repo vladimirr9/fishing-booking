@@ -23,8 +23,13 @@
                 <li class="card-item">Status: {{(reservation.approved)? "Approved" : "Pending"}}</li>
               </ul>
             </mat-card-subtitle>
-            <img mat-card-xl-image src="{{reservation.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
+            
+              <img mat-card-xl-image src="{{reservation.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
+            
           </mat-card-title-group>
+          <button mat-mini-fab  style="margin-left: 350px;" *ngIf="isDeletable(reservation.startDate)" (click)="cancelReservation(reservation.id)" aria-label="Example icon button with a home icon">
+            <mat-icon>delete</mat-icon>
+          </button>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
