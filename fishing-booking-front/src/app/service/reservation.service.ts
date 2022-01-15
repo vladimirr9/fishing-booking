@@ -25,4 +25,9 @@ export class ReservationService {
   createReservation(reservationDto: CreateReservationDTO){
     return this._http.post(`${config.baseUrl}${this._reservationsUrl}/create`,reservationDto);
   }
+
+  deleteReservation(id: number){
+    return this._http.delete(`${config.baseUrl}${this._reservationsUrl}/${id}`);
+  }
+
 }

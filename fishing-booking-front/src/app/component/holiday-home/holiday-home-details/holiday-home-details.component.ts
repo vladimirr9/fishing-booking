@@ -12,6 +12,7 @@ import { HolidayHomeService } from 'src/app/service/holiday-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-holiday-home-details',
@@ -33,8 +34,8 @@ export class HolidayHomeDetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
-    private router: Router,
-    private route: ActivatedRoute, private dialog: MatDialog) { }
+    private route: ActivatedRoute,
+    private storageService: StorageService) { }
 
 
     addHomeForm = this.fb.group({
@@ -57,6 +58,10 @@ export class HolidayHomeDetailsComponent implements OnInit {
        this.initializeForm();
        this.startingDate = new Date(this.route.snapshot.params['startDate']);
        this.endingDate = new Date(this.route.snapshot.params['endDate']);
+    }
+
+    isClient(): boolean{
+      return this.storageService.getRole() == "ROLE_CLIENT";
     }
 
     initializeForm(): void{

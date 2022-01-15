@@ -32,7 +32,7 @@ export class ReserveBoatComponent implements OnInit {
     const utc1 = Date.UTC(this.startingDate.getFullYear(), this.startingDate.getMonth(), this.startingDate.getDate());
     const utc2 = Date.UTC(this.endingDate.getFullYear(), this.endingDate.getMonth(), this.endingDate.getDate());
     let result = Math.floor((utc2 - utc1) / this._MS_PER_DAY);
-    return Math.floor((utc2 - utc1) / this._MS_PER_DAY)+1;
+    return Math.floor((utc2 - utc1) / this._MS_PER_DAY);
   }
  
 
@@ -59,8 +59,8 @@ export class ReserveBoatComponent implements OnInit {
   sendRequest(): void{
     let reservationDto={
       price: this.totalPrice,
-      from: this.startingDate,
-      to: this.endingDate,
+      from: new Date(this.startingDate.setHours(12,0,0,0)),
+      to: new Date(this.endingDate.setHours(12,0,0,0)),
       clientUsername: this.localStorage.getUsername(),
       entityId: this.boat.id,
       type: 'BOAT'

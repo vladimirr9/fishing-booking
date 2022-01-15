@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Boat-details</h1>
     <div>
-        <app-reserve-boat  [boat]="boat" [startingDate]="startingDate" [endingDate]="endingDate"></app-reserve-boat>
+        <app-reserve-boat *ngIf="isClient()" [boat]="boat" [startingDate]="startingDate" [endingDate]="endingDate"></app-reserve-boat>
     </div>
    
     <form class="form-container" [formGroup]="addBoatForm">

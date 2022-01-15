@@ -51,6 +51,7 @@ public class HolidayHome {
     private String additionalInfo;
     private float pricePerDay;
     @OneToMany(mappedBy = "holidayHome",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<HolidayHomeReservation> reservations;
 
     public Set<HolidayHomeReservation> getReservations() {

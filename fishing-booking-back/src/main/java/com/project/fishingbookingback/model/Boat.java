@@ -26,6 +26,7 @@ public class Boat {
     private Boolean fishfinder;
     private Boolean cabin;
     @OneToMany(mappedBy = "boat",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<BoatReservation> reservations;
 
     @OneToOne(cascade = CascadeType.ALL)

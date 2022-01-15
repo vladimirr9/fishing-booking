@@ -11,6 +11,7 @@ import { transform } from 'ol/proj';
 import { BoatService } from 'src/app/service/boat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageService } from 'src/app/service/storage.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class BoatDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
     private router: Router,
-    private route: ActivatedRoute, private dialog: MatDialog) { }
+    private route: ActivatedRoute, private dialog: MatDialog,
+    private storageService: StorageService) { }
 
 
     addBoatForm = this.fb.group({
@@ -71,6 +73,10 @@ export class BoatDetailsComponent implements OnInit {
       this.initializeForm()
       this.startingDate = new Date(this.route.snapshot.params['startDate']);
       this.endingDate = new Date(this.route.snapshot.params['endDate']);
+    }
+
+    isClient(): boolean{
+      return this.storageService.getRole() == "ROLE_CLIENT";
     }
 
     initializeForm(): void{

@@ -48,6 +48,7 @@ public abstract class Reservation {
         this.client = client;
     }
 
+
     abstract public String getOwnerEmail();
 
 

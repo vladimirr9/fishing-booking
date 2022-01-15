@@ -26,7 +26,8 @@ public class ReservationMapper {
 
     private ReservationDTO holidayHomeReservationDTO(HolidayHomeReservation reservation) {
         ReservationDTO reservationDTO = new ReservationDTO();
-
+        reservationDTO.setId(reservation.getId());
+        reservationDTO.setApproved(reservation.isApproved());
         reservationDTO.setName(reservation.getHolidayHome().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getHolidayHome().getAddress().toString());
@@ -44,7 +45,8 @@ public class ReservationMapper {
 
     private ReservationDTO boatReservationDTO(BoatReservation reservation) {
         ReservationDTO reservationDTO = new ReservationDTO();
-
+        reservationDTO.setId(reservation.getId());
+        reservationDTO.setApproved(reservation.isApproved());
         reservationDTO.setName(reservation.getBoat().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getBoat().getAddress().toString());
@@ -61,7 +63,8 @@ public class ReservationMapper {
 
     private ReservationDTO adventureReservationDTO(AdventureReservation reservation) {
         ReservationDTO reservationDTO = new ReservationDTO();
-
+        reservationDTO.setId(reservation.getId());
+        reservationDTO.setApproved(reservation.isApproved());
         reservationDTO.setName(reservation.getAdventure().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getAdventure().getAddress().toString());
