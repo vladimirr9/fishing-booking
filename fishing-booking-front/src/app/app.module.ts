@@ -78,6 +78,7 @@ import { InstructorReservationsPageComponent } from './component/instructor-rese
 import { ReportDialogComponent } from './component/dialog/report-dialog/report-dialog.component';
 import { AdminReportsPageComponent } from './component/admin-reports-page/admin-reports-page.component';
 import { AdminReportDialogComponent } from './component/dialog/admin-report-dialog/admin-report-dialog.component';
+import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
 
 
 
@@ -145,7 +146,8 @@ import { AdminReportDialogComponent } from './component/dialog/admin-report-dial
     ReserveHolidayHomeComponent,
     ReportDialogComponent,
     AdminReportsPageComponent,
-    AdminReportDialogComponent
+    AdminReportDialogComponent,
+    ComplaintDialogComponent
   ],
   imports: [
     BrowserModule,

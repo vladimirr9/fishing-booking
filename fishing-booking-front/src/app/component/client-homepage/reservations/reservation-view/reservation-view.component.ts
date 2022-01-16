@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ComplaintDialogComponent } from 'src/app/component/dialog/complaint-dialog/complaint-dialog.component';
 import { ReservationDTO } from 'src/app/dto/ReservationDTO';
+import { ComplaintServiceService } from 'src/app/service/complaint-service.service';
 import { ReservationService } from 'src/app/service/reservation.service';
 
 @Component({
@@ -9,7 +12,7 @@ import { ReservationService } from 'src/app/service/reservation.service';
 })
 export class ReservationViewComponent implements OnInit {
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService,private dialog: MatDialog,private complaintService:ComplaintServiceService) { }
 
   _MS_PER_DAY: number = 1000 * 60 * 60 * 24;
 
@@ -39,7 +42,17 @@ export class ReservationViewComponent implements OnInit {
  }
 
   complaint(id: number):void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
 
+    const dialogRef = this.dialog.open(ComplaintDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe((data)=>{
+      if(data){
+          this.complaintService.createComplaint(id,data).subscribe(()=>{
+            alert("Complaint successfully sent!");
+          });
+      }
+    });
   }
 
   cancelReservation(id: number):void{
