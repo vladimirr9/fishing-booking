@@ -30,6 +30,10 @@ public abstract class Reservation {
     @JsonBackReference
     private Report report;
 
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private Complaint complaint;
+
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
@@ -51,6 +55,14 @@ public abstract class Reservation {
 
     abstract public String getOwnerEmail();
 
+
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
+    }
 
     public Client getClient() {
         return client;
