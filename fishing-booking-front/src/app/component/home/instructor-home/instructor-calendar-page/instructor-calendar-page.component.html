@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="date-selects">
 <mat-form-field>
@@ -14,30 +15,39 @@
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
-      <div
-        class="btn btn-primary"
+      <div>
+        <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         mwlCalendarPreviousView
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
-      >
+        >
         Previous
+        </button>
       </div>
-      <div
-        class="btn btn-outline-secondary"
+      <div>
+        <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         mwlCalendarToday
         [(viewDate)]="viewDate"
-      >
+        >
         Today
+        </button>
       </div>
-      <div
-        class="btn btn-primary"
+      <div>
+        <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         mwlCalendarNextView
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
         Next
+        </button>
       </div>
     </div>
   </div>
@@ -46,26 +56,35 @@
   </div>
   <div class="col-md-4">
     <div class="btn-group">
-      <div
-        class="btn btn-primary"
+      <div>
+        <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         (click)="setView(CalendarView.Month)"
         [class.active]="view === CalendarView.Month"
-      >
+        >
         Month
+      </button>
       </div>
-      <div
-        class="btn btn-primary"
+      <div>
+        <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         (click)="setView(CalendarView.Week)"
         [class.active]="view === CalendarView.Week"
       >
         Week
+        </button>
       </div>
-      <div
-        class="btn btn-primary"
+      <div>
+      <button
+        mat-flat-button color="primary"
+        class="calendar-button"
         (click)="setView(CalendarView.Day)"
         [class.active]="view === CalendarView.Day"
       >
         Day
+        </button>
       </div>
     </div>
   </div>

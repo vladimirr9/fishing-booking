@@ -1,11 +1,16 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
+import { labelCache } from 'ol/render/canvas';
 import { Subject } from 'rxjs';
+import { ReportDialogComponent } from 'src/app/component/dialog/report-dialog/report-dialog.component';
 import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
 import { AuthService } from 'src/app/service/auth.service';
 import { AvailablePeriodService } from 'src/app/service/available-period.service';
+import { DateService } from 'src/app/service/date.service';
+import { ReservationService } from 'src/app/service/reservation.service';
 import { StorageService } from 'src/app/service/storage.service';
 
 const colors: any = {
@@ -32,15 +37,28 @@ export class InstructorCalendarPageComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
 
-  constructor(private modal: NgbModal, private storageService: StorageService, private availablePeriodService: AvailablePeriodService) {}
+  constructor(private modal: NgbModal,
+    private storageService: StorageService,
+    private availablePeriodService: AvailablePeriodService,
+    private reservationService: ReservationService,
+    private dialog: MatDialog) { }
+
   ngOnInit(): void {
-    this.availablePeriodService.getPeriods(this.storageService.getUsername()).subscribe((data : AvailablePeriod[]) => {
+    this.availablePeriodService.getPeriods(this.storageService.getUsername()).subscribe((data: AvailablePeriod[]) => {
       data.forEach((element) => {
         let id = element.id || 0
-        this.addAvailablePeriodToCalendar(id,element.fromTime,element.toTime)
+        this.addAvailablePeriodToCalendar(id, element.fromTime, element.toTime)
+      })
+    })
+
+    this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
+      data.forEach((element: any) => {
+        let id = element.id || 0
+        this.addReservationToCalendar(id, element.startDate, element.endDate, element.reportPresent)
       })
     })
   }
+
 
   view: CalendarView = CalendarView.Month;
 
@@ -62,13 +80,12 @@ export class InstructorCalendarPageComponent implements OnInit {
       toTime: this.toTime,
       email: this.storageService.getUsername()
     }
-    this.availablePeriodService.postPeriod(availablePeriod).subscribe((data : AvailablePeriod) => {
+    this.availablePeriodService.postPeriod(availablePeriod).subscribe((data: AvailablePeriod) => {
       let id = data.id || 0
       this.addAvailablePeriodToCalendar(id, data.fromTime, data.toTime)
     })
-
-
   }
+
 
 
   CalendarView = CalendarView;
@@ -160,7 +177,7 @@ export class InstructorCalendarPageComponent implements OnInit {
     ];
   }
 
-  addAvailablePeriodToCalendar(id : number ,fromTime: any, toTime: any): void {
+  addAvailablePeriodToCalendar(id: number, fromTime: any, toTime: any): void {
     this.events = [
       ...this.events,
       {
@@ -185,6 +202,59 @@ export class InstructorCalendarPageComponent implements OnInit {
         ]
       },
     ];
+  }
+  addReservationToCalendar(id: any, fromTime: any, toTime: any, reportPresent: any) {
+    let action: any
+    if (!reportPresent && (new Date(Date.parse(toTime))) > (new Date())) {
+      action = {
+        label: '<i class="fas fa-edit"></i>',
+        onClick: ({ event }: { event: CalendarEvent }): void => {
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true
+          dialogConfig.autoFocus = true
+
+          const dialogRef = this.dialog.open(ReportDialogComponent, dialogConfig);
+
+          dialogRef.afterClosed().subscribe(
+            res => {
+              if (res) {
+                this.reservationService.putReport(id, res).subscribe((data: any) => {
+                  window.location.reload()
+                })
+
+              }
+            }
+
+          );
+        },
+      }
+    }
+    else {
+      action = {
+        label: '',
+        onClick: () => { void (0) }
+      }
+    }
+
+
+    this.events = [
+      ...this.events,
+      {
+        title: 'Reservation',
+        start: new Date(Date.parse(fromTime)),
+        end: new Date(Date.parse(toTime)),
+        color: colors.yellow,
+        draggable: false,
+        resizable: {
+          beforeStart: false,
+          afterEnd: false,
+        },
+        actions: [
+          action
+        ]
+      },
+    ];
+
   }
 
 

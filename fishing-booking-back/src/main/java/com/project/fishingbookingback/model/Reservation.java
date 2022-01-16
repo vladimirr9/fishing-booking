@@ -1,6 +1,6 @@
 package com.project.fishingbookingback.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,8 +27,12 @@ public abstract class Reservation {
     private double price;
     private boolean approved;
     @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonBackReference
     private Report report;
+
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private Complaint complaint;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
@@ -56,6 +60,14 @@ public abstract class Reservation {
 
     public boolean overlaps(Reservation reservation) {
         return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
+    }
+
+    public Complaint getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
     }
 
     public Client getClient() {

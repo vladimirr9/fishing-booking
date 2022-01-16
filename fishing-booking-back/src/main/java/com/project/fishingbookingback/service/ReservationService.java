@@ -3,7 +3,15 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.exception.UnrecognizedTypeException;
-import com.project.fishingbookingback.model.*;
+import com.project.fishingbookingback.model.AdventureReservation;
+import com.project.fishingbookingback.model.Boat;
+import com.project.fishingbookingback.model.BoatReservation;
+import com.project.fishingbookingback.model.Client;
+import com.project.fishingbookingback.model.FishingAdventure;
+import com.project.fishingbookingback.model.HolidayHome;
+import com.project.fishingbookingback.model.HolidayHomeReservation;
+import com.project.fishingbookingback.model.Report;
+import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +42,17 @@ public class ReservationService {
         this.adventureService = adventureService;
     }
 
+
+    public List<Reservation> getAll(String ownerEmail) {
+        List<Reservation> reservations = reservationRepository.findAll();
+        if (ownerEmail != null) {
+            reservations.removeIf(n -> (!n.getOwnerEmail().equals(ownerEmail)));
+        }
+        return reservations;
+
+    }
+
+
     public Collection<Reservation> getAllForOwner(String email) {
         return reservationRepository.getAllForOwner(email);
     }
@@ -42,9 +61,9 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public void createReservation(double price,LocalDateTime from,LocalDateTime to,String clientUsername, Long entityId,String type){
-        if(to.isBefore(from)) throw new NotAllowedException();
-        Reservation reservation = createReservationdownClass(type,entityId);
+    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type) {
+        if (to.isBefore(from)) throw new NotAllowedException();
+        Reservation reservation = createReservationdownClass(type, entityId);
         Client client = (Client) userService.findByEmail(clientUsername);
         reservation.setClient(client);
         reservation.setPrice(price);
@@ -52,14 +71,14 @@ public class ReservationService {
         reservation.setEndDate(to);
         reservation.setApproved(false);
         reservationRepository.save(reservation);
-        emailService.sendSimpleMessage(clientUsername,"Reservation","Reservation request successfully sent!");
+        emailService.sendSimpleMessage(clientUsername, "Reservation", "Reservation request successfully sent!");
     }
-    
 
 
-    private Reservation createReservationdownClass(String type,Long entityId){
-        switch (type){
-            case "ADVENTURE" ->{
+    private Reservation createReservationdownClass(String type, Long entityId) {
+        switch (type) {
+            case "ADVENTURE" -> {
+
                 var adventureReservation = new AdventureReservation();
                 FishingAdventure adventure = adventureService.findByID(entityId);
                 adventureReservation.setAdventure(adventure);
@@ -77,7 +96,7 @@ public class ReservationService {
                 home.setReservations(holidayHomeReservations);
                 return holidayReservation;
             }
-            case "BOAT" ->{
+            case "BOAT" -> {
                 var boatReservation = new BoatReservation();
                 Boat boat = boatService.findByID(entityId);
                 boatReservation.setBoat(boat);
@@ -86,7 +105,9 @@ public class ReservationService {
                 boat.setReservations(boatReservations);
                 return boatReservation;
             }
-            default -> { throw new UnrecognizedTypeException("Requested reservation type doesn't exist!");}
+            default -> {
+                throw new UnrecognizedTypeException("Requested reservation type doesn't exist!");
+            }
         }
 
 
@@ -129,7 +150,7 @@ public class ReservationService {
         reservationRepository.save(reservation);
         String clientEmail = report.getReservation().getClient().getEmail();
         String serviceProviderEmail = report.getReservation().getOwnerEmail();
-        emailService.sendSimpleMessage(clientEmail, "Fishing Booking Account Sanctioned", message);
-        emailService.sendSimpleMessage(serviceProviderEmail, "Fishing Booking Client Sanctioned", message);
+        emailService.sendSimpleMessage(clientEmail, "Fishing Booking Account Not Sanctioned", message);
+        emailService.sendSimpleMessage(serviceProviderEmail, "Fishing Booking Client Not Sanctioned", message);
     }
 }

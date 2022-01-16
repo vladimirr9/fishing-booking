@@ -14,7 +14,15 @@ import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -23,6 +31,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/reservations")
 public class ReservationController {
+
+
     private final ReservationService reservationService;
     private final ReservationMapper reservationMapper;
     private final ReportMapper reportMapper;
@@ -39,9 +49,9 @@ public class ReservationController {
 
     @GetMapping
     @Transactional
-    public List<ReservationDTO> getAll() {
+    public List<ReservationDTO> getAll(@RequestParam(required = false) String ownerEmail) {
         List<ReservationDTO> reservationDTOS = new ArrayList<>();
-        for (Reservation reservation : reservationService.getAll()) {
+        for (Reservation reservation : reservationService.getAll(ownerEmail)) {
             reservationDTOS.add(reservationMapper.toDTO(reservation));
         }
         return reservationDTOS;
@@ -54,8 +64,9 @@ public class ReservationController {
         return ResponseEntity.ok(newReport);
     }
 
+
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable Long id) {
         reservationCancelationService.cancelReservation(id);
         return ResponseEntity.noContent().build();
     }
@@ -73,8 +84,8 @@ public class ReservationController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CreateReservationDTO createReservationDTO){
-        reservationService.createReservation(createReservationDTO.getPrice(),createReservationDTO.getFrom(),createReservationDTO.getTo(),createReservationDTO.getClientUsername(),createReservationDTO.getEntityId(),createReservationDTO.getType());
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CreateReservationDTO createReservationDTO) {
+        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType());
         return ResponseEntity.noContent().build();
     }
 

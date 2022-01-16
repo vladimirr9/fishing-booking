@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.dto.response;
 
+import com.project.fishingbookingback.model.Client;
+
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
@@ -8,10 +10,13 @@ public class ReservationDTO {
     private String imgUrl;
     private String name;
     private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private double price;
     private double durationInHours;
     private double mark;
     private String address;
+    private Boolean reportPresent;
+    private Client client;
 
     public ReservationDTO() {
     }
@@ -86,5 +91,30 @@ public class ReservationDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public Boolean getReportPresent() {
+        return reportPresent;
+    }
+
+    public void setReportPresent(Boolean reportPresent) {
+        this.reportPresent = reportPresent;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+    
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

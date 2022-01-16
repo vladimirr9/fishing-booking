@@ -14,8 +14,12 @@ export class ReservationService {
 
   private _reservationsUrl = '/reservations';
 
-  getReservations(): Observable<ReservationDTO[]>{
-    return this._http.get<ReservationDTO[]>(`${config.baseUrl}${this._reservationsUrl}`);
+  getReservations(params?: any): Observable<ReservationDTO[]>{
+    return this._http.get<ReservationDTO[]>(`${config.baseUrl}${this._reservationsUrl}`, {params: params});
+  }
+
+  putReport(reservationId: number, report: any) {
+    return this._http.put(`${config.baseUrl}${this._reservationsUrl}/${reservationId}/reports`, report)
   }
 
   createReservation(reservationDto: CreateReservationDTO){

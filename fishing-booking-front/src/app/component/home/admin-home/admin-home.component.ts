@@ -64,10 +64,6 @@ export class AdminHomeComponent implements OnInit {
     })
   }
 
-  view() {
-    //TODO: action to view registration request
-  }
-
   changeFee() {
 
     const dialogConfig = new MatDialogConfig();

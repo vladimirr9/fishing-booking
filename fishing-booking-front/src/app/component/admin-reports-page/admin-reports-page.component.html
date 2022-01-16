@@ -1,0 +1,11 @@
+<h1>Reports Awaiting Approval</h1>
+  <div class="reports-container">
+    <div *ngFor="let report of reports">
+      <mat-card class="container-card">
+        <mat-card-title>{{report.reservation.client.firstName}} {{report.reservation.client.lastName}}</mat-card-title>
+        <div class="buttons-container">
+          <button class="detailed-button" color="view" (click)="viewReport(report)"  mat-flat-button>Details</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
