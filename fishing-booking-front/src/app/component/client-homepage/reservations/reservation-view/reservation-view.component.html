@@ -27,9 +27,33 @@
               <img mat-card-xl-image src="{{reservation.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
             
           </mat-card-title-group>
-          <button mat-mini-fab  style="margin-left: 350px;" *ngIf="isDeletable(reservation.startDate)" (click)="cancelReservation(reservation.id)" aria-label="Example icon button with a home icon">
-            <mat-icon>delete</mat-icon>
-          </button>
+          
+            <!-- <button mat-mini-fab  style="margin-left: 0px;" *ngIf="isDeletable(reservation.startDate)" (click)="cancelReservation(reservation.id)" aria-label="Example icon button with a home icon">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab  style="margin-left: 350px;" *ngIf="isDeletable(reservation.startDate)" (click)="cancelReservation(reservation.id)" aria-label="Example icon button with a home icon">
+              <mat-icon>delete</mat-icon>
+            </button>
+           -->
+        
+           <section>
+            <div class="example-button-row">
+              <div class="example-flex-container">
+                <div class="example-button-container">
+                  <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                    <mat-icon>thumb_down_alt</mat-icon>
+                  </button>
+                </div>
+                <div class="example-button-container">
+                  <button mat-mini-fab [disabled]="!isDeletable(reservation.startDate)"  (click)="cancelReservation(reservation.id)" color="accent" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>

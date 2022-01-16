@@ -30,6 +30,18 @@ export class ReservationViewComponent implements OnInit {
     return result >= 3;
  }
 
+ isComplainable(date: Date):boolean{
+  let startDate = new Date(date)
+  const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+  const utc2 = Date.UTC(new Date().getFullYear(),new Date().getMonth(), new Date().getDate());
+  let result = Math.abs(Math.floor((utc2 - utc1) / this._MS_PER_DAY));
+  return result <0;
+ }
+
+  complaint(id: number):void {
+
+  }
+
   cancelReservation(id: number):void{
     this.reservationService.deleteReservation(id).subscribe(()=>{
         this.reservations = this.reservations.filter(reservation => reservation.id != id );
