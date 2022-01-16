@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,6 +39,10 @@ public abstract class Reservation {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private Review review;
+
     public Reservation() {
     }
 
@@ -55,6 +60,13 @@ public abstract class Reservation {
 
     abstract public String getOwnerEmail();
 
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 
     public Complaint getComplaint() {
         return complaint;
