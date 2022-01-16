@@ -142,4 +142,10 @@ public class BoatService {
         return boatPromotionService.getPromotions(id);
     }
 
+    public AvailablePeriod addAvailablePeriod(Long id, AvailablePeriod newAvailablePeriod) {
+        var boat = findByID(id);
+        boat.getAvailablePeriods().add(newAvailablePeriod);
+        boatRepository.save(boat);
+        return newAvailablePeriod;
+    }
 }

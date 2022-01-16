@@ -56,6 +56,40 @@ public class AvailablePeriod {
 
     }
 
+    private AvailablePeriod(LocalDateTime fromTime, LocalDateTime toTime, FishingInstructor fishingInstructor, HolidayHome holidayHome, Boat boat) {
+        this.fromTime = fromTime;
+        this.toTime = toTime;
+        this.fishingInstructor = fishingInstructor;
+        this.holidayHome = holidayHome;
+        this.boat = boat;
+    }
+
+    public AvailablePeriod sliceBefore(LocalDateTime time) {
+        if (time.equals(this.toTime)) {
+            return null;
+        }
+        return new AvailablePeriod(this.fromTime, time, this.fishingInstructor, this.holidayHome, this.boat);
+    }
+
+    public AvailablePeriod sliceAfter(LocalDateTime time) {
+        if (time.equals(this.fromTime)) {
+            return null;
+        }
+        return new AvailablePeriod(time, this.toTime, this.fishingInstructor, this.holidayHome, this.boat);
+    }
+
+    public boolean extendWith(AvailablePeriod period) {
+        if(this.fromTime.equals(period.getToTime())) {
+            this.fromTime = period.fromTime;
+            return true;
+        }
+        if(this.toTime.equals(period.getFromTime())) {
+            this.toTime = period.toTime;
+            return true;
+        }
+        return false;
+    }
+
     public AvailablePeriod() {
     }
 
@@ -89,4 +123,9 @@ public class AvailablePeriod {
     public boolean overlaps(Promotion promotion) {
         return overlaps(promotion.getFromTime()) || overlaps(promotion.getToTime());
     }
+    public boolean availableForReservation(Reservation reservation) {
+        return overlaps(reservation.getStartDate()) && overlaps(reservation.getEndDate());
+    }
+
+
 }

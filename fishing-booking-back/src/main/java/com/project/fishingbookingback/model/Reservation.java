@@ -48,9 +48,15 @@ public abstract class Reservation {
         this.client = client;
     }
 
-
     abstract public String getOwnerEmail();
 
+    public boolean overlaps(LocalDateTime time){
+        return !time.isBefore(startDate) && !time.isAfter(endDate);
+    }
+
+    public boolean overlaps(Reservation reservation) {
+        return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
+    }
 
     public Client getClient() {
         return client;

@@ -128,5 +128,12 @@ public class HolidayHomeService {
     public List<HolidayHomePromotion> getPromotions(Long id) {
         return holidayHomePromotionService.getPromotions(id);
     }
+
+    public AvailablePeriod addAvailablePeriod(Long id, AvailablePeriod newAvailablePeriod) {
+        var holidayHome = findByID(id);
+        holidayHome.getAvailablePeriods().add(newAvailablePeriod);
+        holidayHomeRepository.save(holidayHome);
+        return newAvailablePeriod;
+    }
 }
 

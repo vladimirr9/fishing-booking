@@ -8,6 +8,7 @@ import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
+import com.project.fishingbookingback.service.ReservationApprovingService;
 import com.project.fishingbookingback.service.ReservationCancelationService;
 import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -26,12 +27,14 @@ public class ReservationController {
     private final ReservationMapper reservationMapper;
     private final ReportMapper reportMapper;
     private final ReservationCancelationService reservationCancelationService;
+    private final ReservationApprovingService reservationApprovingService;
 
-    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService) {
+    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService, ReservationApprovingService reservationApprovingService) {
         this.reservationService = reservationService;
         this.reservationMapper = reservationMapper;
         this.reportMapper = reportMapper;
         this.reservationCancelationService = reservationCancelationService;
+        this.reservationApprovingService = reservationApprovingService;
     }
 
     @GetMapping
@@ -72,6 +75,12 @@ public class ReservationController {
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody CreateReservationDTO createReservationDTO){
         reservationService.createReservation(createReservationDTO.getPrice(),createReservationDTO.getFrom(),createReservationDTO.getTo(),createReservationDTO.getClientUsername(),createReservationDTO.getEntityId(),createReservationDTO.getType());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<HttpStatus> approveReservation(@PathVariable Long id) {
+        reservationApprovingService.approveReservation(id);
         return ResponseEntity.noContent().build();
     }
 
