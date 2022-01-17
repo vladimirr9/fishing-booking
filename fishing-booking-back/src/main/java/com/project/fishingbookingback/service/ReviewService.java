@@ -19,7 +19,7 @@ public class ReviewService {
 
     public void createReview(Long reservationId, int mark, String comment) {
         Reservation reservation = reservationService.findByID(reservationId);
-        if(reservation.getReview()!=null) throw new NotAllowedException();
+        if(reservation.getReview()!=null || reservation.getReport()==null) throw new NotAllowedException();
         Review review = new Review(reservation,mark,comment,false);
         reservation.setReview(review);
         reviewRepository.save(review);

@@ -62,6 +62,7 @@ public class ReservationService {
     }
 
     public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type) {
+        if(from.isBefore(LocalDateTime.now())) throw new NotAllowedException();
         if (to.isBefore(from)) throw new NotAllowedException();
         Reservation reservation = createReservationdownClass(type, entityId);
         Client client = (Client) userService.findByEmail(clientUsername);

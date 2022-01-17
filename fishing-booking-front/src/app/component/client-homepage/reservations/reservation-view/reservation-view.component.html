@@ -37,7 +37,7 @@
                   </button>
                 </div>
                 <div class="example-button-container">
-                  <button mat-mini-fab color="primary" [disabled]="reservation.reviewPresent" (click)="writeReview(reservation)" aria-label="Example icon button with a menu icon">
+                  <button mat-mini-fab color="primary" [disabled]="reservation.reviewPresent || !reservation.reportPresent" (click)="writeReview(reservation)" aria-label="Example icon button with a menu icon">
                     <mat-icon>feedback</mat-icon>
                   </button>
                 </div>
