@@ -55,6 +55,10 @@ export class ReservationViewComponent implements OnInit {
     });
   }
 
+  writeReview(id: number):void{
+    
+  }
+
   cancelReservation(id: number):void{
     this.reservationService.deleteReservation(id).subscribe(()=>{
         this.reservations = this.reservations.filter(reservation => reservation.id != id );

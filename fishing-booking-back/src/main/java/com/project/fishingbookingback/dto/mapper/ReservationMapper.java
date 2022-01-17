@@ -32,6 +32,9 @@ public class ReservationMapper {
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getHolidayHome().getAddress().toString());
         reservationDTO.setMark(0);
+        reservationDTO.setReviewPresent(reservation.getReview()!=null);
+        reservationDTO.setReportPresent(reservation.getReport()!=null);
+        reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
         if (reservation.getHolidayHome().getExterior().isEmpty())
             reservationDTO.setImgUrl("");
         else
@@ -51,6 +54,9 @@ public class ReservationMapper {
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getBoat().getAddress().toString());
         reservationDTO.setMark(0);
+        reservationDTO.setReviewPresent(reservation.getReview()!=null);
+        reservationDTO.setReportPresent(reservation.getReport()!=null);
+        reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
         if (reservation.getBoat().getExterior().isEmpty())
             reservationDTO.setImgUrl("");
         else
@@ -76,9 +82,9 @@ public class ReservationMapper {
         reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(), reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
         reservationDTO.setEndDate(reservation.getEndDate());
-        if (reservation.getReport() == null)
-            reservationDTO.setReportPresent(false);
-        else reservationDTO.setReportPresent(true);
+        reservationDTO.setReviewPresent(reservation.getReview()!=null);
+        reservationDTO.setReportPresent(reservation.getReport()!=null);
+        reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
         reservationDTO.setId(reservation.getId());
         reservationDTO.setClient(reservation.getClient());
         return reservationDTO;
