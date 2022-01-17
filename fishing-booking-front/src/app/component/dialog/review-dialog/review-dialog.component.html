@@ -1,0 +1,23 @@
+<div>
+    <mat-form-field  appearance="fill" style="width: 400px;">
+        <mat-label>Give comment</mat-label>
+        <textarea matInput
+                    [(ngModel)]="review.comment"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="10"></textarea>
+      </mat-form-field>
+</div>
+
+  <mat-form-field  class="field"  style="margin-left: 100px;" appearance="fill">
+    <mat-label>Mark</mat-label>
+    <mat-select [(ngModel)]="review.mark"  name="food">
+      <mat-option *ngFor="let mark of [1,2,3,4,5]" [value]="mark" >
+        {{mark}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+  <mat-divider></mat-divider>
+  <button  style="margin-left: 160px;margin-top: 10px;margin-bottom: 0px;" (click)="send()" [disabled]="review.comment=='' || review.mark<1" mat-raised-button color="primary">Send</button>
+  <!-- [disabled]="review.comment=='' || review.mark<=1" -->

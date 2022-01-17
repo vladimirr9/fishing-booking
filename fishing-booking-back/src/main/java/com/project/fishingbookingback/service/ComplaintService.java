@@ -20,6 +20,7 @@ public class ComplaintService {
     public void createComplaint(Long reservationId, String content){
         if(content.isBlank()) throw new NotAllowedException();
         Reservation reservation = reservationService.findByID(reservationId);
+        if(reservation.getComplaint()!=null) throw new NotAllowedException();
         Complaint complaint = new Complaint(reservation,content);
         reservation.setComplaint(complaint);
         complaintRepository.save(complaint);

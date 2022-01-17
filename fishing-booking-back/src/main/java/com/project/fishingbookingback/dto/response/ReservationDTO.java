@@ -16,9 +16,27 @@ public class ReservationDTO {
     private double mark;
     private String address;
     private Boolean reportPresent;
+    private Boolean reviewPresent;
+    private Boolean complaintPresent;
     private Client client;
 
     public ReservationDTO() {
+    }
+
+    public Boolean getComplaintPresent() {
+        return complaintPresent;
+    }
+
+    public void setComplaintPresent(Boolean complaintPresent) {
+        this.complaintPresent = complaintPresent;
+    }
+
+    public Boolean getReviewPresent() {
+        return reviewPresent;
+    }
+
+    public void setReviewPresent(Boolean reviewPresent) {
+        this.reviewPresent = reviewPresent;
     }
 
     public Long getId() {

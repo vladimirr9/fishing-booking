@@ -7,5 +7,8 @@ export interface ReservationDTO {
     price: number,
     durationInHours: number,
     mark: number,
+    reportPresent: boolean,
+    complaintPresent: boolean,
+    reviewPresent: boolean,
     address: string
   }
