@@ -79,6 +79,7 @@ import { ReportDialogComponent } from './component/dialog/report-dialog/report-d
 import { AdminReportsPageComponent } from './component/admin-reports-page/admin-reports-page.component';
 import { AdminReportDialogComponent } from './component/dialog/admin-report-dialog/admin-report-dialog.component';
 import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
+import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
 
 
 
@@ -147,7 +148,8 @@ import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/co
     ReportDialogComponent,
     AdminReportsPageComponent,
     AdminReportDialogComponent,
-    ComplaintDialogComponent
+    ComplaintDialogComponent,
+    ReviewDialogComponent
   ],
   imports: [
     BrowserModule,

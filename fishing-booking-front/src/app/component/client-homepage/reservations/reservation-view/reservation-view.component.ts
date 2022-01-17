@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ComplaintDialogComponent } from 'src/app/component/dialog/complaint-dialog/complaint-dialog.component';
+import { ReviewDialogComponent } from 'src/app/component/dialog/review-dialog/review-dialog.component';
 import { ReservationDTO } from 'src/app/dto/ReservationDTO';
 import { ComplaintServiceService } from 'src/app/service/complaint-service.service';
 import { ReservationService } from 'src/app/service/reservation.service';
+import { ReviewServiceService } from 'src/app/service/review-service.service';
 
 @Component({
   selector: 'app-reservation-view',
@@ -12,7 +14,7 @@ import { ReservationService } from 'src/app/service/reservation.service';
 })
 export class ReservationViewComponent implements OnInit {
 
-  constructor(private reservationService: ReservationService,private dialog: MatDialog,private complaintService:ComplaintServiceService) { }
+  constructor(private reservationService: ReservationService,private dialog: MatDialog,private complaintService:ComplaintServiceService,private reviewService:ReviewServiceService) { }
 
   _MS_PER_DAY: number = 1000 * 60 * 60 * 24;
 
@@ -41,22 +43,34 @@ export class ReservationViewComponent implements OnInit {
   return result <0;
  }
 
-  complaint(id: number):void {
+  complaint(reservation: ReservationDTO):void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
 
     const dialogRef = this.dialog.open(ComplaintDialogComponent,dialogConfig);
     dialogRef.afterClosed().subscribe((data)=>{
       if(data){
-          this.complaintService.createComplaint(id,data).subscribe(()=>{
+          this.complaintService.createComplaint(reservation.id,data).subscribe(()=>{
+            reservation.complaintPresent = true;
             alert("Complaint successfully sent!");
           });
       }
     });
   }
 
-  writeReview(id: number):void{
-    
+  writeReview(reservation: any):void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(ReviewDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe((data)=>{
+      if(!data) return;
+      data.reservationId=reservation.id;
+      this.reviewService.createReview(data).subscribe(()=>{
+        reservation.reviewPresent=true;
+        alert("Review successfully submited!");
+      });
+    });
   }
 
   cancelReservation(id: number):void{

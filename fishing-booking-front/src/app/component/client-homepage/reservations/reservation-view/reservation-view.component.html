@@ -32,12 +32,12 @@
             <div class="example-button-row">
               <div class="example-flex-container">
                 <div class="example-button-container">
-                  <button mat-mini-fab color="primary" [disabled]="reservation.complaintPresent" (click)="complaint(reservation.id)" aria-label="Example icon button with a menu icon">
+                  <button mat-mini-fab color="primary" [disabled]="reservation.complaintPresent" (click)="complaint(reservation)" aria-label="Example icon button with a menu icon">
                     <mat-icon>thumb_down_alt</mat-icon>
                   </button>
                 </div>
                 <div class="example-button-container">
-                  <button mat-mini-fab color="primary" [disabled]="reservation.reviewPresent" (click)="writeReview(reservation.id)" aria-label="Example icon button with a menu icon">
+                  <button mat-mini-fab color="primary" [disabled]="reservation.reviewPresent" (click)="writeReview(reservation)" aria-label="Example icon button with a menu icon">
                     <mat-icon>feedback</mat-icon>
                   </button>
                 </div>
