@@ -36,35 +36,24 @@ public class AvailablePeriodController {
     @PostMapping("/instructor")
     public ResponseEntity<AvailablePeriod> addPeriodForInstructor(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO) {
         AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
-        try {
-            AvailablePeriod newAvailablePeriod = availablePeriodService.createForInstructor(availablePeriod, availablePeriodDTO.getEmail());
-            return ResponseEntity.ok(newAvailablePeriod);
-        } catch (NewAvailablePeriodOverlapsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
-        }
+        AvailablePeriod newAvailablePeriod = availablePeriodService.createForInstructor(availablePeriod, availablePeriodDTO.getEmail());
+        return ResponseEntity.ok(newAvailablePeriod);
 
     }
 
     @PostMapping("/holidayHome/{homeId}")
     public ResponseEntity<AvailablePeriod> addPeriodForHolidayHome(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO, @PathVariable Long homeId) {
         AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
-        try {
-            AvailablePeriod newAvailablePeriod = availablePeriodService.createForHolidayHome(availablePeriod, homeId, availablePeriodDTO.getEmail());
-            return ResponseEntity.ok(newAvailablePeriod);
-        } catch (NewAvailablePeriodOverlapsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
-        }
+        AvailablePeriod newAvailablePeriod = availablePeriodService.createForHolidayHome(availablePeriod, homeId, availablePeriodDTO.getEmail());
+        return ResponseEntity.ok(newAvailablePeriod);
+
     }
 
     @PostMapping("/boat/{boatId}")
     public ResponseEntity<AvailablePeriod> addPeriodForBoat(@RequestBody @Valid AvailablePeriodDTO availablePeriodDTO, @PathVariable Long boatId) {
         AvailablePeriod availablePeriod = new AvailablePeriod(availablePeriodDTO.getFrom(), availablePeriodDTO.getTo());
-        try {
-            AvailablePeriod newAvailablePeriod = availablePeriodService.createForBoat(availablePeriod, boatId, availablePeriodDTO.getEmail());
-            return ResponseEntity.ok(newAvailablePeriod);
-        } catch (NewAvailablePeriodOverlapsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
-        }
+        AvailablePeriod newAvailablePeriod = availablePeriodService.createForBoat(availablePeriod, boatId, availablePeriodDTO.getEmail());
+        return ResponseEntity.ok(newAvailablePeriod);
     }
 
     @DeleteMapping(value = "{id}")

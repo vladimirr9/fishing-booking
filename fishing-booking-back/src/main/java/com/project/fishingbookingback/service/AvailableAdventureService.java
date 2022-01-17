@@ -32,7 +32,7 @@ public class AvailableAdventureService {
     public boolean IsInstructorAvailable(String email,LocalDateTime from,LocalDateTime to){
         List<AvailablePeriod> availablePeriods = availablePeriodService.getPeriods(email);
         for(AvailablePeriod availablePeriod : availablePeriods)
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
     }
@@ -40,7 +40,7 @@ public class AvailableAdventureService {
     private List<FishingAdventure> getAvailableAdventuresForFishingInstructor(String email,LocalDateTime from, LocalDateTime to) {
         List<AvailablePeriod> availablePeriods = availablePeriodService.getPeriods(email);
         for (AvailablePeriod availablePeriod : availablePeriods)
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return adventureService.getAdventures(email, null);
 
         return new ArrayList<>();

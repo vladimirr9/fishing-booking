@@ -98,7 +98,7 @@ public class HolidayHomeService {
 
     private boolean isHomeAvailable(HolidayHome holidayHome, LocalDateTime from, LocalDateTime to) {
         for (AvailablePeriod availablePeriod : holidayHome.getAvailablePeriods())
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
     }
@@ -106,7 +106,7 @@ public class HolidayHomeService {
     public boolean IsHomeAvailable(Long id, LocalDateTime from, LocalDateTime to) {
         HolidayHome home = holidayHomeRepository.getById(id);
         for (AvailablePeriod availablePeriod : home.getAvailablePeriods())
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
 	}

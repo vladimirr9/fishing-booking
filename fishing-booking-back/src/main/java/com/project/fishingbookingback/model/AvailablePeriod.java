@@ -111,24 +111,25 @@ public class AvailablePeriod {
         return toTime;
     }
 
-    public boolean overlapsExclusive(LocalDateTime time){
-        return time.isBefore(toTime) && time.isAfter(fromTime);
-    }
-    public boolean overlapsInclusive(LocalDateTime time) {
+    public boolean overlaps(LocalDateTime time){
         return !time.isBefore(fromTime) && !time.isAfter(toTime);
     }
+    public boolean overlapsForNewPeriod(LocalDateTime from, LocalDateTime to) {
+        var startOverlaps =  !from.isBefore(this.fromTime) && from.isBefore(this.toTime);
+        var endOvelaps = !to.isAfter(this.toTime) && to.isAfter(this.fromTime);
+        return startOverlaps || endOvelaps;
+    }
     public boolean overlaps(AvailablePeriod availablePeriod) {
-        return overlapsExclusive(availablePeriod.getFromTime()) || overlapsExclusive(availablePeriod.getToTime()) || (availablePeriod.fromTime.isBefore(this.fromTime) && availablePeriod.toTime.isAfter(this.toTime));
+        return overlapsForNewPeriod(availablePeriod.fromTime, availablePeriod.toTime) || (availablePeriod.fromTime.isBefore(this.fromTime) && availablePeriod.toTime.isAfter(this.toTime));
     }
     public boolean overlaps(Reservation reservation) {
-        return overlapsExclusive(reservation.getStartDate()) || overlapsExclusive(reservation.getEndDate()) || (reservation.getStartDate().isBefore(this.fromTime) && reservation.getEndDate().isAfter(this.toTime));
+        return overlapsForNewPeriod(reservation.getStartDate(), reservation.getEndDate()) || (reservation.getStartDate().isBefore(this.fromTime) && reservation.getEndDate().isAfter(this.toTime));
     }
     public boolean overlaps(Promotion promotion) {
-        return overlapsExclusive(promotion.getFromTime()) || overlapsExclusive(promotion.getToTime()) || (promotion.getFromTime().isBefore(this.fromTime) && promotion.getToTime().isAfter(this.toTime));
+        return overlapsForNewPeriod(promotion.getFromTime(), promotion.getToTime()) || (promotion.getFromTime().isBefore(this.fromTime) && promotion.getToTime().isAfter(this.toTime));
     }
     public boolean availableForReservation(Reservation reservation) {
-        return overlapsInclusive(reservation.getStartDate()) && overlapsInclusive(reservation.getEndDate());
+        return !reservation.getStartDate().isBefore(this.fromTime) && !reservation.getEndDate().isAfter(this.toTime);
     }
-
 
 }

@@ -38,13 +38,13 @@ public class BoatService {
     public boolean IsBoatAvailable(Long id,LocalDateTime from, LocalDateTime to){
         Boat boat = boatRepository.getById(id);
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
     }
     private boolean isBoatAvailable(Boat boat,LocalDateTime from, LocalDateTime to){
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
-            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
+            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
                 return true;
         return false;
     }
