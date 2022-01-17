@@ -80,7 +80,7 @@ export class InstructorCalendarPageComponent implements OnInit {
       toTime: this.toTime,
       email: this.storageService.getUsername()
     }
-    this.availablePeriodService.postPeriod(availablePeriod).subscribe((data: AvailablePeriod) => {
+    this.availablePeriodService.postPeriodInstructor(availablePeriod).subscribe((data: AvailablePeriod) => {
       let id = data.id || 0
       this.addAvailablePeriodToCalendar(id, data.fromTime, data.toTime)
     })
