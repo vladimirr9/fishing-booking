@@ -8,6 +8,4 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    @Query("select res from Reservation res where (:email is null or (res.getOwnerEmail() = :email))")
-    List<Reservation> getAllForOwner(@Param("email") String email);
 }

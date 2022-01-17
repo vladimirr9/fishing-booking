@@ -13,13 +13,11 @@ import com.project.fishingbookingback.model.HolidayHomeReservation;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.repository.ReservationRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ReservationService {
@@ -31,8 +29,10 @@ public class ReservationService {
     private final UserService userService;
     private final BoatService boatService;
     private final AdventureService adventureService;
+    private final AvailablePeriodService availablePeriodService;
 
-    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService) {
+
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
@@ -40,6 +40,7 @@ public class ReservationService {
         this.userService = userService;
         this.boatService = boatService;
         this.adventureService = adventureService;
+        this.availablePeriodService = availablePeriodService;
     }
 
 
@@ -50,11 +51,6 @@ public class ReservationService {
         }
         return reservations;
 
-    }
-
-
-    public Collection<Reservation> getAllForOwner(String email) {
-        return reservationRepository.getAllForOwner(email);
     }
 
     public List<Reservation> getAll() {
@@ -152,5 +148,45 @@ public class ReservationService {
         String serviceProviderEmail = report.getReservation().getOwnerEmail();
         emailService.sendSimpleMessage(clientEmail, "Fishing Booking Account Not Sanctioned", message);
         emailService.sendSimpleMessage(serviceProviderEmail, "Fishing Booking Client Not Sanctioned", message);
+    }
+
+    public Collection<Reservation> getAllForInstructor(String email) {
+        var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
+        reservations.removeIf(x -> !((AdventureReservation)x).getAdventure().getFishingInstructor().getEmail().equals(email));
+        return reservations;
+    }
+
+    public Collection<Reservation> getAllForHome(Long homeId) {
+        var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
+        reservations.removeIf(x -> ((HolidayHomeReservation)x).getHolidayHome().getId() != homeId);
+        return reservations;
+    }
+
+    public Collection<Reservation> getAllForBoat(Long boatId) {
+        var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
+        reservations.removeIf(x -> ((BoatReservation)x).getBoat().getId() != boatId);
+        return reservations;
+    }
+
+    public void approveReservation(Long id) {
+        Reservation reservation = findByID(id);
+        reservation.setApproved(true);
+        availablePeriodService.occupyBy(reservation);
+        addReservationToEntitiesRemoveOverlapping(reservation);
+    }
+
+    private void addReservationToEntitiesRemoveOverlapping(Reservation newReservation) {
+        if(newReservation.getClass().equals(HolidayHomeReservation.class)) {
+            var newHomeReservation = (HolidayHomeReservation)newReservation;
+            holidayHomeService.addReservationRemoveOverlapping(newHomeReservation);
+        }
+        else if(newReservation.getClass().equals(BoatReservation.class)) {
+            var newBoatReservation = (BoatReservation)newReservation;
+            boatService.addReservationRemoveOverlapping(newBoatReservation);
+        }
+        else if(newReservation.getClass().equals(AdventureReservation.class)) {
+            var newAdventureReservation = (AdventureReservation)newReservation;
+            adventureService.addReservationRemoveOverlapping(newAdventureReservation);
+        }
     }
 }

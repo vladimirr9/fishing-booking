@@ -39,7 +39,7 @@ public class AvailablePeriodService {
     public AvailablePeriod createForInstructor(AvailablePeriod newAvailablePeriod, String email) {
         checkIfAllowed(email);
         Collection<AvailablePeriod> availablePeriods = repository.findAllForInstructor(email);
-        Collection<Reservation> reservations = reservationService.getAllForOwner(email);
+        Collection<Reservation> reservations = reservationService.getAllForInstructor(email);
         Collection<Promotion> promotions = fishingPromotionService.getAllForInstructor(email).stream().map(e -> (Promotion)e).collect(Collectors.toList());
         checkIfOverlaps(newAvailablePeriod, availablePeriods, reservations, promotions);
         var mergedPeriod = mergeNewAvailablePeriodInstructor(newAvailablePeriod, email);
@@ -51,8 +51,8 @@ public class AvailablePeriodService {
     public AvailablePeriod createForHolidayHome(AvailablePeriod newAvailablePeriod, Long homeId, String email) {
         checkIfAllowed(email);
         Collection<AvailablePeriod> availablePeriods = repository.findAllForHome(homeId);
-        Collection<Reservation> reservations = reservationService.getAllForOwner(email);
-        Collection<Promotion> promotions = holidayHomePromotionService.getAllForHomeOwner(email).stream().map(e -> (Promotion)e).collect(Collectors.toList());
+        Collection<Reservation> reservations = reservationService.getAllForHome(homeId);
+        Collection<Promotion> promotions = holidayHomePromotionService.getPromotions(homeId).stream().map(e -> (Promotion)e).collect(Collectors.toList());
         checkIfOverlaps(newAvailablePeriod, availablePeriods, reservations, promotions);
         var mergedPeriod = mergeNewAvailablePeriodHome(newAvailablePeriod, homeId);
         holidayHomeService.addAvailablePeriod(homeId, newAvailablePeriod);
@@ -63,9 +63,9 @@ public class AvailablePeriodService {
 
     public AvailablePeriod createForBoat(AvailablePeriod newAvailablePeriod, Long boatId, String email) {
         checkIfAllowed(email);
-        Collection<AvailablePeriod> availablePeriods = repository.findAllForHome(boatId);
-        Collection<Reservation> reservations = reservationService.getAllForOwner(email);
-        Collection<Promotion> promotions = boatPromotionService.getAllForBoatOwner(email).stream().map(e -> (Promotion)e).collect(Collectors.toList());
+        Collection<AvailablePeriod> availablePeriods = repository.findAllForBoat(boatId);
+        Collection<Reservation> reservations = reservationService.getAllForBoat(boatId);
+        Collection<Promotion> promotions = boatPromotionService.getPromotions(boatId).stream().map(e -> (Promotion)e).collect(Collectors.toList());
         checkIfOverlaps(newAvailablePeriod, availablePeriods, reservations, promotions);
         var mergedPeriod = mergeNewAvailablePeriodBoat(newAvailablePeriod, boatId);
         boatService.addAvailablePeriod(boatId, mergedPeriod);
@@ -103,7 +103,7 @@ public class AvailablePeriodService {
             }
          }
          for (var reservation: reservations) {
-             if (newAvailablePeriod.overlaps(reservation)) {
+             if (reservation.isApproved() && newAvailablePeriod.overlaps(reservation)) {
                  throw new NewAvailablePeriodOverlapsException(reservation.getClass().getSimpleName(), reservation.getId());
              }
          }

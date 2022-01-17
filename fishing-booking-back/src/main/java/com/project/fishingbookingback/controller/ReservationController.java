@@ -8,7 +8,6 @@ import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
-import com.project.fishingbookingback.service.ReservationApprovingService;
 import com.project.fishingbookingback.service.ReservationCancelationService;
 import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -37,14 +36,12 @@ public class ReservationController {
     private final ReservationMapper reservationMapper;
     private final ReportMapper reportMapper;
     private final ReservationCancelationService reservationCancelationService;
-    private final ReservationApprovingService reservationApprovingService;
 
-    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService, ReservationApprovingService reservationApprovingService) {
+    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService) {
         this.reservationService = reservationService;
         this.reservationMapper = reservationMapper;
         this.reportMapper = reportMapper;
         this.reservationCancelationService = reservationCancelationService;
-        this.reservationApprovingService = reservationApprovingService;
     }
 
     @GetMapping
@@ -91,7 +88,7 @@ public class ReservationController {
 
     @PutMapping("/{id}/approve")
     public ResponseEntity<HttpStatus> approveReservation(@PathVariable Long id) {
-        reservationApprovingService.approveReservation(id);
+        reservationService.approveReservation(id);
         return ResponseEntity.noContent().build();
     }
 

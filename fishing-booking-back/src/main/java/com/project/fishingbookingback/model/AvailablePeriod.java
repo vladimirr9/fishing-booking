@@ -111,20 +111,23 @@ public class AvailablePeriod {
         return toTime;
     }
 
-    public boolean overlaps(LocalDateTime time){
+    public boolean overlapsExclusive(LocalDateTime time){
+        return time.isBefore(toTime) && time.isAfter(fromTime);
+    }
+    public boolean overlapsInclusive(LocalDateTime time) {
         return !time.isBefore(fromTime) && !time.isAfter(toTime);
     }
     public boolean overlaps(AvailablePeriod availablePeriod) {
-        return overlaps(availablePeriod.getFromTime()) || overlaps(availablePeriod.getToTime());
+        return overlapsExclusive(availablePeriod.getFromTime()) || overlapsExclusive(availablePeriod.getToTime()) || (availablePeriod.fromTime.isBefore(this.fromTime) && availablePeriod.toTime.isAfter(this.toTime));
     }
     public boolean overlaps(Reservation reservation) {
-        return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
+        return overlapsExclusive(reservation.getStartDate()) || overlapsExclusive(reservation.getEndDate()) || (reservation.getStartDate().isBefore(this.fromTime) && reservation.getEndDate().isAfter(this.toTime));
     }
     public boolean overlaps(Promotion promotion) {
-        return overlaps(promotion.getFromTime()) || overlaps(promotion.getToTime());
+        return overlapsExclusive(promotion.getFromTime()) || overlapsExclusive(promotion.getToTime()) || (promotion.getFromTime().isBefore(this.fromTime) && promotion.getToTime().isAfter(this.toTime));
     }
     public boolean availableForReservation(Reservation reservation) {
-        return overlaps(reservation.getStartDate()) && overlaps(reservation.getEndDate());
+        return overlapsInclusive(reservation.getStartDate()) && overlapsInclusive(reservation.getEndDate());
     }
 
 

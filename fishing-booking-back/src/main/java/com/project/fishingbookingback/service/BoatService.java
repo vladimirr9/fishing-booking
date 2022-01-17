@@ -38,13 +38,13 @@ public class BoatService {
     public boolean IsBoatAvailable(Long id,LocalDateTime from, LocalDateTime to){
         Boat boat = boatRepository.getById(id);
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
-            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
     }
     private boolean isBoatAvailable(Boat boat,LocalDateTime from, LocalDateTime to){
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
-            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
     }
@@ -147,5 +147,12 @@ public class BoatService {
         boat.getAvailablePeriods().add(newAvailablePeriod);
         boatRepository.save(boat);
         return newAvailablePeriod;
+    }
+
+    public void addReservationRemoveOverlapping(BoatReservation newBoatReservation) {
+        var reservations = newBoatReservation.getBoat().getReservations();
+        reservations.removeIf(reservation -> reservation.overlaps(newBoatReservation));
+        reservations.add(newBoatReservation);
+        boatRepository.save(newBoatReservation.getBoat());
     }
 }

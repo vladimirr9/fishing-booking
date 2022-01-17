@@ -98,7 +98,7 @@ public class HolidayHomeService {
 
     private boolean isHomeAvailable(HolidayHome holidayHome, LocalDateTime from, LocalDateTime to) {
         for (AvailablePeriod availablePeriod : holidayHome.getAvailablePeriods())
-            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
     }
@@ -106,7 +106,7 @@ public class HolidayHomeService {
     public boolean IsHomeAvailable(Long id, LocalDateTime from, LocalDateTime to) {
         HolidayHome home = holidayHomeRepository.getById(id);
         for (AvailablePeriod availablePeriod : home.getAvailablePeriods())
-            if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
+            if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
 	}
@@ -134,6 +134,13 @@ public class HolidayHomeService {
         holidayHome.getAvailablePeriods().add(newAvailablePeriod);
         holidayHomeRepository.save(holidayHome);
         return newAvailablePeriod;
+    }
+
+    public void addReservationRemoveOverlapping(HolidayHomeReservation newHomeReservation) {
+        var reservations = newHomeReservation.getHolidayHome().getReservations();
+        reservations.removeIf(reservation -> reservation.overlaps(newHomeReservation));
+        reservations.add(newHomeReservation);
+        holidayHomeRepository.save(newHomeReservation.getHolidayHome());
     }
 }
 

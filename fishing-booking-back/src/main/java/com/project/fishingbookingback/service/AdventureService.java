@@ -119,4 +119,10 @@ public class AdventureService {
     }
 
 
+    public void addReservationRemoveOverlapping(AdventureReservation newAdventureReservation) {
+            var reservations = newAdventureReservation.getAdventure().getReservations();
+            reservations.removeIf(reservation -> reservation.overlaps(newAdventureReservation));
+            reservations.add(newAdventureReservation);
+            adventureRepository.save(newAdventureReservation.getAdventure());
+    }
 }
