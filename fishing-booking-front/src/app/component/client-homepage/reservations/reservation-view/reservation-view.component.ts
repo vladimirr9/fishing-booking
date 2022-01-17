@@ -58,7 +58,7 @@ export class ReservationViewComponent implements OnInit {
     });
   }
 
-  writeReview(reservation: any):void{
+  writeReview(reservation: ReservationDTO):void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
 

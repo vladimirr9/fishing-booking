@@ -31,7 +31,7 @@ public class ReservationMapper {
         reservationDTO.setName(reservation.getHolidayHome().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getHolidayHome().getAddress().toString());
-        reservationDTO.setMark(0);
+        reservationDTO.setMark(reservation.getReview()!=null && reservation.getReview().isApproved() ? reservation.getReview().getMark() : 0);
         reservationDTO.setReviewPresent(reservation.getReview()!=null);
         reservationDTO.setReportPresent(reservation.getReport()!=null);
         reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
@@ -53,7 +53,7 @@ public class ReservationMapper {
         reservationDTO.setName(reservation.getBoat().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getBoat().getAddress().toString());
-        reservationDTO.setMark(0);
+        reservationDTO.setMark(reservation.getReview()!=null && reservation.getReview().isApproved() ? reservation.getReview().getMark() : 0);
         reservationDTO.setReviewPresent(reservation.getReview()!=null);
         reservationDTO.setReportPresent(reservation.getReport()!=null);
         reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
@@ -74,7 +74,7 @@ public class ReservationMapper {
         reservationDTO.setName(reservation.getAdventure().getName());
         reservationDTO.setStartDate(reservation.getStartDate());
         reservationDTO.setAddress(reservation.getAdventure().getAddress().toString());
-        reservationDTO.setMark(0);
+        reservationDTO.setMark(reservation.getReview()!=null && reservation.getReview().isApproved() ? reservation.getReview().getMark() : 0);
         if (reservation.getAdventure().getPictures().isEmpty())
             reservationDTO.setImgUrl("");
         else
