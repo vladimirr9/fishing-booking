@@ -30,9 +30,10 @@ public class ReservationService {
     private final BoatService boatService;
     private final AdventureService adventureService;
     private final AvailablePeriodService availablePeriodService;
+    private final LoggedUserService loggedUserService;
 
 
-    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService) {
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
@@ -41,6 +42,7 @@ public class ReservationService {
         this.boatService = boatService;
         this.adventureService = adventureService;
         this.availablePeriodService = availablePeriodService;
+        this.loggedUserService = loggedUserService;
     }
 
 
@@ -174,6 +176,7 @@ public class ReservationService {
         reservation.setApproved(true);
         availablePeriodService.occupyBy(reservation);
         addReservationToEntitiesRemoveOverlapping(reservation);
+        emailService.sendSimpleMessage(loggedUserService.getUsername(), "Reservation accepted", "Your reservation for period: " + reservation.getStartDate().toString() + " - " + reservation.getEndDate().toString() + " has been accepted." );
     }
 
     private void addReservationToEntitiesRemoveOverlapping(Reservation newReservation) {

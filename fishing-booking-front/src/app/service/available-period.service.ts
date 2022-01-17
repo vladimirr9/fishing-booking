@@ -24,8 +24,8 @@ export class AvailablePeriodService {
     } )
   }
 
-  postPeriod(availablePeriod: AvailablePeriod) : Observable<AvailablePeriod> {
-    return this.http.post<AvailablePeriod>(`${config.baseUrl}${this.periodsURL}`, availablePeriod)
+  postPeriodInstructor(availablePeriod: AvailablePeriod) : Observable<AvailablePeriod> {
+    return this.http.post<AvailablePeriod>(`${config.baseUrl}${this.periodsURL}/instructor`, availablePeriod)
   }
 
   deletePeriod(id: number) {
