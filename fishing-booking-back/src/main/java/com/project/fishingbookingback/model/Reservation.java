@@ -66,7 +66,7 @@ public abstract class Reservation {
     public boolean overlaps(Reservation reservation) {
         return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
     }
-    
+	
     public Review getReview() {
         return review;
     }
