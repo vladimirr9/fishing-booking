@@ -46,6 +46,7 @@ public class AdventureService {
     }
 
 
+
     public List<FishingAdventure> getAdventures(String instructorUsername, String adventureName) {
         String adventureSearch = adventureName == null ? "" : adventureName;
         return adventureRepository.findByFishingInstructorId(instructorUsername, adventureSearch);

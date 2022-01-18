@@ -43,15 +43,15 @@ VALUES (2,'Everything you will need will be provided to you', 'I''m a seasoned v
 -- ALTER SEQUENCE MY_SEQ RESTART WITH 2;
 
 --PERIODS
-INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
-VALUES(1,'2016-09-17 18:47:52.69','2022-09-17 18:47:52.69');
-
---INSTRUCTOR AVAILABLE PERIOD
-INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
-VALUES(3,1);
-
---BOAT AVAILABLE PERIOD
-INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id,available_periods_id)
-values(1,1);
+-- INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
+-- VALUES(1,'2016-09-17 18:47:52.69','2022-09-17 18:47:52.69');
+--
+-- --INSTRUCTOR AVAILABLE PERIOD
+-- INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
+-- VALUES(3,1);
+--
+-- --BOAT AVAILABLE PERIOD
+-- INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id,available_periods_id)
+-- values(1,1);
 
 

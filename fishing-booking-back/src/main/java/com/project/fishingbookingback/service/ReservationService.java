@@ -31,9 +31,10 @@ public class ReservationService {
     private final AdventureService adventureService;
     private final AvailablePeriodService availablePeriodService;
     private final LoggedUserService loggedUserService;
+    private final AvailableAdventureService availableAdventureService;
 
 
-    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService) {
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService, AvailableAdventureService availableAdventureService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
@@ -43,6 +44,7 @@ public class ReservationService {
         this.adventureService = adventureService;
         this.availablePeriodService = availablePeriodService;
         this.loggedUserService = loggedUserService;
+        this.availableAdventureService = availableAdventureService;
     }
 
 
@@ -62,24 +64,24 @@ public class ReservationService {
     public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type) {
         if(from.isBefore(LocalDateTime.now())) throw new NotAllowedException();
         if (to.isBefore(from)) throw new NotAllowedException();
-        Reservation reservation = createReservationdownClass(type, entityId);
+        Reservation reservation = createReservationdownClass(type, entityId,from,to);
         Client client = (Client) userService.findByEmail(clientUsername);
         reservation.setClient(client);
         reservation.setPrice(price);
         reservation.setStartDate(from);
         reservation.setEndDate(to);
-        reservation.setApproved(false);
+        reservation.setApproved(false); // OVDE DODAJ!
         reservationRepository.save(reservation);
         emailService.sendSimpleMessage(clientUsername, "Reservation", "Reservation request successfully sent!");
     }
 
 
-    private Reservation createReservationdownClass(String type, Long entityId) {
+    private Reservation createReservationdownClass(String type, Long entityId,LocalDateTime from, LocalDateTime to) {
         switch (type) {
             case "ADVENTURE" -> {
-
                 var adventureReservation = new AdventureReservation();
                 FishingAdventure adventure = adventureService.findByID(entityId);
+                availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(),from,to);
                 adventureReservation.setAdventure(adventure);
                 Set<AdventureReservation> adventureReservations = adventure.getReservations();
                 adventureReservations.add(adventureReservation);
