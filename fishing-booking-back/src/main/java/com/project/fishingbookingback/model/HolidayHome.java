@@ -2,13 +2,23 @@ package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 public class HolidayHome {
-    public HolidayHome(){
+    public HolidayHome() {
 
     }
 
@@ -16,8 +26,9 @@ public class HolidayHome {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JsonManagedReference
     private HomeOwner homeOwner;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
@@ -50,7 +61,7 @@ public class HolidayHome {
     private String rulesOfConduct;
     private String additionalInfo;
     private float pricePerDay;
-    @OneToMany(mappedBy = "holidayHome",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "holidayHome", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<HolidayHomeReservation> reservations;
 

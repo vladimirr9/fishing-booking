@@ -3,7 +3,16 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.*;
+import com.project.fishingbookingback.model.Address;
+import com.project.fishingbookingback.model.AvailablePeriod;
+import com.project.fishingbookingback.model.HolidayHome;
+import com.project.fishingbookingback.model.HolidayHomePromotion;
+import com.project.fishingbookingback.model.HolidayHomeReservation;
+import com.project.fishingbookingback.model.HomeOwner;
+import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
+import com.project.fishingbookingback.model.Role;
+import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +40,7 @@ public class HolidayHomeService {
         return holidayHomeRepository.save(holidayHome);
     }
 
-    public List<HolidayHome> getAll(){
+    public List<HolidayHome> getAll() {
         return holidayHomeRepository.findAll();
     }
 
@@ -75,7 +84,8 @@ public class HolidayHomeService {
 
     private void checkIfAllowed(HolidayHome holidayHome) {
         String username = loggedUserService.getUsername();
-        if (!username.equals(holidayHome.getHomeOwner().getEmail())) {
+        User user = userService.findByEmail(username);
+        if (!username.equals(holidayHome.getHomeOwner().getEmail()) && user.getRole() != Role.ROLE_ADMIN) {
             throw new NotAllowedException();
         }
     }
@@ -89,8 +99,8 @@ public class HolidayHomeService {
 
     public List<HolidayHome> getAvailableHomes(LocalDateTime from, LocalDateTime to) {
         List<HolidayHome> availableHomes = new ArrayList<>();
-        for(HolidayHome holidayHome: holidayHomeRepository.findAll())
-            if(isHomeAvailable(holidayHome,from,to))
+        for (HolidayHome holidayHome : holidayHomeRepository.findAll())
+            if (isHomeAvailable(holidayHome, from, to))
                 availableHomes.add(holidayHome);
 
         return availableHomes;
@@ -109,8 +119,8 @@ public class HolidayHomeService {
             if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
-	}
-    
+    }
+
     public HolidayHomePromotion addPromotion(Long id, Promotion promotion) {
         HolidayHome holidayHome = findByID(id);
         checkIfAllowed(holidayHome);

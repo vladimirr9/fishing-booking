@@ -3,7 +3,16 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.*;
+import com.project.fishingbookingback.model.Address;
+import com.project.fishingbookingback.model.AvailablePeriod;
+import com.project.fishingbookingback.model.Boat;
+import com.project.fishingbookingback.model.BoatOwner;
+import com.project.fishingbookingback.model.BoatPromotion;
+import com.project.fishingbookingback.model.BoatReservation;
+import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
+import com.project.fishingbookingback.model.Role;
+import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,20 +38,21 @@ public class BoatService {
     public List<Boat> getAvailableBoats(LocalDateTime from, LocalDateTime to) {
         List<Boat> availableBoats = new ArrayList<>();
         for (Boat boat : boatRepository.findAll())
-            if(isBoatAvailable(boat,from,to))
+            if (isBoatAvailable(boat, from, to))
                 availableBoats.add(boat);
 
         return availableBoats;
     }
 
-    public boolean IsBoatAvailable(Long id,LocalDateTime from, LocalDateTime to){
+    public boolean IsBoatAvailable(Long id, LocalDateTime from, LocalDateTime to) {
         Boat boat = boatRepository.getById(id);
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
             if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
         return false;
     }
-    private boolean isBoatAvailable(Boat boat,LocalDateTime from, LocalDateTime to){
+
+    private boolean isBoatAvailable(Boat boat, LocalDateTime from, LocalDateTime to) {
         for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
             if (availablePeriod.overlapsExclusive(from) && availablePeriod.overlapsExclusive(to))
                 return true;
@@ -50,7 +60,7 @@ public class BoatService {
     }
 
 
-    public List<Boat> getAll(){
+    public List<Boat> getAll() {
         return boatRepository.findAll();
     }
 
@@ -113,7 +123,8 @@ public class BoatService {
 
     private void checkIfAllowed(Boat boat) {
         String username = loggedUserService.getUsername();
-        if (!username.equals(boat.getBoatOwner().getEmail())) {
+        User user = userService.findByEmail(username);
+        if (!username.equals(boat.getBoatOwner().getEmail()) && user.getRole() != Role.ROLE_ADMIN) {
             throw new NotAllowedException();
         }
     }

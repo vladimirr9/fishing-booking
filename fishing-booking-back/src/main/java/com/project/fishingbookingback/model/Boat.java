@@ -2,7 +2,17 @@ package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +35,7 @@ public class Boat {
     private Boolean vhf;
     private Boolean fishfinder;
     private Boolean cabin;
-    @OneToMany(mappedBy = "boat",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "boat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<BoatReservation> reservations;
 
@@ -33,8 +43,9 @@ public class Boat {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
     private String description;
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JsonManagedReference
     private BoatOwner boatOwner;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(

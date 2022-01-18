@@ -8,11 +8,18 @@ import { HolidayHouseDTO } from '../dto/HolidayHouseDTO';
   providedIn: 'root'
 })
 export class HolidayHomeService {
-  
-  
+
+
+
+
 
   private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
+
+
+  get() {
+    return this.http.get(`${config.baseUrl}${this.homeURL}`);
+  }
 
   getAllHomes() : Observable<HolidayHouseDTO[]>{
       return this.http.get<HolidayHouseDTO[]>(`${config.baseUrl}${this.homeURL}/client`);
@@ -30,7 +37,7 @@ export class HolidayHomeService {
     params.from = from.toISOString();
     params.to = to.toISOString();
     return this.http.get<boolean>(`${config.baseUrl}${this.homeURL}/client/freeHomes/${id}`,{params: params});
-  } 
+  }
 
   createNewHome(home : any) : Observable<any> {
     return this.http.post(`${config.baseUrl}${this.homeURL}`, home)

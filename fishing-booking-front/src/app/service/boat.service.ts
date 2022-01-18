@@ -13,6 +13,10 @@ export class BoatService {
 
   private boatUrl = '/boat';
 
+  get() {
+    return this.http.get(`${config.baseUrl}${this.boatUrl}`)
+  }
+
   getBoats(): Observable<BoatsDTO[]>{
     return this.http.get<BoatsDTO[]>(`${config.baseUrl}${this.boatUrl}/client`);
   }
