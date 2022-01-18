@@ -47,16 +47,7 @@ export class ReserveBoatComponent implements OnInit {
 
   reserve(): void{
     if(this.totalPrice <=0){alert("Please calculate price first!"); return;}
-    this.boatService.IsBoatAvailabile(this.boat.id,this.startingDate,this.endingDate).subscribe((data)=>{
-      this.available = data;
-      if(this.available)
-        this.sendRequest();
-      else
-        this.statusMessage="Unavailable period!";
-    });
-  }
 
-  sendRequest(): void{
     let reservationDto={
       price: this.totalPrice,
       from: new Date(this.startingDate.setHours(12,0,0,0)),
@@ -65,7 +56,14 @@ export class ReserveBoatComponent implements OnInit {
       entityId: this.boat.id,
       type: 'BOAT'
     };
-    this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";});
+    this.reservationService.createReservation(reservationDto).subscribe(()=>
+    {
+      this.available=true;
+      this.statusMessage="Reservation succesfully sent!";},
+    error=>{
+      this.available=false;
+      this.statusMessage="Unavailable period!"});
   }
+
 
 }

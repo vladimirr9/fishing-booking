@@ -50,11 +50,11 @@ public class HolidayHome {
     private List<Picture> interior;
     private int roomsPerHome;
     private int bedsPerRoom;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinTable(
-            name = "holiday_home_appointments",
+            name = "home_available_periods",
             joinColumns = {@JoinColumn(name = "holiday_home_id")},
-            inverseJoinColumns = {@JoinColumn(name = "appointment_id")}
+            inverseJoinColumns = {@JoinColumn(name = "available_periods_id")}
     )
     @JsonManagedReference
     private List<AvailablePeriod> availablePeriods;

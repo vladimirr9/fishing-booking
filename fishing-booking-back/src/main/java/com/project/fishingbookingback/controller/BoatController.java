@@ -64,12 +64,7 @@ public class BoatController {
         return ResponseEntity.ok(boatViewDTOs);
     }
 
-    @GetMapping(value = "/client/freeBoats/{id}")
-    public ResponseEntity<Boolean> IsBoatAvailable(@PathVariable Long id,
-                                                   @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                   @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
-        return ResponseEntity.ok(boatService.IsBoatAvailable(id, from, to));
-    }
+
 
     @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
     @PostMapping()

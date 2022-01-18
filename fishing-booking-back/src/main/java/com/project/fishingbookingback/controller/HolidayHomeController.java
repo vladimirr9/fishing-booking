@@ -87,12 +87,6 @@ public class HolidayHomeController {
         return ResponseEntity.ok(clientsHolidayHomeDTOs);
     }
 
-    @GetMapping(value = "/client/freeHomes/{id}")
-    public ResponseEntity<Boolean> IsHomeAvailable(@PathVariable Long id,
-                                                   @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                   @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
-        return ResponseEntity.ok(holidayHomeService.IsHomeAvailable(id, from, to));
-    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<HolidayHome> getHome(@PathVariable Long id) {

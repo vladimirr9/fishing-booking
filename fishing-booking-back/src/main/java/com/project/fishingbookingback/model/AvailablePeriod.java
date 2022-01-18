@@ -28,7 +28,7 @@ public class AvailablePeriod {
     @JoinTable(
             name = "home_available_periods",
             joinColumns = {@JoinColumn(name = "available_periods_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "home_id", referencedColumnName = "id")}
+            inverseJoinColumns = {@JoinColumn(name = "holiday_home_id", referencedColumnName = "id")}
 
     )
     @JsonBackReference

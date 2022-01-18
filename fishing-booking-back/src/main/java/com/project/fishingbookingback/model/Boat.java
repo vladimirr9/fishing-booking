@@ -54,7 +54,7 @@ public class Boat {
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
     private List<Picture> exterior;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinTable(
             name = "boat_interior_pictures",
             joinColumns = {@JoinColumn(name = "boat_id")},
@@ -62,7 +62,7 @@ public class Boat {
     )
     private List<Picture> interior;
     private int capacity;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinTable(
             name = "boat_available_periods",
             joinColumns = {@JoinColumn(name = "boat_id", referencedColumnName = "id")},

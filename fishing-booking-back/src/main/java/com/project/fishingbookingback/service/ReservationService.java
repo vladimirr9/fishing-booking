@@ -91,6 +91,7 @@ public class ReservationService {
             case "HOLIDAY_HOME" -> {
                 var holidayReservation = new HolidayHomeReservation();
                 HolidayHome home = holidayHomeService.findByID(entityId);
+                holidayHomeService.reserveHomePeriod(entityId,from,to);
                 holidayReservation.setHolidayHome(home);
                 Set<HolidayHomeReservation> holidayHomeReservations = home.getReservations();
                 holidayHomeReservations.add(holidayReservation);
@@ -100,6 +101,7 @@ public class ReservationService {
             case "BOAT" -> {
                 var boatReservation = new BoatReservation();
                 Boat boat = boatService.findByID(entityId);
+                boatService.reserveBoatPeriod(entityId,from,to);
                 boatReservation.setBoat(boat);
                 Set<BoatReservation> boatReservations = boat.getReservations();
                 boatReservations.add(boatReservation);

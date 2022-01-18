@@ -45,16 +45,7 @@ export class ReserveHolidayHomeComponent implements OnInit {
 
   reserve(): void{
     if(this.totalPrice <=0){alert("Please calculate price first!"); return;}
-    this.holidayHomeService.IsHomeAvailabile(this.holidayhome.id,this.startingDate,this.endingDate).subscribe((data)=>{
-      this.available = data;
-      if(this.available)
-        this.sendRequest();
-      else
-        this.statusMessage="Unavailable period!";
-    });
-  }
 
-  sendRequest(): void{
     let reservationDto={
       price: this.totalPrice,
       from: new Date(this.startingDate.setHours(12,0,0,0)),
@@ -63,6 +54,14 @@ export class ReserveHolidayHomeComponent implements OnInit {
       entityId: this.holidayhome.id,
       type: 'HOLIDAY_HOME'
     };
-    this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";});
+    
+    this.reservationService.createReservation(reservationDto).subscribe(()=>{
+      this.available=true;
+      this.statusMessage="Reservation succesfully sent!";},
+      error=>{
+        this.available=false;
+        this.statusMessage="Unavailable period!";
+      });
   }
+
 }

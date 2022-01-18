@@ -44,12 +44,28 @@ public class BoatService {
         return availableBoats;
     }
 
-    public boolean IsBoatAvailable(Long id, LocalDateTime from, LocalDateTime to) {
+    public void reserveBoatPeriod(Long id,LocalDateTime from, LocalDateTime to){
+        AvailablePeriod availablePeriod = IsBoatAvailable(id,from,to);
         Boat boat = boatRepository.getById(id);
-        for (AvailablePeriod availablePeriod : boat.getAvailablePeriods())
+        boat.getAvailablePeriods().remove(availablePeriod);
+
+        var sliceBefore = availablePeriod.sliceBefore(from);
+        if(sliceBefore!=null)
+            boat.getAvailablePeriods().add(sliceBefore);
+
+        var sliceAfter = availablePeriod.sliceAfter(to);
+        if(sliceAfter!= null)
+            boat.getAvailablePeriods().add(sliceAfter);
+
+        boatRepository.save(boat);
+    }
+
+    private AvailablePeriod IsBoatAvailable(Long id, LocalDateTime from, LocalDateTime to) {
+        List<AvailablePeriod> availablePeriods = boatRepository.getById(id).getAvailablePeriods();
+        for (AvailablePeriod availablePeriod : availablePeriods)
             if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
-                return true;
-        return false;
+                return availablePeriod;
+        throw new EntityNotFoundException(availablePeriods.getClass().toString());
     }
 
     private boolean isBoatAvailable(Boat boat, LocalDateTime from, LocalDateTime to) {

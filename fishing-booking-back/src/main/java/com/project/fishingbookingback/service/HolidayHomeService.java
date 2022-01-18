@@ -113,12 +113,29 @@ public class HolidayHomeService {
         return false;
     }
 
-    public boolean IsHomeAvailable(Long id, LocalDateTime from, LocalDateTime to) {
-        HolidayHome home = holidayHomeRepository.getById(id);
-        for (AvailablePeriod availablePeriod : home.getAvailablePeriods())
+    public void reserveHomePeriod(Long boatId,LocalDateTime from, LocalDateTime to){
+        AvailablePeriod availablePeriod = IsHomeAvailable(boatId,from,to);
+        HolidayHome home = holidayHomeRepository.getById(boatId);
+        home.getAvailablePeriods().remove(availablePeriod);
+
+        var sliceBefore = availablePeriod.sliceBefore(from);
+        if(sliceBefore!=null)
+            home.getAvailablePeriods().add(sliceBefore);
+
+        var sliceAfter = availablePeriod.sliceAfter(to);
+        if(sliceAfter!= null)
+            home.getAvailablePeriods().add(sliceAfter);
+
+        holidayHomeRepository.save(home);
+    }
+
+    private AvailablePeriod IsHomeAvailable(Long id, LocalDateTime from, LocalDateTime to) {
+        List<AvailablePeriod> availablePeriods = holidayHomeRepository.getById(id).getAvailablePeriods();
+        for (AvailablePeriod availablePeriod : availablePeriods)
             if (availablePeriod.overlaps(from) && availablePeriod.overlaps(to))
-                return true;
-        return false;
+                return availablePeriod;
+
+        throw new EntityNotFoundException(availablePeriods.getClass().toString());
     }
 
     public HolidayHomePromotion addPromotion(Long id, Promotion promotion) {

@@ -67,28 +67,9 @@ export class ReserveAdventureComponent implements OnInit {
       this.available=false;
       this.statusMessage="Unavailable period!"
     });
-    // this.adventureService.getPeriodAvailability(this.adventure.fishingInstructor.email,from,to).subscribe((data)=>{
-    //   this.available = data;
-    //   if(this.available)
-    //     this.sendRequest(from,to);
-    //   else
-    //     this.statusMessage="Unavailable period!";
-    // });
   }
 
-  
-  sendRequest(from: Date,to: Date): void{
-    let reservationDto={
-      price: this.totalPrice,
-      from: new Date(from.setHours(from.getHours()+1)),
-      to: new Date(to.setHours(to.getHours()+1)),
-      clientUsername: this.localStorage.getUsername(),
-      entityId: this.adventure.id,
-      type: 'ADVENTURE'
-    };
-    this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";});
-    
-  }
+
   
    addMinutes(date: Date, minutes: number): Date {
     return new Date(date.getTime() + minutes*60000);
