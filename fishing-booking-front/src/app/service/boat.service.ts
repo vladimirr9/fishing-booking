@@ -17,8 +17,13 @@ export class BoatService {
     return this.http.get(`${config.baseUrl}${this.boatUrl}`)
   }
 
+
   getBoats(): Observable<BoatsDTO[]>{
     return this.http.get<BoatsDTO[]>(`${config.baseUrl}${this.boatUrl}/client`);
+  }
+
+  getBoatPromotions(id: number): any{
+    return this.http.get(`${config.baseUrl}${this.boatUrl}/${id}/promotions`);
   }
 
   getBoatsForOwner(params : any) : Observable<any> {

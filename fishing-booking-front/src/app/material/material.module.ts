@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 const MaterialCompontents:any = [
   MatButtonModule,
@@ -22,7 +23,8 @@ const MaterialCompontents:any = [
   MatNativeDateModule,
   MatExpansionModule,
   NgxMaterialTimepickerModule,
-  MatDividerModule
+  MatDividerModule,
+  MatListModule
 ];
 
 @NgModule({
