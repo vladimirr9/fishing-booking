@@ -4,6 +4,7 @@ import { DateService } from 'src/app/service/date.service';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { ReportDialogComponent } from '../dialog/report-dialog/report-dialog.component';
+import { ViewProfileDialogComponent } from '../dialog/view-profile-dialog/view-profile-dialog.component';
 
 @Component({
   selector: 'app-instructor-reservations-page',
@@ -23,6 +24,15 @@ export class InstructorReservationsPageComponent implements OnInit {
     this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
       this.reservations = data
     })
+  }
+
+  viewProfile(user : any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+
+    dialogConfig.data = {email: user.client.email}
+    const dialogRef = this.dialog.open(ViewProfileDialogComponent, dialogConfig);
   }
 
 

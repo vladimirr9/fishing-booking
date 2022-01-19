@@ -80,6 +80,7 @@ import { AdminReportsPageComponent } from './component/admin-reports-page/admin-
 import { AdminReportDialogComponent } from './component/dialog/admin-report-dialog/admin-report-dialog.component';
 import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
 import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
+import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
 
 
 
@@ -149,7 +150,8 @@ import { ReviewDialogComponent } from './component/dialog/review-dialog/review-d
     AdminReportsPageComponent,
     AdminReportDialogComponent,
     ComplaintDialogComponent,
-    ReviewDialogComponent
+    ReviewDialogComponent,
+    ViewProfileDialogComponent
   ],
   imports: [
     BrowserModule,

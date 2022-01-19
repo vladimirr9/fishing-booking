@@ -10,6 +10,13 @@
   }
 }
 
+.client-name {
+  text-decoration:underline;
+
+}
+.client-name:hover {
+  cursor: pointer;
+}
 
 th.mat-header-cell, td.mat-cell {
   margin: 20px;
