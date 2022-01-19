@@ -44,19 +44,7 @@ export class InstructorCalendarPageComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.availablePeriodService.getPeriods(this.storageService.getUsername()).subscribe((data: AvailablePeriod[]) => {
-      data.forEach((element) => {
-        let id = element.id || 0
-        this.addAvailablePeriodToCalendar(id, element.fromTime, element.toTime)
-      })
-    })
-
-    this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
-      data.forEach((element: any) => {
-        let id = element.id || 0
-        this.addReservationToCalendar(id, element.startDate, element.endDate, element.reportPresent)
-      })
-    })
+    this.getEvents();
   }
 
 
@@ -65,13 +53,22 @@ export class InstructorCalendarPageComponent implements OnInit {
   fromTime: any
   toTime: any
 
-  test() {
-    console.log(this.fromTime)
-    console.log(this.toTime)
-    let date = new Date(Date.parse(this.toTime))
-    console.log(date.toLocaleString())
-    console.log('---------')
+  private getEvents() {
+    this.events = [];
 
+    this.availablePeriodService.getPeriods(this.storageService.getUsername()).subscribe((data: AvailablePeriod[]) => {
+      data.forEach((element) => {
+        let id = element.id || 0;
+        this.addAvailablePeriodToCalendar(id, element.fromTime, element.toTime);
+      });
+    });
+
+    this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
+      data.forEach((element: any) => {
+        let id = element.id || 0;
+        this.addReservationToCalendar(id, element.startDate, element.endDate, element.reportPresent);
+      });
+    });
   }
 
   addAvailablePeriod() {
@@ -81,8 +78,7 @@ export class InstructorCalendarPageComponent implements OnInit {
       email: this.storageService.getUsername()
     }
     this.availablePeriodService.postPeriodInstructor(availablePeriod).subscribe((data: AvailablePeriod) => {
-      let id = data.id || 0
-      this.addAvailablePeriodToCalendar(id, data.fromTime, data.toTime)
+       this.getEvents()
     })
   }
 
