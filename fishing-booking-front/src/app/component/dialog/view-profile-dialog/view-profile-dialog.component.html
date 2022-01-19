@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>User Details</h1>
+  <form class="form" [formGroup]="form">
+      <div class="left-form">
+    <mat-form-field appearance="standard">
+      <mat-label>Email Address</mat-label>
+      <input matInput  placeholder="Email Address" formControlName="email" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>First Name</mat-label>
+      <input matInput  placeholder="First Name" formControlName="firstName" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Last Name</mat-label>
+      <input matInput  placeholder="Last Name" formControlName="lastName" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Phone Number</mat-label>
+      <input matInput  placeholder="Phone Number" formControlName="phoneNumber" readonly/>
+    </mat-form-field>
+
+
+  </div>
+    <div class="button-holder">
+      <button class="close-button" mat-flat-button color="primary" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

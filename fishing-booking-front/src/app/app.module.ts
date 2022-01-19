@@ -82,6 +82,7 @@ import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/co
 import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
 import { HomePromotionCardComponent } from './component/promotion/home-promotion-card/home-promotion-card.component';
 import { BoatPromotionCardComponent } from './component/promotion/boat-promotion-card/boat-promotion-card.component';
+import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
 
 
 
@@ -153,7 +154,8 @@ import { BoatPromotionCardComponent } from './component/promotion/boat-promotion
     ComplaintDialogComponent,
     ReviewDialogComponent,
     HomePromotionCardComponent,
-    BoatPromotionCardComponent
+    BoatPromotionCardComponent,
+    ViewProfileDialogComponent
   ],
   imports: [
     BrowserModule,

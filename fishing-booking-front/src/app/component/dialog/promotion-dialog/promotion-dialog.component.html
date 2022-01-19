@@ -24,7 +24,7 @@
   </form>
 
   <div class="button-container">
-    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+    <button mat-flat-button color="primary" [disabled]="!isFormValid()"  (click)="submit()">Submit</button>
     <button mat-flat-button color="warn" (click)="close()">Close</button>
   </div>
 </div>
