@@ -10,13 +10,14 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Promotion {
+public abstract class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
     private Double price;
+    private Double standardPrice;
     private LocalDateTime validUntil;
 
     public Promotion() {
@@ -27,6 +28,14 @@ public class Promotion {
         this.toTime = toTime;
         this.price = price;
         this.validUntil = validUntil;
+    }
+
+    public Double getStandardPrice() {
+        return standardPrice;
+    }
+
+    public void setStandardPrice(Double standardPrice) {
+        this.standardPrice = standardPrice;
     }
 
     public Long getId() {

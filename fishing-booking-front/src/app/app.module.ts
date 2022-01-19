@@ -81,6 +81,7 @@ import { AdminReportDialogComponent } from './component/dialog/admin-report-dial
 import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
 import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
 import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
+import { BoatPromotionsComponent } from './component/boat/boat-promotions/boat-promotions.component';
 
 
 
@@ -151,7 +152,8 @@ import { ViewProfileDialogComponent } from './component/dialog/view-profile-dial
     AdminReportDialogComponent,
     ComplaintDialogComponent,
     ReviewDialogComponent,
-    ViewProfileDialogComponent
+    ViewProfileDialogComponent,
+    BoatPromotionsComponent
   ],
   imports: [
     BrowserModule,
