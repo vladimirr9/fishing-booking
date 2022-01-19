@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.controller;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,7 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
-class AdventureControllerIntegrationTest {
+class ServiceFeeControllerIntegrationTest {
+
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
@@ -34,21 +36,14 @@ class AdventureControllerIntegrationTest {
     }
 
     @Test
-    public void canGetAll() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/api/fishing-adventures"))
+    public void canAlwaysGetServiceFee() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(get("/api/service-fees"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.*").isArray())
-                .andExpect(jsonPath("$.*", hasSize(greaterThanOrEqualTo(0))))
+                .andExpect(jsonPath("$.*", hasSize(greaterThan(0))))
+                .andExpect(jsonPath("$.fee", Matchers.greaterThanOrEqualTo(0.0)))
                 .andReturn();
         assertEquals("application/json",
                 mvcResult.getResponse().getContentType());
     }
-
-    @Test
-    public void stringAsIDThrowsBadRequest() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/api/fishing-adventures/a"))
-                .andDo(print()).andExpect(status().isBadRequest())
-                .andReturn();
-    }
-
 }
