@@ -2,13 +2,7 @@ package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,7 +28,7 @@ public class AvailablePeriod {
     @JoinTable(
             name = "home_available_periods",
             joinColumns = {@JoinColumn(name = "available_periods_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "home_id", referencedColumnName = "id")}
+            inverseJoinColumns = {@JoinColumn(name = "holiday_home_id", referencedColumnName = "id")}
 
     )
     @JsonBackReference

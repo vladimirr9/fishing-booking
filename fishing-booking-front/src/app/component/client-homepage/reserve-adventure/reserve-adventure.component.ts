@@ -52,17 +52,7 @@ export class ReserveAdventureComponent implements OnInit {
     let date = new Date(this.chosenDate.setHours(0,0,0,0))
     let from = this.addMinutes(date, this.convertTimeToNum(this.startingTime));
     let to = this.addMinutes(date, this.convertTimeToNum(this.endingTime));
-    this.adventureService.getPeriodAvailability(this.adventure.fishingInstructor.email,from,to).subscribe((data)=>{
-      this.available = data;
-      if(this.available)
-        this.sendRequest(from,to);
-      else
-        this.statusMessage="Unavailable period!";
-    });
-  }
 
-  
-  sendRequest(from: Date,to: Date): void{
     let reservationDto={
       price: this.totalPrice,
       from: new Date(from.setHours(from.getHours()+1)),
@@ -71,9 +61,15 @@ export class ReserveAdventureComponent implements OnInit {
       entityId: this.adventure.id,
       type: 'ADVENTURE'
     };
-    this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";});
-    
+     
+    this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";this.available=true;},
+    error=>{
+      this.available=false;
+      this.statusMessage="Unavailable period!"
+    });
   }
+
+
   
    addMinutes(date: Date, minutes: number): Date {
     return new Date(date.getTime() + minutes*60000);

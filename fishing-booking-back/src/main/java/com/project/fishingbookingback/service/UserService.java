@@ -119,4 +119,8 @@ public class UserService {
         fishingInstructor.getAvailablePeriods().remove(availablePeriod);
         userRepository.save(fishingInstructor);
     }
+
+    public void updateUser(FishingInstructor instructor) {
+        userRepository.save(instructor);
+    }
 }

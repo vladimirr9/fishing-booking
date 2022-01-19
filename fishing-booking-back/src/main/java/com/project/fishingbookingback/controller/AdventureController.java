@@ -97,14 +97,6 @@ public class AdventureController {
         return ResponseEntity.ok(clientsAdventureViewDTOS);
     }
 
-    @GetMapping(value="/client/freePeriods/{email}")
-    public ResponseEntity<Boolean> isInstructorAvailable(@PathVariable String email,
-                                                              @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                              @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
-        Boolean availability = availableAdventureService.IsInstructorAvailable(email,from,to);
-        return ResponseEntity.ok(availability);
-    }
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<FishingAdventure> getAdventure(@PathVariable Long id) {
         return ResponseEntity.ok(adventureService.findByID(id));

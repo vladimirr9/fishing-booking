@@ -15,7 +15,7 @@ import java.util.List;
 @DiscriminatorValue("FISHING_INSTRUCTOR")
 public class FishingInstructor extends User {
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinTable(
             name = "instructor_available_periods",
             joinColumns = {@JoinColumn(name = "instructor_id", referencedColumnName = "id")},
