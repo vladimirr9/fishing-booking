@@ -80,6 +80,8 @@ import { AdminReportsPageComponent } from './component/admin-reports-page/admin-
 import { AdminReportDialogComponent } from './component/dialog/admin-report-dialog/admin-report-dialog.component';
 import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
 import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
+import { HomePromotionCardComponent } from './component/promotion/home-promotion-card/home-promotion-card.component';
+import { BoatPromotionCardComponent } from './component/promotion/boat-promotion-card/boat-promotion-card.component';
 
 
 
@@ -149,7 +151,9 @@ import { ReviewDialogComponent } from './component/dialog/review-dialog/review-d
     AdminReportsPageComponent,
     AdminReportDialogComponent,
     ComplaintDialogComponent,
-    ReviewDialogComponent
+    ReviewDialogComponent,
+    HomePromotionCardComponent,
+    BoatPromotionCardComponent
   ],
   imports: [
     BrowserModule,

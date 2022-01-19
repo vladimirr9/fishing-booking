@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { config } from "src/shared"
 import { HolidayHouseDTO } from '../dto/HolidayHouseDTO';
+import { PromotionDTO } from '../dto/PromotionDTO';
+import { HomePromotion } from '../model/HomePromotion';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +69,16 @@ export class HolidayHomeService {
 
   deletePicture(id_home: number, id_picture : number, isInterior: boolean) {
     return this.http.delete(`${config.baseUrl}${this.homeURL}/${id_home}/pictures/${isInterior}/${id_picture}`)
+  }
+
+  postPromotion(id: number, promotion: PromotionDTO) : Observable<any> {
+    return this.http.post(`${config.baseUrl}${this.homeURL}/${id}/promotions`, promotion)
+  }
+  deletePromotion(id: number, idPromotion: number) : any {
+    return this.http.delete(`${config.baseUrl}${this.homeURL}/${id}/promotions/${idPromotion}`)
+  }
+
+  getPromotions(id: number) : Observable<HomePromotion[]> {
+    return this.http.get<HomePromotion[]>(`${config.baseUrl}${this.homeURL}/${id}/promotions`)
   }
 }

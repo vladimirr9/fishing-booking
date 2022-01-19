@@ -12,6 +12,8 @@ import { BoatService } from 'src/app/service/boat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
+import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
+import { BoatPromotion } from 'src/app/model/BoatPromotion';
 
 @Component({
   selector: 'app-new-boat',
@@ -28,6 +30,7 @@ export class NewBoatComponent implements OnInit {
   map!: Map
   interior : any
   exterior : any
+  promotions !: BoatPromotion[]
 
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
@@ -250,6 +253,33 @@ export class NewBoatComponent implements OnInit {
       return this.editMode ? "Edit" : "Create"
     }
   
-
+    addPromotion() {
+      let id = this.route.snapshot.params['id'];
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+  
+      const dialogRef = this.dialog.open(PromotionDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            this.boatService.postPromotion(id,data).subscribe((result:any) => {
+              this.boatService.getPromotions(id).subscribe((data) => {
+                this.promotions = data;
+              })
+            })
+          }
+        }
+      );
+    }
+  
+    deletePromotion(boatPromotion : BoatPromotion) {
+      let index = this.promotions.indexOf(boatPromotion)
+      if (index !== -1) {
+        this.promotions.splice(index, 1);
+      }
+    }
 
 }
