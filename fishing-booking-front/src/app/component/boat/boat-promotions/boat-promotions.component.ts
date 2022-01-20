@@ -33,7 +33,8 @@ export class BoatPromotionsComponent implements OnInit {
       entityId: this.id,
       type: 'BOAT'
     };
-    this.reservationService.createReservation(reservationDto).subscribe(
+    alert(typeof(promotion.id))
+    this.reservationService.createReservationWithPromotion(reservationDto,promotion.id).subscribe(      
       (data) => {
         this.available=true;
         this.statusMessage="Reservation succesfully sent!";
@@ -44,7 +45,7 @@ export class BoatPromotionsComponent implements OnInit {
       }
     ).add(() => {
       setTimeout(() =>{
-        this.promotions = this.promotions.filter((prom: { promotionId: any; }) => prom.promotionId != promotion.promotionId );
+        this.promotions = this.promotions.filter((prom: { id: any; }) => prom.id != promotion.id );
       }, 1500); 
     });
 
