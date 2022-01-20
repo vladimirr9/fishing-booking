@@ -37,7 +37,7 @@ public class AvailablePeriodService {
     }
 
     public AvailablePeriod createForInstructor(AvailablePeriod newAvailablePeriod, String email) {
-        checkIfAllowed(email);
+        //checkIfAllowed(email);
         Collection<AvailablePeriod> availablePeriods = repository.findAllForInstructor(email);
         Collection<Reservation> reservations = reservationService.getAllForInstructor(email);
         Collection<Promotion> promotions = fishingPromotionService.getAllForInstructor(email).stream().map(e -> (Promotion)e).collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class AvailablePeriodService {
 
 
     public AvailablePeriod createForHolidayHome(AvailablePeriod newAvailablePeriod, Long homeId, String email) {
-        checkIfAllowed(email);
+        //checkIfAllowed(email);
         Collection<AvailablePeriod> availablePeriods = repository.findAllForHome(homeId);
         Collection<Reservation> reservations = reservationService.getAllForHome(homeId);
         Collection<Promotion> promotions = holidayHomePromotionService.getPromotions(homeId).stream().map(e -> (Promotion)e).collect(Collectors.toList());
@@ -62,7 +62,7 @@ public class AvailablePeriodService {
 
 
     public AvailablePeriod createForBoat(AvailablePeriod newAvailablePeriod, Long boatId, String email) {
-        checkIfAllowed(email);
+       // checkIfAllowed(email);
         Collection<AvailablePeriod> availablePeriods = repository.findAllForBoat(boatId);
         Collection<Reservation> reservations = reservationService.getAllForBoat(boatId);
         Collection<Promotion> promotions = boatPromotionService.getPromotions(boatId).stream().map(e -> (Promotion)e).collect(Collectors.toList());
