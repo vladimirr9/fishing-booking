@@ -13,6 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
 import { StorageService } from 'src/app/service/storage.service';
+import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
+import { HomePromotion } from 'src/app/model/HomePromotion';
+import { FishingPromotion } from 'src/app/model/FishingPromotion';
 
 @Component({
   selector: 'app-holiday-home-details',
@@ -35,7 +38,8 @@ export class HolidayHomeDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
     private route: ActivatedRoute,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private dialog: MatDialog) { }
 
 
     addHomeForm = this.fb.group({
@@ -54,10 +58,13 @@ export class HolidayHomeDetailsComponent implements OnInit {
     })
 
     ngOnInit(): void {
+      let id = this.route.snapshot.params['id'];
       this.initMap(this.lon, this.lat);
        this.initializeForm();
        this.startingDate = new Date(this.route.snapshot.params['startDate']);
        this.endingDate = new Date(this.route.snapshot.params['endDate']);
+
+      
     }
 
     isClient(): boolean{
@@ -118,6 +125,10 @@ export class HolidayHomeDetailsComponent implements OnInit {
         })
       });
     }
+
+
+    
+    
     
   
 

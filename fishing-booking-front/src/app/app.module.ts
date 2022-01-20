@@ -80,7 +80,11 @@ import { AdminReportsPageComponent } from './component/admin-reports-page/admin-
 import { AdminReportDialogComponent } from './component/dialog/admin-report-dialog/admin-report-dialog.component';
 import { ComplaintDialogComponent } from './component/dialog/complaint-dialog/complaint-dialog.component';
 import { ReviewDialogComponent } from './component/dialog/review-dialog/review-dialog.component';
+import { HomePromotionCardComponent } from './component/promotion/home-promotion-card/home-promotion-card.component';
+import { BoatPromotionCardComponent } from './component/promotion/boat-promotion-card/boat-promotion-card.component';
 import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
+import { HomeOwnerReservationsPageComponent } from './component/home-owner-reservations-page/home-owner-reservations-page.component';
+import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reservations-page/boat-owner-reservations-page.component';
 import { BoatPromotionsComponent } from './component/boat/boat-promotions/boat-promotions.component';
 import { HomePromotionsComponent } from './component/holiday-home/home-promotions/home-promotions.component';
 import { ViewReservationDialogComponent } from './component/dialog/view-reservation-dialog/view-reservation-dialog.component';
@@ -154,6 +158,11 @@ import { ViewReservationDialogComponent } from './component/dialog/view-reservat
     AdminReportDialogComponent,
     ComplaintDialogComponent,
     ReviewDialogComponent,
+    HomePromotionCardComponent,
+    BoatPromotionCardComponent,
+    ViewProfileDialogComponent,
+    HomeOwnerReservationsPageComponent,
+    BoatOwnerReservationsPageComponent,
     ViewProfileDialogComponent,
     BoatPromotionsComponent,
     HomePromotionsComponent,

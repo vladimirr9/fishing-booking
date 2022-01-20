@@ -75,4 +75,82 @@
     border-top: 0.1em solid transparent;
   }
   
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .reservationButton{
+    margin-left: 10px;
+    margin-right: 20px;
+    align-self: center;
+  }
+  
+  .title {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 42px;
+    margin-bottom: 5px;
+  }
+  
+  .owner-name {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    margin-top: 5px;
+  }
+  
+  .about  {
+    display: flex;
+    flex-direction: row;
+  }
+  .service-container, .picture-container {
+    margin-left: 8%;
+    margin-right: 8%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .additional-services, .pictures, .promotions {
+    display: flex;
+  }
+  
+  .promotion-list {
+    display: flex;
+  }
+  
+  .image{
+    width: 28px;
+    margin-left: 10px;
+  }
+  
+  .service-item, .picture-item {
+    margin: 10px;
+  
+  }
+  .about > div {
+    margin: 30px;
+  }
+  
+  .text {
+    min-width: 300px;
+    max-width: 400px;
+  }
+  
+  .location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .map {
+    margin-top: 40px;
+    border-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    width: 100%;
+  
+  }
+  
   
