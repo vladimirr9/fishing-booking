@@ -39,7 +39,7 @@
     <ng-container matColumnDef="newReservation">
       <th mat-header-cell *matHeaderCellDef></th>
       <span *matCellDef="let element">
-      <td mat-cell ><button  *ngIf="element.ongoing" mat-flat-button color="primary" (click)="createNewReservation(element)">Add new</button></td>
+      <td mat-cell ><button  *ngIf="element.ongoing && element.approved" mat-flat-button color="primary" (click)="createNewReservation(element)">Add new</button></td>
       </span>
     </ng-container>
 

@@ -1,78 +1,81 @@
 .container {
-    margin: 50px 8%;
-  
-  }
-  .menu-container {
-    display: flex;
-    flex-direction: row;
-    > button {
-      margin: 20px;
-    }
-  }
-  
-  .client-name {
-    text-decoration:underline;
-  
-  }
-  .client-name:hover {
-    cursor: pointer;
-  }
-  
-  th.mat-header-cell, td.mat-cell {
+  margin: 50px 8%;
+
+}
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  > button {
     margin: 20px;
-    padding: 30px;
   }
-  .new-admin-button, .change-fee-button {
-    margin-bottom: 20px;
-  }
-  
-  .registration-container {
-    min-height: 100px;
-    display: flex;
-  }
-  
-  .buttons-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  mat-card-title {
-    margin-bottom: 15px;
-  }
-  
-  .container-card {
-    max-width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-  }
-  
-  
-  .mat-view {
-    background-color: #2D9645;
-    color: #fff;
-  }
-  
-  
-  .user-table {
-    width: 80%;
-  }
-  .service-table {
-    width: 60%;
-  }
-  
-  
-  
-  .user-table {
-    min-height: 100px;
-  }
-  
-  
-  
-  .mat-row .mat-cell {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent
-  }
-  
+}
+
+.client-name {
+  text-decoration:underline;
+
+}
+.client-name:hover {
+  cursor: pointer;
+}
+
+th.mat-header-cell, td.mat-cell {
+  margin: 20px;
+  padding: 30px;
+}
+.new-admin-button, .change-fee-button {
+  margin-bottom: 20px;
+}
+
+.registration-container {
+  min-height: 100px;
+  display: flex;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-button {
+  min-width: 130px;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+}
+
+.container-card {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+
+.mat-view {
+  background-color: #2D9645;
+  color: #fff;
+}
+
+
+.user-table {
+  width: 80%;
+}
+.service-table {
+  width: 60%;
+}
+
+
+
+.user-table {
+  min-height: 100px;
+}
+
+
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent
+}
