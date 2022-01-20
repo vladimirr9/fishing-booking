@@ -8,6 +8,7 @@ import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
 import com.project.fishingbookingback.model.Report;
 import com.project.fishingbookingback.model.Reservation;
+import com.project.fishingbookingback.service.PromotionService;
 import com.project.fishingbookingback.service.ReservationCancelationService;
 import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -36,12 +37,14 @@ public class ReservationController {
     private final ReservationMapper reservationMapper;
     private final ReportMapper reportMapper;
     private final ReservationCancelationService reservationCancelationService;
+    private final PromotionService promotionService;
 
-    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService) {
+    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper, ReportMapper reportMapper, ReservationCancelationService reservationCancelationService, PromotionService promotionService) {
         this.reservationService = reservationService;
         this.reservationMapper = reservationMapper;
         this.reportMapper = reportMapper;
         this.reservationCancelationService = reservationCancelationService;
+        this.promotionService = promotionService;
     }
 
     @GetMapping
@@ -85,6 +88,15 @@ public class ReservationController {
         reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType());
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/create/{promotion_id}")
+    public ResponseEntity<HttpStatus> createWithPromotion(@Valid @RequestBody CreateReservationDTO createReservationDTO,@PathVariable Long promotion_id) {
+        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType());
+        promotionService.removePromotion(promotion_id,createReservationDTO.getType());
+        return ResponseEntity.noContent().build();
+    }
+
+
 
     @PutMapping("/{id}/approve")
     public ResponseEntity<HttpStatus> approveReservation(@PathVariable Long id) {

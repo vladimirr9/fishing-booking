@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Promotion {
+public abstract class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
@@ -28,6 +28,7 @@ public class Promotion {
         this.price = price;
         this.validUntil = validUntil;
     }
+
 
     public Long getId() {
         return id;

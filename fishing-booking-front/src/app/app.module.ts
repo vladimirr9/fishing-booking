@@ -85,6 +85,8 @@ import { BoatPromotionCardComponent } from './component/promotion/boat-promotion
 import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
 import { HomeOwnerReservationsPageComponent } from './component/home-owner-reservations-page/home-owner-reservations-page.component';
 import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reservations-page/boat-owner-reservations-page.component';
+import { BoatPromotionsComponent } from './component/boat/boat-promotions/boat-promotions.component';
+import { HomePromotionsComponent } from './component/holiday-home/home-promotions/home-promotions.component';
 
 
 
@@ -159,7 +161,10 @@ import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reser
     BoatPromotionCardComponent,
     ViewProfileDialogComponent,
     HomeOwnerReservationsPageComponent,
-    BoatOwnerReservationsPageComponent
+    BoatOwnerReservationsPageComponent,
+    ViewProfileDialogComponent,
+    BoatPromotionsComponent,
+    HomePromotionsComponent
   ],
   imports: [
     BrowserModule,

@@ -36,32 +36,29 @@ public class ReservationCancelationService {
     }
 
     private void checkDates(Reservation reservation){
-        long diff = Math.abs(ChronoUnit.DAYS.between(reservation.getStartDate(), LocalDateTime.now()));
-        if(diff < 3) throw new NotAllowedException();
+        long diff = ChronoUnit.DAYS.between(LocalDateTime.now(),reservation.getStartDate());
+        if(diff>=0 && diff < 3) throw new NotAllowedException();
     }
 
     private void cancelBoatReservation(BoatReservation reservation){
         Set<BoatReservation> reservations = reservation.getBoat().getReservations();
         reservations.remove(reservation);
         reservation.getBoat().setReservations(reservations);
-        if(reservation.isApproved())
-            availablePeriodService.createForBoat(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getBoat().getId(),reservation.getOwnerEmail());
+        availablePeriodService.createForBoat(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getBoat().getId(),reservation.getOwnerEmail());
     }
 
     private void cancelHomeReservation(HolidayHomeReservation reservation){
         Set<HolidayHomeReservation> reservations = reservation.getHolidayHome().getReservations();
         reservations.remove(reservation);
         reservation.getHolidayHome().setReservations(reservations);
-        if(reservation.isApproved())
-            availablePeriodService.createForHolidayHome(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getHolidayHome().getId(),reservation.getOwnerEmail());
+        availablePeriodService.createForHolidayHome(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getHolidayHome().getId(),reservation.getOwnerEmail());
     }
 
     private void cancelAdventureReservation(AdventureReservation reservation){
         Set<AdventureReservation> reservations = reservation.getAdventure().getReservations();
         reservations.remove(reservation);
         reservation.getAdventure().setReservations(reservations);
-        if(reservation.isApproved())
-            availablePeriodService.createForInstructor(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getOwnerEmail());
+        availablePeriodService.createForInstructor(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getOwnerEmail());
     }
 
 }

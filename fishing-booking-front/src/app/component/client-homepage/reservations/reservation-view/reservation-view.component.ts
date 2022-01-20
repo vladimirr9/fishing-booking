@@ -75,6 +75,7 @@ export class ReservationViewComponent implements OnInit {
 
   cancelReservation(id: number):void{
     this.reservationService.deleteReservation(id).subscribe(()=>{
+        alert("Reservation successfully removed!");
         this.reservations = this.reservations.filter(reservation => reservation.id != id );
     },error=>{
         alert("Date is within 3 days");
