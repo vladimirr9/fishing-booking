@@ -19,6 +19,15 @@ public class ReservationDTO {
     private Boolean reviewPresent;
     private Boolean complaintPresent;
     private Client client;
+    private Boolean ongoing;
+
+    public Boolean getOngoing() {
+        return ongoing;
+    }
+
+    public void setOngoing() {
+        this.ongoing = startDate.isBefore(LocalDateTime.now()) && endDate.isAfter(LocalDateTime.now());
+    }
 
     public ReservationDTO() {
     }

@@ -1,0 +1,24 @@
+<div class="container">
+    <h2 mat-dialog-title>New Reservation</h2>
+
+    <form class="form" [formGroup]="form">
+      <mat-form-field appearance="standard">
+        <mat-label>Start Date</mat-label>
+        <input matInput type="datetime-local" placeholder="Start Date" formControlName="fromTime">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>End Date</mat-label>
+        <input matInput type="datetime-local" placeholder="End Date" formControlName="toTime">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" placeholder="Price" formControlName="price">
+      </mat-form-field>
+    </form>
+  
+    <div class="button-container">
+      <button mat-flat-button color="primary" [disabled]="!isFormValid()"  (click)="submit()">Submit</button>
+      <button mat-flat-button color="warn" (click)="close()">Close</button>
+    </div>
+  </div>
+  

@@ -8,6 +8,7 @@ import com.project.fishingbookingback.model.HolidayHomeReservation;
 import com.project.fishingbookingback.model.Reservation;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Component
@@ -43,6 +44,7 @@ public class ReservationMapper {
         reservationDTO.setPrice(reservation.getPrice());
         reservationDTO.setClient(reservation.getClient());
         reservationDTO.setEndDate(reservation.getEndDate());
+        reservationDTO.setOngoing();
 
 
         return reservationDTO;
@@ -67,7 +69,7 @@ public class ReservationMapper {
         reservationDTO.setPrice(reservation.getPrice());
         reservationDTO.setClient(reservation.getClient());
         reservationDTO.setEndDate(reservation.getEndDate());
-
+        reservationDTO.setOngoing();
         return reservationDTO;
     }
 
@@ -91,6 +93,7 @@ public class ReservationMapper {
         reservationDTO.setComplaintPresent(reservation.getComplaint()!=null);
         reservationDTO.setId(reservation.getId());
         reservationDTO.setClient(reservation.getClient());
+        reservationDTO.setOngoing();
         return reservationDTO;
     }
 
