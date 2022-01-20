@@ -6,6 +6,7 @@ import { StorageService } from 'src/app/service/storage.service';
 import { NewReservationDialogComponent } from '../dialog/new-reservation-dialog/new-reservation-dialog.component';
 import { ReportDialogComponent } from '../dialog/report-dialog/report-dialog.component';
 import { ViewProfileDialogComponent } from '../dialog/view-profile-dialog/view-profile-dialog.component';
+import { ViewReservationDialogComponent } from '../dialog/view-reservation-dialog/view-reservation-dialog.component';
 
 @Component({
   selector: 'app-instructor-reservations-page',
@@ -36,6 +37,43 @@ export class InstructorReservationsPageComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewProfileDialogComponent, dialogConfig);
   }
 
+
+  canWriteReport(element: any) {
+    let endDate = this.dateService.getDate(element.endDate)
+    return !element.reportPresent && endDate < new Date() && element.approved
+  }
+  canApprove(element: any) {
+    return !element.approved
+  }
+
+  viewReservation(element: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+
+    dialogConfig.data = {
+      id: element.id,
+      name: element.name,
+      firstName: element.client.firstName,
+      lastName: element.client.lastName,
+      startDate: element.startDate,
+      endDate: element.endDate,
+      price: element.price
+    }
+    const dialogRef = this.dialog.open(ViewReservationDialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      res => {
+        if (res) {
+          this.reservationService.approveReservation(res).subscribe((data) => {
+            element.approved = true
+          })
+        }
+      }
+
+    );
+  }
 
   sendReport(element: any) {
     const dialogConfig = new MatDialogConfig();

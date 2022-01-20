@@ -88,6 +88,7 @@ import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reser
 import { BoatPromotionsComponent } from './component/boat/boat-promotions/boat-promotions.component';
 import { HomePromotionsComponent } from './component/holiday-home/home-promotions/home-promotions.component';
 import { NewReservationDialogComponent } from './component/dialog/new-reservation-dialog/new-reservation-dialog.component';
+import { ViewReservationDialogComponent } from './component/dialog/view-reservation-dialog/view-reservation-dialog.component';
 
 
 
@@ -166,7 +167,8 @@ import { NewReservationDialogComponent } from './component/dialog/new-reservatio
     ViewProfileDialogComponent,
     BoatPromotionsComponent,
     HomePromotionsComponent,
-    NewReservationDialogComponent
+    NewReservationDialogComponent,
+    ViewReservationDialogComponent
   ],
   imports: [
     BrowserModule,

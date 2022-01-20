@@ -22,7 +22,6 @@ export class ViewProfileDialogComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    console.log(this.data)
     this.userService.getProfile(this.data.email).subscribe((data:any) => {
       this.form.controls['email'].setValue(data.email)
       this.form.controls['firstName'].setValue(data.firstName)

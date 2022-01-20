@@ -25,6 +25,7 @@ public class ReservationCancelationService {
     public void cancelReservation(Long reservationId){
         Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() -> new EntityNotFoundException(Reservation.class.getSimpleName()));
         checkDates(reservation);
+        reservationRepository.delete(reservation);
         if(reservation.getClass() == HolidayHomeReservation.class)
             cancelHomeReservation((HolidayHomeReservation) reservation);
         else if(reservation.getClass() == BoatReservation.class)
@@ -32,7 +33,7 @@ public class ReservationCancelationService {
         else
             cancelAdventureReservation((AdventureReservation) reservation);
 
-        reservationRepository.delete(reservation);
+
     }
 
     private void checkDates(Reservation reservation){

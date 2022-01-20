@@ -28,7 +28,7 @@ export class AdventureService {
     let params = Object();
     params.from = from.toISOString();
     params.to = to.toISOString();
-    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client/freePeriods`,{params: params}); 
+    return this.http.get<InstructorAdventureDTO[]>(`${config.baseUrl}${this.adventureURL}/client/freePeriods`,{params: params});
   }
 
   getPeriodAvailability(email: string,from: Date,to: Date): Observable<boolean>{
@@ -81,6 +81,10 @@ export class AdventureService {
 
   getPromotions(id: number) : Observable<FishingPromotion[]> {
     return this.http.get<FishingPromotion[]>(`${config.baseUrl}${this.adventureURL}/${id}/promotions`)
+  }
+
+  getAllPromotionsForInstructor() {
+    return this.http.get(`${config.baseUrl}${this.adventureURL}/promotions`)
   }
 
 
