@@ -20,3 +20,11 @@
 
 }
 
+.button-holder {
+  padding-top: 10px;
+  text-align: center;
+  & > * {
+    margin: 10px;
+  }
+}
+

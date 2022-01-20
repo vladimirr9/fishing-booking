@@ -10,6 +10,7 @@ import { CreateReservationDTO } from '../dto/CreateReservationDTO';
 })
 export class ReservationService {
 
+
   constructor(private _http: HttpClient) { }
 
   private _reservationsUrl = '/reservations';
@@ -32,6 +33,10 @@ export class ReservationService {
 
   deleteReservation(id: number){
     return this._http.delete(`${config.baseUrl}${this._reservationsUrl}/${id}`);
+  }
+
+  approveReservation(id: any) {
+    return this._http.put(`${config.baseUrl}${this._reservationsUrl}/${id}/approve`,{})
   }
 
 }

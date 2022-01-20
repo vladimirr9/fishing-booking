@@ -83,6 +83,7 @@ import { ReviewDialogComponent } from './component/dialog/review-dialog/review-d
 import { ViewProfileDialogComponent } from './component/dialog/view-profile-dialog/view-profile-dialog.component';
 import { BoatPromotionsComponent } from './component/boat/boat-promotions/boat-promotions.component';
 import { HomePromotionsComponent } from './component/holiday-home/home-promotions/home-promotions.component';
+import { ViewReservationDialogComponent } from './component/dialog/view-reservation-dialog/view-reservation-dialog.component';
 
 
 
@@ -155,7 +156,8 @@ import { HomePromotionsComponent } from './component/holiday-home/home-promotion
     ReviewDialogComponent,
     ViewProfileDialogComponent,
     BoatPromotionsComponent,
-    HomePromotionsComponent
+    HomePromotionsComponent,
+    ViewReservationDialogComponent
   ],
   imports: [
     BrowserModule,

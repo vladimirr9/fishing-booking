@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -88,11 +89,11 @@ public class AdventureController {
         return ResponseEntity.ok(clientsAdventureViewDTOS);
     }
 
-    @GetMapping(value="/client/freePeriods")
+    @GetMapping(value = "/client/freePeriods")
     public ResponseEntity<List<ClientsAdventureViewDTO>> getAvailableAdventures(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                                                @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)  LocalDateTime to){
+                                                                                @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
-        for (FishingAdventure adventure : availableAdventureService.getAvailableAdventures(from,to))
+        for (FishingAdventure adventure : availableAdventureService.getAvailableAdventures(from, to))
             clientsAdventureViewDTOS.add(adventureMapper.toClientAdventureDTO(adventure));
         return ResponseEntity.ok(clientsAdventureViewDTOS);
     }
@@ -134,6 +135,11 @@ public class AdventureController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/promotions")
+    public ResponseEntity<Collection<FishingPromotion>> getAllPromotions() {
+        return ResponseEntity.ok(adventureService.getAllPromotions());
+    }
+    
     @GetMapping(value = "/{id}/promotions")
     public ResponseEntity<List<FishingPromotion>> getPromotions(@PathVariable Long id) {
         return ResponseEntity.ok(adventureService.getPromotions(id));
