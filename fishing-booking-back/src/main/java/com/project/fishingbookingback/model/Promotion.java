@@ -17,7 +17,6 @@ public abstract class Promotion {
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
     private Double price;
-    private Double standardPrice;
     private LocalDateTime validUntil;
 
     public Promotion() {
@@ -30,13 +29,6 @@ public abstract class Promotion {
         this.validUntil = validUntil;
     }
 
-    public Double getStandardPrice() {
-        return standardPrice;
-    }
-
-    public void setStandardPrice(Double standardPrice) {
-        this.standardPrice = standardPrice;
-    }
 
     public Long getId() {
         return id;

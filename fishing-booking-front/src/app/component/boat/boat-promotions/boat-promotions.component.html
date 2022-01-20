@@ -20,7 +20,7 @@
                 <mat-list-item>
                     <mat-form-field appearance="fill" class="example-form-field">
                         <mat-label>From:</mat-label>
-                        <input matInput [(ngModel)]="promotion.fromTime" [matDatepicker]="picker1" >
+                        <input matInput disabled [(ngModel)]="promotion.fromTime" [matDatepicker]="picker1" >
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1>
                           <mat-datepicker-actions>
@@ -32,7 +32,7 @@
                 
                       <mat-form-field appearance="fill" class="example-form-field">
                         <mat-label>To:</mat-label>
-                        <input matInput [(ngModel)]="promotion.toTime" [matDatepicker]="datepicker" >
+                        <input matInput disabled [(ngModel)]="promotion.toTime" [matDatepicker]="datepicker" >
                         <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                         <mat-datepicker #datepicker>
                           <mat-datepicker-actions>
@@ -45,7 +45,7 @@
                   
                       <mat-form-field appearance="fill" class="example-form-field">
                         <mat-label>Valid until:</mat-label>
-                        <input matInput [(ngModel)]="promotion.validUntil" [matDatepicker]="datepicker2" >
+                        <input matInput disabled [(ngModel)]="promotion.validUntil" [matDatepicker]="datepicker2" >
                         <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
                         <mat-datepicker #datepicker2>
                           <mat-datepicker-actions>
@@ -57,8 +57,9 @@
                 </mat-list-item>
                 <mat-list-item>
                      <label><b>Promo price:</b>   {{promotion.price}}$</label>
-                     <label style="margin-left: 50px;"><b>Promo price:</b>   {{promotion.standardPrice}}$</label>
-                     <button style="margin-left: 50px;" mat-button color="primary" (click)="reserve()">RESERVE</button>
+                     <label style="margin-left: 50px;"><b>Standard price:</b>   {{promotion.standardPrice}}$</label>
+                     <button style="margin-left: 50px;" mat-button color="primary" (click)="reserve(promotion)">RESERVE</button>
+                     <label  style="margin-left: 50px;" [style.color]="!available? 'red': 'green'">{{statusMessage}}</label>
                      <mat-divider></mat-divider>
                 </mat-list-item>
               </mat-list>

@@ -26,6 +26,10 @@ export class ReservationService {
     return this._http.post(`${config.baseUrl}${this._reservationsUrl}/create`,reservationDto);
   }
 
+  createReservationWithPromotion(reservationDto: CreateReservationDTO,id: number){
+    return this._http.post(`${config.baseUrl}${this._reservationsUrl}/create/${id}`,reservationDto);
+  }
+
   deleteReservation(id: number){
     return this._http.delete(`${config.baseUrl}${this._reservationsUrl}/${id}`);
   }
