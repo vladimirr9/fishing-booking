@@ -70,6 +70,20 @@
         <mat-label>Additional information</mat-label>
         <textarea class="textarea" matInput placeholder="Additional information" formControlName="additionalInfo"></textarea>
       </mat-form-field>
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="middle-container">
       
@@ -125,6 +139,11 @@
             </div>
         
       </div>
+
+
+ 
+     
+
       
     </div>
     <div class="right-container">
@@ -158,5 +177,20 @@
         <div class="map" (click)="getCoord($event)" id="map"></div>
     </div>
   </form>
+
+  <div *ngIf="editMode" class="date-selects">
+    <h3>
+      Add available period
+    </h3>
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="Start Date" [(ngModel)]="fromTime">
+    </mat-form-field>
+    <div>
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="End Date" [(ngModel)]="toTime">
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="button" (click)="addAvailablePeriod()">Add</button>
+    </div>
+    </div>
   </div>
   

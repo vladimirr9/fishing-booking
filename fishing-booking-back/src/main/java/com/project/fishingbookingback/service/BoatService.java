@@ -3,21 +3,13 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.Address;
-import com.project.fishingbookingback.model.AvailablePeriod;
-import com.project.fishingbookingback.model.Boat;
-import com.project.fishingbookingback.model.BoatOwner;
-import com.project.fishingbookingback.model.BoatPromotion;
-import com.project.fishingbookingback.model.BoatReservation;
-import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -181,5 +173,14 @@ public class BoatService {
         reservations.removeIf(reservation -> reservation.overlaps(newBoatReservation));
         reservations.add(newBoatReservation);
         boatRepository.save(newBoatReservation.getBoat());
+    }
+
+    public Collection<BoatPromotion> getAllPromotions() {
+        String email = loggedUserService.getUsername();
+        return boatPromotionService.getAllForBoatOwner(email);
+    }
+
+    public void save(Boat boat) {
+        boatRepository.save(boat);
     }
 }

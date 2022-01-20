@@ -14,6 +14,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
 import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
 import { HomePromotion } from 'src/app/model/HomePromotion';
+import { StorageService } from 'src/app/service/storage.service';
+import { AvailablePeriodService } from 'src/app/service/available-period.service';
+import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
 
 @Component({
   selector: 'app-new-home',
@@ -30,10 +33,13 @@ export class NewHomeComponent implements OnInit {
   exterior : any
   promotions!: HomePromotion[]
 
+  fromTime: any
+  toTime: any
+
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
     private router: Router,
-    private route: ActivatedRoute, private dialog: MatDialog) { }
+    private route: ActivatedRoute, private dialog: MatDialog, private storageService: StorageService, private availablePeriodService: AvailablePeriodService) { }
 
 
     addHomeForm = this.fb.group({
@@ -231,5 +237,18 @@ export class NewHomeComponent implements OnInit {
       if (index !== -1) {
         this.promotions.splice(index, 1);
       }
+    }
+
+    addAvailablePeriod() {
+      let availablePeriod = {
+        fromTime: this.fromTime,
+        toTime: this.toTime,
+        email: this.storageService.getUsername()
+      }
+      this.availablePeriodService.postPeriodHomeOwner(availablePeriod, this.route.snapshot.params['id']).subscribe((data: AvailablePeriod) => {
+         alert("Successfully added!")
+      }, (error) => {
+        alert("Error.")
+      })
     }
 }

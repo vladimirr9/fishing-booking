@@ -10,6 +10,9 @@ import { BoatPromotion } from '../model/BoatPromotion';
   providedIn: 'root'
 })
 export class BoatService {
+  getAllPromotionsForBoatOwner() {
+    return this.http.get(`${config.baseUrl}${this.boatUrl}/promotions`)
+  }
 
   constructor(private http: HttpClient) { }
 

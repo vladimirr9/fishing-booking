@@ -14,6 +14,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
 import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
 import { BoatPromotion } from 'src/app/model/BoatPromotion';
+import { AvailablePeriodService } from 'src/app/service/available-period.service';
+import { StorageService } from 'src/app/service/storage.service';
+import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
 
 @Component({
   selector: 'app-new-boat',
@@ -32,10 +35,13 @@ export class NewBoatComponent implements OnInit {
   exterior : any
   promotions !: BoatPromotion[]
 
+  fromTime: any
+  toTime: any
+
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
     private router: Router,
-    private route: ActivatedRoute, private dialog: MatDialog) { }
+    private route: ActivatedRoute, private dialog: MatDialog, private availablePeriodService: AvailablePeriodService, private storageService: StorageService) { }
 
 
     addBoatForm = this.fb.group({
@@ -101,7 +107,24 @@ export class NewBoatComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
         })
+
+        this.boatService.getPromotions(id).subscribe((data) => {
+          this.promotions = data;
+        })
       }
+    }
+
+    addAvailablePeriod() {
+      let availablePeriod = {
+        fromTime: this.fromTime,
+        toTime: this.toTime,
+        email: this.storageService.getUsername()
+      }
+      this.availablePeriodService.postPeriodBoatOwner(availablePeriod, this.route.snapshot.params['id']).subscribe((data: AvailablePeriod) => {
+         alert("Successfully added!")
+      }, (error) => {
+        alert("Error.")
+      })
     }
 
     addPicture(isInterior: boolean) {

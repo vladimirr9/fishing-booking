@@ -73,10 +73,21 @@ public class AvailablePeriodService {
     }
 
 
-
-
     public List<AvailablePeriod> getPeriods(String email) {
-        return repository.findAllForInstructor(email);
+        return switch (userService.findByEmail(email).getRole()) {
+            case ROLE_FISHING_INSTRUCTOR -> repository.findAllForInstructor(email);
+            case ROLE_BOAT_OWNER -> findAllForBoatOwner(email);
+            case ROLE_HOME_OWNER -> findAllForHomeOwner(email);
+            default -> null;
+        };
+    }
+
+    private List<AvailablePeriod> findAllForHomeOwner(String email) {
+        return repository.findAll().stream().filter(x -> x.getHolidayHome() != null && x.getHolidayHome().getHomeOwner().getEmail().equals(email)).toList();
+    }
+
+    private List<AvailablePeriod> findAllForBoatOwner(String email) {
+        return repository.findAll().stream().filter(x -> x.getBoat() != null && x.getBoat().getBoatOwner().getEmail().equals(email)).toList();
     }
 
     public AvailablePeriod findByID(Long id) {
@@ -85,7 +96,19 @@ public class AvailablePeriodService {
 
     public void delete(Long id) {
         AvailablePeriod availablePeriod = findByID(id);
-        userService.removeAvailablePeriod(availablePeriod);
+        if (availablePeriod.getFishingInstructor() != null) {
+            userService.removeAvailablePeriod(availablePeriod);
+        }
+        else if (availablePeriod.getBoat() != null){
+            var boat = availablePeriod.getBoat();
+            boat.getAvailablePeriods().remove(availablePeriod);
+            boatService.save(boat);
+        }
+        else if (availablePeriod.getHolidayHome() != null){
+            var home = availablePeriod.getHolidayHome();
+            home.getAvailablePeriods().remove(availablePeriod);
+            holidayHomeService.save(home);
+        }
     }
 
 

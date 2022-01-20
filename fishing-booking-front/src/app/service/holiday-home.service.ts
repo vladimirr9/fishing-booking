@@ -10,6 +10,7 @@ import { HomePromotion } from '../model/HomePromotion';
   providedIn: 'root'
 })
 export class HolidayHomeService {
+  
 
 
 
@@ -18,7 +19,10 @@ export class HolidayHomeService {
   private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
 
-
+  getAllPromotionsForHomeOwner() {
+    return this.http.get(`${config.baseUrl}${this.homeURL}/promotions`)
+  }
+  
   get() {
     return this.http.get(`${config.baseUrl}${this.homeURL}`);
   }

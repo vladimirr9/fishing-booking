@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.request.AvailablePeriodDTO;
+import com.project.fishingbookingback.dto.response.AvailablePeriodCalendarDTO;
 import com.project.fishingbookingback.exception.NewAvailablePeriodOverlapsException;
 import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.service.AvailablePeriodService;
@@ -31,6 +32,11 @@ public class AvailablePeriodController {
     @GetMapping
     public ResponseEntity<List<AvailablePeriod>> getPeriods(@RequestParam(required = false) String providerEmail) {
         return ResponseEntity.ok(availablePeriodService.getPeriods(providerEmail));
+    }
+
+    @GetMapping("/calendar")
+    public ResponseEntity<List<AvailablePeriodCalendarDTO>> getPeriodsCalendar(@RequestParam(required = false) String providerEmail) {
+        return ResponseEntity.ok(availablePeriodService.getPeriods(providerEmail).stream().map(x-> new AvailablePeriodCalendarDTO(x)).toList());
     }
 
     @PostMapping("/instructor")

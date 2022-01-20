@@ -3,21 +3,13 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.Address;
-import com.project.fishingbookingback.model.AvailablePeriod;
-import com.project.fishingbookingback.model.HolidayHome;
-import com.project.fishingbookingback.model.HolidayHomePromotion;
-import com.project.fishingbookingback.model.HolidayHomeReservation;
-import com.project.fishingbookingback.model.HomeOwner;
-import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -168,6 +160,15 @@ public class HolidayHomeService {
         reservations.removeIf(reservation -> reservation.overlaps(newHomeReservation));
         reservations.add(newHomeReservation);
         holidayHomeRepository.save(newHomeReservation.getHolidayHome());
+    }
+
+    public Collection<HolidayHomePromotion> getAllPromotions() {
+        String email = loggedUserService.getUsername();
+        return holidayHomePromotionService.getAllForHomeOwner(email);
+    }
+
+    public void save(HolidayHome home) {
+        holidayHomeRepository.save(home);
     }
 }
 

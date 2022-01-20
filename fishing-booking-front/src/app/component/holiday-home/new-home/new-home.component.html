@@ -63,6 +63,8 @@
           </div>
         </div>
 
+
+        
         <span class="promotions">
           <h3>Promotions</h3>
           <input type="image" class="image" (click)="addPromotion()"
@@ -73,7 +75,6 @@
               <app-home-promotion-card [homePromotion]="promotion" (promotionDeleted)="deletePromotion($event)"></app-home-promotion-card>
             </div>
             </div>
-
         
       </div>
       
@@ -105,9 +106,26 @@
         <button mat-flat-button color="primary" (click)="editMode ? editHome() : createHome()" class="button">{{getButtonText()}}</button>
         <button mat-flat-button color="warn" (click)="Cancel()" class="button">Cancel</button>
       </div>
+      <div class="map" (click)="getCoord($event)" id="map"></div>
       </div>
-        <div class="map" (click)="getCoord($event)" id="map"></div>
+        
     </div>
   </form>
+
+  <div *ngIf="editMode" class="date-selects">
+    <h3>
+      Add available period
+    </h3>
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="Start Date" [(ngModel)]="fromTime">
+    </mat-form-field>
+    <div>
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="End Date" [(ngModel)]="toTime">
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="button" (click)="addAvailablePeriod()">Add</button>
+    </div>
+    </div>
+
   </div>
   

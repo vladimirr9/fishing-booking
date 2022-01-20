@@ -163,14 +163,12 @@ public class ReservationService {
 
     public Collection<Reservation> getAllForInstructor(String email) {
         var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
-        reservations.removeIf(x -> !((AdventureReservation) x).getAdventure().getFishingInstructor().getEmail().equals(email));
         reservations.removeIf(x -> !x.getClass().equals(AdventureReservation.class) || !((AdventureReservation) x).getAdventure().getFishingInstructor().getEmail().equals(email));
         return reservations;
     }
 
     public Collection<Reservation> getAllForHome(Long homeId) {
         var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
-        reservations.removeIf(x -> ((HolidayHomeReservation) x).getHolidayHome().getId() != homeId);
         reservations.removeIf(x -> !x.getClass().equals(HolidayHomeReservation.class) || ((HolidayHomeReservation) x).getHolidayHome().getId() != homeId);
 
         return reservations;
@@ -178,7 +176,6 @@ public class ReservationService {
 
     public Collection<Reservation> getAllForBoat(Long boatId) {
         var reservations = new ArrayList<Reservation>(reservationRepository.findAll());
-        reservations.removeIf(x -> ((BoatReservation) x).getBoat().getId() != boatId);
         reservations.removeIf(x -> !x.getClass().equals(BoatReservation.class) || ((BoatReservation) x).getBoat().getId() != boatId);
         return reservations;
     }

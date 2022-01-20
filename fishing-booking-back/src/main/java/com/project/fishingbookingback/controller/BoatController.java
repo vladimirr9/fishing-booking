@@ -3,10 +3,7 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.BoatMapper;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
-import com.project.fishingbookingback.model.Boat;
-import com.project.fishingbookingback.model.BoatPromotion;
-import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.BoatService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -120,5 +118,10 @@ public class BoatController {
     @GetMapping(value = "/{id}/promotions")
     public ResponseEntity<List<BoatPromotion>> getPromotions(@PathVariable Long id) {
         return ResponseEntity.ok(boatService.getPromotions(id));
+    }
+
+    @GetMapping(value = "/promotions")
+    public ResponseEntity<Collection<BoatPromotion>> getAllPromotions() {
+        return ResponseEntity.ok(boatService.getAllPromotions());
     }
 }

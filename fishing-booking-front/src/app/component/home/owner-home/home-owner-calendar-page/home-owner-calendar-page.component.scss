@@ -1,0 +1,19 @@
+
+.date-selects {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .btn-group {
+    display: flex;
+    .calendar-button {
+      margin: 10px;
+    }
+  }
+  
+  mat-form-field {
+    margin: 20px;
+    min-width: 300px;
+    max-width: 300px;
+  }
+  
