@@ -32,19 +32,19 @@ public class PromotionMapper {
     //MENJATI CENU
 
     private void toViewDTO(HolidayHomePromotion promotion,PromotionViewDTO promotionDTO){
-        promotionDTO.setStandardPrice(promotion.getHolidayHome().getPricePerDay());
+        promotionDTO.setStandardPrice((float) promotion.getStandardPrice());
         promotionDTO.setEntityName(promotion.getHolidayHome().getName());
         promotionDTO.setEntityType("Holiday home");
     }
 
     private void toViewDTO(BoatPromotion promotion,PromotionViewDTO promotionDTO){
-        promotionDTO.setStandardPrice(promotion.getBoat().getPricePerDay());
+        promotionDTO.setStandardPrice((float) promotion.getStandardPrice());
         promotionDTO.setEntityName(promotion.getBoat().getName());
         promotionDTO.setEntityType("Boat");
     }
 
     private void toViewDTO(FishingPromotion promotion,PromotionViewDTO promotionDTO){
-        promotionDTO.setStandardPrice(promotion.getFishingAdventure().getHourlyPrice().floatValue());
+        promotionDTO.setStandardPrice((float)promotion.getStandardPrice());
         promotionDTO.setEntityName(promotion.getFishingAdventure().getName());
         promotionDTO.setEntityType("Fishing adventure");
     }

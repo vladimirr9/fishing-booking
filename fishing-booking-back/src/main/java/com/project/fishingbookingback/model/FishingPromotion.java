@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 public class FishingPromotion extends Promotion {
@@ -22,5 +23,9 @@ public class FishingPromotion extends Promotion {
 
     public FishingAdventure getFishingAdventure() {
         return fishingAdventure;
+    }
+
+    public double getStandardPrice(){
+        return ChronoUnit.HOURS.between(getFromTime(), getToTime()) * fishingAdventure.getHourlyPrice();
     }
 }

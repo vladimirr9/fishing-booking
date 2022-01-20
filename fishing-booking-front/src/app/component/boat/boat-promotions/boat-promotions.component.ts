@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoatService } from 'src/app/service/boat.service';
+import { ReservationService } from 'src/app/service/reservation.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-boat-promotions',
@@ -8,11 +10,13 @@ import { BoatService } from 'src/app/service/boat.service';
 })
 export class BoatPromotionsComponent implements OnInit {
 
-  constructor(private boatService: BoatService) { }
+  constructor(private boatService: BoatService,private localStorage: StorageService,private reservationService: ReservationService) { }
 
   @Input() id: number= 0;
 
   promotions: any;
+  available: boolean = true;
+  statusMessage: string = "";
 
   ngOnInit(): void {
    this.boatService.getBoatPromotions(this.id).subscribe((data: any)=>{
@@ -20,8 +24,32 @@ export class BoatPromotionsComponent implements OnInit {
    });
   }
 
-  reserve(): void{
-    
+  reserve(promotion: any): void{
+    let reservationDto={
+      price: promotion.price,
+      from: promotion.fromTime,
+      to: promotion.toTime,
+      clientUsername: this.localStorage.getUsername(),
+      entityId: this.id,
+      type: 'BOAT'
+    };
+    this.reservationService.createReservation(reservationDto).subscribe(
+      (data) => {
+        this.available=true;
+        this.statusMessage="Reservation succesfully sent!";
+       },
+      (error) => {
+        this.available=false;
+        this.statusMessage="Unavailable period!";
+      }
+    ).add(() => {
+      setTimeout(() =>{
+        this.promotions = this.promotions.filter((prom: { promotionId: any; }) => prom.promotionId != promotion.promotionId );
+      }, 1500); 
+    });
+
+
   }
+  
 
 }
