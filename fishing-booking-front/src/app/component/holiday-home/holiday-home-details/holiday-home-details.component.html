@@ -1,6 +1,11 @@
 <div class="container">
     <h1>Holiday-home details</h1>
+    <div>
+      <app-home-promotions [id]="holidayhome.id"></app-home-promotions>
+    <mat-divider></mat-divider>
     <app-reserve-holiday-home *ngIf="isClient()"  [holidayhome]="holidayhome" [startingDate]="startingDate" [endingDate]="endingDate"></app-reserve-holiday-home>
+    </div>
+    
     <form class="form-container" [formGroup]="addHomeForm">
     <div class="left-container">
       <mat-form-field appearance="standard">

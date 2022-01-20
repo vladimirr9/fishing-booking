@@ -1,27 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BoatService } from 'src/app/service/boat.service';
+import { HolidayHomeService } from 'src/app/service/holiday-home.service';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
-  selector: 'app-boat-promotions',
-  templateUrl: './boat-promotions.component.html',
-  styleUrls: ['./boat-promotions.component.scss']
+  selector: 'app-home-promotions',
+  templateUrl: './home-promotions.component.html',
+  styleUrls: ['./home-promotions.component.scss']
 })
-export class BoatPromotionsComponent implements OnInit {
+export class HomePromotionsComponent implements OnInit {
 
-  constructor(private boatService: BoatService,private localStorage: StorageService,private reservationService: ReservationService) { }
+  constructor(private homeService:HolidayHomeService,private reservationService: ReservationService,private localStorage:StorageService) { }
 
   @Input() id: number= 0;
 
   promotions: any;
   available: boolean = true;
   statusMessage: string = "";
-
+  
   ngOnInit(): void {
-   this.boatService.getBoatPromotions(this.id).subscribe((data: any)=>{
-      this.promotions=data;
-   });
+    this.homeService.getHomePromotions(this.id).subscribe((data: any)=>{
+        this.promotions=data;
+    });
   }
 
   reserve(promotion: any): void{
@@ -31,7 +31,7 @@ export class BoatPromotionsComponent implements OnInit {
       to: promotion.toTime,
       clientUsername: this.localStorage.getUsername(),
       entityId: this.id,
-      type: 'BOAT'
+      type: 'HOLIDAY_HOME'
     };
     this.reservationService.createReservationWithPromotion(reservationDto,promotion.id).subscribe(      
       (data) => {
@@ -47,9 +47,6 @@ export class BoatPromotionsComponent implements OnInit {
         this.promotions = this.promotions.filter((prom: { id: any; }) => prom.id != promotion.id );
       }, 1500); 
     });
-
-
   }
-  
 
 }

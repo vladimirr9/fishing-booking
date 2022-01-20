@@ -25,6 +25,10 @@ export class HolidayHomeService {
       return this.http.get<HolidayHouseDTO[]>(`${config.baseUrl}${this.homeURL}/client`);
   }
 
+  getHomePromotions(id: number): any{
+    return this.http.get(`${config.baseUrl}${this.homeURL}/${id}/promotions`);
+  }
+
   getAvailableHomes(from: Date,to: Date):Observable<HolidayHouseDTO[]>{
     let params = Object();
     params.from = from.toISOString();
