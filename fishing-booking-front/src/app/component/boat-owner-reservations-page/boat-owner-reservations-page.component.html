@@ -34,6 +34,12 @@
         <td mat-cell ><button  *ngIf="!element.reportPresent" mat-flat-button color="primary" (click)="sendReport(element)">Write Report</button></td>
         </span>
       </ng-container>
+      <ng-container matColumnDef="newReservation">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <span *matCellDef="let element">
+        <td mat-cell ><button  *ngIf="element.ongoing" mat-flat-button color="primary" (click)="createNewReservation(element)">Add new</button></td>
+        </span>
+      </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr

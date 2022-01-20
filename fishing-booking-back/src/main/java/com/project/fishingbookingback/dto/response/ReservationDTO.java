@@ -20,10 +20,20 @@ public class ReservationDTO {
     private Boolean complaintPresent;
     private Client client;
     private Boolean ongoing;
+    private Long entityId;
+
+    public Long getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(Long entityId) {
+        this.entityId = entityId;
+    }
 
     public Boolean getOngoing() {
-        return ongoing;
+        return this.ongoing;
     }
+
 
     public void setOngoing() {
         this.ongoing = startDate.isBefore(LocalDateTime.now()) && endDate.isAfter(LocalDateTime.now());

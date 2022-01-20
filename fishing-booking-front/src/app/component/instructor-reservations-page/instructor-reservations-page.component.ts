@@ -75,12 +75,16 @@ export class InstructorReservationsPageComponent implements OnInit {
             from: new Date(data.fromTime),
             to: new Date(data.toTime),
             clientUsername: element.client.email,
-            entityId: element.id,
+            entityId: element.entityId,
             type: 'ADVENTURE'
           };
 
           this.reservationService.createReservation(reservationDto).subscribe(()=>{
             alert("Reservation created.");
+            this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
+              this.reservations = data
+            })
+
           },
           (error)=> {
             alert("Error.");

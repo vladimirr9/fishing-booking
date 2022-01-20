@@ -45,6 +45,7 @@ public class ReservationMapper {
         reservationDTO.setClient(reservation.getClient());
         reservationDTO.setEndDate(reservation.getEndDate());
         reservationDTO.setOngoing();
+        reservationDTO.setEntityId(reservation.getHolidayHome().getId());
 
 
         return reservationDTO;
@@ -70,6 +71,7 @@ public class ReservationMapper {
         reservationDTO.setClient(reservation.getClient());
         reservationDTO.setEndDate(reservation.getEndDate());
         reservationDTO.setOngoing();
+        reservationDTO.setEntityId(reservation.getBoat().getId());
         return reservationDTO;
     }
 
@@ -94,6 +96,7 @@ public class ReservationMapper {
         reservationDTO.setId(reservation.getId());
         reservationDTO.setClient(reservation.getClient());
         reservationDTO.setOngoing();
+        reservationDTO.setEntityId(reservation.getAdventure().getId());
         return reservationDTO;
     }
 
