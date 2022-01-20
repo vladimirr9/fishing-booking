@@ -7,6 +7,7 @@ import { labelCache } from 'ol/render/canvas';
 import { Subject } from 'rxjs';
 import { ReportDialogComponent } from 'src/app/component/dialog/report-dialog/report-dialog.component';
 import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
+import { AdventureService } from 'src/app/service/adventure.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { AvailablePeriodService } from 'src/app/service/available-period.service';
 import { DateService } from 'src/app/service/date.service';
@@ -26,6 +27,11 @@ const colors: any = {
     primary: '#e3bc08',
     secondary: '#FDF1BA',
   },
+  green: {
+    primary: '#86DC3D',
+    secondary: '#378805',
+  },
+
 };
 
 @Component({
@@ -41,7 +47,8 @@ export class InstructorCalendarPageComponent implements OnInit {
     private storageService: StorageService,
     private availablePeriodService: AvailablePeriodService,
     private reservationService: ReservationService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private adventureService: AdventureService) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -69,6 +76,13 @@ export class InstructorCalendarPageComponent implements OnInit {
         this.addReservationToCalendar(id, element.startDate, element.endDate, element.reportPresent);
       });
     });
+
+    this.adventureService.getAllPromotionsForInstructor().subscribe((data:any) => {
+      data.forEach((element: any) => {
+        let id = element.id || 0;
+        this.addPromotionToCalendar(id, element.fromTime, element.toTime);
+      });
+    })
   }
 
   addAvailablePeriod() {
@@ -199,9 +213,27 @@ export class InstructorCalendarPageComponent implements OnInit {
       },
     ];
   }
+  addPromotionToCalendar(id: number, fromTime: any, toTime: any): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Promotion',
+        start: new Date(Date.parse(fromTime)),
+        end: new Date(Date.parse(toTime)),
+        color: colors.green,
+        draggable: false,
+        resizable: {
+          beforeStart: false,
+          afterEnd: false,
+        },
+        actions: [
+        ]
+      },
+    ];
+  }
   addReservationToCalendar(id: any, fromTime: any, toTime: any, reportPresent: any) {
     let action: any
-    if (!reportPresent && (new Date(Date.parse(toTime))) > (new Date())) {
+    if (!reportPresent && (new Date(Date.parse(toTime))) < (new Date())) {
       action = {
         label: '<i class="fas fa-edit"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -215,7 +247,7 @@ export class InstructorCalendarPageComponent implements OnInit {
             res => {
               if (res) {
                 this.reservationService.putReport(id, res).subscribe((data: any) => {
-                  window.location.reload()
+                  this.getEvents()
                 })
 
               }

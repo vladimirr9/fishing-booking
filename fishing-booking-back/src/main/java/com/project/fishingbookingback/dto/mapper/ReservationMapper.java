@@ -41,6 +41,8 @@ public class ReservationMapper {
             reservationDTO.setImgUrl(reservation.getHolidayHome().getExterior().get(0).getLink());
         reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(), reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
+        reservationDTO.setClient(reservation.getClient());
+        reservationDTO.setEndDate(reservation.getEndDate());
 
 
         return reservationDTO;
@@ -63,6 +65,8 @@ public class ReservationMapper {
             reservationDTO.setImgUrl(reservation.getBoat().getExterior().get(0).getLink());
         reservationDTO.setDurationInHours(ChronoUnit.HOURS.between(reservation.getStartDate(), reservation.getEndDate()));
         reservationDTO.setPrice(reservation.getPrice());
+        reservationDTO.setClient(reservation.getClient());
+        reservationDTO.setEndDate(reservation.getEndDate());
 
         return reservationDTO;
     }

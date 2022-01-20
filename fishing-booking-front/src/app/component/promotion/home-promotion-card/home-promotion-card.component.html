@@ -1,0 +1,16 @@
+<mat-card class="container-card">
+    <mat-card-title>Promotion</mat-card-title>
+    <mat-card-subtitle>{{getDate(this.homePromotion.fromTime) | date}} - {{getDate(this.homePromotion.toTime) | date}}</mat-card-subtitle>
+    <mat-card-content>
+      <p>Valid until {{getDate(this.homePromotion.validUntil) | date}}</p>
+      <p>Price: {{this.homePromotion.price}}</p>
+    </mat-card-content>
+    <div class="buttons-container">
+      <div class="edit-delete-buttons">
+      <input type="image" class="image" (click)="deletePromotion()"
+          src="assets/img/delete.png">
+      </div>
+    </div>
+  
+  </mat-card>
+  

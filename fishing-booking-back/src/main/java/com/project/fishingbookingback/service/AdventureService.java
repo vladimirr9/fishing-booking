@@ -14,6 +14,7 @@ import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -52,7 +53,6 @@ public class AdventureService {
         fishingAdventure.addPicture(picture);
         return adventureRepository.save(fishingAdventure);
     }
-
 
 
     public List<FishingAdventure> getAdventures(String instructorUsername, String adventureName) {
@@ -116,6 +116,11 @@ public class AdventureService {
 
     public List<FishingPromotion> getPromotions(Long id) {
         return fishingPromotionService.getPromotions(id);
+    }
+
+    public Collection<FishingPromotion> getAllPromotions() {
+        String email = loggedUserService.getUsername();
+        return fishingPromotionService.getAllForInstructor(email);
     }
 
     private void checkIfAllowed(FishingAdventure fishingAdventure) {

@@ -12,6 +12,8 @@ import { HolidayHomeService } from 'src/app/service/holiday-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PictureDialogComponent } from '../../dialog/picture-dialog/picture-dialog.component';
+import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
+import { HomePromotion } from 'src/app/model/HomePromotion';
 
 @Component({
   selector: 'app-new-home',
@@ -26,6 +28,7 @@ export class NewHomeComponent implements OnInit {
   map!: Map
   interior : any
   exterior : any
+  promotions!: HomePromotion[]
 
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
@@ -49,9 +52,9 @@ export class NewHomeComponent implements OnInit {
 
     ngOnInit(): void {
       this.initMap(this.lon, this.lat);
+      let id = this.route.snapshot.params['id'];
       if (this.router.url.endsWith('edit')) {
         this.editMode = true
-        let id = this.route.snapshot.params['id'];
         this.holidayHomeService.getHome(id).subscribe((data) => {
           this.addHomeForm.controls['name'].setValue(data.name)
           this.addHomeForm.controls['description'].setValue(data.description)
@@ -71,6 +74,9 @@ export class NewHomeComponent implements OnInit {
           this.interior = data.interior
         })
       }
+      this.holidayHomeService.getPromotions(id).subscribe((data) => {
+        this.promotions = data
+      })
     }
 
     addPicture(isInterior: boolean) {
@@ -197,6 +203,33 @@ export class NewHomeComponent implements OnInit {
     getButtonText() {
       return this.editMode ? "Edit" : "Create"
     }
-  
 
+    addPromotion() {
+      let id = this.route.snapshot.params['id'];
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+  
+      const dialogRef = this.dialog.open(PromotionDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            this.holidayHomeService.postPromotion(id,data).subscribe((result:any) => {
+              this.holidayHomeService.getPromotions(id).subscribe((data) => {
+                this.promotions = data;
+              })
+            })
+          }
+        }
+      );
+    }
+  
+    deletePromotion(homePromotion : HomePromotion) {
+      let index = this.promotions.indexOf(homePromotion)
+      if (index !== -1) {
+        this.promotions.splice(index, 1);
+      }
+    }
 }

@@ -5,14 +5,13 @@ import { ReservationService } from 'src/app/service/reservation.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { ReportDialogComponent } from '../dialog/report-dialog/report-dialog.component';
 import { ViewProfileDialogComponent } from '../dialog/view-profile-dialog/view-profile-dialog.component';
-import { ViewReservationDialogComponent } from '../dialog/view-reservation-dialog/view-reservation-dialog.component';
 
 @Component({
-  selector: 'app-instructor-reservations-page',
-  templateUrl: './instructor-reservations-page.component.html',
-  styleUrls: ['./instructor-reservations-page.component.scss']
+  selector: 'app-home-owner-reservations-page',
+  templateUrl: './home-owner-reservations-page.component.html',
+  styleUrls: ['./home-owner-reservations-page.component.scss']
 })
-export class InstructorReservationsPageComponent implements OnInit {
+export class HomeOwnerReservationsPageComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'client','startDate', 'endDate', 'price', 'report'];
   reservations: any
@@ -37,43 +36,6 @@ export class InstructorReservationsPageComponent implements OnInit {
   }
 
 
-  canWriteReport(element: any) {
-    let endDate = this.dateService.getDate(element.endDate)
-    return !element.reportPresent && endDate < new Date() && element.approved
-  }
-  canApprove(element: any) {
-    return !element.approved
-  }
-
-  viewReservation(element: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true
-    dialogConfig.autoFocus = true
-
-    dialogConfig.data = {
-      id: element.id,
-      name: element.name,
-      firstName: element.client.firstName,
-      lastName: element.client.lastName,
-      startDate: element.startDate,
-      endDate: element.endDate,
-      price: element.price
-    }
-    const dialogRef = this.dialog.open(ViewReservationDialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      res => {
-        if (res) {
-          this.reservationService.approveReservation(res).subscribe((data) => {
-            element.approved = true
-          })
-        }
-      }
-
-    );
-  }
-
   sendReport(element: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true
@@ -94,4 +56,5 @@ export class InstructorReservationsPageComponent implements OnInit {
 
     );
   }
+
 }

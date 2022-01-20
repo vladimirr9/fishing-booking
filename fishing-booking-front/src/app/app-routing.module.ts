@@ -27,6 +27,8 @@ import { BoatDetailsComponent } from './component/boat/boat-details/boat-details
 import { HolidayHomeDetailsComponent } from './component/holiday-home/holiday-home-details/holiday-home-details.component';
 import { InstructorReservationsPageComponent } from './component/instructor-reservations-page/instructor-reservations-page.component';
 import { AdminReportsPageComponent } from './component/admin-reports-page/admin-reports-page.component';
+import { HomeOwnerReservationsPageComponent } from './component/home-owner-reservations-page/home-owner-reservations-page.component';
+import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reservations-page/boat-owner-reservations-page.component';
 
 
 
@@ -50,6 +52,7 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'adventures/:id/:date', component:  AdventureDetailedComponent},
                          { path: 'owner-home', component:  OwnerHomeComponent},
                          { path: 'owner-home/new-home', component:  NewHomeComponent},
+                         { path: 'owner-home/reservations', component:  HomeOwnerReservationsPageComponent},
                          { path: 'holiday-homes/:id/edit', component:  NewHomeComponent},
                          { path: 'home-owner-profile', component: HomeOwnerProfileComponent },
                          { path: 'client-homepage/boats', component: BoatsComponent},
@@ -58,6 +61,7 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'client-homepage/reservations', component: ReservationsComponent},
                          { path: 'boat-owner-home', component:  BoatOwnerHomeComponent},
                          { path: 'boat-owner-home/new-boat', component:  NewBoatComponent},
+                         { path: 'boat-owner-home/reservations', component:  BoatOwnerReservationsPageComponent},
                          { path: 'boats/:id/edit', component:  NewBoatComponent},
                          { path: 'boat-owner-profile', component: BoatOwnerProfileComponent },
                          { path: 'boats/:id', component:  BoatDetailsComponent},

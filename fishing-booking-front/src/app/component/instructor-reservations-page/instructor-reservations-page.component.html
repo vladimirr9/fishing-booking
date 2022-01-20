@@ -31,7 +31,8 @@
     <ng-container matColumnDef="report">
       <th mat-header-cell *matHeaderCellDef></th>
       <span *matCellDef="let element">
-      <td mat-cell ><button  *ngIf="!element.reportPresent" mat-flat-button color="primary" (click)="sendReport(element)">Write Report</button></td>
+      <td mat-cell *ngIf="canWriteReport(element)"><button class="table-button"   mat-flat-button color="primary" (click)="sendReport(element)">Write Report</button></td>
+      <td mat-cell *ngIf="canApprove(element)"><button  class="table-button" mat-flat-button color="primary" (click)="viewReservation(element)">View</button></td>
       </span>
     </ng-container>
 
