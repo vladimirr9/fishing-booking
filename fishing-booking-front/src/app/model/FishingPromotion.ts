@@ -4,5 +4,7 @@ export interface FishingPromotion {
   toTime: any,
   price: number,
   validUntil: any,
-  fishingAdventure: any
+  fishingAdventure: any,
+  standardPrice: number,
+  peopleNumber: number
 }

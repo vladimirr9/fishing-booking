@@ -33,7 +33,8 @@ public class FishingPromotionService {
     }
 
     public List<FishingPromotion> getPromotions(Long id) {
-        return repository.findByFishingAdventure_Id(id);
+        List<FishingPromotion> retList = repository.findByFishingAdventure_Id(id);
+        return retList;
     }
 
     public Collection<FishingPromotion> getAllForInstructor(String email) { return  repository.getAllForInstructor(email);}
