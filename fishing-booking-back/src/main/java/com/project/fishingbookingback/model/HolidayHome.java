@@ -2,17 +2,7 @@ package com.project.fishingbookingback.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -73,7 +63,18 @@ public class HolidayHome {
     )
     private List<AdditionalService> additionalService;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedHomes")
+    private List<Client> subscribedClients;
+
     private double averageMark;
+
+    public List<Client> getSubscribedClients() {
+        return subscribedClients;
+    }
+
+    public void setSubscribedClients(List<Client> subscribedClients) {
+        this.subscribedClients = subscribedClients;
+    }
 
     public double getAverageMark() {
         return averageMark;
