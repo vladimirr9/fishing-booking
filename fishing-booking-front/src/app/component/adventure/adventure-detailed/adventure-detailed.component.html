@@ -7,17 +7,17 @@
   </div>
   
   <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
-  <h2>Hourly Price: {{adventure.hourlyPrice}}RSD</h2>
+  <h2>Hourly Price: {{adventure.hourlyPrice}}$</h2>
   <div>Cancellation Fee:{{adventure.cancellationFee}}%</div>
   <div>Maximum number of people: {{adventure.maxPeople}}
   </div>
   <span class="promotions">
-  <h3>Promotions</h3>
+  <h3 *ngIf="!isClient()">Promotions</h3>
   <input *ngIf="authService.isFishingInstructor()" type="image" class="image" (click)="addPromotion()"
       src="assets/img/plus.svg">
     </span>
-    <div class="promotion-list">
-    <div *ngFor="let promotion of promotions" class="service-item">
+    <div *ngIf="!isClient()" class="promotion-list">
+    <div  *ngFor="let promotion of promotions" class="service-item">
       <app-fishing-promotion-card [fishingPromotion]="promotion" (promotionDeleted)="deletePromotion($event)"></app-fishing-promotion-card>
     </div>
   </div>
