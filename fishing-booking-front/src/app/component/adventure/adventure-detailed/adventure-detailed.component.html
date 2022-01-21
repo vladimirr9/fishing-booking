@@ -1,6 +1,11 @@
 <div class="container" >
   <h1 class="title">{{adventure.name}}  </h1>
-  <app-reserve-adventure *ngIf="isClient()" [adventure]="adventure" [chosenDate]="chosenDate" [endingDate]="endingDate"></app-reserve-adventure>
+  <div>
+    <app-adventure-promotion [id]="adventure.id" *ngIf="isClient()" ></app-adventure-promotion>
+    <mat-divider></mat-divider>
+    <app-reserve-adventure *ngIf="isClient()" [adventure]="adventure" [chosenDate]="chosenDate" [endingDate]="endingDate"></app-reserve-adventure>
+  </div>
+  
   <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
   <h2>Hourly Price: {{adventure.hourlyPrice}}RSD</h2>
   <div>Cancellation Fee:{{adventure.cancellationFee}}%</div>
