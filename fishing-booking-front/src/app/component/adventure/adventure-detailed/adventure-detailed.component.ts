@@ -14,6 +14,7 @@ import { AdditionalServiceDialogComponent } from '../../dialog/additional-servic
 import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
 import { FishingPromotion } from 'src/app/model/FishingPromotion';
 import { StorageService } from 'src/app/service/storage.service';
+import { SubscriptionService } from 'src/app/service/subscription.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class AdventureDetailedComponent implements OnInit {
   //Client related fields
   chosenDate: Date = new Date()
   endingDate: Date = new Date();
-  constructor(private route: ActivatedRoute, private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
+  subscribed: boolean = false;
+  constructor(private route: ActivatedRoute,private subscribeService: SubscriptionService ,private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.initMap(19.7245, 45.2889)
@@ -41,7 +43,9 @@ export class AdventureDetailedComponent implements OnInit {
     if(this.isClient()){
       this.chosenDate = new Date(this.route.snapshot.params['date'])
       this.endingDate = new Date(this.route.snapshot.params['date2'])
-    }
+
+    this.subscribeService.isAdventureSubscribed(this.storageService.getUsername(),this.id).subscribe((data) => {this.subscribed=data;})
+   }
       
       
     this.adventureService.getAdventure(this.id).subscribe((data) => {
@@ -147,6 +151,20 @@ export class AdventureDetailedComponent implements OnInit {
     if (index !== -1) {
       this.promotions.splice(index, 1);
     }
+  }
+
+  subscribe(): any{
+    this.subscribeService.createAdventureSubscription(this.storageService.getUsername(),this.id).subscribe((data)=>{
+      alert("Subscribed!");
+      this.subscribed = true;
+    })
+  }
+
+  unsubscribe(): any{
+    this.subscribeService.deleteAdventureSubscription(this.storageService.getUsername(),this.id).subscribe((data)=>{
+      alert("Unsubscribed!");
+      this.subscribed=false;
+    })
   }
 
 

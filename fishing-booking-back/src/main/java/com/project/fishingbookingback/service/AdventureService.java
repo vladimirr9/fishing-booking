@@ -136,4 +136,8 @@ public class AdventureService {
         fishingAdventure.setAverageMark(average);
         adventureRepository.save(fishingAdventure);
     }
+
+    public void saveAdventure(FishingAdventure fishingAdventure){
+        adventureRepository.save(fishingAdventure);
+    }
 }

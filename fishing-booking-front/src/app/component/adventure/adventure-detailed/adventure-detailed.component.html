@@ -1,5 +1,11 @@
 <div class="container" >
   <h1 class="title">{{adventure.name}}  </h1>
+  <button style="margin-left: 1200px;" (click)="subscribe()" *ngIf="!subscribed && isClient()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>notifications_active</mat-icon>
+  </button>
+  <button style="margin-left: 1200px;" (click)="unsubscribe()" *ngIf="subscribed && isClient()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>notifications_off</mat-icon>
+  </button>
   <div>
     <app-adventure-promotion [id]="adventure.id" *ngIf="isClient()" ></app-adventure-promotion>
     <mat-divider></mat-divider>
