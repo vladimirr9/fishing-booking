@@ -92,6 +92,10 @@ import { ViewReservationDialogComponent } from './component/dialog/view-reservat
 import { BoatOwnerCalendarPageComponent } from './component/home/boat-owner-home/boat-owner-calendar-page/boat-owner-calendar-page.component';
 import { HomeOwnerCalendarPageComponent } from './component/home/owner-home/home-owner-calendar-page/home-owner-calendar-page.component';
 import { AdventurePromotionComponent } from './component/adventure/adventure-promotion/adventure-promotion.component';
+import { ReviewsPageComponent } from './component/home/admin-home/reviews-page/reviews-page.component';
+import { ComplaintsPageComponent } from './component/home/admin-home/complaints-page/complaints-page.component';
+import { ViewComplaintDialogComponent } from './component/dialog/view-complaint-dialog/view-complaint-dialog.component';
+import { ViewReviewDialogComponent } from './component/dialog/view-review-dialog/view-review-dialog.component';
 
 
 
@@ -174,7 +178,11 @@ import { AdventurePromotionComponent } from './component/adventure/adventure-pro
     ViewReservationDialogComponent,
     BoatOwnerCalendarPageComponent,
     HomeOwnerCalendarPageComponent,
-    AdventurePromotionComponent
+    AdventurePromotionComponent,
+    ReviewsPageComponent,
+    ComplaintsPageComponent,
+    ViewComplaintDialogComponent,
+    ViewReviewDialogComponent
   ],
   imports: [
     BrowserModule,

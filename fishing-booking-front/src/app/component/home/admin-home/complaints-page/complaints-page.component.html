@@ -1,0 +1,13 @@
+<div class="container">
+<h1>Complaints</h1>
+  <div class="container-complaints">
+    <div *ngFor="let complaint of complaints">
+      <mat-card class="container-card">
+        <mat-card-title>{{complaint.reservation.client.firstName}} {{complaint.reservation.client.lastName}}</mat-card-title>
+        <div class="buttons-container">
+          <button class="detailed-button" color="view" (click)="openComplaint(complaint)" mat-flat-button>Details</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Complaint</h1>
+  <form class="form" [formGroup]="form">
+      <div class="left-form">
+    <mat-form-field appearance="standard">
+      <mat-label>Client Name</mat-label>
+      <input matInput  placeholder="Client Name" formControlName="clientName" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Start Date</mat-label>
+      <input matInput  placeholder="Start Date" formControlName="startDate" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>End Date</mat-label>
+      <input matInput  placeholder="End Date" formControlName="endDate" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Price</mat-label>
+      <input matInput  placeholder="Price" formControlName="price" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Owner Email</mat-label>
+      <input matInput  placeholder="Owner Email" formControlName="ownerEmail" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Content</mat-label>
+      <textarea matInput  placeholder="Content" formControlName="content" readonly></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Answer</mat-label>
+      <textarea matInput  placeholder="Answer" formControlName="answer"></textarea>
+    </mat-form-field>
+  </div>
+    <div class="button-holder">
+      <button class="close-button" mat-flat-button color="primary" (click)="send()">Send</button>
+      <button class="close-button" mat-flat-button color="warn" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

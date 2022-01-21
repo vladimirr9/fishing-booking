@@ -31,6 +31,8 @@ import { HomeOwnerReservationsPageComponent } from './component/home-owner-reser
 import { BoatOwnerReservationsPageComponent } from './component/boat-owner-reservations-page/boat-owner-reservations-page.component';
 import { BoatOwnerCalendarPageComponent } from './component/home/boat-owner-home/boat-owner-calendar-page/boat-owner-calendar-page.component';
 import { HomeOwnerCalendarPageComponent } from './component/home/owner-home/home-owner-calendar-page/home-owner-calendar-page.component';
+import { ReviewsPageComponent } from './component/home/admin-home/reviews-page/reviews-page.component';
+import { ComplaintsPageComponent } from './component/home/admin-home/complaints-page/complaints-page.component';
 
 
 
@@ -40,6 +42,8 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'admin-home', component: AdminHomeComponent },
                          { path: 'admin-home/new-admin', component: AdminRegistrationComponent },
                          { path: 'admin-home/reports', component: AdminReportsPageComponent },
+                         { path: 'admin-home/reviews', component: ReviewsPageComponent },
+                         { path: 'admin-home/complaints', component: ComplaintsPageComponent },
                          { path: 'admin-home/registration-requests/:id', component: RegistrationRequestPageComponent },
                          { path: 'instructor-home/new-adventure', component:  NewAdventureComponent},
                          { path: 'instructor-home/calendar', component:  InstructorCalendarPageComponent},
