@@ -3,7 +3,17 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.*;
+import com.project.fishingbookingback.model.AdditionalService;
+import com.project.fishingbookingback.model.Address;
+import com.project.fishingbookingback.model.AvailablePeriod;
+import com.project.fishingbookingback.model.Boat;
+import com.project.fishingbookingback.model.BoatOwner;
+import com.project.fishingbookingback.model.BoatPromotion;
+import com.project.fishingbookingback.model.BoatReservation;
+import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
+import com.project.fishingbookingback.model.Role;
+import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,17 +46,17 @@ public class BoatService {
         return availableBoats;
     }
 
-    public void reserveBoatPeriod(Long id,LocalDateTime from, LocalDateTime to){
-        AvailablePeriod availablePeriod = IsBoatAvailable(id,from,to);
+    public void reserveBoatPeriod(Long id, LocalDateTime from, LocalDateTime to) {
+        AvailablePeriod availablePeriod = IsBoatAvailable(id, from, to);
         Boat boat = boatRepository.getById(id);
         boat.getAvailablePeriods().remove(availablePeriod);
 
         var sliceBefore = availablePeriod.sliceBefore(from);
-        if(sliceBefore!=null)
+        if (sliceBefore != null)
             boat.getAvailablePeriods().add(sliceBefore);
 
         var sliceAfter = availablePeriod.sliceAfter(to);
-        if(sliceAfter!= null)
+        if (sliceAfter != null)
             boat.getAvailablePeriods().add(sliceAfter);
 
         boatRepository.save(boat);
@@ -194,6 +204,12 @@ public class BoatService {
     }
 
     public void save(Boat boat) {
+        boatRepository.save(boat);
+    }
+
+    public void updateAverageMark(Long id, Double average) {
+        Boat boat = findByID(id);
+        boat.setAverageMark(average);
         boatRepository.save(boat);
     }
 }

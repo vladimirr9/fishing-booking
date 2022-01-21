@@ -50,7 +50,7 @@ public class HolidayHome {
     private List<Picture> interior;
     private int roomsPerHome;
     private int bedsPerRoom;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(
             name = "home_available_periods",
             joinColumns = {@JoinColumn(name = "holiday_home_id")},
@@ -72,6 +72,16 @@ public class HolidayHome {
             inverseJoinColumns = {@JoinColumn(name = "service_id")}
     )
     private List<AdditionalService> additionalService;
+
+    private double averageMark;
+
+    public double getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(double averageMark) {
+        this.averageMark = averageMark;
+    }
 
     public List<AdditionalService> getAdditionalService() {
         return additionalService;

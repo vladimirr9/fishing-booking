@@ -138,4 +138,10 @@ public class AdventureService {
         reservations.add(newAdventureReservation);
         adventureRepository.save(newAdventureReservation.getAdventure());
     }
+
+    public void updateAverageMark(Long id, Double average) {
+        FishingAdventure fishingAdventure = findByID(id);
+        fishingAdventure.setAverageMark(average);
+        adventureRepository.save(fishingAdventure);
+    }
 }

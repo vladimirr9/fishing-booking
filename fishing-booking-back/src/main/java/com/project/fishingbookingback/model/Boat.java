@@ -54,7 +54,7 @@ public class Boat {
             inverseJoinColumns = {@JoinColumn(name = "picture_id")}
     )
     private List<Picture> exterior;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(
             name = "boat_interior_pictures",
             joinColumns = {@JoinColumn(name = "boat_id")},
@@ -62,7 +62,7 @@ public class Boat {
     )
     private List<Picture> interior;
     private int capacity;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(
             name = "boat_available_periods",
             joinColumns = {@JoinColumn(name = "boat_id", referencedColumnName = "id")},
@@ -75,6 +75,7 @@ public class Boat {
     private String fishingEquipment;
     private Float cancellationFeePercentage;
     private Float pricePerDay;
+    private double averageMark;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -312,6 +313,14 @@ public class Boat {
 
     public void setCancellationFeePercentage(Float cancellationFeePercentage) {
         this.cancellationFeePercentage = cancellationFeePercentage;
+    }
+
+    public double getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(double averageMark) {
+        this.averageMark = averageMark;
     }
 
     public void addPicture(Boolean is_interior, Picture picture) {

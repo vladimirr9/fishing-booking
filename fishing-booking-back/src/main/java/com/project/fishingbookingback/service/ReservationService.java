@@ -3,25 +3,13 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.exception.UnrecognizedTypeException;
-import com.project.fishingbookingback.model.AdventureReservation;
-import com.project.fishingbookingback.model.Boat;
-import com.project.fishingbookingback.model.BoatReservation;
-import com.project.fishingbookingback.model.Client;
-import com.project.fishingbookingback.model.FishingAdventure;
-import com.project.fishingbookingback.model.HolidayHome;
-import com.project.fishingbookingback.model.HolidayHomeReservation;
-import com.project.fishingbookingback.model.Report;
-import com.project.fishingbookingback.model.Reservation;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.ReservationRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ReservationService {
@@ -199,5 +187,12 @@ public class ReservationService {
             var newAdventureReservation = (AdventureReservation) newReservation;
             adventureService.addReservationRemoveOverlapping(newAdventureReservation);
         }
+    }
+
+    public void denyReview(Long id) {
+        Reservation reservation = findByID(id);
+        reservation.setReview(null);
+        reservationRepository.save(reservation);
+
     }
 }

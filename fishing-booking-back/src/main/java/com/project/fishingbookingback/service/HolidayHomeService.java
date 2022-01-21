@@ -3,7 +3,17 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.*;
+import com.project.fishingbookingback.model.AdditionalService;
+import com.project.fishingbookingback.model.Address;
+import com.project.fishingbookingback.model.AvailablePeriod;
+import com.project.fishingbookingback.model.HolidayHome;
+import com.project.fishingbookingback.model.HolidayHomePromotion;
+import com.project.fishingbookingback.model.HolidayHomeReservation;
+import com.project.fishingbookingback.model.HomeOwner;
+import com.project.fishingbookingback.model.Picture;
+import com.project.fishingbookingback.model.Promotion;
+import com.project.fishingbookingback.model.Role;
+import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
 
@@ -105,17 +115,17 @@ public class HolidayHomeService {
         return false;
     }
 
-    public void reserveHomePeriod(Long boatId,LocalDateTime from, LocalDateTime to){
-        AvailablePeriod availablePeriod = IsHomeAvailable(boatId,from,to);
+    public void reserveHomePeriod(Long boatId, LocalDateTime from, LocalDateTime to) {
+        AvailablePeriod availablePeriod = IsHomeAvailable(boatId, from, to);
         HolidayHome home = holidayHomeRepository.getById(boatId);
         home.getAvailablePeriods().remove(availablePeriod);
 
         var sliceBefore = availablePeriod.sliceBefore(from);
-        if(sliceBefore!=null)
+        if (sliceBefore != null)
             home.getAvailablePeriods().add(sliceBefore);
 
         var sliceAfter = availablePeriod.sliceAfter(to);
-        if(sliceAfter!= null)
+        if (sliceAfter != null)
             home.getAvailablePeriods().add(sliceAfter);
 
         holidayHomeRepository.save(home);
@@ -182,6 +192,12 @@ public class HolidayHomeService {
 
     public void save(HolidayHome home) {
         holidayHomeRepository.save(home);
+    }
+
+    public void updateAverageMark(Long id, Double average) {
+        HolidayHome holidayHome = findByID(id);
+        holidayHome.setAverageMark(average);
+        holidayHomeRepository.save(holidayHome);
     }
 }
 

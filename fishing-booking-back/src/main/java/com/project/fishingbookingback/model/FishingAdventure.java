@@ -74,6 +74,8 @@ public class FishingAdventure {
 
     private Double hourlyPrice;
 
+    private double averageMark;
+
     public FishingAdventure() {
     }
 
@@ -89,7 +91,7 @@ public class FishingAdventure {
         this.address = address;
         this.additionalService = new ArrayList<>();
         this.pictures = new ArrayList<>();
-
+        this.averageMark = 0;
     }
 
     public Set<AdventureReservation> getReservations() {
@@ -208,5 +210,13 @@ public class FishingAdventure {
 
     public void setHourlyPrice(Double hourlyPrice) {
         this.hourlyPrice = hourlyPrice;
+    }
+
+    public double getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(double averageMark) {
+        this.averageMark = averageMark;
     }
 }
