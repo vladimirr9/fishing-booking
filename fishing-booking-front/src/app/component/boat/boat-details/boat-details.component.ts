@@ -27,7 +27,7 @@ export class BoatDetailsComponent implements OnInit {
   submitFailed = false
   editMode = false
   hasCabin = false
-  subscribed: boolean = false
+  
   map!: Map
   interior : any
   exterior : any
@@ -36,6 +36,7 @@ export class BoatDetailsComponent implements OnInit {
   //client
   startingDate: Date= new Date();
   endingDate: Date = new Date();
+  subscribed: boolean = false
 
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
