@@ -195,4 +195,10 @@ public class ReservationService {
         reservationRepository.save(reservation);
 
     }
+
+    public void answerComplaint(Long id) {
+        Reservation reservation = findByID(id);
+        reservation.setComplaint(null);
+        reservationRepository.save(reservation);
+    }
 }
