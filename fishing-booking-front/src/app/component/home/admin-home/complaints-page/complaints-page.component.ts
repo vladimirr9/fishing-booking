@@ -34,7 +34,6 @@ export class ComplaintsPageComponent implements OnInit {
       ownerEmail: complaint.reservation.ownerEmail,
       content: complaint.content
     }
-    //console.log(dialogConfig.data);
 
     const dialogRef = this.dialog.open(ViewComplaintDialogComponent, dialogConfig);
 

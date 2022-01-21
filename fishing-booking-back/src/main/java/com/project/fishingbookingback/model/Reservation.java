@@ -3,17 +3,7 @@ package com.project.fishingbookingback.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -37,6 +27,7 @@ public abstract class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonManagedReference
     private Client client;
 
     @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -59,14 +50,16 @@ public abstract class Reservation {
 
     abstract public String getOwnerEmail();
 
-    public boolean overlaps(LocalDateTime time){
+    abstract public String getEntityName();
+
+    public boolean overlaps(LocalDateTime time) {
         return !time.isBefore(startDate) && !time.isAfter(endDate);
     }
 
     public boolean overlaps(Reservation reservation) {
         return overlaps(reservation.getStartDate()) || overlaps(reservation.getEndDate());
     }
-	
+
     public Review getReview() {
         return review;
     }

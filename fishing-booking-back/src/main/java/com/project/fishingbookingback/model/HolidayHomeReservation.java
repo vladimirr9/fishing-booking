@@ -28,6 +28,11 @@ public class HolidayHomeReservation extends Reservation {
         return holidayHome.getHomeOwner().getEmail();
     }
 
+    @Override
+    public String getEntityName() {
+        return holidayHome.getName();
+    }
+
     public HolidayHome getHolidayHome() {
         return holidayHome;
     }

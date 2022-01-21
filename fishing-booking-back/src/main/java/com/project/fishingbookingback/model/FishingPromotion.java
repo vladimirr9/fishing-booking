@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ public class FishingPromotion extends Promotion {
 
     @ManyToOne()
     @JoinColumn(name = "fishing_id", nullable = false)
+    @JsonManagedReference
     private FishingAdventure fishingAdventure;
 
     private int peopleNumber;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/reviews")
@@ -28,6 +29,13 @@ public class ReviewController {
     @GetMapping
     public ResponseEntity<List<Review>> getAll() {
         return ResponseEntity.ok(reviewService.findALl());
+    }
+
+    @GetMapping(value = "unapproved")
+    public ResponseEntity<List<Review>> getAllUnapproved() {
+        return ResponseEntity.ok(reviewService.findALl().stream()
+                .filter(review -> !review.isApproved())
+                .collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}/approve")

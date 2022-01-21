@@ -1,1 +1,28 @@
-<p>view-review-dialog works!</p>
+<div class="container">
+  <h1>Complaint</h1>
+  <form class="form" [formGroup]="form">
+      <div class="left-form">
+    <mat-form-field appearance="standard">
+      <mat-label>Client Name</mat-label>
+      <input matInput  placeholder="Client Name" formControlName="clientName" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Reservation Place</mat-label>
+      <input matInput  placeholder="Reservation Place" formControlName="entityName" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Owner Email</mat-label>
+      <input matInput  placeholder="Owner Email" formControlName="ownerEmail" readonly/>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Comment</mat-label>
+      <textarea matInput  placeholder="Comment" formControlName="comment" readonly></textarea>
+    </mat-form-field>
+  </div>
+    <div class="button-holder">
+      <button class="close-button" mat-flat-button color="primary" (click)="approve()">Approve</button>
+      <button class="close-button" mat-flat-button color="warn" (click)="deny()">Deny</button>
+      <button class="close-button" mat-flat-button color="warn" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

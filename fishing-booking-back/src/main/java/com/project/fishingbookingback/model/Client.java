@@ -1,14 +1,20 @@
 package com.project.fishingbookingback.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("CLIENT")
 public class Client extends User {
 
-    public Client() {}
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<Reservation> reservations;
+
+    public Client() {
+    }
 
     private boolean isEnabled;
 

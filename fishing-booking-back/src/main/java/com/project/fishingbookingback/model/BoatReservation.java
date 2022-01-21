@@ -29,6 +29,11 @@ public class BoatReservation extends Reservation {
         return boat.getBoatOwner().getEmail();
     }
 
+    @Override
+    public String getEntityName() {
+        return this.boat.getName();
+    }
+
     public Boat getBoat() {
         return boat;
     }

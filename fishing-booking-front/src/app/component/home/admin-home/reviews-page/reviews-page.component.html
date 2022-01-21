@@ -1,1 +1,13 @@
-<p>reviews-page works!</p>
+<div class="container">
+  <h1>Pending Reviews</h1>
+    <div class="container-reviews">
+      <div *ngFor="let review of reviews">
+        <mat-card class="container-card">
+          <mat-card-title>{{review.reservation.client.firstName}} {{review.reservation.client.lastName}}</mat-card-title>
+          <div class="buttons-container">
+            <button class="detailed-button" color="view" (click)="openReview(review)" mat-flat-button>Details</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
