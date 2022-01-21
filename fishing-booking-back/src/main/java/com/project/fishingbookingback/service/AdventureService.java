@@ -2,15 +2,7 @@ package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
-import com.project.fishingbookingback.model.AdditionalService;
-import com.project.fishingbookingback.model.AdventureReservation;
-import com.project.fishingbookingback.model.FishingAdventure;
-import com.project.fishingbookingback.model.FishingInstructor;
-import com.project.fishingbookingback.model.FishingPromotion;
-import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
-import com.project.fishingbookingback.model.Role;
-import com.project.fishingbookingback.model.User;
+import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.stereotype.Service;
 
@@ -101,10 +93,10 @@ public class AdventureService {
     }
 
 
-    public FishingPromotion addPromotion(Long id, Promotion promotion) {
+    public FishingPromotion addPromotion(Long id, FishingPromotion promotion) {
         FishingAdventure fishingAdventure = findByID(id);
         checkIfAllowed(fishingAdventure);
-        FishingPromotion fishingPromotion = new FishingPromotion(promotion.getFromTime(), promotion.getToTime(), promotion.getPrice(), promotion.getValidUntil(), fishingAdventure);
+        FishingPromotion fishingPromotion = new FishingPromotion(promotion.getFromTime(), promotion.getToTime(), promotion.getPrice(), promotion.getValidUntil(), fishingAdventure, promotion.getPeopleNumber());
         return fishingPromotionService.addPromotion(fishingPromotion);
     }
 

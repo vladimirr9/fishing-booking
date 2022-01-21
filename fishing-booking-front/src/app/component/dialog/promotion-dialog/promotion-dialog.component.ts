@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/service/auth.service';
 import { DateService } from 'src/app/service/date.service';
 
 @Component({
@@ -10,13 +11,14 @@ import { DateService } from 'src/app/service/date.service';
 })
 export class PromotionDialogComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<PromotionDialogComponent>, private dateService: DateService) { }
+  constructor(private dialogRef: MatDialogRef<PromotionDialogComponent>, private dateService: DateService, public authService: AuthService) { }
 
   form = new FormGroup({
     fromTime: new FormControl('', Validators.required),
     toTime: new FormControl('', Validators.required),
     price: new FormControl(0, Validators.required),
-    validUntil: new FormControl('', Validators.required)
+    validUntil: new FormControl('', Validators.required),
+    peopleNumber: new FormControl(0)
   })
 
   ngOnInit(): void {

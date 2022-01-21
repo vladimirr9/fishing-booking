@@ -1,6 +1,8 @@
 package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.AdventureMapper;
+import com.project.fishingbookingback.dto.mapper.PromotionMapper;
+import com.project.fishingbookingback.dto.request.FishingPromotionDTO;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
 import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
@@ -8,7 +10,6 @@ import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Picture;
-import com.project.fishingbookingback.model.Promotion;
 import com.project.fishingbookingback.service.AdventureService;
 import com.project.fishingbookingback.service.AvailableAdventureService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,15 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -38,11 +31,13 @@ public class AdventureController {
     private AdventureService adventureService;
     private AdventureMapper adventureMapper;
     private final AvailableAdventureService availableAdventureService;
+    private final PromotionMapper promotionMapper;
 
-    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper, AvailableAdventureService availableAdventureService) {
+    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper, AvailableAdventureService availableAdventureService, PromotionMapper promotionMapper) {
         this.adventureService = adventureService;
         this.adventureMapper = adventureMapper;
         this.availableAdventureService = availableAdventureService;
+        this.promotionMapper = promotionMapper;
     }
 
     @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
@@ -125,8 +120,9 @@ public class AdventureController {
     }
 
     @PostMapping(value = "/{id}/promotions")
-    public ResponseEntity<FishingPromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
-        return ResponseEntity.ok(adventureService.addPromotion(id, promotion));
+    public ResponseEntity<FishingPromotion> addPromotion(@Valid @RequestBody FishingPromotionDTO promotionDTO, @PathVariable Long id) {
+        FishingPromotion fishingPromotion = promotionMapper.toModel(promotionDTO);
+        return ResponseEntity.ok(adventureService.addPromotion(id, fishingPromotion));
     }
 
     @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
@@ -139,7 +135,7 @@ public class AdventureController {
     public ResponseEntity<Collection<FishingPromotion>> getAllPromotions() {
         return ResponseEntity.ok(adventureService.getAllPromotions());
     }
-    
+
     @GetMapping(value = "/{id}/promotions")
     public ResponseEntity<List<FishingPromotion>> getPromotions(@PathVariable Long id) {
         return ResponseEntity.ok(adventureService.getPromotions(id));

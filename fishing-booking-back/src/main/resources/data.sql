@@ -122,4 +122,5 @@ INSERT
 INTO FISHING_PROMOTION (id, from_time, price, to_time, valid_until, people_number, fishing_id)
 values (2, '2022-01-21 18:47:52.69', 2000, '2022-01-21 19:47:52.69', '2022-01-31 18:47:52.69', 2, 1);
 
+ALTER SEQUENCE PROMOTION_SEQ_GEN RESTART WITH 3;
 

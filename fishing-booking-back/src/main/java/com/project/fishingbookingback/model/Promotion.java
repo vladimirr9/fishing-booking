@@ -1,11 +1,6 @@
 package com.project.fishingbookingback.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -13,7 +8,8 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Promotion {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @SequenceGenerator(name = "PromotionSeqGen", sequenceName = "PromotionSeqGen", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PromotionSeqGen")
     private Long id;
     @NotNull
     private LocalDateTime fromTime;

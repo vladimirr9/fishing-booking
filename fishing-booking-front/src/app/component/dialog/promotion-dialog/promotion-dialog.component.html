@@ -21,6 +21,10 @@
       <mat-label>Valid Until</mat-label>
       <input matInput type="datetime-local" placeholder="Valid Until" formControlName="validUntil">
     </mat-form-field>
+    <mat-form-field appearance="standard" *ngIf="authService.isFishingInstructor()">
+      <mat-label>Number Of People</mat-label>
+      <input matInput type="number" placeholder="Number Of People" formControlName="peopleNumber">
+    </mat-form-field>
   </form>
 
   <div class="button-container">

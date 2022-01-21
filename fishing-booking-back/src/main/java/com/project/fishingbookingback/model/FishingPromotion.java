@@ -18,9 +18,10 @@ public class FishingPromotion extends Promotion {
     public FishingPromotion() {
     }
 
-    public FishingPromotion(LocalDateTime fromTime, LocalDateTime toTime, Double price, LocalDateTime validUntil, FishingAdventure fishingAdventure) {
+    public FishingPromotion(LocalDateTime fromTime, LocalDateTime toTime, Double price, LocalDateTime validUntil, FishingAdventure fishingAdventure, int peopleNumber) {
         super(fromTime, toTime, price, validUntil);
         this.fishingAdventure = fishingAdventure;
+        this.peopleNumber = peopleNumber;
     }
 
     public int getPeopleNumber() {
@@ -35,7 +36,7 @@ public class FishingPromotion extends Promotion {
         return fishingAdventure;
     }
 
-    public double getStandardPrice(){
-        return ChronoUnit.HOURS.between(getFromTime(), getToTime()) * fishingAdventure.getHourlyPrice()*peopleNumber;
+    public double getStandardPrice() {
+        return ChronoUnit.HOURS.between(getFromTime(), getToTime()) * fishingAdventure.getHourlyPrice() * peopleNumber;
     }
 }
