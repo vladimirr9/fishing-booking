@@ -1,5 +1,13 @@
 <div class="container">
-    <h1>Boat-details</h1>
+    
+      <h1>Boat-details</h1>
+    <button style="margin-left: 1000px;" (click)="subscribe()" *ngIf="!subscribed" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>notifications_active</mat-icon>
+    </button>
+    <button style="margin-left: 1000px;" (click)="unsubscribe()" *ngIf="subscribed" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>notifications_off</mat-icon>
+    </button>
+    
     <div>
         <app-boat-promotions *ngIf="isClient()" [id]="boat.id" ></app-boat-promotions>
         <mat-divider></mat-divider>

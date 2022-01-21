@@ -64,6 +64,7 @@ public class HolidayHome {
     private List<AdditionalService> additionalService;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedHomes")
+    @JsonManagedReference
     private List<Client> subscribedClients;
 
     private double averageMark;

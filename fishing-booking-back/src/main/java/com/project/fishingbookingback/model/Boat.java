@@ -76,6 +76,7 @@ public class Boat {
     private List<AdditionalService> additionalService;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedBoats")
+    @JsonManagedReference
     private List<Client> subscribedClients;
 
     public List<Client> getSubscribedClients() {

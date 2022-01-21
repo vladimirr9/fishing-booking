@@ -63,6 +63,7 @@ public class FishingAdventure {
     }
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedAdventures")
+    @JsonManagedReference
     private List<Client> subscribedClients;
 
     public List<Client> getSubscribedClients() {

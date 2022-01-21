@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -15,10 +17,13 @@ public class Client extends User {
     private boolean isEnabled;
 
     @ManyToMany()
+    @JsonBackReference
     private List<HolidayHome> subscribedHomes;
     @ManyToMany
+    @JsonBackReference
     private List<Boat> subscribedBoats;
     @ManyToMany
+    @JsonBackReference
     private List<FishingAdventure> subscribedAdventures;
 
     public Client(ProviderRegistration providerRegistration) {
