@@ -13,6 +13,8 @@ public class FishingPromotion extends Promotion {
     @JoinColumn(name = "fishing_id", nullable = false)
     private FishingAdventure fishingAdventure;
 
+    private int peopleNumber;
+
     public FishingPromotion() {
     }
 
@@ -21,11 +23,19 @@ public class FishingPromotion extends Promotion {
         this.fishingAdventure = fishingAdventure;
     }
 
+    public int getPeopleNumber() {
+        return peopleNumber;
+    }
+
+    public void setPeopleNumber(int peopleNumber) {
+        this.peopleNumber = peopleNumber;
+    }
+
     public FishingAdventure getFishingAdventure() {
         return fishingAdventure;
     }
 
     public double getStandardPrice(){
-        return ChronoUnit.HOURS.between(getFromTime(), getToTime()) * fishingAdventure.getHourlyPrice();
+        return ChronoUnit.HOURS.between(getFromTime(), getToTime()) * fishingAdventure.getHourlyPrice()*peopleNumber;
     }
 }

@@ -71,7 +71,7 @@ ALTER SEQUENCE MY_SEQ RESTART WITH 3;
 -- values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1)
 
 -- ADVENTURE FISHING_PROMOTION
-INSERT INTO FISHING_PROMOTION (id,from_time,price,to_time,valid_until,fishing_id)
-values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1)
+INSERT INTO FISHING_PROMOTION (id,from_time,price,to_time,valid_until,people_number,fishing_id)
+values (2,'2022-01-21 18:47:52.69',2000,'2022-01-21 19:47:52.69','2022-01-31 18:47:52.69',2,1)
 
 

@@ -59,7 +59,7 @@
                 </mat-list-item>
                 <mat-list-item>
                      <label><b>Promo price:</b>   {{promotion.price}}$</label>
-                     <label style="margin-left: 50px;"><b>Standard price:</b>   0$</label>
+                     <label style="margin-left: 50px;"><b>Standard price:</b> {{promotion.standardPrice}}$</label>
                      <button style="margin-left: 50px;" mat-button color="primary" (click)="reserve(promotion)">RESERVE</button>
                      <label  style="margin-left: 50px;" [style.color]="!available? 'red': 'green'">{{statusMessage}}</label>
                      <mat-divider></mat-divider>
