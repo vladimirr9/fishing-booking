@@ -16,6 +16,7 @@ import { StorageService } from 'src/app/service/storage.service';
 import { PromotionDialogComponent } from '../../dialog/promotion-dialog/promotion-dialog.component';
 import { HomePromotion } from 'src/app/model/HomePromotion';
 import { FishingPromotion } from 'src/app/model/FishingPromotion';
+import { SubscriptionService } from 'src/app/service/subscription.service';
 
 @Component({
   selector: 'app-holiday-home-details',
@@ -30,16 +31,18 @@ export class HolidayHomeDetailsComponent implements OnInit {
   interior : any
   holidayhome : any
   exterior : any
+  
    //client
    startingDate: Date= new Date();
    endingDate: Date = new Date();
+   subscribed: boolean = false
   
 
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
     private route: ActivatedRoute,
     private storageService: StorageService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, private subscribeService: SubscriptionService) { }
 
 
     addHomeForm = this.fb.group({
@@ -93,9 +96,23 @@ export class HolidayHomeDetailsComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
         })
+
+        this.subscribeService.isHomeSubscribed(this.storageService.getUsername(),id).subscribe((data) => {this.subscribed=data;})
     }
 
-    
+    subscribe(): any{
+      this.subscribeService.createHomeSubscription(this.storageService.getUsername(),this.holidayhome.id).subscribe((data)=>{
+        alert("Subscribed!");
+        this.subscribed = true;
+      })
+    }
+
+    unsubscribe(): any{
+      this.subscribeService.deleteHomeSubscription(this.storageService.getUsername(),this.holidayhome.id).subscribe((data)=>{
+        alert("Unsubscribed!");
+        this.subscribed=false;
+      })
+    }
 
   
 

@@ -67,6 +67,18 @@ public class FishingAdventure {
         this.fishingInstructor = fishingInstructor;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedAdventures")
+    @JsonManagedReference
+    private List<Client> subscribedClients;
+
+    public List<Client> getSubscribedClients() {
+        return subscribedClients;
+    }
+
+    public void setSubscribedClients(List<Client> subscribedClients) {
+        this.subscribedClients = subscribedClients;
+    }
+
     private Double hourlyPrice;
 
     private double averageMark;

@@ -12,6 +12,7 @@ import { BoatService } from 'src/app/service/boat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from 'src/app/service/storage.service';
+import { SubscriptionService } from 'src/app/service/subscription.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class BoatDetailsComponent implements OnInit {
   submitFailed = false
   editMode = false
   hasCabin = false
+  
   map!: Map
   interior : any
   exterior : any
@@ -34,12 +36,14 @@ export class BoatDetailsComponent implements OnInit {
   //client
   startingDate: Date= new Date();
   endingDate: Date = new Date();
+  subscribed: boolean = false
 
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
     private router: Router,
     private route: ActivatedRoute, private dialog: MatDialog,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private subscribeService: SubscriptionService) { }
 
 
     addBoatForm = this.fb.group({
@@ -113,6 +117,9 @@ export class BoatDetailsComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
         })
+
+        this.subscribeService.isBoatSubscribed(this.storageService.getUsername(),id).subscribe((data) => {this.subscribed=data;})
+
     }
 
     getCoord(event: any) {
@@ -141,6 +148,20 @@ export class BoatDetailsComponent implements OnInit {
     
     getButtonText() {
       return this.editMode ? "Edit" : "Create"
+    }
+
+    subscribe(): any{
+      this.subscribeService.createBoatSubscription(this.storageService.getUsername(),this.boat.id).subscribe((data)=>{
+        alert("Subscribed!");
+        this.subscribed = true;
+      })
+    }
+
+    unsubscribe(): any{
+      this.subscribeService.deleteBoatSubscription(this.storageService.getUsername(),this.boat.id).subscribe((data)=>{
+        alert("Unsubscribed!");
+        this.subscribed=false;
+      })
     }
 
     reserve(): void{}
