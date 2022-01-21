@@ -3,7 +3,7 @@
   <mat-card-subtitle>{{additionalService.price}} RSD</mat-card-subtitle>
   <div class="buttons-container">
     <div class="delete-button">
-    <input *ngIf="isFishingInstructor()" type="image" class="image" (click)="deleteService()"
+    <input *ngIf="isProvider()" type="image" class="image" (click)="deleteService()"
         src="assets/img/delete.png">
     </div>
   </div>

@@ -19,6 +19,13 @@ export class HolidayHomeService {
   private homeURL = "/holiday-home"
   constructor(private http: HttpClient) { }
 
+  deleteAdditionalService(id_home: number, id_service : number) {
+    return this.http.delete(`${config.baseUrl}${this.homeURL}/${id_home}/additional-services/${id_service}`)
+  }
+  postAdditionalService(id: number, additionalService: any) {
+    return this.http.post(`${config.baseUrl}${this.homeURL}/${id}/additional-services/`, additionalService)
+  }
+
   getAllPromotionsForHomeOwner() {
     return this.http.get(`${config.baseUrl}${this.homeURL}/promotions`)
   }

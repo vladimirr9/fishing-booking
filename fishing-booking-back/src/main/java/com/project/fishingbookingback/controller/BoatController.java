@@ -104,11 +104,13 @@ public class BoatController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
     @PostMapping(value = "/{id}/promotions")
     public ResponseEntity<BoatPromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
         return ResponseEntity.ok(boatService.addPromotion(id, promotion));
     }
 
+    @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
     @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
     public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
         boatService.deletePromotion(id, id_promotion);
@@ -123,5 +125,18 @@ public class BoatController {
     @GetMapping(value = "/promotions")
     public ResponseEntity<Collection<BoatPromotion>> getAllPromotions() {
         return ResponseEntity.ok(boatService.getAllPromotions());
+    }
+
+    @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
+    @PostMapping(value = "/{id}/additional-services")
+    public ResponseEntity<Boat> addService(@Valid @RequestBody AdditionalService additionalService, @PathVariable Long id) {
+        return ResponseEntity.ok(boatService.addService(id, additionalService));
+    }
+
+    @PreAuthorize("hasRole('ROLE_BOAT_OWNER') or hasRole('ROLE_ADMIN')")
+    @DeleteMapping(value = "/{id}/additional-services/{id_service}")
+    public ResponseEntity<HttpStatus> deleteAdditionalService(@PathVariable Long id, @PathVariable Long id_service) {
+        boatService.deleteAdditionalService(id, id_service);
+        return ResponseEntity.noContent().build();
     }
 }

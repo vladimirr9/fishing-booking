@@ -180,6 +180,19 @@ public class BoatService {
         return boatPromotionService.getAllForBoatOwner(email);
     }
 
+    public Boat addService(Long id, AdditionalService additionalService) {
+        Boat boat = findByID(id);
+        boat.addService(additionalService);
+        return boatRepository.save(boat);
+    }
+
+    public void deleteAdditionalService(Long id, Long id_service) {
+        Boat boat = findByID(id);
+        checkIfAllowed(boat);
+        boat.getAdditionalService().removeIf(service -> service.getId().equals(id_service));
+        boatRepository.save(boat);
+    }
+
     public void save(Boat boat) {
         boatRepository.save(boat);
     }

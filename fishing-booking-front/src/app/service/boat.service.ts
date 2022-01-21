@@ -18,6 +18,13 @@ export class BoatService {
 
   private boatUrl = '/boat';
 
+  deleteAdditionalService(id_boat: number, id_service : number) {
+    return this.http.delete(`${config.baseUrl}${this.boatUrl}/${id_boat}/additional-services/${id_service}`)
+  }
+  postAdditionalService(id: number, additionalService: any) {
+    return this.http.post(`${config.baseUrl}${this.boatUrl}/${id}/additional-services/`, additionalService)
+  }
+
   get() {
     return this.http.get(`${config.baseUrl}${this.boatUrl}`)
   }

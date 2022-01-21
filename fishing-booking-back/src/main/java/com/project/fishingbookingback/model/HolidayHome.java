@@ -65,6 +65,22 @@ public class HolidayHome {
     @JsonManagedReference
     private Set<HolidayHomeReservation> reservations;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "home_additional_service",
+            joinColumns = {@JoinColumn(name = "adventure_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")}
+    )
+    private List<AdditionalService> additionalService;
+
+    public List<AdditionalService> getAdditionalService() {
+        return additionalService;
+    }
+
+    public void addService(AdditionalService additionalService) {
+        this.additionalService.add(additionalService);
+    }
+
     public Set<HolidayHomeReservation> getReservations() {
         return reservations;
     }

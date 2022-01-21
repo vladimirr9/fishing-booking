@@ -14,8 +14,8 @@ export class AdditionalServiceCardComponent implements OnInit {
   @Input() additionalService : any
   @Output() serviceDeleted = new EventEmitter()
 
-  isFishingInstructor() : boolean {
-    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR"
+  isProvider() : boolean {
+    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR" || this.storageService.getRole() === "ROLE_BOAT_OWNER" || this.storageService.getRole() === "ROLE_HOME_OWNER" 
   }
 
   deleteService() {

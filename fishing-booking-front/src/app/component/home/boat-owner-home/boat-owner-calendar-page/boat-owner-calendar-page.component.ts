@@ -73,7 +73,7 @@ export class BoatOwnerCalendarPageComponent implements OnInit {
     this.reservationService.getReservations({ ownerEmail: this.storageService.getUsername() }).subscribe((data: any) => {
       data.forEach((element: any) => {
         let id = element.id || 0;
-        this.addReservationToCalendar(id, element.startDate, element.endDate, element.name);
+        this.addReservationToCalendar(id, element.startDate, element.endDate, element.name, element.reportPresent);
       });
     });
 
@@ -223,8 +223,40 @@ export class BoatOwnerCalendarPageComponent implements OnInit {
       },
     ];
   }
-  addReservationToCalendar(id: any, fromTime: any, toTime: any, name: string) {
-    
+  addReservationToCalendar(id: any, fromTime: any, toTime: any, name: string, reportPresent: any) {
+    let action: any
+    if (!reportPresent && (new Date(Date.parse(toTime))) < (new Date())) {
+      alert("1")
+      action = {
+        label: '<i class="fas fa-edit"></i>',
+        onClick: ({ event }: { event: CalendarEvent }): void => {
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true
+          dialogConfig.autoFocus = true
+
+          const dialogRef = this.dialog.open(ReportDialogComponent, dialogConfig);
+
+          dialogRef.afterClosed().subscribe(
+            res => {
+              if (res) {
+                this.reservationService.putReport(id, res).subscribe((data: any) => {
+                  this.getEvents()
+                })
+
+              }
+            }
+
+          );
+        },
+      }
+    }
+    else {
+      alert("2")
+      action = {
+        label: '',
+        onClick: () => { void (0) }
+      }
+    }
     this.events = [
       ...this.events,
       {
@@ -236,8 +268,11 @@ export class BoatOwnerCalendarPageComponent implements OnInit {
         resizable: {
           beforeStart: false,
           afterEnd: false,
-        }
-      },
+        },
+        actions: [
+          action
+        ]
+      }
     ];
 
   }

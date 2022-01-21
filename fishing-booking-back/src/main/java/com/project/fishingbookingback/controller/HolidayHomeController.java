@@ -76,7 +76,7 @@ public class HolidayHomeController {
     }
 
     @GetMapping(value = "/client/freeHomes")
-    public ResponseEntity<List<ClientsHolidayHomeDTO>> getAvailableBoats(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+    public ResponseEntity<List<ClientsHolidayHomeDTO>> getAvailableHomes(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
                                                                          @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         List<ClientsHolidayHomeDTO> clientsHolidayHomeDTOs = new ArrayList<>();
         for (HolidayHome home : holidayHomeService.getAvailableHomes(from, to))
@@ -105,11 +105,13 @@ public class HolidayHomeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @PostMapping(value = "/{id}/promotions")
     public ResponseEntity<HolidayHomePromotion> addPromotion(@Valid @RequestBody Promotion promotion, @PathVariable Long id) {
         return ResponseEntity.ok(holidayHomeService.addPromotion(id, promotion));
     }
 
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
     public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
         holidayHomeService.deletePromotion(id, id_promotion);
@@ -126,6 +128,18 @@ public class HolidayHomeController {
         return ResponseEntity.ok(holidayHomeService.getAllPromotions());
     }
 
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
+    @PostMapping(value = "/{id}/additional-services")
+    public ResponseEntity<HolidayHome> addService(@Valid @RequestBody AdditionalService additionalService, @PathVariable Long id) {
+        return ResponseEntity.ok(holidayHomeService.addService(id, additionalService));
+    }
+
+    @PreAuthorize("hasRole('ROLE_HOME_OWNER') or hasRole('ROLE_ADMIN')")
+    @DeleteMapping(value = "/{id}/additional-services/{id_service}")
+    public ResponseEntity<HttpStatus> deleteAdditionalService(@PathVariable Long id, @PathVariable Long id_service) {
+        holidayHomeService.deleteAdditionalService(id, id_service);
+        return ResponseEntity.noContent().build();
+    }
 
 }
 

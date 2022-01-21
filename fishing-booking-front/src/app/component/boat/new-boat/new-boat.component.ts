@@ -17,6 +17,7 @@ import { BoatPromotion } from 'src/app/model/BoatPromotion';
 import { AvailablePeriodService } from 'src/app/service/available-period.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
+import { AdditionalServiceDialogComponent } from '../../dialog/additional-service-dialog/additional-service-dialog.component';
 
 @Component({
   selector: 'app-new-boat',
@@ -34,6 +35,7 @@ export class NewBoatComponent implements OnInit {
   interior : any
   exterior : any
   promotions !: BoatPromotion[]
+  services: any
 
   fromTime: any
   toTime: any
@@ -106,6 +108,7 @@ export class NewBoatComponent implements OnInit {
           this.map.getView().setCenter(transform([this.lon, this.lat], 'EPSG:4326', 'EPSG:3857'));
           this.exterior = data.exterior
           this.interior = data.interior
+          this.services = data.additionalService
         })
 
         this.boatService.getPromotions(id).subscribe((data) => {
@@ -303,6 +306,35 @@ export class NewBoatComponent implements OnInit {
       if (index !== -1) {
         this.promotions.splice(index, 1);
       }
+    }
+
+    addAdditionalService() {
+
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+  
+      const dialogRef = this.dialog.open(AdditionalServiceDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            this.boatService.postAdditionalService(this.route.snapshot.params['id'],data).subscribe((result:any) => {
+              this.services = result.additionalService
+            })
+          }
+        }
+      );
+    }
+
+    removeService(additionalService : any) {
+      this.boatService.deleteAdditionalService(this.route.snapshot.params['id'], additionalService.id).subscribe((data) => {
+        let index = this.services.indexOf(additionalService);
+        if (index !== -1) {
+          this.services.splice(index, 1);
+        }
+      })
     }
 
 }

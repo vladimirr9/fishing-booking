@@ -167,6 +167,19 @@ public class HolidayHomeService {
         return holidayHomePromotionService.getAllForHomeOwner(email);
     }
 
+    public HolidayHome addService(Long id, AdditionalService additionalService) {
+        HolidayHome holidayHome = findByID(id);
+        holidayHome.addService(additionalService);
+        return holidayHomeRepository.save(holidayHome);
+    }
+
+    public void deleteAdditionalService(Long id, Long id_service) {
+        HolidayHome home = findByID(id);
+        checkIfAllowed(home);
+        home.getAdditionalService().removeIf(service -> service.getId().equals(id_service));
+        holidayHomeRepository.save(home);
+    }
+
     public void save(HolidayHome home) {
         holidayHomeRepository.save(home);
     }

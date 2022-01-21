@@ -128,4 +128,19 @@
     </div>
 
   </div>
+
+  <div *ngIf="editMode">
+
+    <span class="additional-services">
+      <h3>Additional Services</h3>
+      <input type="image" class="image" (click)="addAdditionalService()"
+            src="assets/img/plus.svg">
+    </span>
+      <div class="service-container">
+        <div *ngFor="let service of services" class="service-item">
+          <app-additional-service-card  [additionalService]="service" (serviceDeleted)="removeService($event)"></app-additional-service-card>
+        </div>
+      </div>
+    </div>
+  
   

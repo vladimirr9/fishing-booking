@@ -76,6 +76,22 @@ public class Boat {
     private Float cancellationFeePercentage;
     private Float pricePerDay;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "boat_additional_service",
+            joinColumns = {@JoinColumn(name = "adventure_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")}
+    )
+    private List<AdditionalService> additionalService;
+
+    public List<AdditionalService> getAdditionalService() {
+        return additionalService;
+    }
+
+    public void addService(AdditionalService additionalService) {
+        this.additionalService.add(additionalService);
+    }
+
     public Boat(String name, String type, Float length, int engineNumber, Float enginePower, Float maxSpeed, Boolean gps, Boolean radar, Boolean vhf, Boolean fishfinder, Boolean cabin, Address address, String description, int capacity, String rulesOfConduct, String additionalInfo, String fishingEquipment, Float cancellationFeePercentage, Float pricePerDay) {
         this.name = name;
         this.type = type;

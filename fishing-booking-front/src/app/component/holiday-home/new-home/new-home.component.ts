@@ -17,6 +17,7 @@ import { HomePromotion } from 'src/app/model/HomePromotion';
 import { StorageService } from 'src/app/service/storage.service';
 import { AvailablePeriodService } from 'src/app/service/available-period.service';
 import { AvailablePeriod } from 'src/app/model/AvailablePeriod';
+import { AdditionalServiceDialogComponent } from '../../dialog/additional-service-dialog/additional-service-dialog.component';
 
 @Component({
   selector: 'app-new-home',
@@ -35,6 +36,7 @@ export class NewHomeComponent implements OnInit {
 
   fromTime: any
   toTime: any
+  services: any
 
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
@@ -78,6 +80,7 @@ export class NewHomeComponent implements OnInit {
           this.map.getView().setCenter(transform([this.lon, this.lat], 'EPSG:4326', 'EPSG:3857'));
           this.exterior = data.exterior
           this.interior = data.interior
+          this.services = data.additionalService
         })
       }
       this.holidayHomeService.getPromotions(id).subscribe((data) => {
@@ -249,6 +252,35 @@ export class NewHomeComponent implements OnInit {
          alert("Successfully added!")
       }, (error) => {
         alert("Error.")
+      })
+    }
+
+    addAdditionalService() {
+
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+  
+      const dialogRef = this.dialog.open(AdditionalServiceDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            this.holidayHomeService.postAdditionalService(this.route.snapshot.params['id'],data).subscribe((result:any) => {
+              this.services = result.additionalService
+            })
+          }
+        }
+      );
+    }
+
+    removeService(additionalService : any) {
+      this.holidayHomeService.deleteAdditionalService(this.route.snapshot.params['id'], additionalService.id).subscribe((data) => {
+        let index = this.services.indexOf(additionalService);
+        if (index !== -1) {
+          this.services.splice(index, 1);
+        }
       })
     }
 }
