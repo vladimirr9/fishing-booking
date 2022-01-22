@@ -2,7 +2,6 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.request.AvailablePeriodDTO;
 import com.project.fishingbookingback.dto.response.AvailablePeriodCalendarDTO;
-import com.project.fishingbookingback.exception.NewAvailablePeriodOverlapsException;
 import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.service.AvailablePeriodService;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;

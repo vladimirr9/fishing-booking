@@ -50,4 +50,19 @@ public class Promotion {
     public LocalDateTime getValidUntil() {
         return validUntil;
     }
+
+    public boolean overlapsForNewPromotion(LocalDateTime from, LocalDateTime to) {
+        var startOverlaps =  !from.isBefore(this.fromTime) && from.isBefore(this.toTime);
+        var endOvelaps = !to.isAfter(this.toTime) && to.isAfter(this.fromTime);
+        return startOverlaps || endOvelaps;
+    }
+    public boolean overlaps(AvailablePeriod availablePeriod) {
+        return overlapsForNewPromotion(availablePeriod.getFromTime(), availablePeriod.getToTime()) || (availablePeriod.getFromTime().isBefore(this.fromTime) && availablePeriod.getToTime().isAfter(this.toTime));
+    }
+    public boolean overlaps(Reservation reservation) {
+        return overlapsForNewPromotion(reservation.getStartDate(), reservation.getEndDate()) || (reservation.getStartDate().isBefore(this.fromTime) && reservation.getEndDate().isAfter(this.toTime));
+    }
+    public boolean overlaps(Promotion promotion) {
+        return overlapsForNewPromotion(promotion.getFromTime(), promotion.getToTime()) || (promotion.getFromTime().isBefore(this.fromTime) && promotion.getToTime().isAfter(this.toTime));
+    }
 }

@@ -69,8 +69,8 @@ public class ControllerExceptionHandler {
     }
 
 
-    @ExceptionHandler(NewAvailablePeriodOverlapsException.class)
-    public ResponseEntity<ErrorMessage> NewAvailablePeriodOverlapsException(NewAvailablePeriodOverlapsException ex, WebRequest request) {
+    @ExceptionHandler(OverlapsException.class)
+    public ResponseEntity<ErrorMessage> NewAvailablePeriodOverlapsException(OverlapsException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 ex.getMessage(),
                 new Date());

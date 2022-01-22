@@ -301,6 +301,9 @@ export class NewBoatComponent implements OnInit {
               })
             })
           }
+        },
+        error => {
+          alert(error.error.message)
         }
       );
     }

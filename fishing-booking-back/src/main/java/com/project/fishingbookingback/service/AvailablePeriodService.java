@@ -1,13 +1,12 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
-import com.project.fishingbookingback.exception.NewAvailablePeriodOverlapsException;
+import com.project.fishingbookingback.exception.OverlapsException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.AvailablePeriodRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -122,17 +121,17 @@ public class AvailablePeriodService {
     private void checkIfOverlaps(AvailablePeriod newAvailablePeriod, Collection<AvailablePeriod> availablePeriods, Collection<Reservation> reservations, Collection<Promotion> promotions) {
          for (var availablePeriod: availablePeriods) {
             if (newAvailablePeriod.overlaps(availablePeriod)) {
-                throw new NewAvailablePeriodOverlapsException(availablePeriod.getClass().getSimpleName(), availablePeriod.getId());
+                throw new OverlapsException(availablePeriod.getClass().getSimpleName(), availablePeriod.getId());
             }
          }
          for (var reservation: reservations) {
              if (reservation.isApproved() && newAvailablePeriod.overlaps(reservation)) {
-                 throw new NewAvailablePeriodOverlapsException(reservation.getClass().getSimpleName(), reservation.getId());
+                 throw new OverlapsException(reservation.getClass().getSimpleName(), reservation.getId());
              }
          }
          for (var promotion: promotions) {
             if (newAvailablePeriod.overlaps(promotion)) {
-                throw new NewAvailablePeriodOverlapsException(promotion.getClass().getSimpleName(), promotion.getId());
+                throw new OverlapsException(promotion.getClass().getSimpleName(), promotion.getId());
             }
          }
     }
