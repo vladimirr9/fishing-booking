@@ -59,12 +59,16 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
       this.filteredHouses = this.houses.filter(boat => boat.name.includes(this.filterComponent.filterName));
       this.filteredHouses = this.filteredHouses.filter(boat => boat.address.includes(this.filterComponent.filterAdress));
       this.filteredHouses = this.filteredHouses.filter(boat => boat.mark >= this.filterComponent.filterMark);
+      if(this.filterComponent.subscribed)
+        this.filteredHouses = this.filteredHouses.filter(house=> house.subscribed);
       this.sortHouses();
   }
 
   searchHouses(): void{
     this._holidayHouseService.getAvailableHomes(this.searchStartDate,this.searchEndDate).subscribe((data: HolidayHouseDTO[])=>{
       this.filteredHouses = data;
+      if(this.filteredHouses.length==0)
+        alert("No available holiday homes!");
     });
   }
   

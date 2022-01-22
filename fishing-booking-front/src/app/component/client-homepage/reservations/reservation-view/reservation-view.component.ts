@@ -78,7 +78,7 @@ export class ReservationViewComponent implements OnInit {
         alert("Reservation successfully removed!");
         this.reservations = this.reservations.filter(reservation => reservation.id != id );
     },error=>{
-        alert("Date is within 3 days");
+        alert("Removed reservation!");
     });
   }
 }

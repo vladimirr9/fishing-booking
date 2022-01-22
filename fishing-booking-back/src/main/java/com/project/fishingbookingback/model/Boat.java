@@ -339,4 +339,11 @@ public class Boat {
             exterior.add(picture);
         }
     }
+
+    public boolean isClientSubscribed(String clientUsername){
+        for(Client client : getSubscribedClients())
+            if(client.getEmail().equals(clientUsername))
+                return true;
+        return false;
+    }
 }

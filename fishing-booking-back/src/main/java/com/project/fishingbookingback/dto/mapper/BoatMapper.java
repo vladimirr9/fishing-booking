@@ -5,10 +5,18 @@ import com.project.fishingbookingback.dto.request.NewBoatDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Boat;
+import com.project.fishingbookingback.service.LoggedUserService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BoatMapper {
+
+    private final LoggedUserService loggedUserService;
+
+    public BoatMapper(LoggedUserService loggedUserService) {
+        this.loggedUserService = loggedUserService;
+    }
+
     public ClientsBoatViewDTO toBoatViewDTO(Boat boat){
         ClientsBoatViewDTO boatViewDTO = new ClientsBoatViewDTO();
         boatViewDTO.setId(boat.getId());
@@ -21,6 +29,7 @@ public class BoatMapper {
         boatViewDTO.setDescription(boat.getDescription());
         boatViewDTO.setMark(boat.getAverageMark());
         boatViewDTO.setPrice(boat.getPricePerDay());
+        boatViewDTO.setSubscribed(boat.isClientSubscribed(loggedUserService.getUsername()));
         return boatViewDTO;
     }
 

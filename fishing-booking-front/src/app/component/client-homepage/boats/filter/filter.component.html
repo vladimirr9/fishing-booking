@@ -15,6 +15,12 @@
               </mat-option>
             </mat-select>
         </mat-form-field>
+        
+        <mat-checkbox *ngIf="!isRouteReservation()" type="checkbox"
+        [checked]="subscribed"
+        (change)="subscribed = !subscribed" style="margin-left:15px;" class="example-margin">Subscribed</mat-checkbox>
+      
+     
         <!-- <mat-form-field appearance="fill" class="field">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
