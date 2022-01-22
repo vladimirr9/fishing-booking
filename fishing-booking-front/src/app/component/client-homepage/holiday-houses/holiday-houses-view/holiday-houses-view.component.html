@@ -9,7 +9,7 @@
               <ul class="reservationCard">
                 <li class="card-item">Adress: {{house.address}}</li>
                 <li class="card-item">Price: {{house.price}}$</li>
-                <li class="card-item">Mark: {{house.mark}}</li>
+                <li class="card-item">Mark: {{house.mark.toFixed(2)}}</li>
               </ul>
             </mat-card-subtitle>
             <img mat-card-xl-image src="{{house.imgUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/308/200/300'" >

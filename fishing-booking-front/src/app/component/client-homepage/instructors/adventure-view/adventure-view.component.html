@@ -24,7 +24,7 @@
             <ul class="reservationCard">
               <li class="card-item">Adress: {{adventure.adress}}</li>
               <li class="card-item">Price: {{adventure.price}}$</li>
-              <li class="card-item">Mark: {{adventure.mark}}</li>
+              <li class="card-item">Mark: {{adventure.mark.toFixed(2)}}</li>
             </ul>
           </mat-card-subtitle>
           <img mat-card-xl-image src="{{adventure.imageUrl}}" onerror="this.onerror=null; this.src='https://picsum.photos/id/27/100/300'" >
