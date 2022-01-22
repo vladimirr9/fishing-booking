@@ -67,6 +67,8 @@ export class HolidayHousesComponent implements OnInit,AfterViewInit {
   searchHouses(): void{
     this._holidayHouseService.getAvailableHomes(this.searchStartDate,this.searchEndDate).subscribe((data: HolidayHouseDTO[])=>{
       this.filteredHouses = data;
+      if(this.filteredHouses.length==0)
+        alert("No available holiday homes!");
     });
   }
   
