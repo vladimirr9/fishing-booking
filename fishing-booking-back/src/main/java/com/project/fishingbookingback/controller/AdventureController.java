@@ -19,7 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -86,7 +85,6 @@ public class AdventureController {
         return ResponseEntity.ok(adventureResponseDTOS);
     }
 
-    @Transactional
     @GetMapping(value = "/client")
     public ResponseEntity<List<ClientsAdventureViewDTO>> getClientAdventures() {
         List<ClientsAdventureViewDTO> clientsAdventureViewDTOS = new ArrayList<>();
