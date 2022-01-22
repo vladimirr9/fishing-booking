@@ -1,6 +1,7 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
+import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class AvailableAdventureService {
     }
 
     public List<FishingAdventure> getAvailableAdventures(LocalDateTime from, LocalDateTime to){
+        if(from.isAfter(to)) throw new NotAllowedException();
         List<FishingAdventure> fishingAdventures = new ArrayList<>();
         for(User user : userService.findAll())
             if(user.getRole()== Role.ROLE_FISHING_INSTRUCTOR)

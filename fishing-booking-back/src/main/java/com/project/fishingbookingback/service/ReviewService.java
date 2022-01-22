@@ -62,6 +62,10 @@ public class ReviewService {
         reservationService.denyReview(review.getReservation().getId());
     }
 
+    public void updateReview(Review review){
+        reviewRepository.save(review);
+    }
+
     private void updateFishingAdventure(Review review) {
         AdventureReservation adventureReservation = (AdventureReservation) review.getReservation();
         Double average = 0d;

@@ -107,6 +107,7 @@ public class HolidayHomeService {
     }
 
     public List<HolidayHome> getAvailableHomes(LocalDateTime from, LocalDateTime to) {
+        if(from.isAfter(to)) throw new NotAllowedException();
         List<HolidayHome> availableHomes = new ArrayList<>();
         for (HolidayHome holidayHome : holidayHomeRepository.findAll())
             if (isHomeAvailable(holidayHome, from, to))
