@@ -55,10 +55,10 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type,Long[] additionalServicesIds) {
+    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type,Long[] additionalServicesIds,boolean isPromotion) {
         if (from.isBefore(LocalDateTime.now())) throw new NotAllowedException();
         if (to.isBefore(from)) throw new NotAllowedException();
-        Reservation reservation = createReservationdownClass(type, entityId, from, to);
+        Reservation reservation = createReservationdownClass(type, entityId, from, to,isPromotion);
         Client client = (Client) userService.findByEmail(clientUsername);
         reservation.setClient(client);
         reservation.setPrice(price);
@@ -80,12 +80,13 @@ public class ReservationService {
     }
 
 
-    private Reservation createReservationdownClass(String type, Long entityId, LocalDateTime from, LocalDateTime to) {
+    private Reservation createReservationdownClass(String type, Long entityId, LocalDateTime from, LocalDateTime to,boolean isPromotion) {
         switch (type) {
             case "ADVENTURE" -> {
                 var adventureReservation = new AdventureReservation();
                 FishingAdventure adventure = adventureService.findByID(entityId);
-                availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(), from, to);
+                if(!isPromotion)
+                    availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(), from, to);
                 adventureReservation.setAdventure(adventure);
                 Set<AdventureReservation> adventureReservations = adventure.getReservations();
                 adventureReservations.add(adventureReservation);
@@ -95,7 +96,8 @@ public class ReservationService {
             case "HOLIDAY_HOME" -> {
                 var holidayReservation = new HolidayHomeReservation();
                 HolidayHome home = holidayHomeService.findByID(entityId);
-                holidayHomeService.reserveHomePeriod(entityId, from, to);
+                if(!isPromotion)
+                    holidayHomeService.reserveHomePeriod(entityId, from, to);
                 holidayReservation.setHolidayHome(home);
                 Set<HolidayHomeReservation> holidayHomeReservations = home.getReservations();
                 holidayHomeReservations.add(holidayReservation);
@@ -105,7 +107,8 @@ public class ReservationService {
             case "BOAT" -> {
                 var boatReservation = new BoatReservation();
                 Boat boat = boatService.findByID(entityId);
-                boatService.reserveBoatPeriod(entityId, from, to);
+                if(!isPromotion)
+                    boatService.reserveBoatPeriod(entityId, from, to);
                 boatReservation.setBoat(boat);
                 Set<BoatReservation> boatReservations = boat.getReservations();
                 boatReservations.add(boatReservation);
@@ -213,4 +216,5 @@ public class ReservationService {
         reservation.setComplaint(null);
         reservationRepository.save(reservation);
     }
+
 }

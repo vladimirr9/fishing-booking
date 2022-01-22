@@ -112,11 +112,11 @@ values(1,1);
 
  -- BOAT PROMOTIONS
 INSERT INTO BOAT_PROMOTION(id,from_time,price,to_time,valid_until,boat_id)
-values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1);
+values (1,'2022-01-25 18:47:52.69',2000,'2022-01-27 18:47:52.69','2022-01-31 18:47:52.69',1);
 
 -- -- HOLIDAY HOME PROMOTIONS
 INSERT INTO HOLIDAY_HOME_PROMOTION(id, from_time, price, to_time, valid_until, holiday_home_id)
-values (2, '2022-01-21 18:47:52.69', 2000, '2022-01-23 18:47:52.69', '2022-01-31 18:47:52.69', 1);
+values (2, '2022-01-25 18:47:52.69', 2000, '2022-01-27 18:47:52.69', '2022-01-31 18:47:52.69', 1);
 
 -- INSERT INTO HOLIDAY_HOME_PROMOTION(id,from_time,price,to_time,valid_until,holiday_home_id)
 -- values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1)
