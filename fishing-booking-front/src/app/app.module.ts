@@ -96,6 +96,7 @@ import { ReviewsPageComponent } from './component/home/admin-home/reviews-page/r
 import { ComplaintsPageComponent } from './component/home/admin-home/complaints-page/complaints-page.component';
 import { ViewComplaintDialogComponent } from './component/dialog/view-complaint-dialog/view-complaint-dialog.component';
 import { ViewReviewDialogComponent } from './component/dialog/view-review-dialog/view-review-dialog.component';
+import { IncomeReportComponent } from './component/income-report/income-report.component';
 
 
 
@@ -182,7 +183,8 @@ import { ViewReviewDialogComponent } from './component/dialog/view-review-dialog
     ReviewsPageComponent,
     ComplaintsPageComponent,
     ViewComplaintDialogComponent,
-    ViewReviewDialogComponent
+    ViewReviewDialogComponent,
+    IncomeReportComponent
   ],
   imports: [
     BrowserModule,

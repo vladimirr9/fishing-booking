@@ -4,11 +4,15 @@ import { ReservationDTO } from '../dto/ReservationDTO';
 import {  Observable } from 'rxjs';
 import { config } from "src/shared"
 import { CreateReservationDTO } from '../dto/CreateReservationDTO';
+import { IncomeDTO } from '../dto/IncomeDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+  incomeReport(incomeDto: IncomeDTO) {
+    return this._http.post<number>(`${config.baseUrl}${this._reservationsUrl}/income`, incomeDto);
+  }
 
 
   constructor(private _http: HttpClient) { }

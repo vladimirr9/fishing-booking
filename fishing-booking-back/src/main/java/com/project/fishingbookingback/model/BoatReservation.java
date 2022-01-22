@@ -34,6 +34,11 @@ public class BoatReservation extends Reservation {
         return this.boat.getName();
     }
 
+    @Override
+    public Long getEntityId() {
+        return boat.getId();
+    }
+
     public Boat getBoat() {
         return boat;
     }

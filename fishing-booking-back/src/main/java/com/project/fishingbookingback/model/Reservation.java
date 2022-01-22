@@ -64,6 +64,8 @@ public abstract class Reservation {
 
     abstract public String getEntityName();
 
+    abstract public Long getEntityId();
+
     public boolean overlaps(LocalDateTime time) {
         return !time.isBefore(startDate) && !time.isAfter(endDate);
     }

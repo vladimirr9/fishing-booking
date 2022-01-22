@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.service;
 
+import com.project.fishingbookingback.dto.request.IncomeRequestDTO;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.exception.UnrecognizedTypeException;
@@ -212,5 +213,15 @@ public class ReservationService {
         Reservation reservation = findByID(id);
         reservation.setComplaint(null);
         reservationRepository.save(reservation);
+    }
+
+    public double income(IncomeRequestDTO dto) {
+        double income = 0;
+        for (Reservation reservation: getAll(dto.getEmail())) {
+            if(reservation.getStartDate().isAfter(dto.getFrom()) && reservation.getEndDate().isBefore(dto.getTo())) {
+                income += reservation.getPrice();
+            }
+        }
+        return income;
     }
 }

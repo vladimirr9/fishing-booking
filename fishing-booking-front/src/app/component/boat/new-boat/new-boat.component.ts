@@ -40,6 +40,9 @@ export class NewBoatComponent implements OnInit {
   fromTime: any
   toTime: any
 
+  
+  averageMark: string = ""
+
   constructor(private fb: FormBuilder,
     private boatService: BoatService,
     private router: Router,
@@ -109,6 +112,7 @@ export class NewBoatComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
           this.services = data.additionalService
+          this.averageMark = data.averageMark == 0 ? "Unrated" : `${data.averageMark}/5`
         })
 
         this.boatService.getPromotions(id).subscribe((data) => {

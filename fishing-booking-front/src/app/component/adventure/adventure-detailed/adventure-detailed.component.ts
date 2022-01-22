@@ -35,6 +35,7 @@ export class AdventureDetailedComponent implements OnInit {
   chosenDate: Date = new Date()
   endingDate: Date = new Date();
   subscribed: boolean = false;
+  averageMark: string = ""
   constructor(private route: ActivatedRoute,private subscribeService: SubscriptionService ,private adventureService: AdventureService, public authService: AuthService, private dialog: MatDialog,private storageService: StorageService) { }
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class AdventureDetailedComponent implements OnInit {
       this.services = data.additionalService
       this.pictures = data.pictures
       this.map.getView().setCenter(transform([data.address.longitude, data.address.latitude], 'EPSG:4326', 'EPSG:3857'));
+      this.averageMark = data.averageMark == 0 ? "Unrated" : `${data.averageMark}/5`
 
 
       this.finishedLoading = true
