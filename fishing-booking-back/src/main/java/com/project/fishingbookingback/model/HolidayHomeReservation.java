@@ -33,6 +33,11 @@ public class HolidayHomeReservation extends Reservation {
         return holidayHome.getName();
     }
 
+    @Override
+    public Long getEntityId() {
+        return holidayHome.getId();
+    }
+
     public HolidayHome getHolidayHome() {
         return holidayHome;
     }
