@@ -18,11 +18,14 @@ export class ReserveBoatComponent implements OnInit {
   available: boolean = true;
   statusMessage: string = "";
   _MS_PER_DAY: number = 1000 * 60 * 60 * 24;
+  services: any;
+  servicePrice: number =0;
   activatedServices: number[]=[]
 
   constructor(private boatService: BoatService,private localStorage: StorageService,private reservationService: ReservationService) { }
 
   ngOnInit(): void {
+    this.services = this.boat.additionalService;
   }
 
 
@@ -41,7 +44,7 @@ export class ReserveBoatComponent implements OnInit {
     let result = this.dateDiffInDays()*this.personNum*this.boat.pricePerDay;
     if(result<=0){alert("Please enter valid dates!");return;}
 
-    this.totalPrice = this.dateDiffInDays()*this.personNum*this.boat.pricePerDay;
+    this.totalPrice = this.dateDiffInDays()*this.personNum*this.boat.pricePerDay+this.servicePrice;
   }
 
   
@@ -65,6 +68,20 @@ export class ReserveBoatComponent implements OnInit {
     error=>{
       this.available=false;
       this.statusMessage="Unavailable period!"});
+  }
+
+  isServiceActivated(serviceId: any){
+    return this.activatedServices.includes(serviceId);
+  }
+
+  addService(service: any){
+    this.activatedServices.push(service.id);
+    this.servicePrice+=service.price;
+  }
+
+  cancelService(service: any){
+    this.activatedServices = this.activatedServices.filter(function(item) {return item != service.id})
+    this.servicePrice-=service.price;
   }
 
 
