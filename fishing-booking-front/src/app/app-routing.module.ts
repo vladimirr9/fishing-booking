@@ -33,6 +33,7 @@ import { BoatOwnerCalendarPageComponent } from './component/home/boat-owner-home
 import { HomeOwnerCalendarPageComponent } from './component/home/owner-home/home-owner-calendar-page/home-owner-calendar-page.component';
 import { ReviewsPageComponent } from './component/home/admin-home/reviews-page/reviews-page.component';
 import { ComplaintsPageComponent } from './component/home/admin-home/complaints-page/complaints-page.component';
+import { IncomeReportComponent } from './component/income-report/income-report.component';
 
 
 
@@ -75,7 +76,8 @@ const routes: Routes = [ { path: 'login', component: LoginComponent },
                          { path: 'boats/:id', component:  BoatDetailsComponent},
                          { path: 'boats/:id/:startDate/:endDate', component:  BoatDetailsComponent},
                          { path: 'holiday-home/:id',component: HolidayHomeDetailsComponent},
-                         { path: 'holiday-home/:id/:startDate/:endDate',component: HolidayHomeDetailsComponent}
+                         { path: 'holiday-home/:id/:startDate/:endDate',component: HolidayHomeDetailsComponent},
+                         { path: 'income', component: IncomeReportComponent}
                         ];
 
 @NgModule({

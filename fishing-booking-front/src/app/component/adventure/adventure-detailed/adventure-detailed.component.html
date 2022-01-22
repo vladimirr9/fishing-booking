@@ -15,8 +15,8 @@
   <h2 class="owner-name">{{adventure.fishingInstructor.firstName}} {{adventure.fishingInstructor.lastName}}</h2>
   <h2>Hourly Price: {{adventure.hourlyPrice}}$</h2>
   <div>Cancellation Fee:{{adventure.cancellationFee}}%</div>
-  <div>Maximum number of people: {{adventure.maxPeople}}
-  </div>
+  <div>Maximum number of people: {{adventure.maxPeople}}</div>
+  <div>Average mark: {{averageMark}}</div>
   <span class="promotions">
   <h3 *ngIf="!isClient()">Promotions</h3>
   <input *ngIf="authService.isFishingInstructor()" type="image" class="image" (click)="addPromotion()"
