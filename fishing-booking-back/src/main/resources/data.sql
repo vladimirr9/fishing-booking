@@ -77,9 +77,9 @@ VALUES (2, 'Everything you will need will be provided to you', 'I''m a seasoned 
 
 --RESERVATIONS
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id, SERVICE_FEE)
-VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, TRUE, 4, 1, 0.15);
+VALUES (1, '2022-01-17 18:47:52.69', '2022-01-17 20:52:52.69', 200, TRUE, 4, 1, 0.15);
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id, SERVICE_FEE)
-VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, FALSE, 4, 1, 0.15);
+VALUES (2, '2022-01-21 18:47:52.69', '2022-01-21 20:52:52.69', 200, FALSE, 4, 1, 0.15);
 
 INSERT INTO HOLIDAY_HOME_RESERVATION (id, start_date, end_date, price, approved, client_id, holidayhome_id, SERVICE_FEE)
 VALUES (3, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, TRUE, 4, 1, 0.15);
@@ -103,11 +103,11 @@ VALUES (1, 'Wasnt too good', 1);
 
 --PERIODS
 INSERT INTO AVAILABLE_PERIOD(id, from_time, to_time)
-VALUES (1, '2022-02-05 18:47:52.69', '2022-02-07 20:52:52.69');
+VALUES (1, '2022-02-05 18:47:52.69', '2022-02-08 20:52:52.69');
 INSERT INTO AVAILABLE_PERIOD(id, from_time, to_time)
-VALUES (2, '2022-02-05 18:47:52.69', '2022-02-07 20:52:52.69');
+VALUES (2, '2022-02-05 18:47:52.69', '2022-02-08 20:52:52.69');
 INSERT INTO AVAILABLE_PERIOD(id, from_time, to_time)
-VALUES (3, '2022-02-05 18:47:52.69', '2022-02-07 20:52:52.69');
+VALUES (3, '2022-02-05 18:47:52.69', '2022-02-08 20:52:52.69');
 
 --INSTRUCTOR AVAILABLE PERIOD
 INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id, available_periods_id)

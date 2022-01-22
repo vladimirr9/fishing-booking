@@ -16,7 +16,7 @@
             </mat-select>
         </mat-form-field>
         
-        <mat-checkbox *ngIf="!isRouteReservation()" type="checkbox"
+        <mat-checkbox *ngIf="!isRouteReservation() && isClient()" type="checkbox"
         [checked]="subscribed"
         (change)="subscribed = !subscribed" style="margin-left:15px;" class="example-margin">Subscribed</mat-checkbox>
       
