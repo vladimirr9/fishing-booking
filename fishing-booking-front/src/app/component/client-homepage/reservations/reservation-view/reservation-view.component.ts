@@ -79,6 +79,7 @@ export class ReservationViewComponent implements OnInit {
         this.reservations = this.reservations.filter(reservation => reservation.id != id );
     },error=>{
         alert("Removed reservation!");
+        this.reservations = this.reservations.filter(reservation => reservation.id != id );
     });
   }
 }
