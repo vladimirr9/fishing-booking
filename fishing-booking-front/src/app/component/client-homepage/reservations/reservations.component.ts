@@ -4,6 +4,7 @@ import { ReservationDTO } from 'src/app/dto/ReservationDTO';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { FilterComponent } from '../boats/filter/filter.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-reservations',
@@ -12,7 +13,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 })
 export class ReservationsComponent implements OnInit,AfterViewInit {
 
-  constructor(private _reservationsService: ReservationService) { }
+  constructor(private _reservationsService: ReservationService,private storageService:StorageService) { }
 
   reservations: ReservationDTO[] = [];
   filteredReservations: ReservationDTO[] = [];
@@ -28,7 +29,7 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this._reservationsService.getReservations().subscribe((data: ReservationDTO[])=>{
+    this._reservationsService.getReservationsForClient(this.storageService.getUsername()).subscribe((data: ReservationDTO[])=>{
       this.reservations = data;
       this.filteredReservations = data;
     });

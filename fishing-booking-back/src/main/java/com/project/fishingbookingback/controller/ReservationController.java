@@ -57,6 +57,15 @@ public class ReservationController {
         return reservationDTOS;
     }
 
+    @GetMapping(value = "/{clientUsername}")
+    public List<ReservationDTO> getAllForClient(@PathVariable String clientUsername) {
+        List<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for (Reservation reservation : reservationService.getAllForClient(clientUsername))
+            reservationDTOS.add(reservationMapper.toDTO(reservation));
+
+        return reservationDTOS;
+    }
+
     @PutMapping(value = "/{id}/reports")
     public ResponseEntity<Report> addReport(@Valid @RequestBody ReportRequestDTO reportRequestDTO, @PathVariable Long id) {
         Report report = reportMapper.toModel(reportRequestDTO);
