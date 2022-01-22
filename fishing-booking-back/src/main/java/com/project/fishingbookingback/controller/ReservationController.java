@@ -61,6 +61,15 @@ public class ReservationController {
     @PostMapping("/income")
     public ResponseEntity<Double> income(@Valid @RequestBody IncomeRequestDTO dto) {
         return ResponseEntity.ok(reservationService.income(dto));
+	}
+	
+    @GetMapping(value = "/{clientUsername}")
+    public List<ReservationDTO> getAllForClient(@PathVariable String clientUsername) {
+        List<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for (Reservation reservation : reservationService.getAllForClient(clientUsername))
+            reservationDTOS.add(reservationMapper.toDTO(reservation));
+
+        return reservationDTOS;
     }
 
     @PutMapping(value = "/{id}/reports")

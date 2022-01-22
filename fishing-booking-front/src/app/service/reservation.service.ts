@@ -23,6 +23,12 @@ export class ReservationService {
     return this._http.get<ReservationDTO[]>(`${config.baseUrl}${this._reservationsUrl}`, {params: params});
   }
 
+  getReservationsForClient(clientUsername: string): Observable<ReservationDTO[]>{
+    return this._http.get<ReservationDTO[]>(`${config.baseUrl}${this._reservationsUrl}/${clientUsername}`);
+  }
+
+
+
   putReport(reservationId: number, report: any) {
     return this._http.put(`${config.baseUrl}${this._reservationsUrl}/${reservationId}/reports`, report)
   }

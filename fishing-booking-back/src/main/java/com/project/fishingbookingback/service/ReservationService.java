@@ -226,5 +226,13 @@ public class ReservationService {
             }
         }
         return income;
+	}
+	
+    public List<Reservation> getAllForClient(String clientEmail) {
+        List<Reservation> reservations = reservationRepository.findAll();
+        if (clientEmail != null)
+            reservations.removeIf(n -> (!n.getClient().getEmail().equals(clientEmail)));
+
+        return reservations;
     }
 }
