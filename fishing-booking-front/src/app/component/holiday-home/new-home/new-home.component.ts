@@ -38,6 +38,8 @@ export class NewHomeComponent implements OnInit {
   toTime: any
   services: any
 
+  averageMark: string = ""
+
   constructor(private fb: FormBuilder,
     private holidayHomeService: HolidayHomeService,
     private router: Router,
@@ -81,6 +83,7 @@ export class NewHomeComponent implements OnInit {
           this.exterior = data.exterior
           this.interior = data.interior
           this.services = data.additionalService
+          this.averageMark = data.averageMark == 0 ? "Unrated" : `${data.averageMark}/5`
         })
       }
       this.holidayHomeService.getPromotions(id).subscribe((data) => {

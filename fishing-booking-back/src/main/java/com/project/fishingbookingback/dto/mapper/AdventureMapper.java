@@ -2,6 +2,7 @@ package com.project.fishingbookingback.dto.mapper;
 
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
+import com.project.fishingbookingback.dto.response.AdventureResponseDTO;
 import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.FishingAdventure;
@@ -53,7 +54,7 @@ public class AdventureMapper {
     public ClientsAdventureViewDTO toClientAdventureDTO(FishingAdventure adventure) {
         ClientsAdventureViewDTO returnDto = new ClientsAdventureViewDTO();
         returnDto.setId(adventure.getId());
-        if(adventure.getPictures().isEmpty())
+        if (adventure.getPictures().isEmpty())
             returnDto.setImageUrl("No image");
         else
             returnDto.setImageUrl(adventure.getPictures().get(0).getLink());
@@ -65,5 +66,26 @@ public class AdventureMapper {
         returnDto.setMark(adventure.getAverageMark());
         returnDto.setPrice(adventure.getHourlyPrice());
         return returnDto;
+    }
+
+    public AdventureResponseDTO toAdventureResponseDTO(FishingAdventure fa, boolean occupied) {
+        return new AdventureResponseDTO(fa.getId(),
+                fa.getName(),
+                fa.getDescription(),
+                fa.getBiography(),
+                fa.getPictures(),
+                fa.getMaxPeople(),
+                fa.getRulesOfConduct(),
+                fa.getAvailableEquipment(),
+                fa.getCancellationFee(),
+                fa.getAddress(),
+                fa.getReservations(),
+                null,
+                fa.getAdditionalService(),
+                fa.getFishingInstructor(),
+                fa.getSubscribedClients(),
+                fa.getHourlyPrice(),
+                fa.getAverageMark(),
+                occupied);
     }
 }

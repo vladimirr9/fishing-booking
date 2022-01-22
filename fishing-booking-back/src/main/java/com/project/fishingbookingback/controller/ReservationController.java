@@ -3,6 +3,7 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.ReportMapper;
 import com.project.fishingbookingback.dto.mapper.ReservationMapper;
 import com.project.fishingbookingback.dto.request.CreateReservationDTO;
+import com.project.fishingbookingback.dto.request.IncomeRequestDTO;
 import com.project.fishingbookingback.dto.request.ReportAnswerRequestDTO;
 import com.project.fishingbookingback.dto.request.ReportRequestDTO;
 import com.project.fishingbookingback.dto.response.ReservationDTO;
@@ -57,6 +58,11 @@ public class ReservationController {
         return reservationDTOS;
     }
 
+    @PostMapping("/income")
+    public ResponseEntity<Double> income(@Valid @RequestBody IncomeRequestDTO dto) {
+        return ResponseEntity.ok(reservationService.income(dto));
+	}
+	
     @GetMapping(value = "/{clientUsername}")
     public List<ReservationDTO> getAllForClient(@PathVariable String clientUsername) {
         List<ReservationDTO> reservationDTOS = new ArrayList<>();

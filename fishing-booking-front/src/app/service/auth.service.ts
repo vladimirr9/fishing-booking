@@ -37,6 +37,10 @@ export class AuthService {
     return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR"
   }
 
+  hasIncome() : boolean {
+    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR" || this.storageService.getRole() === "ROLE_HOME_OWNER" ||this.storageService.getRole() === "ROLE_BOAT_OWNER"
+  }
+
   isAdmin() : boolean {
     return this.storageService.getRole() === "ROLE_ADMIN"
   }

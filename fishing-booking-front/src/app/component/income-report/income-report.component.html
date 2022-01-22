@@ -1,0 +1,20 @@
+<div class="middle-container">
+    <h3>
+      Get income report
+    </h3>
+
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="Start Date" [(ngModel)]="fromTime">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="End Date" [(ngModel)]="toTime">
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" class="button" (click)="getIncome()">Get</button>
+    
+    <p>
+        Income: ${{income}}
+    </p>
+    
+</div>

@@ -2,22 +2,17 @@ package com.project.fishingbookingback.controller;
 
 import com.project.fishingbookingback.dto.mapper.BoatMapper;
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
+import com.project.fishingbookingback.dto.response.BoatResponseDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
+import com.project.fishingbookingback.exception.EntityOccupiedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.BoatService;
+import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -30,17 +25,22 @@ import java.util.List;
 public class BoatController {
     private final BoatService boatService;
     private final BoatMapper boatMapper;
+    private final ReservationService reservationService;
 
-    public BoatController(BoatService boatService, BoatMapper boatMapper) {
+    public BoatController(BoatService boatService, BoatMapper boatMapper, ReservationService reservationService) {
         this.boatService = boatService;
         this.boatMapper = boatMapper;
+        this.reservationService = reservationService;
     }
 
     @GetMapping()
-    public ResponseEntity<List<Boat>> getBoatsForOwner(@RequestParam(required = false) String ownerUsername,
-                                                       @RequestParam(required = false) String search) {
-        ;
-        return ResponseEntity.ok(boatService.getBoatsForOwner(ownerUsername, search));
+    public ResponseEntity<List<BoatResponseDTO>> getBoatsForOwner(@RequestParam(required = false) String ownerUsername,
+                                                                  @RequestParam(required = false) String search) {
+        List<BoatResponseDTO> boatResponseDTOS = new ArrayList<>();
+        for (Boat boat : boatService.getBoatsForOwner(ownerUsername, search)) {
+            boatResponseDTOS.add(boatMapper.toBoatResponseDTO(boat, reservationService.isBoatOccupied(boat.getId())));
+        }
+        return ResponseEntity.ok(boatResponseDTOS);
     }
 
     @GetMapping(value = "/client")
@@ -63,7 +63,6 @@ public class BoatController {
     }
 
 
-
     @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
     @PostMapping()
     public ResponseEntity<Boat> create(@Valid @RequestBody NewBoatDTO dto) {
@@ -81,6 +80,7 @@ public class BoatController {
     @PreAuthorize("hasRole('ROLE_BOAT_OWNER')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Boat> update(@Valid @RequestBody NewBoatDTO dto, @PathVariable Long id) {
+        if (reservationService.isBoatOccupied(id)) throw new EntityOccupiedException();
         Boat newBoat = boatService.update(id, dto);
         return (ResponseEntity<Boat>) ResponseEntity.ok(newBoat);
     }
@@ -93,6 +93,7 @@ public class BoatController {
     @PreAuthorize("hasRole('ROLE_BOAT_OWNER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteBoat(@PathVariable Long id) {
+        if (reservationService.isBoatOccupied(id)) throw new EntityOccupiedException();
         boatService.deleteBoat(id);
         return ResponseEntity.noContent().build();
     }

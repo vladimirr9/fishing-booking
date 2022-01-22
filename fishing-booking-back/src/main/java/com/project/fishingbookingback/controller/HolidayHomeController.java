@@ -3,22 +3,17 @@ package com.project.fishingbookingback.controller;
 import com.project.fishingbookingback.dto.mapper.HolidayHomeMapper;
 import com.project.fishingbookingback.dto.request.NewHolidayHomeDTO;
 import com.project.fishingbookingback.dto.response.ClientsHolidayHomeDTO;
+import com.project.fishingbookingback.dto.response.HomeResponseDTO;
+import com.project.fishingbookingback.exception.EntityOccupiedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.service.HolidayHomeService;
+import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -31,10 +26,12 @@ import java.util.List;
 public class HolidayHomeController {
     private HolidayHomeService holidayHomeService;
     private HolidayHomeMapper holidayHomeMapper;
+    private ReservationService reservationService;
 
-    public HolidayHomeController(HolidayHomeService holidayHomeService, HolidayHomeMapper holidayHomeMapper) {
+    public HolidayHomeController(HolidayHomeService holidayHomeService, HolidayHomeMapper holidayHomeMapper, ReservationService reservationService) {
         this.holidayHomeService = holidayHomeService;
         this.holidayHomeMapper = holidayHomeMapper;
+        this.reservationService = reservationService;
     }
 
     @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
@@ -54,15 +51,20 @@ public class HolidayHomeController {
     @PreAuthorize("hasRole('ROLE_HOME_OWNER')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<HolidayHome> update(@Valid @RequestBody NewHolidayHomeDTO updatedHolidayHomeDTO, @PathVariable Long id) {
+        if (reservationService.isHomeOccupied(id)) throw new EntityOccupiedException();
         HolidayHome newHolidayHome = holidayHomeService.update(id, updatedHolidayHomeDTO);
         return (ResponseEntity<HolidayHome>) ResponseEntity.ok(newHolidayHome);
     }
 
     @GetMapping()
-    public ResponseEntity<List<HolidayHome>> getHolidayHomes(@RequestParam(required = false) String homeOwnerUsername,
-                                                             @RequestParam(required = false) String holidayHomeName) {
-        ;
-        return ResponseEntity.ok(holidayHomeService.getHolidayHomes(homeOwnerUsername, holidayHomeName));
+    public ResponseEntity<List<HomeResponseDTO>> getHolidayHomes(@RequestParam(required = false) String homeOwnerUsername,
+                                                                 @RequestParam(required = false) String holidayHomeName) {
+        List<HomeResponseDTO> homeResponseDTOS = new ArrayList<>();
+        List<HolidayHome> holidayHomes = holidayHomeService.getHolidayHomes(homeOwnerUsername, holidayHomeName);
+        for (HolidayHome home : holidayHomes) {
+            homeResponseDTOS.add(holidayHomeMapper.toHomeResponseDTO(home, reservationService.isHomeOccupied(home.getId())));
+        }
+        return ResponseEntity.ok(homeResponseDTOS);
     }
 
     @Transactional
@@ -94,6 +96,7 @@ public class HolidayHomeController {
     @PreAuthorize("hasRole('ROLE_HOME_OWNER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteHolidayHome(@PathVariable Long id) {
+        if (reservationService.isHomeOccupied(id)) throw new EntityOccupiedException();
         holidayHomeService.deleteHolidayHome(id);
         return ResponseEntity.noContent().build();
     }
