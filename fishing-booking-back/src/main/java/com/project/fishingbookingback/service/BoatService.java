@@ -39,6 +39,7 @@ public class BoatService {
     }
 
     public List<Boat> getAvailableBoats(LocalDateTime from, LocalDateTime to) {
+        if(from.isAfter(to)) throw new NotAllowedException();
         List<Boat> availableBoats = new ArrayList<>();
         for (Boat boat : boatRepository.findAll())
             if (isBoatAvailable(boat, from, to))
