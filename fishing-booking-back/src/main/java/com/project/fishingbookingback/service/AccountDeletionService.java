@@ -6,6 +6,7 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.AccountDeletion;
 import com.project.fishingbookingback.repository.AccountDeletionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,15 +63,18 @@ public class AccountDeletionService {
         }
     }
 
+    @Transactional
     public void approve(Long id, String reason) {
-        AccountDeletion accountDeletion = findOne(id);
+        AccountDeletion accountDeletion = repository.findOneById(id);
         emailService.sendSimpleMessage(accountDeletion.getEmail(), "Account deletion approved", reason);
         userService.deleteUser(accountDeletion.getEmail());
         repository.deleteById(id);
     }
 
+    @Transactional
     public void deny(Long id, String reason) {
-        AccountDeletion accountDeletion = findOne(id);
+        AccountDeletion accountDeletion = repository.findOneById(id);
         emailService.sendSimpleMessage(accountDeletion.getEmail(), "Account deletion denied", reason);
+        repository.deleteById(id);
     }
 }

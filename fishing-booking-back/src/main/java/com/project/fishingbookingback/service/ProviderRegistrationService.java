@@ -7,6 +7,7 @@ import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.ProviderRegistrationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,15 +43,17 @@ public class ProviderRegistrationService {
         return repository.findByEmail(email) != null;
     }
 
+    @Transactional
     public void approve(Long id) {
-        ProviderRegistration providerRegistration = findById(id);
+        ProviderRegistration providerRegistration = repository.findOneById(id);
         User newUser = userService.createUser(providerRegistration);
         emailService.sendSimpleMessage(newUser.getEmail(), "Fishing Account Approved", "Your fishing booking account has been approved");
         repository.deleteById(id);
     }
 
+    @Transactional
     public void deny(Long id, String reason) {
-        ProviderRegistration providerRegistration = findById(id);
+        ProviderRegistration providerRegistration = repository.findOneById(id);
         emailService.sendSimpleMessage(providerRegistration.getEmail(), "Fishing Account Denied", "The reason why your account has been denied:\n" + reason);
         repository.deleteById(id);
     }

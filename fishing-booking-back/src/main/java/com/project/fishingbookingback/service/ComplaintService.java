@@ -6,6 +6,7 @@ import com.project.fishingbookingback.model.Complaint;
 import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.repository.ComplaintRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,8 +36,9 @@ public class ComplaintService {
         return complaintRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Complaint.class.getSimpleName()));
     }
 
+    @Transactional
     public void answerComplaint(Long id, String message) {
-        Complaint complaint = findByID(id);
+        Complaint complaint = complaintRepository.findOneById(id);
         emailService.sendSimpleMessage(complaint.getReservation().getOwnerEmail(), "Complaint Resolved", message);
         emailService.sendSimpleMessage(complaint.getReservation().getClient().getEmail(), "Complaint Resolved", message);
         reservationService.answerComplaint(complaint.getReservation().getId());
