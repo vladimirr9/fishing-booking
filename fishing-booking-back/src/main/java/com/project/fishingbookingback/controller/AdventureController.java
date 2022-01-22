@@ -132,12 +132,14 @@ public class AdventureController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PostMapping(value = "/{id}/promotions")
     public ResponseEntity<FishingPromotion> addPromotion(@Valid @RequestBody FishingPromotionDTO promotionDTO, @PathVariable Long id) {
         FishingPromotion fishingPromotion = promotionMapper.toModel(promotionDTO);
         return ResponseEntity.ok(adventureService.addPromotion(id, fishingPromotion));
     }
 
+    @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @DeleteMapping(value = "/{id}/promotions/{id_promotion}")
     public ResponseEntity<HttpStatus> deletePromotion(@PathVariable Long id, @PathVariable Long id_promotion) {
         adventureService.deletePromotion(id, id_promotion);

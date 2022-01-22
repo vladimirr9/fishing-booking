@@ -1,7 +1,6 @@
 package com.project.fishingbookingback.service;
 
 import com.project.fishingbookingback.exception.EntityNotFoundException;
-import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Boat;
 import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.repository.BoatRepository;
@@ -15,9 +14,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BoatServiceTest {
@@ -48,6 +45,7 @@ class BoatServiceTest {
         when(boatRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(() -> boatService.findByID(1L));
+        
     }
 
     @Test
