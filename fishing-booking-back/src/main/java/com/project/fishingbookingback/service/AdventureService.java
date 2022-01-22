@@ -5,6 +5,7 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.AdventureRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,12 @@ public class AdventureService {
 
     public FishingAdventure findByID(Long id) {
         return adventureRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(FishingAdventure.class.getSimpleName()));
+    }
+    @Transactional(readOnly = true)
+    public FishingAdventure findOneById(Long id){
+        FishingAdventure fishingAdventure = adventureRepository.findOneById(id);
+        if(fishingAdventure==null) throw new EntityNotFoundException(FishingAdventure.class.getSimpleName());
+        return fishingAdventure;
     }
 
     public FishingAdventure addService(Long id, AdditionalService additionalService) {

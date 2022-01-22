@@ -2,6 +2,7 @@ package com.project.fishingbookingback.exception.handler;
 
 
 import com.project.fishingbookingback.exception.*;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +19,14 @@ public class ControllerExceptionHandler {
                 ex.getMessage(),
                 new Date());
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(PessimisticLockingFailureException.class)
+    public ResponseEntity<ErrorMessage> dataAlreadyLocked(EntityAlreadyExistsException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                ex.getMessage(),
+                new Date());
+        return new ResponseEntity<>(message, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(EntityAlreadyExistsException.class)

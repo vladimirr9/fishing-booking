@@ -85,7 +85,7 @@ public class ReservationService {
         switch (type) {
             case "ADVENTURE" -> {
                 var adventureReservation = new AdventureReservation();
-                FishingAdventure adventure = adventureService.findByID(entityId);
+                FishingAdventure adventure = adventureService.findOneById(entityId);
                 if (!isPromotion)
                     availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(), from, to);
                 adventureReservation.setAdventure(adventure);
@@ -96,7 +96,7 @@ public class ReservationService {
             }
             case "HOLIDAY_HOME" -> {
                 var holidayReservation = new HolidayHomeReservation();
-                HolidayHome home = holidayHomeService.findByID(entityId);
+                HolidayHome home = holidayHomeService.findOneById(entityId);
                 if (!isPromotion)
                     holidayHomeService.reserveHomePeriod(entityId, from, to);
                 holidayReservation.setHolidayHome(home);
@@ -107,7 +107,7 @@ public class ReservationService {
             }
             case "BOAT" -> {
                 var boatReservation = new BoatReservation();
-                Boat boat = boatService.findByID(entityId);
+                Boat boat = boatService.findOneById(entityId);
                 if (!isPromotion)
                     boatService.reserveBoatPeriod(entityId, from, to);
                 boatReservation.setBoat(boat);
