@@ -130,7 +130,7 @@ export class NewBoatComponent implements OnInit {
       this.availablePeriodService.postPeriodBoatOwner(availablePeriod, this.route.snapshot.params['id']).subscribe((data: AvailablePeriod) => {
          alert("Successfully added!")
       }, (error) => {
-        alert("Error.")
+        alert(error.error.message)
       })
     }
 

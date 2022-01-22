@@ -250,7 +250,6 @@ export class HomeOwnerCalendarPageComponent implements OnInit {
       }
     }
     else {
-      alert("2")
       action = {
         label: '',
         onClick: () => { void (0) }

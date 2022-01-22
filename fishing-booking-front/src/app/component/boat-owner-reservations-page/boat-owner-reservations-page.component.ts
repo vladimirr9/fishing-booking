@@ -125,7 +125,7 @@ export class BoatOwnerReservationsPageComponent implements OnInit {
             })
           },
           (error)=> {
-            alert("Error.");
+            alert(error.error.message);
           });
       }
     });

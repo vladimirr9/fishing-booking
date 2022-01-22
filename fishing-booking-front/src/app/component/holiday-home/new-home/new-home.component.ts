@@ -254,7 +254,7 @@ export class NewHomeComponent implements OnInit {
       this.availablePeriodService.postPeriodHomeOwner(availablePeriod, this.route.snapshot.params['id']).subscribe((data: AvailablePeriod) => {
          alert("Successfully added!")
       }, (error) => {
-        alert("Error.")
+        alert(error.error.message)
       })
     }
 

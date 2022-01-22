@@ -125,7 +125,7 @@ export class HomeOwnerReservationsPageComponent implements OnInit {
             alert("Reservation created.");
           },
           (error)=> {
-            alert("Error.");
+            alert("Reservation could not be created!");
           });
       }
     });

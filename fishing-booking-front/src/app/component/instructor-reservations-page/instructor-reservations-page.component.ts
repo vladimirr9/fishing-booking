@@ -102,7 +102,6 @@ export class InstructorReservationsPageComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
     const dialogRef = this.dialog.open(NewReservationDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
@@ -126,7 +125,7 @@ export class InstructorReservationsPageComponent implements OnInit {
 
           },
           (error)=> {
-            alert("Error.");
+            alert("Reservation could not be created!");
           });
       }
     });

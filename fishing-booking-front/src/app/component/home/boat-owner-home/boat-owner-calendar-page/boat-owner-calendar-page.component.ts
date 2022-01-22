@@ -226,7 +226,6 @@ export class BoatOwnerCalendarPageComponent implements OnInit {
   addReservationToCalendar(id: any, fromTime: any, toTime: any, name: string, reportPresent: any) {
     let action: any
     if (!reportPresent && (new Date(Date.parse(toTime))) < (new Date())) {
-      alert("1")
       action = {
         label: '<i class="fas fa-edit"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -251,7 +250,6 @@ export class BoatOwnerCalendarPageComponent implements OnInit {
       }
     }
     else {
-      alert("2")
       action = {
         label: '',
         onClick: () => { void (0) }
