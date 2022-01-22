@@ -16,6 +16,7 @@ import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.HolidayHomeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,6 +49,12 @@ public class HolidayHomeService {
 
     public HolidayHome findByID(Long id) {
         return holidayHomeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(HolidayHome.class.getSimpleName()));
+    }
+    @Transactional(readOnly = true)
+    public HolidayHome findOneById(Long id){
+        HolidayHome home = holidayHomeRepository.findOneById(id);
+        if(home == null) throw new EntityNotFoundException(HolidayHome.class.getSimpleName());
+        return home;
     }
 
     public List<HolidayHome> getHolidayHomes(String homeOwnerUsername, String holidayHomeName) {

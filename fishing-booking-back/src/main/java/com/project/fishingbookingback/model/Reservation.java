@@ -38,11 +38,17 @@ public abstract class Reservation {
     @ManyToMany(cascade = CascadeType.DETACH)
     private List<AdditionalService> additionalServices;
 
+    private double serviceFee;
+
+    public void setServiceFee(double serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
     public Reservation() {
     }
 
 
-    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Client client) {
+    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Client client, double serviceFee) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,6 +56,11 @@ public abstract class Reservation {
         this.report = null;
         this.approved = approved;
         this.client = client;
+        this.serviceFee = serviceFee;
+    }
+
+    public double getServiceFee() {
+        return serviceFee;
     }
 
     public List<AdditionalService> getAdditionalServices() {

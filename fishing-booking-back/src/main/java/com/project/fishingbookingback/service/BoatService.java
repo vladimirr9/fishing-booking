@@ -16,6 +16,7 @@ import com.project.fishingbookingback.model.Role;
 import com.project.fishingbookingback.model.User;
 import com.project.fishingbookingback.repository.BoatRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -96,6 +97,13 @@ public class BoatService {
 
     public Boat findByID(Long id) {
         return boatRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Boat.class.getSimpleName()));
+    }
+
+    @Transactional(readOnly = true)
+    public Boat findOneById(Long id){
+        Boat boat = boatRepository.findOneById(id);
+        if(boat==null) throw new EntityNotFoundException(Boat.class.getSimpleName());
+        return boat;
     }
 
     public Boat update(long id, NewBoatDTO dto) {

@@ -1,5 +1,6 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -79,6 +80,10 @@ public class Boat {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribedBoats")
     @JsonManagedReference
     private List<Client> subscribedClients;
+
+    @OneToMany(mappedBy = "boat", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<BoatPromotion> boatPromotions;
 
     public List<Client> getSubscribedClients() {
         return subscribedClients;
@@ -328,21 +333,21 @@ public class Boat {
 
     public void addPicture(Boolean is_interior, Picture picture) {
         if (is_interior) {
-            if(interior == null) {
+            if (interior == null) {
                 interior = new ArrayList<Picture>();
             }
             interior.add(picture);
         } else {
-            if(exterior == null) {
+            if (exterior == null) {
                 exterior = new ArrayList<Picture>();
             }
             exterior.add(picture);
         }
     }
 
-    public boolean isClientSubscribed(String clientUsername){
-        for(Client client : getSubscribedClients())
-            if(client.getEmail().equals(clientUsername))
+    public boolean isClientSubscribed(String clientUsername) {
+        for (Client client : getSubscribedClients())
+            if (client.getEmail().equals(clientUsername))
                 return true;
         return false;
     }

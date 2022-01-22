@@ -6,7 +6,6 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.exception.UnrecognizedTypeException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.ReservationRepository;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,13 +21,14 @@ public class ReservationService {
     private final UserService userService;
     private final BoatService boatService;
     private final AdventureService adventureService;
-    private final AvailablePeriodService availablePeriodService;
+
     private final LoggedUserService loggedUserService;
     private final AvailableAdventureService availableAdventureService;
     private final AdditionalServiceService additionalServiceService;
+    private final FeeService feeService;
 
 
-    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService, AvailableAdventureService availableAdventureService, AdditionalServiceService additionalServiceService) {
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, LoggedUserService loggedUserService, AvailableAdventureService availableAdventureService, AdditionalServiceService additionalServiceService, FeeService feeService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
@@ -36,12 +36,11 @@ public class ReservationService {
         this.userService = userService;
         this.boatService = boatService;
         this.adventureService = adventureService;
-        this.availablePeriodService = availablePeriodService;
         this.loggedUserService = loggedUserService;
         this.availableAdventureService = availableAdventureService;
         this.additionalServiceService = additionalServiceService;
+        this.feeService = feeService;
     }
-
 
     public List<Reservation> getAll(String ownerEmail) {
         List<Reservation> reservations = reservationRepository.findAll();
@@ -66,6 +65,7 @@ public class ReservationService {
         reservation.setStartDate(from);
         reservation.setEndDate(to);
         reservation.setApproved(false);
+        reservation.setServiceFee(feeService.get().getFee());
         setAdittionalServices(reservation, additionalServicesIds);
         reservationRepository.save(reservation);
         emailService.sendSimpleMessage(clientUsername, "Reservation", "Reservation request successfully sent!");
@@ -85,7 +85,7 @@ public class ReservationService {
         switch (type) {
             case "ADVENTURE" -> {
                 var adventureReservation = new AdventureReservation();
-                FishingAdventure adventure = adventureService.findByID(entityId);
+                FishingAdventure adventure = adventureService.findOneById(entityId);
                 if (!isPromotion)
                     availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(), from, to);
                 adventureReservation.setAdventure(adventure);
@@ -96,7 +96,7 @@ public class ReservationService {
             }
             case "HOLIDAY_HOME" -> {
                 var holidayReservation = new HolidayHomeReservation();
-                HolidayHome home = holidayHomeService.findByID(entityId);
+                HolidayHome home = holidayHomeService.findOneById(entityId);
                 if (!isPromotion)
                     holidayHomeService.reserveHomePeriod(entityId, from, to);
                 holidayReservation.setHolidayHome(home);
@@ -107,7 +107,7 @@ public class ReservationService {
             }
             case "BOAT" -> {
                 var boatReservation = new BoatReservation();
-                Boat boat = boatService.findByID(entityId);
+                Boat boat = boatService.findOneById(entityId);
                 if (!isPromotion)
                     boatService.reserveBoatPeriod(entityId, from, to);
                 boatReservation.setBoat(boat);
@@ -217,7 +217,7 @@ public class ReservationService {
         reservation.setComplaint(null);
         reservationRepository.save(reservation);
     }
-    
+
     public boolean isAdventureOccupied(Long fishingAdventureId) {
         LocalDateTime now = LocalDateTime.now();
         for (Reservation reservation : reservationRepository.findAll()) {
@@ -256,11 +256,22 @@ public class ReservationService {
 
     public double income(IncomeRequestDTO dto) {
         double income = 0;
-        for (Reservation reservation : getAll(dto.getEmail())) {
+        String email = loggedUserService.getUsername();
+        User user = userService.findByEmail(email);
+        boolean admin = false;
+        List<Reservation> reservations;
+        if (user.getRole() == Role.ROLE_ADMIN) {
+            reservations = getAll();
+            admin = true;
+        } else {
+            reservations = getAll(dto.getEmail());
+        }
+        for (Reservation reservation : reservations) {
             if (reservation.getStartDate().isAfter(dto.getFrom()) && reservation.getEndDate().isBefore(dto.getTo())) {
-                income += reservation.getPrice();
-                for (var additionalService: reservation.getAdditionalServices()) {
-                    income += additionalService.getPrice();
+                double coefficient = admin ? reservation.getServiceFee() : 1 - reservation.getServiceFee();
+                income += reservation.getPrice() * coefficient;
+                for (var additionalService : reservation.getAdditionalServices()) {
+                    income += additionalService.getPrice() * coefficient;
                 }
             }
         }

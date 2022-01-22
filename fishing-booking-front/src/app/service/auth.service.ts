@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   hasIncome() : boolean {
-    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR" || this.storageService.getRole() === "ROLE_HOME_OWNER" ||this.storageService.getRole() === "ROLE_BOAT_OWNER"
+    return this.storageService.getRole() === "ROLE_FISHING_INSTRUCTOR" || this.storageService.getRole() === "ROLE_HOME_OWNER" ||this.storageService.getRole() === "ROLE_BOAT_OWNER" ||this.storageService.getRole() === "ROLE_ADMIN"
   }
 
   isAdmin() : boolean {

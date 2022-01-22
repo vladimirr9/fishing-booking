@@ -15,8 +15,8 @@ public class BoatReservation extends Reservation {
     @JsonBackReference
     private Boat boat;
 
-    public BoatReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Boat boat, Client client) {
-        super(id, startDate, endDate, price, approved, client);
+    public BoatReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, Boat boat, Client client, double serviceFee) {
+        super(id, startDate, endDate, price, approved, client, serviceFee);
         this.boat = boat;
     }
 
