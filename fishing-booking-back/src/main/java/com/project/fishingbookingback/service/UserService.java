@@ -8,6 +8,7 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class.getSimpleName()));
     }
 
+    @Transactional(readOnly = true)
     public boolean userExists(String email) {
-        return userRepository.findByEmail(email) != null;
+        return userRepository.findOneByEmail(email) != null;
     }
 
     public User findByEmail(String email) {
