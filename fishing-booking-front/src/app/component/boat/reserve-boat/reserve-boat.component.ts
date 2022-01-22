@@ -18,6 +18,7 @@ export class ReserveBoatComponent implements OnInit {
   available: boolean = true;
   statusMessage: string = "";
   _MS_PER_DAY: number = 1000 * 60 * 60 * 24;
+  activatedServices: number[]=[]
 
   constructor(private boatService: BoatService,private localStorage: StorageService,private reservationService: ReservationService) { }
 
@@ -54,7 +55,8 @@ export class ReserveBoatComponent implements OnInit {
       to: new Date(this.endingDate.setHours(12,0,0,0)),
       clientUsername: this.localStorage.getUsername(),
       entityId: this.boat.id,
-      type: 'BOAT'
+      type: 'BOAT',
+      additionalServices: this.activatedServices
     };
     this.reservationService.createReservation(reservationDto).subscribe(()=>
     {

@@ -31,7 +31,8 @@ export class BoatPromotionsComponent implements OnInit {
       to: promotion.toTime,
       clientUsername: this.localStorage.getUsername(),
       entityId: this.id,
-      type: 'BOAT'
+      type: 'BOAT',
+      additionalServices: []
     };
     this.reservationService.createReservationWithPromotion(reservationDto,promotion.id).subscribe(      
       (data) => {

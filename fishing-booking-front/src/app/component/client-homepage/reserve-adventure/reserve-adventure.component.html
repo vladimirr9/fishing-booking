@@ -51,6 +51,21 @@
         <button mat-button color="primary" (click)="reserve()">RESERVE</button>
       </mat-action-row>
 
+     
+        <section class="example-section">
+          <label style="margin-left: 5px;" *ngFor="let service of services">{{service.name}}({{service.price}}$)
+            <button   [disabled]="isServiceActivated(service.id)" (click)="addService(service)" mat-mini-fab style="background-color: green;" aria-label="Example icon button with a home icon">
+              <mat-icon>check</mat-icon>
+            </button>
+            
+            <button mat-mini-fab [disabled]="!isServiceActivated(service.id)"  (click)="cancelService(service)" style="background-color: red;" aria-label="Example icon button with a home icon">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </label>
+          
+        </section>
+      
+
     </mat-expansion-panel>
 
 </mat-accordion>

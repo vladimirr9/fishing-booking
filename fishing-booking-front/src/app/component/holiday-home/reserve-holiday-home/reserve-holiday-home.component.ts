@@ -52,7 +52,8 @@ export class ReserveHolidayHomeComponent implements OnInit {
       to: new Date(this.endingDate.setHours(12,0,0,0)),
       clientUsername: this.localStorage.getUsername(),
       entityId: this.holidayhome.id,
-      type: 'HOLIDAY_HOME'
+      type: 'HOLIDAY_HOME',
+      additionalServices: []
     };
     
     this.reservationService.createReservation(reservationDto).subscribe(()=>{

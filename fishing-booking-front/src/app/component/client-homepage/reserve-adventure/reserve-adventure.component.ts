@@ -22,15 +22,18 @@ export class ReserveAdventureComponent implements OnInit {
   personNum: number = 1;
   available: boolean = true;
   statusMessage: string = "";
+  services: any
+  activatedServices: number[]=[]
   
   
 
   ngOnInit(): void {
-    if(isNaN(this.endingDate.getHours())) return;
+    //if(isNaN(this.endingDate.getHours())) return;
     let formatedStart = this.chosenDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.chosenDate.toLocaleTimeString().split(" ")[1]
     let formatedEnd = this.endingDate.toLocaleTimeString().split(" ")[0].slice(0,4) + " " + this.endingDate.toLocaleTimeString().split(" ")[1]
     this.startingTime = formatedStart;
     this.endingTime = formatedEnd;
+    this.services = this.adventure.additionalService;
   }
 
   convertTimeToNum(time: string): number{
@@ -59,7 +62,8 @@ export class ReserveAdventureComponent implements OnInit {
       to: new Date(to.setHours(to.getHours()+1)),
       clientUsername: this.localStorage.getUsername(),
       entityId: this.adventure.id,
-      type: 'ADVENTURE'
+      type: 'ADVENTURE',
+      additionalServices: this.activatedServices
     };
      
     this.reservationService.createReservation(reservationDto).subscribe(()=>{this.statusMessage="Reservation succesfully sent!";this.available=true;},
@@ -75,6 +79,10 @@ export class ReserveAdventureComponent implements OnInit {
     return new Date(date.getTime() + minutes*60000);
   }
 
+  checkService(service: any,checked: boolean): void{
+    alert(checked);
+  }
+
 
   periodDurationInMinutes(): number{
     return this.convertTimeToNum(this.endingTime)- this.convertTimeToNum(this.startingTime);
@@ -86,5 +94,19 @@ export class ReserveAdventureComponent implements OnInit {
       alert("Please choose valid times!"); return;
     }
     this.totalPrice = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
+  }
+
+  isServiceActivated(serviceId: any){
+    return this.activatedServices.includes(serviceId);
+  }
+
+  addService(service: any){
+    this.activatedServices.push(service.id);
+    this.totalPrice+=service.price;
+  }
+
+  cancelService(service: any){
+    this.activatedServices = this.activatedServices.filter(function(item) {return item != service.id})
+    this.totalPrice-=service.price;
   }
 }
