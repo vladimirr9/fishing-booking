@@ -22,7 +22,8 @@ export class ReserveAdventureComponent implements OnInit {
   personNum: number = 1;
   available: boolean = true;
   statusMessage: string = "";
-  services: any
+  services: any;
+  servicePrice: number =0;
   activatedServices: number[]=[]
   
   
@@ -93,7 +94,7 @@ export class ReserveAdventureComponent implements OnInit {
     if(price <= 0 || isNaN(price)){
       alert("Please choose valid times!"); return;
     }
-    this.totalPrice = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice;
+    this.totalPrice = this.periodDurationInMinutes()/60 * this.personNum * this.adventure.hourlyPrice+this.servicePrice;
   }
 
   isServiceActivated(serviceId: any){
@@ -102,11 +103,11 @@ export class ReserveAdventureComponent implements OnInit {
 
   addService(service: any){
     this.activatedServices.push(service.id);
-    this.totalPrice+=service.price;
+    this.servicePrice+=service.price;
   }
 
   cancelService(service: any){
     this.activatedServices = this.activatedServices.filter(function(item) {return item != service.id})
-    this.totalPrice-=service.price;
+    this.servicePrice-=service.price;
   }
 }
