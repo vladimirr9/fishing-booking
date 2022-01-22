@@ -6,6 +6,7 @@ import com.project.fishingbookingback.exception.NotAllowedException;
 import com.project.fishingbookingback.model.*;
 import com.project.fishingbookingback.repository.AvailablePeriodRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -93,8 +94,9 @@ public class AvailablePeriodService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(AvailablePeriod.class.getSimpleName()));
     }
 
+    @Transactional
     public void delete(Long id) {
-        AvailablePeriod availablePeriod = findByID(id);
+        AvailablePeriod availablePeriod = repository.findOneById(id);
         if (availablePeriod.getFishingInstructor() != null) {
             userService.removeAvailablePeriod(availablePeriod);
         }
