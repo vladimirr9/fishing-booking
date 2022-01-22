@@ -71,8 +71,11 @@ public class ReservationService {
     }
 
     private void setAdittionalServices(Reservation reservation,Long[] additionalServicesIds){
+        if(additionalServicesIds==null) return;
+        if(reservation.getAdditionalServices()==null)
+            reservation.setAdditionalServices(new ArrayList<>());
         for(Long id: additionalServicesIds)
-            reservation.getAdditionalServices().add(additionalServiceService.findById(id));
+                reservation.getAdditionalServices().add(additionalServiceService.findById(id));
 
     }
 

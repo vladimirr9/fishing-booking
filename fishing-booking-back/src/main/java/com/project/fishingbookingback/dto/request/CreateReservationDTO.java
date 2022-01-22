@@ -19,14 +19,14 @@ public class CreateReservationDTO {
     @NotBlank
     String type;
 
-    Long[] additionalServicesIds;
+    Long[] additionalServices;
 
-    public Long[] getAdditionalServicesIds() {
-        return additionalServicesIds;
+    public Long[] getAdditionalServices() {
+        return additionalServices;
     }
 
-    public void setAdditionalServicesIds(Long[] additionalServicesIds) {
-        this.additionalServicesIds = additionalServicesIds;
+    public void setAdditionalServices(Long[] additionalServices) {
+        this.additionalServices = additionalServices;
     }
 
     public double getPrice() {

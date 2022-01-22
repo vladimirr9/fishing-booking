@@ -85,13 +85,13 @@ public class ReservationController {
 
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody CreateReservationDTO createReservationDTO) {
-        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType(),createReservationDTO.getAdditionalServicesIds());
+        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType(),createReservationDTO.getAdditionalServices());
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/create/{promotion_id}")
     public ResponseEntity<HttpStatus> createWithPromotion(@Valid @RequestBody CreateReservationDTO createReservationDTO,@PathVariable Long promotion_id) {
-        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType(), createReservationDTO.getAdditionalServicesIds());
+        reservationService.createReservation(createReservationDTO.getPrice(), createReservationDTO.getFrom(), createReservationDTO.getTo(), createReservationDTO.getClientUsername(), createReservationDTO.getEntityId(), createReservationDTO.getType(), createReservationDTO.getAdditionalServices());
         promotionService.removePromotion(promotion_id,createReservationDTO.getType());
         return ResponseEntity.noContent().build();
     }
