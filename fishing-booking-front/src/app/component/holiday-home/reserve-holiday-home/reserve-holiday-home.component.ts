@@ -20,10 +20,14 @@ export class ReserveHolidayHomeComponent implements OnInit {
   available: boolean = true;
   statusMessage: string = "";
   _MS_PER_DAY: number = 1000 * 60 * 60 * 24;
+  services: any;
+  servicePrice: number =0;
+  activatedServices: number[]=[]
   
   constructor(private holidayHomeService: HolidayHomeService,private localStorage: StorageService,private reservationService: ReservationService) { }
 
   ngOnInit(): void {
+    this.services= this.holidayhome.additionalService;
   }
 
   dateDiffInDays(): number {
@@ -38,7 +42,7 @@ export class ReserveHolidayHomeComponent implements OnInit {
     let result = this.dateDiffInDays()*this.personNum*this.holidayhome.pricePerDay;
     if(result<=0){alert("Please enter valid dates!");return;}
 
-    this.totalPrice = this.dateDiffInDays()*this.personNum*this.holidayhome.pricePerDay;
+    this.totalPrice = this.dateDiffInDays()*this.personNum*this.holidayhome.pricePerDay+this.servicePrice;
   }
 
   
@@ -53,7 +57,7 @@ export class ReserveHolidayHomeComponent implements OnInit {
       clientUsername: this.localStorage.getUsername(),
       entityId: this.holidayhome.id,
       type: 'HOLIDAY_HOME',
-      additionalServices: []
+      additionalServices: this.activatedServices
     };
     
     this.reservationService.createReservation(reservationDto).subscribe(()=>{
@@ -63,6 +67,20 @@ export class ReserveHolidayHomeComponent implements OnInit {
         this.available=false;
         this.statusMessage="Unavailable period!";
       });
+  }
+
+  isServiceActivated(serviceId: any){
+    return this.activatedServices.includes(serviceId);
+  }
+
+  addService(service: any){
+    this.activatedServices.push(service.id);
+    this.servicePrice+=service.price;
+  }
+
+  cancelService(service: any){
+    this.activatedServices = this.activatedServices.filter(function(item) {return item != service.id})
+    this.servicePrice-=service.price;
   }
 
 }
