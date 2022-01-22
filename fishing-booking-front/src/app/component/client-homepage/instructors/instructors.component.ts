@@ -72,7 +72,7 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
     let date = new Date(this.searchStartDate.setHours(0,0,0,0))
     let from = this.addMinutes(date,this.convertTimeToNum(this.startingTime));
     let to = this.addMinutes(date,this.convertTimeToNum(this.endingTime));
-    this._adventureService.getAvailableAdventures(from,to).subscribe((data: InstructorAdventureDTO[])=>{
+    this._adventureService.getAvailableAdventures(new Date(from.setHours(from.getHours()+1)),new Date(to.setHours(to.getHours()+1))).subscribe((data: InstructorAdventureDTO[])=>{
       this.filteredAdventures = data;
       if(this.filteredAdventures.length==0)
         alert("No available adventures!")
