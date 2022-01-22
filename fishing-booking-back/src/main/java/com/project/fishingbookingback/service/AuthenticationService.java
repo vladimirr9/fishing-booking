@@ -56,7 +56,7 @@ public class AuthenticationService {
             return clientRegistrationService.confirmClient(client);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public Client registerClient(Client client) throws UnknownHostException {
         if(providerRegistrationService.registrationExists(client.getEmail()) || userService.userExists(client.getEmail()))
             throw new EntityAlreadyExistsException(client.getEmail());
