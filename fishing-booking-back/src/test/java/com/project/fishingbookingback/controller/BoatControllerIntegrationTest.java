@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
+
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,6 +50,23 @@ class BoatControllerIntegrationTest {
     @Test
     public void stringAsIDThrowsBadRequest() throws Exception {
         MvcResult mvcResult = this.mockMvc.perform(get("/api/boat/a"))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    public void canGetAvailableBoatsException() throws Exception{
+        MvcResult mvcResult = this.mockMvc.perform(get("/api/boat/a"))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    public void badDateParametersThrowsRequest() throws Exception {
+        LocalDateTime l1 = LocalDateTime.now().minusDays(1);
+        LocalDateTime l2 = LocalDateTime.now().minusDays(5);
+        MvcResult mvcResult = this.mockMvc.perform(get("/api/boat/client/freeBoats").param("from", String.valueOf(l1))
+                        .param("to", String.valueOf(l2)))
                 .andDo(print()).andExpect(status().isBadRequest())
                 .andReturn();
     }
