@@ -3,6 +3,7 @@ package com.project.fishingbookingback.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -327,8 +328,14 @@ public class Boat {
 
     public void addPicture(Boolean is_interior, Picture picture) {
         if (is_interior) {
+            if(interior == null) {
+                interior = new ArrayList<Picture>();
+            }
             interior.add(picture);
         } else {
+            if(exterior == null) {
+                exterior = new ArrayList<Picture>();
+            }
             exterior.add(picture);
         }
     }
