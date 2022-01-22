@@ -61,6 +61,8 @@ export class BoatsComponent implements OnInit,AfterViewInit {
       this.filteredBoats = this.boats.filter(boat => boat.name.includes(this.filterComponent.filterName));
       this.filteredBoats = this.filteredBoats.filter(boat => boat.address.includes(this.filterComponent.filterAdress));
       this.filteredBoats = this.filteredBoats.filter(boat => boat.mark >= this.filterComponent.filterMark);
+      if(this.filterComponent.subscribed)
+        this.filteredBoats = this.filteredBoats.filter(boat => boat.subscribed);
       this.sortBoats();
   }
 

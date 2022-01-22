@@ -62,6 +62,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
     this.filteredAdventures = this.adventures.filter(adventure => adventure.name.includes(this.filterComponent.filterName));
     this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.adress.includes(this.filterComponent.filterAdress));
     this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.mark >= this.filterComponent.filterMark);
+    if(this.filterComponent.subscribed)
+      this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.subscribed);
     this.sortAdventures();
   }
 
