@@ -259,6 +259,9 @@ public class ReservationService {
         for (Reservation reservation : getAll(dto.getEmail())) {
             if (reservation.getStartDate().isAfter(dto.getFrom()) && reservation.getEndDate().isBefore(dto.getTo())) {
                 income += reservation.getPrice();
+                for (var additionalService: reservation.getAdditionalServices()) {
+                    income += additionalService.getPrice();
+                }
             }
         }
         return income;
