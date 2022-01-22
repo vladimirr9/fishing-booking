@@ -6,7 +6,7 @@
     </mat-card-content>
     <div class="buttons-container">
       <div class="edit-delete-buttons">
-      <input *ngIf="isBoatOwner() && !boat.occupied" type="image" class="image" (click)="editBoat()"
+      <input *ngIf="isBoatOwner()" type="image" class="image" (click)="editBoat()"
           src="assets/img/edit.png">
       <input *ngIf="isBoatOwner() && !boat.occupied" type="image" class="image" (click)="deleteBoat()"
           src="assets/img/delete.png">

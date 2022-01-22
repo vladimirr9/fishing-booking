@@ -4,6 +4,7 @@ package com.project.fishingbookingback.service;
 import com.project.fishingbookingback.exception.EntityNotFoundException;
 import com.project.fishingbookingback.exception.OverlapsException;
 import com.project.fishingbookingback.model.AvailablePeriod;
+import com.project.fishingbookingback.model.Client;
 import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Reservation;
 import com.project.fishingbookingback.repository.FishingPromotionRepository;
@@ -20,12 +21,14 @@ public class FishingPromotionService {
     private final AvailablePeriodService availablePeriodService;
     private final ReservationService reservationService;
     private final LoggedUserService loggedUserService;
+    private final EmailService emailService;
 
-    public FishingPromotionService(FishingPromotionRepository repository, @Lazy AvailablePeriodService availablePeriodService, @Lazy ReservationService reservationService, LoggedUserService loggedUserService) {
+    public FishingPromotionService(FishingPromotionRepository repository, @Lazy AvailablePeriodService availablePeriodService, @Lazy ReservationService reservationService, LoggedUserService loggedUserService, EmailService emailService) {
         this.repository = repository;
         this.availablePeriodService = availablePeriodService;
         this.reservationService = reservationService;
         this.loggedUserService = loggedUserService;
+        this.emailService = emailService;
     }
 
     public FishingPromotion findByID(Long id) {
@@ -38,7 +41,14 @@ public class FishingPromotionService {
         Collection<Reservation> reservations = reservationService.getAllForInstructor(fishingPromotion.getFishingAdventure().getFishingInstructor().getEmail());
         Collection<FishingPromotion> promotions = repository.findByFishingAdventure_Id(fishingPromotion.getFishingAdventure().getId());
         checkIfOverlaps(fishingPromotion, availablePeriods, reservations, promotions);
+        sendMail(fishingPromotion.getFishingAdventure().getSubscribedClients(), fishingPromotion.getFishingAdventure().getName());
         return repository.save(fishingPromotion);
+    }
+
+    private void sendMail(List<Client> subscribedClients, String entityName) {
+        for (var client: subscribedClients) {
+            emailService.sendSimpleMessage(client.getEmail(), "New promotion is out!", "Do not miss out on new promotion for " + entityName);
+        }
     }
 
     public void deletePromotion(Long id_promotion) {
