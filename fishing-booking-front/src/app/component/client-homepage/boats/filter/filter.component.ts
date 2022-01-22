@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-filter',
@@ -15,7 +16,7 @@ export class FilterComponent implements OnInit {
   // filterStartDate: Date = new Date();
   // filterEndDate: Date = new Date();
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private storageService: StorageService) { }
 
   ngOnInit(): void {
   }
@@ -29,4 +30,7 @@ export class FilterComponent implements OnInit {
     //alert(this.filterEndDate);
   }
 
+  isClient():boolean{
+      return this.storageService.getRole()=='ROLE_CLIENT';
+  }
 }
