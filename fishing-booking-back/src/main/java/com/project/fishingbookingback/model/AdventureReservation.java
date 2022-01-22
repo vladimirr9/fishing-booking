@@ -32,8 +32,9 @@ public class AdventureReservation extends Reservation {
     public Long getEntityId() {
         return adventure.getId();
     }
-    public AdventureReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, FishingAdventure adventure, Client client) {
-        super(id, startDate, endDate, price, approved, client);
+
+    public AdventureReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, FishingAdventure adventure, Client client, double serviceFee) {
+        super(id, startDate, endDate, price, approved, client, serviceFee);
         this.adventure = adventure;
     }
 

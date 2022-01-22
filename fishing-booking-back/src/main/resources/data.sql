@@ -76,10 +76,10 @@ VALUES (2, 'Everything you will need will be provided to you', 'I''m a seasoned 
         'You must stay with me, the instructor, the entire duration of the trip', 0, 12, 3);
 
 --RESERVATIONS
-INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
-VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, TRUE, 4, 1);
-INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
-VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, FALSE, 4, 1);
+INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id, SERVICE_FEE)
+VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, TRUE, 4, 1, 0.15);
+INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id, SERVICE_FEE)
+VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, FALSE, 4, 1, 0.15);
 --ALTER SEQUENCE MY_SEQ RESTART WITH 2;
 
 --INSERT INTO BOAT_RESERVATION (id,start_date,end_date,price,approved,client_id,boat_id)

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -22,7 +21,6 @@ public class IncomeRequestDTO {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @NotNull
     LocalDateTime toTime;
-    @Email
     @NotNull
     String email;
 

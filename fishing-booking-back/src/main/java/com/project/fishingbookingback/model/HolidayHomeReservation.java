@@ -15,8 +15,8 @@ public class HolidayHomeReservation extends Reservation {
     @JsonBackReference
     private HolidayHome holidayHome;
 
-    public HolidayHomeReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, HolidayHome holidayHome, Client client) {
-        super(id, startDate, endDate, price, approved, client);
+    public HolidayHomeReservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean approved, HolidayHome holidayHome, Client client, double serviceFee) {
+        super(id, startDate, endDate, price, approved, client, serviceFee);
         this.holidayHome = holidayHome;
     }
 
