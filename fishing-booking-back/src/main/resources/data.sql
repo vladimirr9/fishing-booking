@@ -65,13 +65,13 @@ VALUES (2, 'addInfo4', false, 10, 5, 'Dobar veoma.', 10, 20, false, 'Nema ni vol
 --FISHING ADVENTURES
 INSERT INTO fishing_adventure(id, available_equipment, biography, cancellation_fee, description, hourly_price,
                               max_people, name, rules_of_conduct, average_mark, address_id, instructor_id)
-VALUES (1, 'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15,
+VALUES (1, 'Everything you will need will be provided to you', 'Im a seasoned veteran when it comes to angling', 15,
         'Tons of fun for the whole family', 450, 5, 'Amazon Fishing',
         'You must stay with me, the instructor, the entire duration of the trip', 0, 11, 3);
 
 INSERT INTO fishing_adventure(id, available_equipment, biography, cancellation_fee, description, hourly_price,
                               max_people, name, rules_of_conduct, average_mark, address_id, instructor_id)
-VALUES (2, 'Everything you will need will be provided to you', 'I''m a seasoned veteran when it comes to angling', 15,
+VALUES (2, 'Everything you will need will be provided to you', 'Im a seasoned veteran when it comes to angling', 15,
         'Tons of fun for the whole family', 450, 5, 'Canyon Rock',
         'You must stay with me, the instructor, the entire duration of the trip', 0, 12, 3);
 
@@ -114,12 +114,12 @@ INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id, available_periods_id)
 VALUES (3, 1);
 
 --BOAT AVAILABLE PERIOD
-INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id,available_periods_id)
-values(1,2);
+INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id, available_periods_id)
+values (1, 2);
 
 --HOME AVAILABLE PERIOD
-INSERT INTO HOME_AVAILABLE_PERIODS(holiday_home_id,available_periods_id)
-values(1,3);
+INSERT INTO HOME_AVAILABLE_PERIODS(holiday_home_id, available_periods_id)
+values (1, 3);
 
 
 -- BOAT PROMOTIONS
