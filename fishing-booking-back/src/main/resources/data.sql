@@ -5,23 +5,23 @@ values (2, 'Novi Sad', 'Serbia', 45.2889, 19.7245, 'Kralja Petra 2');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
 values (3, 'Novi Sad', 'Serbia', 45.6889, 19.5245, 'Kralja Petra 4');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (4, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (4, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 11');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (5, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (5, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 12');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
 values (6, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (7, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (7, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 15');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (8, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (8, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 16');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (9, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (9, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 22');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (10, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (10, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 33');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (11, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (11, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 63');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
-values (12, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
+values (12, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 113');
 
 --USERS--
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN, ADDRESS_ID)
