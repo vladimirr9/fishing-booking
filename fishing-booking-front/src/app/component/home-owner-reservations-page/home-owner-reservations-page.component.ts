@@ -114,7 +114,8 @@ export class HomeOwnerReservationsPageComponent implements OnInit {
             to: new Date(data.toTime),
             clientUsername: element.client.email,
             entityId: element.entityId,
-            type: 'HOLIDAY_HOME'
+            type: 'HOLIDAY_HOME',
+            additionalServices: []
           };
 
           this.reservationService.createReservation(reservationDto).subscribe(()=>{

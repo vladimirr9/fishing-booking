@@ -11,6 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const MaterialCompontents:any = [
   MatButtonModule,
@@ -24,7 +25,8 @@ const MaterialCompontents:any = [
   MatExpansionModule,
   NgxMaterialTimepickerModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

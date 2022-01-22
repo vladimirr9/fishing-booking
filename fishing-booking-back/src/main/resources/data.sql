@@ -99,14 +99,17 @@ INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
 VALUES(1,'2016-09-17 18:47:52.69','2022-09-17 18:47:52.69');
 
 --INSTRUCTOR AVAILABLE PERIOD
-INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
-VALUES(3,1);
---
+-- INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
+-- VALUES(3,1);
+-- --
 -- --BOAT AVAILABLE PERIOD
 -- INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id,available_periods_id)
 -- values(1,1);
 
--- BOAT PROMOTIONS
+--HOLIDAY HOME AVA
+INSERT INTO HOME_AVAILABLE_PERIODS(holiday_home_id,available_periods_id)
+values(1,1)
+    -- BOAT PROMOTIONS
 -- INSERT INTO BOAT_PROMOTION(id,from_time,price,to_time,valid_until,boat_id)
 -- values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1)
 
@@ -118,9 +121,9 @@ VALUES(3,1);
 -- values (1,'2022-01-21 18:47:52.69',2000,'2022-01-23 18:47:52.69','2022-01-31 18:47:52.69',1)
 
 -- ADVENTURE FISHING_PROMOTION
-INSERT
-INTO FISHING_PROMOTION (id, from_time, price, to_time, valid_until, people_number, fishing_id)
-values (2, '2022-01-23 18:47:52.69', 2000, '2022-01-23 19:47:52.69', '2022-01-31 18:47:52.69', 2, 1);
-
-ALTER SEQUENCE PROMOTION_SEQ_GEN RESTART WITH 3;
+-- INSERT
+-- INTO FISHING_PROMOTION (id, from_time, price, to_time, valid_until, people_number, fishing_id)
+-- values (2, '2022-01-23 18:47:52.69', 2000, '2022-01-23 19:47:52.69', '2022-01-31 18:47:52.69', 2, 1);
+--
+-- ALTER SEQUENCE PROMOTION_SEQ_GEN RESTART WITH 3;
 

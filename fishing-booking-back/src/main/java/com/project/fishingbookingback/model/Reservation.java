@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -34,6 +35,9 @@ public abstract class Reservation {
     @JsonBackReference
     private Review review;
 
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<AdditionalService> additionalServices;
+
     public Reservation() {
     }
 
@@ -46,6 +50,14 @@ public abstract class Reservation {
         this.report = null;
         this.approved = approved;
         this.client = client;
+    }
+
+    public List<AdditionalService> getAdditionalServices() {
+        return additionalServices;
+    }
+
+    public void setAdditionalServices(List<AdditionalService> additionalServices) {
+        this.additionalServices = additionalServices;
     }
 
     abstract public String getOwnerEmail();

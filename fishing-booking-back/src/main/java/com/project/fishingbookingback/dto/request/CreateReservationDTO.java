@@ -19,6 +19,15 @@ public class CreateReservationDTO {
     @NotBlank
     String type;
 
+    Long[] additionalServices;
+
+    public Long[] getAdditionalServices() {
+        return additionalServices;
+    }
+
+    public void setAdditionalServices(Long[] additionalServices) {
+        this.additionalServices = additionalServices;
+    }
 
     public double getPrice() {
         return price;

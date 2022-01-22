@@ -25,7 +25,6 @@ public class ReservationCancelationService {
     public void cancelReservation(Long reservationId){
         Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() -> new EntityNotFoundException(Reservation.class.getSimpleName()));
         checkDates(reservation);
-        reservationRepository.delete(reservation);
         if(reservation.getClass() == HolidayHomeReservation.class)
             cancelHomeReservation((HolidayHomeReservation) reservation);
         else if(reservation.getClass() == BoatReservation.class)
@@ -45,6 +44,7 @@ public class ReservationCancelationService {
         Set<BoatReservation> reservations = reservation.getBoat().getReservations();
         reservations.remove(reservation);
         reservation.getBoat().setReservations(reservations);
+        reservationRepository.delete(reservation);
         availablePeriodService.createForBoat(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getBoat().getId(),reservation.getOwnerEmail());
     }
 
@@ -52,6 +52,7 @@ public class ReservationCancelationService {
         Set<HolidayHomeReservation> reservations = reservation.getHolidayHome().getReservations();
         reservations.remove(reservation);
         reservation.getHolidayHome().setReservations(reservations);
+        reservationRepository.delete(reservation);
         availablePeriodService.createForHolidayHome(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getHolidayHome().getId(),reservation.getOwnerEmail());
     }
 
@@ -59,6 +60,7 @@ public class ReservationCancelationService {
         Set<AdventureReservation> reservations = reservation.getAdventure().getReservations();
         reservations.remove(reservation);
         reservation.getAdventure().setReservations(reservations);
+        reservationRepository.delete(reservation);
         availablePeriodService.createForInstructor(new AvailablePeriod(reservation.getStartDate(),reservation.getEndDate()),reservation.getOwnerEmail());
     }
 

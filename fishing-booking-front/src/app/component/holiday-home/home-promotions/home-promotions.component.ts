@@ -31,7 +31,8 @@ export class HomePromotionsComponent implements OnInit {
       to: promotion.toTime,
       clientUsername: this.localStorage.getUsername(),
       entityId: this.id,
-      type: 'HOLIDAY_HOME'
+      type: 'HOLIDAY_HOME',
+      additionalServices: []
     };
     this.reservationService.createReservationWithPromotion(reservationDto,promotion.id).subscribe(      
       (data) => {

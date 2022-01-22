@@ -114,7 +114,8 @@ export class InstructorReservationsPageComponent implements OnInit {
             to: new Date(data.toTime),
             clientUsername: element.client.email,
             entityId: element.entityId,
-            type: 'ADVENTURE'
+            type: 'ADVENTURE',
+            additionalServices: []
           };
 
           this.reservationService.createReservation(reservationDto).subscribe(()=>{

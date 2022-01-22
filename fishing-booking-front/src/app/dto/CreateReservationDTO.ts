@@ -4,5 +4,6 @@ export interface CreateReservationDTO{
     to: Date,
     clientUsername: string,
     entityId: number,
-    type: string
+    type: string,
+    additionalServices: number[]
 }

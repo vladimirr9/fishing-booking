@@ -24,9 +24,10 @@ public class ReservationService {
     private final AvailablePeriodService availablePeriodService;
     private final LoggedUserService loggedUserService;
     private final AvailableAdventureService availableAdventureService;
+    private final AdditionalServiceService additionalServiceService;
 
 
-    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService, AvailableAdventureService availableAdventureService) {
+    public ReservationService(ReservationRepository reservationRepository, ReportService reportService, EmailService emailService, HolidayHomeService holidayHomeService, UserService userService, BoatService boatService, AdventureService adventureService, @Lazy AvailablePeriodService availablePeriodService, LoggedUserService loggedUserService, AvailableAdventureService availableAdventureService, AdditionalServiceService additionalServiceService) {
         this.reservationRepository = reservationRepository;
         this.reportService = reportService;
         this.emailService = emailService;
@@ -37,6 +38,7 @@ public class ReservationService {
         this.availablePeriodService = availablePeriodService;
         this.loggedUserService = loggedUserService;
         this.availableAdventureService = availableAdventureService;
+        this.additionalServiceService = additionalServiceService;
     }
 
 
@@ -53,7 +55,7 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type) {
+    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type,Long[] additionalServicesIds) {
         if (from.isBefore(LocalDateTime.now())) throw new NotAllowedException();
         if (to.isBefore(from)) throw new NotAllowedException();
         Reservation reservation = createReservationdownClass(type, entityId, from, to);
@@ -62,9 +64,19 @@ public class ReservationService {
         reservation.setPrice(price);
         reservation.setStartDate(from);
         reservation.setEndDate(to);
-        reservation.setApproved(false); // OVDE DODAJ!
+        reservation.setApproved(false);
+        setAdittionalServices(reservation,additionalServicesIds);
         reservationRepository.save(reservation);
         emailService.sendSimpleMessage(clientUsername, "Reservation", "Reservation request successfully sent!");
+    }
+
+    private void setAdittionalServices(Reservation reservation,Long[] additionalServicesIds){
+        if(additionalServicesIds==null) return;
+        if(reservation.getAdditionalServices()==null)
+            reservation.setAdditionalServices(new ArrayList<>());
+        for(Long id: additionalServicesIds)
+                reservation.getAdditionalServices().add(additionalServiceService.findById(id));
+
     }
 
 
