@@ -1,9 +1,9 @@
 <div class="container">
     <h1>Holiday-home details</h1>
-    <button style="margin-left: 1000px;" (click)="subscribe()" *ngIf="!subscribed" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button style="margin-left: 1000px;" (click)="subscribe()" *ngIf="!subscribed &&  isClient()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
       <mat-icon>notifications_active</mat-icon>
     </button>
-    <button style="margin-left: 1000px;" (click)="unsubscribe()" *ngIf="subscribed" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button style="margin-left: 1000px;" (click)="unsubscribe()" *ngIf="subscribed &&  isClient()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
       <mat-icon>notifications_off</mat-icon>
     </button>
     <div>
