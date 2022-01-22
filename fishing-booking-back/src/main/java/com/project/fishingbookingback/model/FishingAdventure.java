@@ -226,4 +226,11 @@ public class FishingAdventure {
     public void setAverageMark(double averageMark) {
         this.averageMark = averageMark;
     }
+
+    public boolean isClientSubscribed(String clientUsername){
+        for(Client client : getSubscribedClients())
+            if(client.getEmail().equals(clientUsername))
+                return true;
+        return false;
+    }
 }

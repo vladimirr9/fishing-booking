@@ -6,5 +6,6 @@ export interface BoatsDTO{
     address: string,
     description: string,
     mark: number,
-    price: number
+    price: number,
+    subscribed: boolean
 }

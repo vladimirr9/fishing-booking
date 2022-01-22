@@ -6,11 +6,17 @@ import com.project.fishingbookingback.dto.response.AdventureResponseDTO;
 import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.FishingAdventure;
+import com.project.fishingbookingback.service.LoggedUserService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AdventureMapper {
-    public AdventureMapper() {
+
+    private final LoggedUserService loggedUserService;
+
+    public AdventureMapper(LoggedUserService loggedUserService) {
+
+        this.loggedUserService = loggedUserService;
     }
 
     public FishingAdventure toModel(NewAdventureDTO newAdventureDTO) {
@@ -53,6 +59,7 @@ public class AdventureMapper {
         else
             returnDto.setImageUrl(adventure.getPictures().get(0).getLink());
         returnDto.setName(adventure.getName());
+        returnDto.setSubscribed(adventure.isClientSubscribed(loggedUserService.getUsername()));
         returnDto.setAdress(adventure.getAddress().toString());
         returnDto.setDescription(adventure.getDescription());
         returnDto.setInstructorsDescription(adventure.getBiography());

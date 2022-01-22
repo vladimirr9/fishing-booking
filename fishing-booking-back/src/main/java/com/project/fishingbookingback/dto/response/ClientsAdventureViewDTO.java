@@ -9,6 +9,7 @@ public class ClientsAdventureViewDTO {
     private String instructorsDescription;
     private double mark;
     private double price;
+    private boolean subscribed;
 
     public ClientsAdventureViewDTO() {
 
@@ -23,6 +24,14 @@ public class ClientsAdventureViewDTO {
         this.instructorsDescription = instructorsDescription;
         this.mark = mark;
         this.price = price;
+    }
+
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     public Long getId() {

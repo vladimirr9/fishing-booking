@@ -149,7 +149,6 @@ public class BoatService {
 
     public Boat addPicture(Long id, Boolean is_interior, Picture picture) {
         Boat boat = findByID(id);
-        checkIfAllowed(boat);
         boat.addPicture(is_interior, picture);
         return boatRepository.save(boat);
     }

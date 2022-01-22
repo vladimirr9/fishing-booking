@@ -37,7 +37,7 @@ export class ReservationsComponent implements OnInit,AfterViewInit {
   sortHouses(): void{
     switch(this.sorterType){
       case 'date':
-        this.filteredReservations.sort((a, b) => b.startDate.getTime()-a.startDate.getTime());
+        this.filteredReservations.sort((a, b) => new Date(b.startDate).getTime()-new Date(a.startDate).getTime());
         break;
       case 'price':
         this.filteredReservations.sort((a, b) => b.price - a.price);

@@ -62,6 +62,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
     this.filteredAdventures = this.adventures.filter(adventure => adventure.name.includes(this.filterComponent.filterName));
     this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.adress.includes(this.filterComponent.filterAdress));
     this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.mark >= this.filterComponent.filterMark);
+    if(this.filterComponent.subscribed)
+      this.filteredAdventures = this.filteredAdventures.filter(adventure => adventure.subscribed);
     this.sortAdventures();
   }
 
@@ -72,6 +74,8 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
     let to = this.addMinutes(date,this.convertTimeToNum(this.endingTime));
     this._adventureService.getAvailableAdventures(from,to).subscribe((data: InstructorAdventureDTO[])=>{
       this.filteredAdventures = data;
+      if(this.filterAdventures.length==0)
+        alert("No available adventures!")
     });
   }
 

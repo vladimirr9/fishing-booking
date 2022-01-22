@@ -9,8 +9,17 @@ public class ClientsHolidayHomeDTO {
     private double mark;
     private double price;
     private String rules;
+    private boolean subscribed;
 
     public ClientsHolidayHomeDTO() {
+    }
+
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     public Long getId() {
