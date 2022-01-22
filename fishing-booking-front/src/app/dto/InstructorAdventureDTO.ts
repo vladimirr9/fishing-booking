@@ -7,5 +7,5 @@ export interface InstructorAdventureDTO{
     instructorsDescription: string,
     mark: number,
     price: number,
-    freeDates: any
+    subscribed: boolean
 }

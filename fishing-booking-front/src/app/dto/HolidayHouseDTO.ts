@@ -7,5 +7,6 @@ export interface HolidayHouseDTO{
     description: string,
     mark: number,
     price: number,
-    rules: string
+    rules: string,
+    subscribed: boolean
 }

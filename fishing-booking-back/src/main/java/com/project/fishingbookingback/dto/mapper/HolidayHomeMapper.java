@@ -6,12 +6,18 @@ import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Appointment;
 import com.project.fishingbookingback.model.AvailablePeriod;
 import com.project.fishingbookingback.model.HolidayHome;
+import com.project.fishingbookingback.service.LoggedUserService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 @Component
 public class HolidayHomeMapper {
+    private  final LoggedUserService loggedUserService;
+
+    public HolidayHomeMapper(LoggedUserService loggedUserService) {
+        this.loggedUserService = loggedUserService;
+    }
 
     public HolidayHome toModel(NewHolidayHomeDTO dto) {
         return new HolidayHome(dto.getName(),
@@ -43,6 +49,7 @@ public class HolidayHomeMapper {
         holidayHomeDTO.setMark(home.getAverageMark());
         holidayHomeDTO.setPrice(home.getPricePerDay());
         holidayHomeDTO.setRules(home.getRulesOfConduct());
+        holidayHomeDTO.setSubscribed(home.isClientSubscribed(loggedUserService.getUsername()));
         return holidayHomeDTO;
     }
 }

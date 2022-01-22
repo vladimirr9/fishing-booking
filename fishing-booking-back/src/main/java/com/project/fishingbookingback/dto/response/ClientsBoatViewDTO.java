@@ -8,8 +8,17 @@ public class ClientsBoatViewDTO {
     private String description;
     private double mark;
     private double price;
+    private boolean subscribed;
 
     public ClientsBoatViewDTO() {
+    }
+
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     public Long getId() {
