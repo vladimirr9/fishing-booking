@@ -17,12 +17,14 @@ public class HolidayHomePromotionService {
     private final AvailablePeriodService availablePeriodService;
     private final ReservationService reservationService;
     private final LoggedUserService loggedUserService;
+    private final EmailService emailService;
 
-    public HolidayHomePromotionService(HolidayHomePromotionRepository repository, @Lazy AvailablePeriodService availablePeriodService, @Lazy ReservationService reservationService, LoggedUserService loggedUserService) {
+    public HolidayHomePromotionService(HolidayHomePromotionRepository repository, @Lazy AvailablePeriodService availablePeriodService, @Lazy ReservationService reservationService, LoggedUserService loggedUserService, EmailService emailService) {
         this.repository = repository;
         this.availablePeriodService = availablePeriodService;
         this.reservationService = reservationService;
         this.loggedUserService = loggedUserService;
+        this.emailService = emailService;
     }
 
     public HolidayHomePromotion findByID(Long id) {
@@ -35,8 +37,14 @@ public class HolidayHomePromotionService {
         Collection<Reservation> reservations = reservationService.getAllForBoat(holidayHomePromotion.getHolidayHome().getId());
         Collection<HolidayHomePromotion> promotions = repository.findByHolidayHome_Id(holidayHomePromotion.getHolidayHome().getId());
         checkIfOverlaps(holidayHomePromotion, availablePeriods, reservations, promotions);
-
+        sendMail(holidayHomePromotion.getHolidayHome().getSubscribedClients(), holidayHomePromotion.getHolidayHome().getName());
         return repository.save(holidayHomePromotion);
+    }
+
+    private void sendMail(List<Client> subscribedClients, String entityName) {
+        for (var client: subscribedClients) {
+            emailService.sendSimpleMessage(client.getEmail(), "New promotion is out!", "Do not miss out on new promotion for " + entityName);
+        }
     }
 
     public void deletePromotion(Long id_promotion) {
