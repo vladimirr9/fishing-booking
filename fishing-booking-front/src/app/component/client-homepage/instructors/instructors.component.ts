@@ -74,7 +74,7 @@ export class InstructorsComponent implements OnInit,AfterViewInit {
     let to = this.addMinutes(date,this.convertTimeToNum(this.endingTime));
     this._adventureService.getAvailableAdventures(from,to).subscribe((data: InstructorAdventureDTO[])=>{
       this.filteredAdventures = data;
-      if(this.filterAdventures.length==0)
+      if(this.filteredAdventures.length==0)
         alert("No available adventures!")
     });
   }

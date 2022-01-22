@@ -217,4 +217,11 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    public List<Reservation> getAllForClient(String clientEmail) {
+        List<Reservation> reservations = reservationRepository.findAll();
+        if (clientEmail != null)
+            reservations.removeIf(n -> (!n.getClient().getEmail().equals(clientEmail)));
+
+        return reservations;
+    }
 }
