@@ -1,4 +1,3 @@
---ADDRESS--
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
 values (1, 'Novi Sad', 'Serbia', 0, 0, 'Kralja Petra 1');
 insert into ADDRESS (ID, CITY, COUNTRY, LATITUDE, LONGITUDE, STREET_AND_NUMBER)
@@ -26,19 +25,20 @@ values (12, 'Novi Sad', 'Serbia', 45.2889, 19.3245, 'Cara Lazara 13');
 
 --USERS--
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN, ADDRESS_ID)
-VALUES ('ADMIN', 1, 'admin', 'admin', 'admin', 'pass', '21323', 1, 0, 1);
+VALUES ('ADMIN', 1, 'admin', 'admin', 'admin', 'pass', '21323', 1, FALSE, 1);
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN, ADDRESS_ID)
-VALUES ('BOAT_OWNER', 2, 'jovanjovanic@gmail.com', 'Jovan', 'Jovanić', 'pass', '+43365464', 2, null, 2);
+VALUES ('BOAT_OWNER', 2, 'jovanjovanic@gmail.com', 'Jovan', 'Jovanic', 'pass', '+43365464', 2, null, 2);
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN, ADDRESS_ID)
-VALUES ('FISHING_INSTRUCTOR', 3, 'peraperic4200@gmail.com', 'Pera', 'Perić', 'pass', '+4343365464', 3, null, 3);
+VALUES ('FISHING_INSTRUCTOR', 3, 'peraperic4200@gmail.com', 'Pera', 'Peric', 'pass', '+4343365464', 3, null, 3);
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, IS_ENABLED, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN,
                    ADDRESS_ID)
-VALUES ('CLIENT', 4, 'nikola1@gmail.com', 'Pera', true, 'Perić', 'pass', '+4343365464', 0, null, 4);
+VALUES ('CLIENT', 4, 'nikola1@gmail.com', 'Pera', true, 'Peric', 'pass', '+4343365464', 0, null, 4);
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, IS_ENABLED, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN,
                    ADDRESS_ID)
-VALUES ('CLIENT', 5, 'nikola2@gmail.com', 'Pera', false, 'Perić', 'pass', '+4343365464', 0, null, 5);
+VALUES ('CLIENT', 5, 'nikola2@gmail.com', 'Pera', false, 'Peric', 'pass', '+4343365464', 0, null, 5);
 INSERT INTO users (D_TYPE, ID, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, PHONE_NUMBER, ROLE, FIRST_LOGIN, ADDRESS_ID)
 VALUES ('HOME_OWNER', 6, 'home@owner.com', 'Zdravko', 'Cholich', 'pass', '+3811369666', 4, null, 6);
+
 
 --HOLIDAY HOMES
 
@@ -77,9 +77,9 @@ VALUES (2, 'Everything you will need will be provided to you', 'I''m a seasoned 
 
 --RESERVATIONS
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
-VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, 1, 4, 1);
+VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, TRUE, 4, 1);
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
-VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, 0, 4, 1);
+VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, FALSE, 4, 1);
 --ALTER SEQUENCE MY_SEQ RESTART WITH 2;
 
 --INSERT INTO BOAT_RESERVATION (id,start_date,end_date,price,approved,client_id,boat_id)
@@ -89,7 +89,7 @@ ALTER SEQUENCE MY_SEQ RESTART WITH 3;
 -- INSERT INTO REVIEW(ID, APPROVED, COMMENT, MARK, RESERVATION_ID)
 -- VALUES (1, 0, 'good', 4, 1);
 INSERT INTO REVIEW(ID, APPROVED, COMMENT, MARK, RESERVATION_ID)
-VALUES (1, 0, 'good', 4, 1);
+VALUES (1, FALSE, 'good', 4, 1);
 
 INSERT INTO COMPLAINT(ID, CONTENT, RESERVATION_ID)
 VALUES (1, 'Wasnt too good', 1);

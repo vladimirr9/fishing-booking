@@ -1,5 +1,7 @@
 package com.project.fishingbookingback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ public class HolidayHomePromotion extends Promotion {
 
     @ManyToOne()
     @JoinColumn(name = "holidayHome_id", nullable = false)
+    @JsonManagedReference
     private HolidayHome holidayHome;
 
     public HolidayHomePromotion() {
@@ -25,7 +28,7 @@ public class HolidayHomePromotion extends Promotion {
         return holidayHome;
     }
 
-    public double getStandardPrice(){
+    public double getStandardPrice() {
         return ChronoUnit.DAYS.between(getFromTime(), getToTime()) * holidayHome.getPricePerDay();
     }
 }
