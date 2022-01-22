@@ -8,6 +8,7 @@ import com.project.fishingbookingback.exception.InvalidCredentialsException;
 import com.project.fishingbookingback.exception.UserNotConfirmedException;
 import com.project.fishingbookingback.model.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -55,6 +56,7 @@ public class AuthenticationService {
             return clientRegistrationService.confirmClient(client);
     }
 
+    @Transactional(readOnly = false)
     public Client registerClient(Client client) throws UnknownHostException {
         if(providerRegistrationService.registrationExists(client.getEmail()) || userService.userExists(client.getEmail()))
             throw new EntityAlreadyExistsException(client.getEmail());
