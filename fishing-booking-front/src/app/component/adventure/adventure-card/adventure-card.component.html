@@ -7,9 +7,9 @@
   <div class="buttons-container">
     <button class="detailed-button" color="view" mat-flat-button (click)="view()">Details</button>
     <div class="edit-delete-buttons">
-    <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="editAdventure()"
+    <input *ngIf="isAdventureOwner() && !adventure.occupied" type="image" class="image" (click)="editAdventure()"
         src="assets/img/edit.png">
-    <input *ngIf="isAdventureOwner()" type="image" class="image" (click)="deleteAdventure()"
+    <input *ngIf="isAdventureOwner() && !adventure.occupied" type="image" class="image" (click)="deleteAdventure()"
         src="assets/img/delete.png">
     </div>
   </div>

@@ -6,12 +6,11 @@
     </mat-card-content>
     <div class="buttons-container">
       <div class="edit-delete-buttons">
-      <input *ngIf="isHomeOwner()" type="image" class="image" (click)="editHome()"
+      <input *ngIf="isHomeOwner() && !home.occupied" type="image" class="image" (click)="editHome()"
           src="assets/img/edit.png">
-      <input *ngIf="isHomeOwner()" type="image" class="image" (click)="deleteHome()"
+      <input *ngIf="isHomeOwner() && !home.occupied" type="image" class="image" (click)="deleteHome()"
           src="assets/img/delete.png">
       </div>
     </div>
-  
+
   </mat-card>
-  

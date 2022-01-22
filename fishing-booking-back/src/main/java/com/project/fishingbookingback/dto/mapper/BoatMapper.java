@@ -2,6 +2,7 @@ package com.project.fishingbookingback.dto.mapper;
 
 
 import com.project.fishingbookingback.dto.request.NewBoatDTO;
+import com.project.fishingbookingback.dto.response.BoatResponseDTO;
 import com.project.fishingbookingback.dto.response.ClientsBoatViewDTO;
 import com.project.fishingbookingback.model.Address;
 import com.project.fishingbookingback.model.Boat;
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BoatMapper {
-    public ClientsBoatViewDTO toBoatViewDTO(Boat boat){
+    public ClientsBoatViewDTO toBoatViewDTO(Boat boat) {
         ClientsBoatViewDTO boatViewDTO = new ClientsBoatViewDTO();
         boatViewDTO.setId(boat.getId());
-        if(boat.getExterior().isEmpty())
+        if (boat.getExterior().isEmpty())
             boatViewDTO.setImageUrl("No image");
         else
             boatViewDTO.setImageUrl(boat.getExterior().get(0).getLink());
@@ -52,5 +53,37 @@ public class BoatMapper {
                 dto.getCancellationFeePercentage(),
                 dto.getPricePerDay()
         );
+    }
+
+    public BoatResponseDTO toBoatResponseDTO(Boat b, boolean occupied) {
+        return new BoatResponseDTO(b.getId(),
+                b.getName(),
+                b.getType(),
+                b.getLength(),
+                b.getEngineNumber(),
+                b.getEnginePower(),
+                b.getMaxSpeed(),
+                b.getGps(),
+                b.getRadar(),
+                b.getVhf(),
+                b.getFishfinder(),
+                b.getCabin(),
+                b.getReservations(),
+                b.getAddress(),
+                b.getDescription(),
+                b.getBoatOwner(),
+                b.getExterior(),
+                b.getInterior(),
+                b.getCapacity(),
+                b.getAvailablePeriods(),
+                b.getRulesOfConduct(),
+                b.getAdditionalInfo(),
+                b.getFishingEquipment(),
+                b.getCancellationFeePercentage(),
+                b.getPricePerDay(),
+                b.getAverageMark(),
+                b.getAdditionalService(),
+                b.getSubscribedClients(),
+                occupied);
     }
 }

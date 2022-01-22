@@ -55,37 +55,37 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type,Long[] additionalServicesIds,boolean isPromotion) {
+    public void createReservation(double price, LocalDateTime from, LocalDateTime to, String clientUsername, Long entityId, String type, Long[] additionalServicesIds, boolean isPromotion) {
         if (from.isBefore(LocalDateTime.now())) throw new NotAllowedException();
         if (to.isBefore(from)) throw new NotAllowedException();
-        Reservation reservation = createReservationdownClass(type, entityId, from, to,isPromotion);
+        Reservation reservation = createReservationdownClass(type, entityId, from, to, isPromotion);
         Client client = (Client) userService.findByEmail(clientUsername);
         reservation.setClient(client);
         reservation.setPrice(price);
         reservation.setStartDate(from);
         reservation.setEndDate(to);
         reservation.setApproved(false);
-        setAdittionalServices(reservation,additionalServicesIds);
+        setAdittionalServices(reservation, additionalServicesIds);
         reservationRepository.save(reservation);
         emailService.sendSimpleMessage(clientUsername, "Reservation", "Reservation request successfully sent!");
     }
 
-    private void setAdittionalServices(Reservation reservation,Long[] additionalServicesIds){
-        if(additionalServicesIds==null) return;
-        if(reservation.getAdditionalServices()==null)
+    private void setAdittionalServices(Reservation reservation, Long[] additionalServicesIds) {
+        if (additionalServicesIds == null) return;
+        if (reservation.getAdditionalServices() == null)
             reservation.setAdditionalServices(new ArrayList<>());
-        for(Long id: additionalServicesIds)
-                reservation.getAdditionalServices().add(additionalServiceService.findById(id));
+        for (Long id : additionalServicesIds)
+            reservation.getAdditionalServices().add(additionalServiceService.findById(id));
 
     }
 
 
-    private Reservation createReservationdownClass(String type, Long entityId, LocalDateTime from, LocalDateTime to,boolean isPromotion) {
+    private Reservation createReservationdownClass(String type, Long entityId, LocalDateTime from, LocalDateTime to, boolean isPromotion) {
         switch (type) {
             case "ADVENTURE" -> {
                 var adventureReservation = new AdventureReservation();
                 FishingAdventure adventure = adventureService.findByID(entityId);
-                if(!isPromotion)
+                if (!isPromotion)
                     availableAdventureService.reservePeriod(adventure.getFishingInstructor().getEmail(), from, to);
                 adventureReservation.setAdventure(adventure);
                 Set<AdventureReservation> adventureReservations = adventure.getReservations();
@@ -96,7 +96,7 @@ public class ReservationService {
             case "HOLIDAY_HOME" -> {
                 var holidayReservation = new HolidayHomeReservation();
                 HolidayHome home = holidayHomeService.findByID(entityId);
-                if(!isPromotion)
+                if (!isPromotion)
                     holidayHomeService.reserveHomePeriod(entityId, from, to);
                 holidayReservation.setHolidayHome(home);
                 Set<HolidayHomeReservation> holidayHomeReservations = home.getReservations();
@@ -107,7 +107,7 @@ public class ReservationService {
             case "BOAT" -> {
                 var boatReservation = new BoatReservation();
                 Boat boat = boatService.findByID(entityId);
-                if(!isPromotion)
+                if (!isPromotion)
                     boatService.reserveBoatPeriod(entityId, from, to);
                 boatReservation.setBoat(boat);
                 Set<BoatReservation> boatReservations = boat.getReservations();
@@ -215,6 +215,42 @@ public class ReservationService {
         Reservation reservation = findByID(id);
         reservation.setComplaint(null);
         reservationRepository.save(reservation);
+    }
+
+    public boolean isAdventureOccupied(Long fishingAdventureId) {
+        LocalDateTime now = LocalDateTime.now();
+        for (Reservation reservation : reservationRepository.findAll()) {
+            if (reservation.getClass() == AdventureReservation.class) {
+                AdventureReservation ar = (AdventureReservation) reservation;
+                if (Objects.equals(ar.getAdventure().getId(), fishingAdventureId) && reservation.overlaps(now))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isHomeOccupied(Long holidayHomeId) {
+        LocalDateTime now = LocalDateTime.now();
+        for (Reservation reservation : reservationRepository.findAll()) {
+            if (reservation.getClass() == HolidayHomeReservation.class) {
+                HolidayHomeReservation ar = (HolidayHomeReservation) reservation;
+                if (Objects.equals(ar.getHolidayHome().getId(), holidayHomeId) && reservation.overlaps(now))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isBoatOccupied(Long boatId) {
+        LocalDateTime now = LocalDateTime.now();
+        for (Reservation reservation : reservationRepository.findAll()) {
+            if (reservation.getClass() == BoatReservation.class) {
+                BoatReservation ar = (BoatReservation) reservation;
+                if (Objects.equals(ar.getBoat().getId(), boatId) && reservation.overlaps(now))
+                    return true;
+            }
+        }
+        return false;
     }
 
 }

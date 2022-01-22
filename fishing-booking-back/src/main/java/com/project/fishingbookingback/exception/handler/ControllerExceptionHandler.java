@@ -68,4 +68,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(EntityOccupiedException.class)
+    public ResponseEntity<ErrorMessage> UnrecognizedTypeException(EntityOccupiedException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                ex.getMessage(),
+                new Date());
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
+
 }

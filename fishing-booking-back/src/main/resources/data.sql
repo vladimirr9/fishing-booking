@@ -79,7 +79,7 @@ VALUES (2, 'Everything you will need will be provided to you', 'I''m a seasoned 
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
 VALUES (1, '2022-01-17 18:47:52.69', '2022-01-18 20:52:52.69', 200, 1, 4, 1);
 INSERT INTO ADVENTURE_RESERVATION (id, start_date, end_date, price, approved, client_id, adventure_id)
-VALUES (2, '2022-01-23 18:47:52.69', '2022-01-23 20:52:52.69', 200, 0, 4, 1);
+VALUES (2, '2022-01-21 18:47:52.69', '2022-01-23 20:52:52.69', 200, 0, 4, 1);
 --ALTER SEQUENCE MY_SEQ RESTART WITH 2;
 
 --INSERT INTO BOAT_RESERVATION (id,start_date,end_date,price,approved,client_id,boat_id)
@@ -93,26 +93,25 @@ INSERT INTO COMPLAINT(ID, CONTENT, RESERVATION_ID)
 VALUES (1, 'Wasnt too good', 1);
 
 
-
 --PERIODS
-INSERT INTO AVAILABLE_PERIOD(id,from_time,to_time)
-VALUES(1,'2016-09-17 18:47:52.69','2022-09-17 18:47:52.69');
+INSERT INTO AVAILABLE_PERIOD(id, from_time, to_time)
+VALUES (1, '2022-09-17 16:47:52.69', '2022-09-17 18:47:52.69');
 
 --INSTRUCTOR AVAILABLE PERIOD
-INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id,available_periods_id)
-VALUES(3,1);
+INSERT INTO INSTRUCTOR_AVAILABLE_PERIODS (instructor_id, available_periods_id)
+VALUES (3, 1);
 -- --
 -- --BOAT AVAILABLE PERIOD
 -- INSERT INTO BOAT_AVAILABLE_PERIODS(boat_id,available_periods_id)
 -- values(1,1);
 
 --HOLIDAY HOME AVA
-INSERT INTO HOME_AVAILABLE_PERIODS(holiday_home_id,available_periods_id)
-values(1,1);
+INSERT INTO HOME_AVAILABLE_PERIODS(holiday_home_id, available_periods_id)
+values (1, 1);
 
- -- BOAT PROMOTIONS
-INSERT INTO BOAT_PROMOTION(id,from_time,price,to_time,valid_until,boat_id)
-values (1,'2022-01-25 18:47:52.69',2000,'2022-01-27 18:47:52.69','2022-01-31 18:47:52.69',1);
+-- BOAT PROMOTIONS
+INSERT INTO BOAT_PROMOTION(id, from_time, price, to_time, valid_until, boat_id)
+values (1, '2022-01-25 18:47:52.69', 2000, '2022-01-27 18:47:52.69', '2022-01-31 18:47:52.69', 1);
 
 -- -- HOLIDAY HOME PROMOTIONS
 INSERT INTO HOLIDAY_HOME_PROMOTION(id, from_time, price, to_time, valid_until, holiday_home_id)

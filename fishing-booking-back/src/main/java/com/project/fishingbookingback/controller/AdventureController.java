@@ -5,13 +5,16 @@ import com.project.fishingbookingback.dto.mapper.PromotionMapper;
 import com.project.fishingbookingback.dto.request.FishingPromotionDTO;
 import com.project.fishingbookingback.dto.request.NewAdventureDTO;
 import com.project.fishingbookingback.dto.request.UpdateAdventureDTO;
+import com.project.fishingbookingback.dto.response.AdventureResponseDTO;
 import com.project.fishingbookingback.dto.response.ClientsAdventureViewDTO;
+import com.project.fishingbookingback.exception.EntityOccupiedException;
 import com.project.fishingbookingback.model.AdditionalService;
 import com.project.fishingbookingback.model.FishingAdventure;
 import com.project.fishingbookingback.model.FishingPromotion;
 import com.project.fishingbookingback.model.Picture;
 import com.project.fishingbookingback.service.AdventureService;
 import com.project.fishingbookingback.service.AvailableAdventureService;
+import com.project.fishingbookingback.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +35,14 @@ public class AdventureController {
     private AdventureMapper adventureMapper;
     private final AvailableAdventureService availableAdventureService;
     private final PromotionMapper promotionMapper;
+    private final ReservationService reservationService;
 
-    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper, AvailableAdventureService availableAdventureService, PromotionMapper promotionMapper) {
+    public AdventureController(AdventureService adventureService, AdventureMapper adventureMapper, AvailableAdventureService availableAdventureService, PromotionMapper promotionMapper, ReservationService reservationService) {
         this.adventureService = adventureService;
         this.adventureMapper = adventureMapper;
         this.availableAdventureService = availableAdventureService;
         this.promotionMapper = promotionMapper;
+        this.reservationService = reservationService;
     }
 
     @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
@@ -63,15 +68,22 @@ public class AdventureController {
     @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<FishingAdventure> updateAdventure(@Valid @RequestBody UpdateAdventureDTO updateAdventureDTO, @PathVariable Long id) {
+        if (reservationService.isAdventureOccupied(id)) throw new EntityOccupiedException();
         FishingAdventure fishingAdventure = adventureMapper.toModel(updateAdventureDTO);
         return ResponseEntity.ok(adventureService.updateAdventure(id, fishingAdventure));
     }
 
 
     @GetMapping()
-    public ResponseEntity<List<FishingAdventure>> getAdventures(@RequestParam(required = false) String instructorUsername,
-                                                                @RequestParam(required = false) String adventureName) {
-        return ResponseEntity.ok(adventureService.getAdventures(instructorUsername, adventureName));
+    public ResponseEntity<List<AdventureResponseDTO>> getAdventures(@RequestParam(required = false) String instructorUsername,
+                                                                    @RequestParam(required = false) String adventureName) {
+
+        List<AdventureResponseDTO> adventureResponseDTOS = new ArrayList<>();
+        List<FishingAdventure> fishingAdventures = adventureService.getAdventures(instructorUsername, adventureName);
+        for (FishingAdventure fishingAdventure : fishingAdventures) {
+            adventureResponseDTOS.add(adventureMapper.toAdventureResponseDTO(fishingAdventure, reservationService.isAdventureOccupied(fishingAdventure.getId())));
+        }
+        return ResponseEntity.ok(adventureResponseDTOS);
     }
 
     @Transactional
@@ -101,6 +113,7 @@ public class AdventureController {
     @PreAuthorize("hasRole('ROLE_FISHING_INSTRUCTOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteAdventure(@PathVariable Long id) {
+        if (reservationService.isAdventureOccupied(id)) throw new EntityOccupiedException();
         adventureService.deleteAdventure(id);
         return ResponseEntity.noContent().build();
     }
