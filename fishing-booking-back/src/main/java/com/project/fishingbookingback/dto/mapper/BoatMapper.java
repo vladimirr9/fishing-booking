@@ -19,7 +19,7 @@ public class BoatMapper {
         boatViewDTO.setName(boat.getName());
         boatViewDTO.setAddress(boat.getAddress().toString());
         boatViewDTO.setDescription(boat.getDescription());
-        boatViewDTO.setMark(0);
+        boatViewDTO.setMark(boat.getAverageMark());
         boatViewDTO.setPrice(boat.getPricePerDay());
         return boatViewDTO;
     }

@@ -55,7 +55,7 @@ public class AdventureMapper {
         returnDto.setAdress(adventure.getAddress().toString());
         returnDto.setDescription(adventure.getDescription());
         returnDto.setInstructorsDescription(adventure.getBiography());
-        returnDto.setMark(0);
+        returnDto.setMark(adventure.getAverageMark());
         returnDto.setPrice(adventure.getHourlyPrice());
         return returnDto;
     }

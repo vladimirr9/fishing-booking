@@ -35,7 +35,7 @@ public abstract class Reservation {
     @JsonBackReference
     private Review review;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.DETACH)
     private List<AdditionalService> additionalServices;
 
     public Reservation() {

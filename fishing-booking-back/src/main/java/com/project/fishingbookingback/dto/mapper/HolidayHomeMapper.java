@@ -40,7 +40,7 @@ public class HolidayHomeMapper {
         holidayHomeDTO.setName(home.getName());
         holidayHomeDTO.setAddress(home.getAddress().toString());
         holidayHomeDTO.setDescription(home.getDescription());
-        holidayHomeDTO.setMark(0);
+        holidayHomeDTO.setMark(home.getAverageMark());
         holidayHomeDTO.setPrice(home.getPricePerDay());
         holidayHomeDTO.setRules(home.getRulesOfConduct());
         return holidayHomeDTO;
